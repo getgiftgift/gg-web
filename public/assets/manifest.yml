@@ -35,6 +35,8 @@ birthday_deals/open-presents.png: birthday_deals/open-presents-96ea29c87c0b4b544
 birthday_deals/open-presents/index.png: birthday_deals/open-presents-96ea29c87c0b4b5443574a31a6fd992f.png
 birthday_deals/voucher-birthday-logo.png: birthday_deals/voucher-birthday-logo-6ec048a274fadf8121828484641e0a46.png
 birthday_deals/voucher-birthday-logo/index.png: birthday_deals/voucher-birthday-logo-6ec048a274fadf8121828484641e0a46.png
+favicon.ico: favicon-ff7bea2e986298d95619a1674789443b.ico
+favicon/index.ico: favicon-ff7bea2e986298d95619a1674789443b.ico
 rails.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 rails/index.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 application.js: application-cc19906f5b4fd4fead82c25f96c62906.js
