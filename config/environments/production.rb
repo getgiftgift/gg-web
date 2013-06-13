@@ -7,7 +7,7 @@ WorthdayWeb::Application.configure do
   end
     
   # Set default url host
-  routes.default_url_options[:host] = 'birthdayclubjeffcity.herokuapp.com'
+  routes.default_url_options[:host] = 'worthdaydemo.herokuapp.com'
 
   # Config Mandrill 
   config.action_mailer.smtp_settings = {
@@ -20,7 +20,7 @@ WorthdayWeb::Application.configure do
     :domain => 'heroku.com', # your domain to identify your server when connecting
   }
 
-  config.action_mailer.default_url_options = { :host => 'worthday.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'worthdaydemo.herokuapp.com' }
   
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
