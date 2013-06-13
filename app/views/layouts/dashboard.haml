@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title The Birthday Club!
+    = stylesheet_link_tag    "dashboard", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    
+  #main
+    #header
+      = render partial: 'layouts/dashboard_header'  
+    = yield
+
+

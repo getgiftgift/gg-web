@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  birthday_deal_id: 1
+  user_id: 1
+  verification_number: MyString
+  valid_on: 2013-04-17
+  good_through: 2013-04-17
+  state: MyString
+
+two:
+  birthday_deal_id: 1
+  user_id: 1
+  verification_number: MyString
+  valid_on: 2013-04-17
+  good_through: 2013-04-17
+  state: MyString

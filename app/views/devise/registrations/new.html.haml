@@ -1,0 +1,11 @@
+.cell#customer_signup
+  .floater
+  .container 
+    .left
+      = image_tag "birthday_deals/birthday-logo.png"
+    .right 
+      .form
+        = render partial: 'new'
+      %h2.bottom_tag
+        Already have an account? 
+        = link_to 'Sign In', new_user_session_path  

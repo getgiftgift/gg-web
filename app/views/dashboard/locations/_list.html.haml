@@ -1,0 +1,11 @@
+- if @locations and not @locations.empty?
+  .items_container
+    - for location in @locations
+      .item.clearfix
+        .item_left
+          %h3= location.name
+        .item_right
+          %ul
+            %li= link_to "Birthday Deals", dashboard_location_birthday_deals_path(location)
+- else
+  No markets have been added.

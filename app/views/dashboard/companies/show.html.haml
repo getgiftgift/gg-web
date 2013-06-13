@@ -1,0 +1,51 @@
+%h1
+  = @company.name
+%p
+  Phone: 
+  = @company.phone
+%p
+  Address:
+  = @company.street1
+= @company.street2
+%p
+  = display_city_state(@company.city, @company.state)
+  = @company.postal_code
+%p
+  Archived:
+  = @company.archived
+
+- 3.times do
+  %br
+#company_locations
+  = button_to 'Add a Location', new_dashboard_company_company_location_path(@company), method: :get
+  - if !@company.company_locations.empty?
+    %h3 
+      Company Locations
+    %table
+      %thead
+        %tr
+          %th Street1
+          %th Street2
+          %th City
+          %th State
+          %th Zip
+          %th Phone
+          %th Location
+          %th
+      %tbody    
+      - @company.company_locations.each do |company_location|
+        %tr
+          %td= company_location.street1
+          %td= company_location.street2
+          %td= company_location.city
+          %td= company_location.state
+          %td= company_location.postal_code
+          %td= company_location.phone
+          %td= company_location.location.name
+          / = display_company_location(company_location)
+          %td
+            = link_to 'Edit', edit_dashboard_company_company_location_path(@company, company_location)
+            \
+            = link_to 'Destroy', dashboard_company_company_location_path(@company, company_location), method: :delete, data: { confirm: 'Are you sure?' }
+  - else
+    No company locations    

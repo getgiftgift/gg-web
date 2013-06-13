@@ -1,0 +1,36 @@
+%h1 Listing Birthday Deals
+
+= link_to 'New Birthday deal' , new_dashboard_location_birthday_deal_path(@location)
+
+
+/%h3 Total Value of Active Deals: $#{total_value_of_birthday_deals}
+%table.list_table.tablesorter{:cellpadding => "0", :cellspacing => "0"}
+  %thead
+    %tr
+      %th Hook
+      %th Company
+      %th Status
+      %th{title: 'Percent printed out of the total available.'} Success
+      %th{title: 'Percent trashed out of the total available.'} Fail
+      %th Active
+      %th
+      %th
+  %tbody
+    - @birthday_deals.each do |birthday_deal|
+      = content_tag_for(:tr, birthday_deal, class: birthday_deal.state ) do
+        %td= birthday_deal ? birthday_deal.hook : link_to(birthday_deal.hook, edit_dashboard_birthday_deal_path(birthday_deal.id))
+        %td= birthday_deal.company.name
+        %td.state= birthday_deal.state.capitalize
+        - total = birthday_deal.birthday_deal_vouchers.is_available.count.to_d
+        - success = number_to_percentage((birthday_deal.birthday_deal_vouchers.is_available.with_state(:printed).count.to_d / total) * 100)
+        - fail = number_to_percentage((birthday_deal.birthday_deal_vouchers.is_available.with_state(:trashed).count.to_d / total) * 100) 
+        -#%td.state_link= birthday_deal_state_link(birthday_deal.id)
+        %td= success unless total.zero?
+        %td= fail unless total.zero? 
+        %td= birthday_deal.approved? ? birthday_deal.active? ? 'Active' : 'Expired' : 'N/A'          
+        %td= link_to 'Show', dashboard_birthday_deal_path(birthday_deal)
+        %td= link_to 'Archive', dashboard_birthday_deal_path(birthday_deal), :confirm => 'Are you sure?', :method => :delete unless birthday_deal.archived?
+
+%br
+
+

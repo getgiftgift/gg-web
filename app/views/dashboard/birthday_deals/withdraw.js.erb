@@ -1,0 +1,2 @@
+$("#<%= dom_id(@birthday_deal)%>").children('.state').html('Unapproved');
+$("#<%= dom_id(@birthday_deal)%>").children('.state_link').html('<%= escape_javascript(link_to "Submit for approval", submit_for_approval_dashboard_location_birthday_deal_path(@location, @birthday_deal), remote: true, method: :put )%>');

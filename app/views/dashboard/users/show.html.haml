@@ -1,0 +1,36 @@
+%p 
+  Name:
+  = @user.full_name
+%p
+  Email: 
+  = @user.email
+%p 
+  Birthdate:
+  = @user.birthdate
+
+- if not @birthday_vouchers.empty?
+  .container
+    %table
+      %thead
+        %th Hook
+        %th Company
+        %th Verification Number
+        %th Valid On
+        %th Good Thru
+        %th State
+        %th Print
+      %tbody
+      - @birthday_vouchers.each do |voucher|
+        %tr
+          %td= voucher.hook
+          %td= voucher.company.name
+          %td= voucher.verification_number   
+          %td= voucher.valid_on
+          %td= voucher.good_through
+          %td= voucher.state
+          %td= link_to 'Print', print_birthday_deal_voucher_path(voucher)
+
+- else
+  %h4 No Birthday Club Vouchers  
+
+= link_to 'Back', dashboard_users_path  

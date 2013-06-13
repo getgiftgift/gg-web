@@ -1,0 +1,72 @@
+%p#notice= notice
+
+%p
+  %b Hook:
+  = @birthday_deal.hook
+%p
+  %b Value:
+  = display_price(@birthday_deal.value)
+%p
+  %b Restrictions:
+  = @birthday_deal.restrictions
+%p
+  %b How to redeem:
+  = @birthday_deal.how_to_redeem
+%p
+  %b Path:
+  = @birthday_deal.slug
+%p
+  %b Company:
+  = @birthday_deal.company
+%p
+  %b Location:
+  = @birthday_deal.location.name
+%p
+  %b Active:
+  = @birthday_deal.active?
+
+%p
+  %b Start Date:
+  = @birthday_deal.start_date
+
+%p
+  %b End Date:
+  = @birthday_deal.end_date
+
+
+%p
+  %b Status:
+  %span#status= @birthday_deal.state.titleize
+
+.buttons
+  / = approval_buttons(@birthday_deal)
+= link_to 'Edit', edit_dashboard_birthday_deal_path(@birthday_deal) unless @birthday_deal.archived?
+\|
+= link_to 'Back', dashboard_location_birthday_deals_path(@location)
+
+
+
+
+.page_section_header.clearfix
+  .page_section_header_heading
+    %h4 Birthday Deal Vouchers
+.page_section.clearfix
+  - if @birthday_deal.birthday_deal_vouchers and not @birthday_deal.birthday_deal_vouchers.empty?
+    %table.list_table.tablesorter{:cellpadding => "0", :cellspacing => "0"}
+      %thead
+        %tr
+          %th User
+          %th Verification Number
+          %th Valid On
+          %th Good Through
+          %th Status
+      %tbody
+        - for voucher in @birthday_deal.birthday_deal_vouchers
+          %tr
+            %td.main= link_to "#{voucher.user.email}", dashboard_user_path(voucher.user)
+            %td= voucher.verification_number
+            %td= voucher.valid_on
+            %td= voucher.good_through
+            %td= voucher.state
+  - else
+    No birthday deal vouchers yet...

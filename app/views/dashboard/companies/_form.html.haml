@@ -1,0 +1,16 @@
+= semantic_form_for([:dashboard, @company]) do |f|
+  = f.inputs do
+    = image_tag @company.image_url if @company.image?
+    = f.input :image, as: :file
+    = f.input :image_cache, as: :hidden
+    = f.input :name
+    = f.input :phone
+    = f.input :street1
+    = f.input :street2
+    = f.input :city
+    = f.input :state
+    = f.input :postal_code
+    = f.input :archived
+  = f.actions do
+    = f.action :submit
+= link_to 'Cancel', [:dashboard, @company]

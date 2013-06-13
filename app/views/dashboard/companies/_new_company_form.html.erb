@@ -1,0 +1,16 @@
+<div id="new_company_form">
+	<div id="form_box" class="clearfix modal_form_box">
+		<h3>Add a New Company</h3>
+		<%= form_for([:dashboard, @company]) do |f| %> 
+			<div class="modal_content">
+				<%= render :partial => "form", :locals => {:f => f}%>
+			</div>
+			<div id="edit_modal_buttons" class="modal_buttons clearfix">
+				<span class="submit_buttons">
+					<%= submit_tag "Create Company", {:class => "submit"} %> 
+					&nbsp;<%= link_to "Cancel", {:action => "index"} %>
+				</span>
+			</div>
+		<% end %>
+	</div>	
+</div>

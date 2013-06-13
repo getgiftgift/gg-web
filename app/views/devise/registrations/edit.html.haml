@@ -1,0 +1,18 @@
+.cell#customer_signin
+  .floater
+  .container.form.center
+    = link_to 'Back to My Birthday Deals', account_path
+    %h1
+      My Birthday:
+      = current_user.birthdate
+    = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'user-form' }) do |f|
+      = devise_error_messages!
+      = f.inputs do
+        = f.input :first_name, label: false, required: false, placeholder: @user.first_name
+        = f.input :last_name, label: false, required: false, placeholder: @user.last_name
+        = f.input :email, label: false, required: false, placeholder: @user.email
+        = f.input :password, :label => false, :required => false, placeholder: 'Password:'
+        = f.input :password_confirmation, :label => false, :required => false, placeholder: 'Confirm Password:'
+      = f.actions do
+        = f.action :submit, button_html: {class: 'form-button orange', value: 'Update'}
+   

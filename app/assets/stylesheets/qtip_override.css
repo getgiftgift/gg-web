@@ -1,0 +1,93 @@
+
+/*! qTip2 v2.0.0 | http://craigsworks.com/projects/qtip2/ | Licensed MIT,  GPL */
+.ui-tooltip, .qtip {
+  position:absolute;
+  left:-28000px;
+  top:-28000px;
+  display:none;
+  max-width:300px;
+  min-width:50px;
+  font-size:14px;
+  line-height:18px;
+  border-width:2px;
+  border-style:solid;
+}
+/* custom tooltip for birthday club */
+.bday_tooltip {
+  border-color:#0066FF;
+  background-color:#b5dff5;
+  color:#221e1f;
+}
+/* custom tooltip for birthday club */
+.bday_tooltip .ui-tooltip-titlebar {
+  background-color: #B5DFF5;
+  text-align:center;
+  
+}
+
+.ui-tooltip-fluid {
+  display:block;
+  visibility:hidden;
+  position:static!important;
+  float:left!important;
+}
+
+.ui-tooltip-content {
+  position:relative;
+  padding:5px 10px;
+  overflow:hidden;
+  text-align:left;
+  word-wrap:break-word;
+}
+
+.ui-tooltip-titlebar {
+  position:relative;
+  min-height:14px;
+  padding:5px 5px 0px 5px;
+  overflow:hidden;
+  border-width:0 0 1px;
+  font-weight:400;
+}
+
+.ui-tooltip-titlebar+.ui-tooltip-content {
+  border-top-width:0!important;
+}
+
+.ui-tooltip-titlebar .ui-state-default {
+  position:absolute;
+  right:133px;
+  top:50%;
+  margin-top:-9px;
+  cursor:pointer;
+  outline:medium none;
+  border-width:1px;
+  border-style:solid;
+}
+
+* html .ui-tooltip-titlebar .ui-state-default {
+  top:16px;
+}
+
+.ui-tooltip-titlebar .ui-icon, .ui-tooltip-icon .ui-icon {
+  display:block;
+  text-indent:-1000em;
+  direction:ltr;
+}
+
+.ui-tooltip-icon, .ui-tooltip-icon .ui-icon {
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  border-radius:3px;
+  text-decoration:none;
+}
+
+.ui-tooltip-icon .ui-icon {
+  width:10px;
+  height:12px;
+  text-align:center;
+  text-indent:0;
+  font:normal bold 10px/13px Tahoma, sans-serif;
+  color:inherit;
+  background:transparent none no-repeat -100em -100em;
+}
+

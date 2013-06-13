@@ -1,0 +1,9 @@
+.cell#video
+  .floater
+  .white-box
+    %iframe{ :frameborder => "0", :height => "360", :src => "https://www.youtube-nocookie.com/embed/lj0mOvFTzT8?allowfullscreen=1&rel=0&showinfo=0&modestbranding=1", :width => "640"}
+  %h2.bottom_tag
+    - if !!@deals && @deals.empty?
+      Sorry, we don't have any presents for you in your city.
+    - else
+      Our records indicate that it's not quite your birthday. We'll send you an email when it's time to celebrate!

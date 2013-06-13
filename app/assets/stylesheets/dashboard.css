@@ -1,0 +1,33 @@
+/**
+*
+*= require_self
+*= require scaffolds
+*
+*/
+
+table { 
+  border-collapse: collapse;
+}
+th, td {
+  padding: 10px 5px;
+  border-bottom: 1px solid gray;
+}
+th {
+  background-color: #333;
+  color: #fff;
+}
+
+nav li { padding: 0px 10px; display: inline;}
+
+#main {
+  position: relative;
+  width: 960px;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+}
+#header {
+  height: 60px;
+  padding: 0 20px;
+}

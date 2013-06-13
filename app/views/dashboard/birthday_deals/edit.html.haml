@@ -1,0 +1,8 @@
+%h1 Editing Birthday Day
+
+= semantic_form_for [:dashboard, @birthday_deal] do |f|
+  = render 'form', :f => f
+
+= link_to 'Show', dashboard_birthday_deal_path(@birthday_deal)
+\|
+= link_to 'Back', dashboard_location_birthday_deals_path(@location)

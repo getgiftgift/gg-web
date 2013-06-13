@@ -1,0 +1,17 @@
+.container
+  %table
+    %thead
+      %th Name 
+      %th Email
+      %th Birthdate
+      %th
+    %tbody  
+    - @users.each do |user| 
+      %tr
+        %td= link_to user.full_name, dashboard_user_path(user)
+        %td= user.email
+        %td= user.birthdate
+        %td
+          = link_to 'Edit', edit_dashboard_user_path(user)
+          |
+          = link_to 'Delete', dashboard_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }

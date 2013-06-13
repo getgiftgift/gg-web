@@ -1,0 +1,45 @@
+- unless @birthday_deal_vouchers.empty?
+  #flags-left
+  #flags-right
+  #logo
+    = image_tag "birthday_deals/birthday-logo.png"
+    / #geolocation.boxform.select.geobox
+    /   = form_tag '/', method: :post, id: 'selectcity', name: 'selectcity' do 
+    /     = field_set_tag do
+    /       = label_tag 'geolocation', 'Select Your City'
+    /       = select_tag "geolocation", options_from_collection_for_select(Location.find(:all), "slug", "name", current_location.slug)
+    /       = submit_tag 'Submit', class: 'no-javascript darkbtn'
+    /       #next
+  #instructions
+  #details.white-box
+    #card_container
+      - @birthday_deal_vouchers.each do |voucher|
+        - birthday_deal = voucher.birthday_deal
+        = content_tag_for :div, voucher, :card, class: "card-box" do
+          .value
+            = "#{display_price(birthday_deal.value)}"
+            %span Value
+          .hook
+            = birthday_deal.hook.to_s + " at " 
+            %br/
+            =birthday_deal.company.name
+          %img{ src: birthday_deal.company.image_url(:deal_image), alt: 'Logo' }
+          .bottom-buttons
+            = button_to 'Trash It', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red form-button"
+            = button_to 'Keep It', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "orange form-button"
+  #box_container
+    .list
+      = pyramid(@birthday_deal_vouchers)
+- else
+  .cell#all_opened
+    .floater
+    .container 
+      .left
+        = image_tag "birthday_deals/birthday-logo.png"
+      .right
+        .white-box
+          You've opened everything!
+          %br
+          Visit 
+          = link_to 'My Birthday Deals', account_path
+          to use what you saved!

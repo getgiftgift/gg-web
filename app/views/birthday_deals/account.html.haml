@@ -1,0 +1,26 @@
+#my_birthday_deals   
+  .container.white-box
+    %ul{style: 'float: right;'}
+      %li= link_to 'Birthday Club!', birthday_deals_path
+      %li= link_to 'Edit My Account', edit_user_registration_path(current_user)
+    %h2 My Birthday Deals
+    - if @birthday_vouchers.empty?
+      You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
+    -else   
+      %table
+        %thead
+          %tr{class: alternate_table_row}
+            %th 
+            %th Birthday Deal
+            %th Status
+            %th Expires On
+            %th
+        %tbody
+          
+          - @birthday_vouchers.each do |deal|
+            %tr{ class: alternate_table_row } 
+              %td= image_tag deal.company.image_url(:deal_image) if deal.company.image?
+              %td #{deal.hook} at #{deal.company.name}
+              %td= deal.state
+              %td= deal.good_through.to_s
+              %td= link_to 'Print Voucher', print_birthday_deal_voucher_path(deal)

@@ -1,0 +1,49 @@
+= f.inputs 'Deal info' do
+  = f.input :company, as: :select, collection: @companies
+  / = render partial: 'dashboard/companies/list_company_locations_for_model', locals: { parent: @birthday_deal} \
+
+  %li#birthday_deal_value_input.string.input.optional.stringish
+    %label.label{:for => "birthday_deal_value"} Value
+    $
+    = text_field_tag "birthday_deal[value]", @birthday_deal.value, id: 'birthday_deal_value', size: 3, maxlength: 3
+  %li#birthday_deal_hook_input.string.input.optional.stringish
+    %label.label{:for => "birthday_deal_hook"} Hook
+    = text_field_tag "birthday_deal[hook]", @birthday_deal.hook, id: 'birthday_deal_hook'
+    = "at Company Name"  
+  = f.input :restrictions, as: :text, input_html: { rows: 2, size: 100}
+
+  = f.input :how_to_redeem, as: :text, input_html: { rows: 2, size: 100}, hint: "This already displays on all vouchers: 'Merchant will check ID upon redemption.  Photo ID showing required to validate birthday.'   DO NOT ADD the text in this quote"
+
+= f.inputs 'Run time' do
+  = f.input :start_date #, as: :string, data: { behaviour: 'datepicker' }, input_html: {class: "format-m-d-y highlight-days-67 no-transparency", size: 10}
+  = f.input :end_date #, as: :string, input_html: { readonly: true, size: 10 }
+
+= f.actions do
+  = f.action :submit
+
+
+
+
+/ :coffeescript
+/   $ ->
+/     $('#birthday_deal_company_id').change (event)->
+/       $.get '#{list_company_locations_for_dashboard_company_path("'+this.value+'", "birthday_deal")}', (data)->
+/         if data
+/           $('#birthday_deal_company_locations_input').replaceWith(data)
+/         else
+/           $('#birthday_deal_company_locations_input').html('')
+
+/     $('#birthday_deal_start_date').change (event)->
+/       start_date = new Date($(this).val())
+/       end_date = new Date(start_date.setMonth(start_date.getMonth()+3))
+/       curr_date = pad(end_date.getDate())
+/       curr_month = pad(end_date.getMonth() + 1)
+/       curr_year = end_date.getFullYear()
+/       out =  curr_month + "/" + curr_date + "/" + curr_year
+/       $('#birthday_deal_end_date').val(out)
+
+/     pad = (num) ->
+/       if num < 10
+/         num = '0' + num.toString()
+/       else
+/         num
