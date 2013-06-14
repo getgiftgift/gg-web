@@ -2,7 +2,7 @@
   #flags-left
   #flags-right
   #logo
-    = image_tag "birthday_deals/birthday-logo.png"
+    = image_tag "birthday_deals/worthday_templogo_blue_white.png"
     / #geolocation.boxform.select.geobox
     /   = form_tag '/', method: :post, id: 'selectcity', name: 'selectcity' do 
     /     = field_set_tag do
@@ -35,11 +35,11 @@
     .floater
     .container 
       .left
-        = image_tag "birthday_deals/birthday-logo.png"
+        = image_tag "birthday_deals/worthday_templogo_blue_white.png"
       .right
         .white-box
           You've opened everything!
           %br
           Visit 
-          = link_to 'My Birthday Deals', account_path
+          = link_to 'My Deals', account_path
           to use what you saved!

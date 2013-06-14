@@ -1,9 +1,9 @@
 #my_birthday_deals   
   .container.white-box
     %ul{style: 'float: right;'}
-      %li= link_to 'Birthday Club!', birthday_deals_path
+      %li= link_to 'Worthday', birthday_deals_path
       %li= link_to 'Edit My Account', edit_user_registration_path(current_user)
-    %h2 My Birthday Deals
+    %h2 My Deals
     - if @birthday_vouchers.empty?
       You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
     -else   
