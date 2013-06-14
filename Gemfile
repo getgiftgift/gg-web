@@ -47,7 +47,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'workless', '~> 1.1.1'
 gem 'fog'
-
+gem 'figaro'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

@@ -77,6 +77,9 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fattr (2.2.1)
+    figaro (0.6.4)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     fog (1.12.0)
       builder
       excon (~> 0.22.1)
@@ -216,6 +219,7 @@ DEPENDENCIES
   debugger
   delayed_job_active_record
   devise
+  figaro
   fog
   formtastic
   geoip
