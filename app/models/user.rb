@@ -75,29 +75,18 @@ class User < ActiveRecord::Base
 
   def eligible_for_birthday_deals?
     return true if self.test_user?
-    date_start = (Date.today - 15.days)
-    date_end = (Date.today + 15.days)
-    return true
-    if date_end.strftime('%m%d') < date_start.strftime('%m%d') # Birthday overlaps new year 
-    ### MYSQL
-    #   where_sql = "(DATE_FORMAT(`birthdate`, '%m%d') >= \"0101\""
-    #   where_sql << " AND DATE_FORMAT(`birthdate`, '%m%d') <= \"#{date_end.strftime('%m%d')}\")"
-    #   where_sql << " OR (DATE_FORMAT(`birthdate`, '%m%d') >= \"#{date_start.strftime('%m%d')}\""
-    #   where_sql << " AND DATE_FORMAT(`birthdate`, '%m%d') <= \"1231\")"
-    #
-    # else
-    #   where_sql = "DATE_FORMAT(`birthdate`, '%m%d') >= \"#{date_start.strftime('%m%d')}\" AND DATE_FORMAT(`birthdate`, '%m%d') <= \"#{date_end.strftime('%m%d')}\""
-    # end
-    ###
-    ## PSQL
-      where_sql = "(to_char(birthdate, 'MMDD') >= \"0101\""
-      where_sql << " AND to_char(birthdate, 'MMDD') <= \"#{date_end.strftime('%m%d')}\")"
-      where_sql << " OR (to_char(birthdate, 'MMDD') >= \"#{date_start.strftime('%m%d')}\""
-      where_sql << " AND to_char(birthdate, 'MMDD') <= \"1231\")"  
+    date_start = (Date.today - 15.days).strftime('%m%d')
+    date_end = (Date.today + 15.days).strftime('%m%d')
+    user_bday = self.birthdate.strftime('%m%d')
+    if date_end < date_start # Birthday overlaps new year 
+      if (user_bday >= "0101" and user_bday <= end_date) or ( user_bday <= "1231" and user_bday >= start_date )
+        return true
+      else
+        return false  
+      end  
     else
-      where_sql = "DATE_FORMAT(`birthdate`, '%m%d') >= \"#{date_start.strftime('%m%d')}\" AND DATE_FORMAT(`birthdate`, '%m%d') <= \"#{date_end.strftime('%m%d')}\""
+      return true if user_bday <= date_end and user_bday >= date_start
     end
-    User.where(id: self.id).where(where_sql).count > 0 ? true : false
   end
 
   def test_user?

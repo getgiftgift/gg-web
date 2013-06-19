@@ -39,7 +39,7 @@ WorthdayWeb::Application.routes.draw do
       
     end   
 
-    resources :birthday_deal_vouchers, only: [:show, :index], as: "deal_vouchers", path: 'birthday_deals' do
+    resources :birthday_deal_vouchers, only: [:index], as: "deal_vouchers", path: 'birthday_deals' do
       member do
         put :trash
         put :keep
