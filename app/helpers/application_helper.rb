@@ -1,4 +1,17 @@
 module ApplicationHelper
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
+  
   def display_price(price)
     return nil unless price
     if ((price*100).divmod(100))[1] == 0

@@ -1,17 +1,20 @@
 class User < ActiveRecord::Base
+  include ApplicationHelper
   has_many :birthday_deal_vouchers
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  
+  devise :omniauthable, omniauth_providers: [:facebook]
 
-  validates_presence_of     :first_name, :last_name, :message => "Required Field"
-  validates_presence_of     :password,:message => "Required Field",                   :if => :password_required?
-  validates_presence_of     :password_confirmation, :message => "Required Field",     :if => :password_required?
-  validates_length_of       :password, :within => 4..40, :message => 'Is Too Short (Minimum Is 4 Characters)',  :if => :password_required?
-  validates_confirmation_of :password, :message => "Does Not Match Confirmation"
+  # validates_presence_of     :first_name, :last_name, :message => "Required Field"
+  # validates_presence_of     :password,:message => "Required Field",                   :if => :password_required?
+  # validates_presence_of     :password_confirmation, :message => "Required Field",     :if => :password_required?
+  # validates_length_of       :password, :within => 4..40, :message => 'Is Too Short (Minimum Is 4 Characters)',  :if => :password_required?
+  # validates_confirmation_of :password, :message => "Does Not Match Confirmation"
   validates :email, :uniqueness => { :case_sensitive => false, :message => 'The email you entered is associated with another account'},
                     :length => { :within => 3..100, :message => 'Invalid Length' },
                     :presence => {:message => "Required Field"}
@@ -19,11 +22,36 @@ class User < ActiveRecord::Base
 
   validates_presence_of     :email, :message => "Required Field"
   # validates_presence_of     :birthdate, :message => "Required Field"
-  validates_presence_of :birthdate
+  # validates_presence_of :birthdate
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :encrypted_password, :birthdate
+  # attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :encrypted_password, :birthdate
+  
   # attr_accessible :title, :body
+
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.first_name = auth.info.first_name 
+      user.last_name = auth.info.last_name
+      
+      # user.image = auth.info.image
+
+      # user.oauth_token = auth.credentials.token
+      # user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.save!
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
 
   def full_name
     "#{first_name} #{last_name}"

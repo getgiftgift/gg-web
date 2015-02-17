@@ -1,4 +1,6 @@
 class OverrideRegistrationsController < Devise::RegistrationsController
+  
+
 
   # prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
   # prepend_before_filter :authenticate_scope!, :only => [:edit, :update, :destroy]
@@ -11,7 +13,8 @@ class OverrideRegistrationsController < Devise::RegistrationsController
 
     ## no superclass method `sign_up_params'
     # build_resource(sign_up_params)
-    resource = User.new(params[:user]) 
+    build_resource sign_up_params
+    # resource = User.new() 
     if resource.save
       MailingList.subscribe(resource)
       
@@ -120,5 +123,9 @@ class OverrideRegistrationsController < Devise::RegistrationsController
 
   def account_update_params
     super
+  end
+
+  def user_params
+    params.require(:user).permit!
   end
 end

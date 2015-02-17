@@ -1,3 +1,4 @@
+= link_to "facebook stuff here", user_omniauth_authorize_path(:facebook)
 - if current_user 
   = link_to current_user.email, destroy_user_session_path, method: :delete 
 .cell#customer_signin

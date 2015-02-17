@@ -46,7 +46,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
   # POST /birthday_deals
   # POST /birthday_deals.json
   def create
-    @birthday_deal = @location.birthday_deals.build(params[:birthday_deal])
+    @birthday_deal = @location.birthday_deals.build(birthday_deal_params)
 
     respond_to do |format|
       if @birthday_deal.save
@@ -109,7 +109,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
   def update
 
     respond_to do |format|
-      if @birthday_deal.update_attributes(params[:birthday_deal])
+      if @birthday_deal.update_attributes(birthday_deal_params)
         @birthday_deal.edit
         format.html { redirect_to dashboard_location_birthday_deals_path(@birthday_deal.location), notice: 'Birthday deal was successfully updated.' }
         format.json { head :no_content }
@@ -142,5 +142,9 @@ class Dashboard::BirthdayDealsController < ApplicationController
     @model = 'birthday_deal'
   end
 
+  private
+  def birthday_deal_params
+    params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :restrictions, :company_id, :comany_location_ids, :value, :start_date, :end_date)
+  end
 end
  

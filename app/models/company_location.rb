@@ -1,5 +1,5 @@
 class CompanyLocation < ActiveRecord::Base
-  include Geokit::Geocoders
+  # include Geokit::Geocoders
   belongs_to :location
   belongs_to :company
 
@@ -7,7 +7,7 @@ class CompanyLocation < ActiveRecord::Base
 
   # before_save :geocode_address
 
-  attr_accessible :company_id, :company, :name, :phone, :fax, :street1, :street2, :city, :state, :postal_code, :location_id
+  # attr_accessible :company_id, :company, :name, :phone, :fax, :street1, :street2, :city, :state, :postal_code, :location_id
 
   validates :name, :phone, :street1, :city, :state, :postal_code, presence: true
 

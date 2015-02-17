@@ -49,9 +49,10 @@ class BirthdayDealsController < ApplicationController
   def add_birthday_to_user
 
     @customer = current_user
+    byebug
     begin
-      @customer.update_attributes(params[:user_birthdate])
-      @customer.save
+      @customer.update_attributes( birthdate: Date.new(params[:user_birthdate]['birthdate(1i)'].to_i, params[:user_birthdate]['birthdate(2i)'].to_i, params[:user_birthdate]['birthdate(3i)'].to_i))
+      @customer.save!
     rescue
     end
     redirect_to birthday_deals_url

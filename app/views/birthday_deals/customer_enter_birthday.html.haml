@@ -7,16 +7,19 @@
   .floater
   .container 
     .left
-      = image_tag "birthday_deals/birthday-logo.png"
+      = image_tag "birthday_deals/worthday_templogo_blue_white_tagline.png"
     .right
       .form
-        = semantic_form_for(current_user, url: add_birthday_to_user_url, :validate => false, :html => {:class => 'user-form'}) do |f|
-          = f.inputs name: 'Add your birthday to your account to join the club!' do
+        = simple_form_for(current_user, url: add_birthday_to_user_url, :validate => false, :html => {:class => 'user-form'}) do |f|
+          %fieldset
+            Add your birthday to your account to join the club!
             %li.dob
+              / = f.input :birthdate, as: :string, order: [:day, :month, :year], label: false
+
               = text_field_tag "user_birthdate[birthdate(2i)]", nil, placeholder: 'MM', size: 2, maxlength: 2, class: 'month'
               = text_field_tag "user_birthdate[birthdate(3i)]", nil, placeholder: 'DD', size: 2, maxlength: 2, class: 'day'
               = text_field_tag "user_birthdate[birthdate(1i)]", nil, placeholder: 'YYYY', size: 2, maxlength: 4, class: 'year'
-          = f.actions do
-            = f.action :submit, :as => :button, :label => 'Submit',  :button_html => { :class => 'form-button orange', :value => 'Submit'}
+
+            = f.button :submit, :label => 'Submit',  :button_html => { :class => 'form-button orange', :value => 'Submit'}
   %h2.bottom_tag
     You can access your presents 2 weeks before your birthday!

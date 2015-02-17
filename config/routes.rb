@@ -1,18 +1,20 @@
 WorthdayWeb::Application.routes.draw do
-  match '/dashboard' => 'dashboard/locations#index'
+  get '/dashboard' => 'dashboard/locations#index'
   # match '/users/sign_in' => "birthday_deals#index"
   # match '/users/sign_up' => "birthday_deals#index"
   root :to => 'birthday_deals#index'
-  match '/' => "birthday_deals#index", as: 'birthday_deals'
+  get '/' => "birthday_deals#index", as: 'birthday_deals'
+
+  # devise_for :users, :controllers => {:registrations => 'override_registrations'}
   
-  devise_for :users, :controllers => {:registrations => 'override_registrations'}
-  
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   # devise_for :users, :path => '', :path_names => { :sign_in => "sign_in", :sign_out => "sign_out", :sign_up => "sign_up" }
   resources :users, only: [:show, :edit, :update]
-  match '/my_account' => "birthday_deals#account", as: 'account' 
+  get '/my_account' => "birthday_deals#account", as: 'account' 
 
-  put '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
-  match '/' => "birthday_deals#index", as: 'deals'
+  patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
+  get '/' => "birthday_deals#index", as: 'deals'
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
     member do
       put :trash
@@ -21,7 +23,7 @@ WorthdayWeb::Application.routes.draw do
     end
   end
 
-  match '/:geolocation' => 'birthday_deals#index'
+  get '/:geolocation' => 'birthday_deals#index'
 
   
   namespace :dashboard do
@@ -34,7 +36,7 @@ WorthdayWeb::Application.routes.draw do
       end  
       collection do
         get :archived
-        match :search
+        match :search, via: [:get, :post]
       end 
       
     end   

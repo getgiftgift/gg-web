@@ -3,5 +3,5 @@ class Location < ActiveRecord::Base
   has_many :company_locations
 
 
-  attr_accessible :city, :lat, :lng, :name, :slug, :state
+  # attr_accessible :city, :lat, :lng, :name, :slug, :state
 end

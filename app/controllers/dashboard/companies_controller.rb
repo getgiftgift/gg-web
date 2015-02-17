@@ -116,7 +116,7 @@ class Dashboard::CompaniesController < ApplicationController
   # POST /companies
   # POST /companies.xml
   def create
-    @company = Company.new(params[:company])
+    @company = Company.new(company_params)
 
     respond_to do |format|
       if @company.save
@@ -135,7 +135,7 @@ class Dashboard::CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:id])
     respond_to do |format|
-      if @company.update_attributes(params[:company])
+      if @company.update_attributes(company_params)
         flash[:notice] = 'Company was successfully updated.'
         format.js   { render :js => 'window.location.reload()' }
         format.html { redirect_to(:action => "index") }
@@ -159,4 +159,8 @@ class Dashboard::CompaniesController < ApplicationController
     end
   end
 
+  private
+  def company_params
+    params.require(:company).permit(:name, :archived, :city, :image, :image_cache, :phone, :postal_code, :state, :street1, :street2, :url)
+  end
 end

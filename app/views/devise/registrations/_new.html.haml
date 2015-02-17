@@ -1,14 +1,15 @@
-= semantic_form_for(resource, :as => resource_name, :url => user_registration_path, html: {class: 'user-form'}) do |f|
+= simple_form_for(resource, :as => resource_name, :url => user_registration_path, html: {class: 'user-form'}) do |f|
   =# devise_error_messages!
-  = f.inputs name: 'Sign up for an account:' do
+  %fieldset 
+    Sign up for an account
     = f.input :first_name, :label => false, :required => true, placeholder: 'First Name:'
     = f.input :last_name, :label => false, :required => true, placeholder: 'Last Name:'
     = f.input :email, :label => false, :required => true, placeholder: 'E-Mail:'
     = f.input :password, :label => false, :required => true, placeholder: 'Password:'
     = f.input :password_confirmation, :label => false, :required => true, placeholder: 'Confirm Password:'
     %li.dob
-      = text_field_tag "user[birthdate(2i)]", nil, placeholder: 'MM', size: 2, maxlength: 2, class: 'month'
-      = text_field_tag "user[birthdate(3i)]", nil, placeholder: 'DD', size: 2, maxlength: 2, class: 'day'
-      = text_field_tag "user[birthdate(1i)]", nil, placeholder: 'YYYY', size: 2, maxlength: 4, class: 'year'
-  = f.actions do
-    = f.action :submit, :as => :button, :label => 'Sign Up',  :button_html => { :class => 'form-button orange', :value => 'Sign_Up'}
+      = text_field_tag "user[birthdate(2i)]", nil, placeholder: 'MM', input_html: {maxlength: 2}, class: 'month'
+      = text_field_tag "user[birthdate(3i)]", nil, placeholder: 'DD', input_html: {maxlength: 2}, class: 'day'
+      = text_field_tag "user[birthdate(1i)]", nil, placeholder: 'YYYY', input_html: {maxlength: 4}, class: 'year'
+
+    = f.button :submit, class: 'form-button orange', value: 'Sign_Up'

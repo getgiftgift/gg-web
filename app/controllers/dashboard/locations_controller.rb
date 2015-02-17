@@ -47,7 +47,7 @@ class Dashboard::LocationsController < ApplicationController
   # POST /locations
   # POST /locations.xml
   def create
-    @location = Location.new(params[:location])
+    @location = Location.new(location_params)
     # @location.account_id = current_account.id
     
     respond_to do |format|
@@ -90,4 +90,9 @@ class Dashboard::LocationsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  private
+  def location_params
+    params.require(:location).permit(:name, :city, :state, :slug)
+  end
+
 end
