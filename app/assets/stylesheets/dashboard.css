@@ -1,11 +1,11 @@
 /**
 *
 *= require_self
-*= require scaffolds
+*= require foundation
 *
 */
 
-table { 
+/*table { 
   border-collapse: collapse;
 }
 th, td {
@@ -15,7 +15,7 @@ th, td {
 th {
   background-color: #333;
   color: #fff;
-}
+}*/
 
 nav li { padding: 0px 10px; display: inline;}
 
@@ -27,7 +27,7 @@ nav li { padding: 0px 10px; display: inline;}
   margin: 0 auto;
   position: relative;
 }
-#header {
+/*#header {
   height: 60px;
   padding: 0 20px;
-}
+}*/

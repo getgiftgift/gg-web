@@ -27,6 +27,9 @@ $(document).ready ->
   # $('.birthday-box.closed').click( ->
     # $(this).removeClass('closed').addClass('open')
     # )
+  
+
+
   count = true
   count2 = true
   

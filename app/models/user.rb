@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   include ApplicationHelper
   has_many :birthday_deal_vouchers
 
+  geocoded_by :last_sign_in_ip
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -31,14 +33,21 @@ class User < ActiveRecord::Base
 
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
-      user.first_name = auth.info.first_name 
-      user.last_name = auth.info.last_name
+      user.email = auth.info.email                                                # required by Facebook
+      user.first_name = auth.info.first_name                                      # required by Facebook
+      user.last_name = auth.info.last_name                                        # required by Facebook
+      if Rails.env.development?
+        user.birthdate = Date.today
+      else
+        user.birthdate = Date.strptime( auth.extra.raw_info.birthday, "%m/%d/%Y" )  # required by Facebook
+      end
+      user.gender = auth.extra.raw_info.gender                                    # required by Facebook 
       
       # user.image = auth.info.image
-
+      # user.location = auth.info.location  # "City, State"
+      
       # user.oauth_token = auth.credentials.token
       # user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!

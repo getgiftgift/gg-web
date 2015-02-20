@@ -144,7 +144,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
 
   private
   def birthday_deal_params
-    params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :restrictions, :company_id, :comany_location_ids, :value, :start_date, :end_date)
+    params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :restrictions, :company_id, :comany_location_id, :value, :start_date, :end_date, :state)
   end
 end
  

@@ -20,6 +20,9 @@ gem 'devise'
 gem 'delayed_job_active_record'
 
 gem 'fog'
+gem 'foundation-rails'
+
+gem 'geocoder'
 
 gem 'haml'
 
@@ -27,13 +30,18 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-qtip2-rails'
 
+gem "koala", "~> 1.11.0rc"
+
 gem 'omniauth-facebook'
+
+gem 'prawn'
 
 gem 'rmagick'
 
 gem 'sass-rails'
 gem 'simple_form'
-gem 'state_machine'
+gem 'slim-rails'
+gem 'state_machine', :git => "git@github.com:seuros/state_machine.git"  # gem no longer maintained by author, using fork
 gem 'state_machine-audit_trail'
 
 group :development do 

@@ -1,5 +1,6 @@
-= f.inputs 'Deal info' do
-  = f.input :company, as: :select, collection: @companies
+%fieldset 
+  Deal info
+  = f.input :company_id, as: :select, collection: @companies
   / = render partial: 'dashboard/companies/list_company_locations_for_model', locals: { parent: @birthday_deal} \
 
   %li#birthday_deal_value_input.string.input.optional.stringish
@@ -14,12 +15,13 @@
 
   = f.input :how_to_redeem, as: :text, input_html: { rows: 2, size: 100}, hint: "This already displays on all vouchers: 'Merchant will check ID upon redemption.  Photo ID showing required to validate birthday.'   DO NOT ADD the text in this quote"
 
-= f.inputs 'Run time' do
+%fieldset 
+  Run time
   = f.input :start_date #, as: :string, data: { behaviour: 'datepicker' }, input_html: {class: "format-m-d-y highlight-days-67 no-transparency", size: 10}
   = f.input :end_date #, as: :string, input_html: { readonly: true, size: 10 }
 
-= f.actions do
-  = f.action :submit
+
+  = f.button :submit
 
 
 

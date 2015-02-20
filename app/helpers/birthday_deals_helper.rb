@@ -72,7 +72,7 @@ module BirthdayDealsHelper
     index.times { |i|
       i.times { |j|
         box = rand(9)+1
-        apple = content_tag_for :a, vouchers.pop, href: '#', class: "birthday-box", :data => { box: box} do
+        apple = content_tag_for :a, vouchers.to_a.pop, href: '#', class: "birthday-box", :data => { box: box} do
           image_tag "birthday_deals/box-#{box}-closed.png", class: "box-#{box}"
         end
         out.concat apple

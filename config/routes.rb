@@ -10,7 +10,7 @@ WorthdayWeb::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # devise_for :users, :path => '', :path_names => { :sign_in => "sign_in", :sign_out => "sign_out", :sign_up => "sign_up" }
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show]
   get '/my_account' => "birthday_deals#account", as: 'account' 
 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'

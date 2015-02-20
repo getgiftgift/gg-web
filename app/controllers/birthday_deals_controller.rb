@@ -12,7 +12,6 @@ class BirthdayDealsController < ApplicationController
   end
 
   def index
-    
     if customer_logged_in?
       @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available
       # @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.in_location(current_location)
@@ -30,26 +29,16 @@ class BirthdayDealsController < ApplicationController
       render action: 'index_view_birthday_deals'
     else
       @customer = Customer.new
-      # @customer.account = current_account
       render action: 'index_customer_login'
     end
   end
 
-  # GET /birthday_deals/1
-  # GET /birthday_deals/1.json
   def show
     @birthday_deal = BirthdayDeal.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @birthday_deal }
-    end
   end
 
   def add_birthday_to_user
-
     @customer = current_user
-    byebug
     begin
       @customer.update_attributes( birthdate: Date.new(params[:user_birthdate]['birthdate(1i)'].to_i, params[:user_birthdate]['birthdate(2i)'].to_i, params[:user_birthdate]['birthdate(3i)'].to_i))
       @customer.save!

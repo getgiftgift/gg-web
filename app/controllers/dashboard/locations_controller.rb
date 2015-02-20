@@ -68,7 +68,7 @@ class Dashboard::LocationsController < ApplicationController
     @location = Location.find(params[:id])
 
     respond_to do |format|
-      if @location.update_attributes(params[:location])
+      if @location.update_attributes(location_params)
         flash[:notice] = 'Location was successfully updated.'
         format.html { redirect_to(dashboard_locations_path) }
         format.xml  { head :ok }
