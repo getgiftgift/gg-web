@@ -6,7 +6,7 @@
     .left
       = image_tag "birthday_deals/worthday_templogo_blue_white_tagline.png"
     .right style="padding:30px;"
-      #fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
+      / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
       
       = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250"), user_omniauth_authorize_path(:facebook) 
       

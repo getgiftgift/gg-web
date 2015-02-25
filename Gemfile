@@ -8,7 +8,8 @@ gem 'mysql2'
 
 gem 'asset_sync'
 
-gem "binding_of_caller"
+gem 'barby'
+gem 'binding_of_caller'
 gem 'byebug'
 
 gem 'carrierwave'
@@ -34,7 +35,7 @@ gem "koala", "~> 1.11.0rc"
 
 gem 'omniauth-facebook'
 
-gem 'prawn'
+gem 'prawn-rails'
 
 gem 'rmagick'
 

@@ -1,5 +1,5 @@
 class DownloadBirthdayVoucher < Prawn::Document
-require 'prawn/layout'
+require 'prawn'
 require 'prawn/table'
 require 'barby'
 require 'barby/barcode/code_128'

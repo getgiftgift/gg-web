@@ -1,9 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  # Unpermitted parameters: first_name, last_name, birthdate(2i), birthdate(3i), birthdate(1i)
   before_action :configure_permitted_parameters, if: :devise_controller?
-
 
   def admin_login_required
     unless current_user && current_user.admin?
@@ -47,6 +45,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_location
+      byebug
       @current_location ||= (location_from_params || location_from_session || location_from_ip || default_location)
   end
 
