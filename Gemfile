@@ -1,5 +1,5 @@
-source "https://rubygems.org"
-ruby '2.1.2'
+source "http://rubygems.org"
+ruby '2.2.0'
 
 gem 'rails', '~> 4.2.0'
 gem 'railties', '~> 4.2.0'
@@ -38,6 +38,7 @@ gem 'omniauth-facebook'
 gem 'prawn-rails'
 
 gem 'rmagick'
+gem 'rubber'
 
 gem 'sass-rails'
 gem 'simple_form'
@@ -50,3 +51,4 @@ group :development do
 end
 
 
+gem 'open4'

@@ -1,0 +1,65 @@
+---
+- !ruby/object:Rubber::Configuration::InstanceItem
+  name: production
+  domain: foo.com
+  roles:
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: app
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: unicorn
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: nginx
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: collectd
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: common
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: monit
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: db
+    options:
+      primary: true
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: mysql
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: mysql_master
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: examples
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: graphite_server
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: graphite_web
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: web
+    options: {}
+  - !ruby/object:Rubber::Configuration::RoleItem
+    name: web_tools
+    options: {}
+  instance_id: i-c00b6a3a
+  image_type: m1.small
+  image_id: ami-92f569fa
+  security_groups:
+  - default
+  - web
+  - web_tools
+  external_host: ec2-54-160-172-169.compute-1.amazonaws.com
+  external_ip: 54.160.172.169
+  internal_host: ip-10-151-86-198.ec2.internal
+  internal_ip: 10.151.86.198
+  zone: us-east-1c
+  provider: aws
+  platform: linux
+  root_device_type: instance-store
+- volumes: {}
+  static_ips: {}
