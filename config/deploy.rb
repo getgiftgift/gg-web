@@ -16,7 +16,8 @@ end
 set :scm, :git
 set :ssh_options, { :forward_agent => true }
 set :repository, 'git@github.com:addsheet/worthday-demo.git'
-set :branch, "#{Rubber.env == 'production' ? 'master' : 'staging'}"
+set :branch, 'rubber'
+# set :branch, "#{Rubber.env == 'production' ? 'master' : 'staging'}"
 set :deploy_via, :remote_cache
 
 
