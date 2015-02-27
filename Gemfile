@@ -46,6 +46,8 @@ gem 'slim-rails'
 gem 'state_machine', :git => "git@github.com:seuros/state_machine.git"  # gem no longer maintained by author, using fork
 gem 'state_machine-audit_trail'
 
+gem "therubyracer" #JavaScript runtime for production
+
 group :development do 
   gem 'better_errors'
 end
