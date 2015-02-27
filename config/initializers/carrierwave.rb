@@ -2,12 +2,20 @@ if Rails.env.production?
   CarrierWave.configure do |config|
     config.fog_credentials = {
       provider:               'AWS',
-      aws_access_key_id:      ENV['S3_KEY'],
-      aws_secret_access_key:  ENV['S3_SECRET'],
-      region:                 ENV['S3_REGION']
+      aws_access_key_id:      'AKIAJX3JJNVVSLYVIV3Q',
+      aws_secret_access_key:  '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',
+      region:                 'us-east-1'
+
+      # aws_access_key_id:      ENV['S3_KEY'],
+      # aws_secret_access_key:  ENV['S3_SECRET'],
+      # region:                 ENV['S3_REGION']
     }
-    config.asset_host       = "//#{ENV['S3_BUCKET']}.s3.amazonaws.com"
-    config.fog_directory  = ENV['S3_BUCKET']
+    
+    config.asset_host       = "//worthday-demo.s3.amazonaws.com"
+    config.fog_directory  = 'worthday-demo'
+    
+    # config.asset_host       = "//#{ENV['S3_BUCKET']}.s3.amazonaws.com"
+    # config.fog_directory  = ENV['S3_BUCKET']
     config.storage = :fog
   end
 # elsif Rails.env.development?
