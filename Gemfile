@@ -48,6 +48,8 @@ gem 'state_machine-audit_trail'
 
 gem "therubyracer" #JavaScript runtime for production
 
+gem 'uglifier'
+
 group :development do 
   gem 'better_errors'
 end
