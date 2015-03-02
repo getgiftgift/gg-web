@@ -16,7 +16,7 @@ production:
   password:
   pool: 5
   host: localhost
-  socket: /tmp/mysql.sock
+
 
 
 
