@@ -51,7 +51,6 @@ class BirthdayDealsController < ApplicationController
   protected
 
   def verify_login_and_birthday
-    return redirect_to dashboard_path if current_user and current_user.admin?
     if customer_logged_in?
       birthday = current_user.adjusted_birthday
       return render 'customer_enter_birthday' if birthday.nil?
