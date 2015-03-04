@@ -98,7 +98,7 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
 end
 
 # capistrano's deploy:cleanup doesn't play well with FILTER
-after "deploy", "symlink_shared"
+after "deploy:update_code", "symlink_shared"
 after "deploy", "cleanup"
 after "deploy:migrations", "cleanup"
 task :cleanup, :except => { :no_release => true } do
