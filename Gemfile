@@ -22,6 +22,7 @@ gem 'delayed_job_active_record'
 
 gem 'figaro'
 gem 'fog', '~> 1.28.0'
+gem 'fog-aws'
 gem 'foundation-rails'
 
 gem 'geocoder'

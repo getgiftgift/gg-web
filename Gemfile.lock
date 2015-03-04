@@ -397,6 +397,7 @@ DEPENDENCIES
   devise
   figaro
   fog (~> 1.28.0)
+  fog-aws
   foundation-rails
   geocoder
   haml
