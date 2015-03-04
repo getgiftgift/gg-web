@@ -30,6 +30,10 @@ set :password, nil
 # This way exposed services (mongrel) aren't running as a privileged user
 set :use_sudo, true
 
+# Set linked files which are not in version control
+set :linked_files, %w(config/database.yml config/application.yml)
+
+
 # If you're having troubles connecting to your server, uncommenting this
 # line will give you more verbose logging output from net-ssh, which will
 # make debugging the problem much easier.
