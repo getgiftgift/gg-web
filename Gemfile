@@ -20,6 +20,7 @@ gem 'compass-rails'
 gem 'devise'
 gem 'delayed_job_active_record'
 
+gem 'figaro'
 gem 'fog', '~> 1.28.0'
 gem 'foundation-rails'
 
