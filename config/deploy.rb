@@ -30,10 +30,6 @@ set :password, nil
 # This way exposed services (mongrel) aren't running as a privileged user
 set :use_sudo, true
 
-# Set linked files which are not in version control
-set :linked_files, %w(config/database.yml config/application.yml)
-
-
 # If you're having troubles connecting to your server, uncommenting this
 # line will give you more verbose logging output from net-ssh, which will
 # make debugging the problem much easier.
@@ -98,7 +94,7 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
 end
 
 # capistrano's deploy:cleanup doesn't play well with FILTER
-after "deploy:update_code", "deploy:symlink_shared"
+after "deploy:finalize_update", "deploy:symlink_shared"
 after "deploy", "cleanup"
 after "deploy:migrations", "cleanup"
 task :cleanup, :except => { :no_release => true } do
