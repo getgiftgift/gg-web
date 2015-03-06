@@ -38,19 +38,13 @@ class User < ActiveRecord::Base
       user.email = auth.info.email                                                  # required by Facebook
       user.first_name = auth.info.first_name                                        # required by Facebook
       user.last_name = auth.info.last_name                                          # required by Facebook
-      if Rails.env.development?
-        user.birthdate = Date.today
-      else
-        user.birthdate = Date.strptime( auth.extra.raw_info.birthday, "%m/%d/%Y" )  # required by Facebook
-      end
+      user.birthdate = Date.strptime( auth.extra.raw_info.birthday, "%m/%d/%Y" )    # required by Facebook
       user.gender = auth.extra.raw_info.gender                                      # required by Facebook 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       
       # user.image = auth.info.image
       # user.location = auth.info.location  # "City, State"
-      
-      
       user.save!
     end
   end
@@ -81,8 +75,8 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
-    birthdate = self.test_user? ? Date.today : self.birthdate
-    # birthdate = self.birthdate
+    birthdate = Date.today  ## Development testing in production env
+    # Rails.env.production? ? birthdate = self.birthdate : birthdate = Date.today  ## Production
     return nil if birthdate.nil?
     birthday_string = birthdate.strftime('%m%d')
     today = Date.today.strftime('%m%d')
@@ -112,7 +106,8 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_birthday_deals?
-    return true if self.test_user?
+    return true  ## Development testing in production env
+    # return true if self.test_user?
     date_start = (Date.today - 15.days).strftime('%m%d')
     date_end = (Date.today + 15.days).strftime('%m%d')
     user_bday = self.birthdate.strftime('%m%d')

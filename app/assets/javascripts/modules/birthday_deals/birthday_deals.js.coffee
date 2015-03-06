@@ -24,9 +24,9 @@ $(document).ready ->
     top: '10%'
     , 4000, 'easeInOutElastic', ->
       $('#instructions').fadeIn(2000)  
-  # $('.birthday-box.closed').click( ->
-    # $(this).removeClass('closed').addClass('open')
-    # )
+  $('.birthday-box.closed').click( ->
+    $(this).removeClass('closed').addClass('open')
+    )
   
 
 
@@ -49,6 +49,23 @@ $(document).ready ->
           style:
             def: false
             classes: 'bday_tooltip'
+
+  step2 = $('.card-box:visible').qtip
+        content: 
+          text: 'Keep It if you like, or Trash It if you don\'t'
+        viewport: $(window)     
+        hide:
+          fixed: true 
+          event: false
+        show:
+          fixed: true
+          event: false
+        position:
+              my: 'top center'
+              at: 'bottom center'
+        style:
+          def: false
+          classes: 'bday_tooltip'            
 
   step3 =
     $('#account').qtip
@@ -74,10 +91,12 @@ $(document).ready ->
     if count2 == true
       $(step3).qtip('show')
       count2 = false  
-    $(step2).qtip('destroy')
+    $('#qtip-2').remove()
 
   # event handler to show step2/3 
   $('.birthday-box').click (event) ->
+      
+    $(step2).qtip('show')
     step2 = $('#card_'+$(this).attr('id')).qtip
         content: 
           text: 'Keep It if you like, or Trash It if you don\'t'
@@ -94,10 +113,12 @@ $(document).ready ->
         style:
           def: false
           classes: 'bday_tooltip'
+     
+       
     if $('.white-box > div').is(':visible')
       event.preventDefault()   
     else
-      $(step1).qtip('destroy')    
+      $('#qtip-0').remove()    
       $('#details').fadeIn()
       $('.card-box').hide()
       $('#card_'+$(this).attr('id')).show()

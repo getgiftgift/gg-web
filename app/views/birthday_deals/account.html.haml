@@ -2,11 +2,6 @@
   .container.white-box
     %ul{style: 'float: right;'}
       %li= link_to 'Worthday', birthday_deals_path
-    
-    |PROFILE: #{@graph.get_object("me")}
-    %br
-    FRIENDS: #{@graph.get_connections("me", "friends")} 
-
     %h2 My Deals
     - if @birthday_vouchers.empty?
       You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
