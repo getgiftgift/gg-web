@@ -67,14 +67,6 @@ namespace :deploy do
       task t.name, t.options, &t.body
     end
   end
-
-  desc "Symlink shared config files"
-  task :symlink_shared, :roles => :app, :except => { :no_release => true } do
-    ["config/database.yml", "config/application.yml"].each do |path|
-      run "ln -fs #{shared_path}/#{path} #{release_path}/#{path}"
-    end
-  end
-
 end
 
 namespace :deploy do
@@ -94,7 +86,6 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
 end
 
 # capistrano's deploy:cleanup doesn't play well with FILTER
-after "deploy:finalize_update", "deploy:symlink_shared"
 after "deploy", "cleanup"
 after "deploy:migrations", "cleanup"
 task :cleanup, :except => { :no_release => true } do
