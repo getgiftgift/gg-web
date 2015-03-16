@@ -27,6 +27,7 @@ gem 'fog-aws'
 gem 'foundation-rails'
 
 gem 'geocoder'
+gem 'geoip'
 
 gem 'haml'
 

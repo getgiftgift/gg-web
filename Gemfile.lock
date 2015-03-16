@@ -209,6 +209,7 @@ GEM
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
     geocoder (1.2.7)
+    geoip (1.4.0)
     globalid (0.3.2)
       activesupport (>= 4.1.0)
     haml (4.0.6)
@@ -400,6 +401,7 @@ DEPENDENCIES
   fog-aws
   foundation-rails
   geocoder
+  geoip
   haml
   jquery-qtip2-rails
   jquery-rails

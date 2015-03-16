@@ -9,7 +9,6 @@ class BirthdayDealsController < ApplicationController
   def account
     @user = current_user
     @birthday_vouchers = @user.birthday_deal_vouchers.with_state(:kept)
-    @graph = @graph = Koala::Facebook::API.new(@user.oauth_token)
   end
 
   def index

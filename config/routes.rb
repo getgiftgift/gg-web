@@ -4,7 +4,7 @@ WorthdayWeb::Application.routes.draw do
   # match '/users/sign_up' => "birthday_deals#index"
   root :to => 'birthday_deals#index'
   get '/' => "birthday_deals#index", as: 'birthday_deals'
-
+  get '/:referral_code' => 'birthday_deals#index'
   # devise_for :users, :controllers => {:registrations => 'override_registrations'}
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -23,7 +23,7 @@ WorthdayWeb::Application.routes.draw do
     end
   end
 
-  get '/:geolocation' => 'birthday_deals#index'
+  # get '/:geolocation' => 'birthday_deals#index'
 
   
   namespace :dashboard do

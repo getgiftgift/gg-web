@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_filter :set_referral_code
 
   def admin_login_required
     unless current_user && current_user.admin?
@@ -44,10 +45,17 @@ class ApplicationController < ActionController::Base
   end
 
   def current_location
-      byebug
-      @current_location ||= (location_from_params || location_from_session || location_from_ip || default_location)
+    @current_location ||= (location_from_params || location_from_session || location_from_ip || default_location)
   end
 
+  def set_referral_code
+    session[:referral_code] = params[:r] if params[:r]
+  end
+
+  def save_referral_code_with_user(user)
+    referrer = User.where(referral_code: session[:referral_code]).first
+    Referral.create(recipient: user, referrer: referrer) if referrer && referrer != user
+  end
 
   protected
 

@@ -1,8 +1,14 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
-  has_many :birthday_deal_vouchers
+  after_create :build_referral_code
 
-  geocoded_by :last_sign_in_ip
+  has_many :birthday_deal_vouchers
+  has_many :referrals_received, :foreign_key => :recipient_id,
+                                :class_name => "Referral"
+
+  has_many :referrals_made, :foreign_key => :referrer_id,
+                                :class_name => "Referral"
+  
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -11,6 +17,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
   devise :omniauthable, omniauth_providers: [:facebook]
+
+
 
   # validates_presence_of     :first_name, :last_name, :message => "Required Field"
   # validates_presence_of     :password,:message => "Required Field",                   :if => :password_required?
@@ -42,7 +50,6 @@ class User < ActiveRecord::Base
       user.gender = auth.extra.raw_info.gender                                      # required by Facebook 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      
       # user.image = auth.info.image
       # user.location = auth.info.location  # "City, State"
       user.save!
@@ -55,6 +62,14 @@ class User < ActiveRecord::Base
         user.email = data["email"] if user.email.blank?
       end
     end
+  end
+
+  def build_referral_code
+    # 5 character referral code
+    # avoids similar characters like l and 1, o and 0 etc. 
+    charset = %w{ 2 3 4 6 7 9 a c d e f g h j k m n p q r t v w x y z}
+    code = (0...5).map{ charset.to_a[SecureRandom.random_number(charset.size)] }.join
+    update_attributes referral_code: code
   end
 
   def full_name

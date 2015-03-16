@@ -16,3 +16,9 @@
 //= require jquery-ui
 //= require jquery.qtip.js
 //= require_tree .
+
+
+
+//  remove url garbage
+if (window.location.hash == "#_=_") {
+    window.location.hash = "";   }
