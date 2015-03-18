@@ -7,6 +7,7 @@ WorthdayWeb::Application.routes.draw do
   get '/:referral_code' => 'birthday_deals#index'
   # devise_for :users, :controllers => {:registrations => 'override_registrations'}
   
+  get '/locations' => 'birthday_deals#index', as: 'locations'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   # devise_for :users, :path => '', :path_names => { :sign_in => "sign_in", :sign_out => "sign_out", :sign_up => "sign_up" }

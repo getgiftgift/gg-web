@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     end
 
   def location_from_params
-    if (params and params[:geolocation] and (params[:geolocation] == 'columbia-mo' || params[:geolocation] == 'jefferson-city-mo'))
+    if params[:geolocation]
       @current_location = Location.find_by_slug(params[:geolocation])
     end
     @current_location

@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    title Worthday
+    = stylesheet_link_tag 'birthday_deals', :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
+  body
+    = render 'layouts/messages'
+    / - if customer_logged_in? or logged_in?
+    - if current_user  
+      #geolocation
+        
+        / = form_for @current_location, url: locations_path, method: :get do |f|
+          / = f.select :slug, Location.all.collect{ |u| [u.location_name, u.slug]}
+
+        = form_tag locations_path, method: :get do
+          = select_tag :geolocation, options_for_select(Location.all.collect{ |u| [u.location_name, u.slug]}, selected: @location.slug)
+          / = submit_tag 'go'
+      #account.white-box
+        = link_to 'My Deals ', account_url
+        ||
+        = link_to ' Sign out', destroy_user_session_path, method: :delete
+        br
+        br
+        #location= @location.location_name 
+  #main  
+    = yield
