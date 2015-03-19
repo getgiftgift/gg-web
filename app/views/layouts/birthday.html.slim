@@ -12,11 +12,12 @@ html
     - if current_user  
       #geolocation
         
-        / = form_for @current_location, url: locations_path, method: :get do |f|
-          / = f.select :slug, Location.all.collect{ |u| [u.location_name, u.slug]}
+        = simple_form_for current_user, url: change_location_path do |f|
+          = f.association :location, label_method: :location_name, include_blank: false
+          / , Location.all.collect{ |loc| [loc.location_name, loc.id]}, as: :select
 
-        = form_tag locations_path, method: :get do
-          = select_tag :geolocation, options_for_select(Location.all.collect{ |u| [u.location_name, u.slug]}, selected: @location.slug)
+        / = form_tag locations_path, method: :get do
+          / = select_tag :geolocation, options_for_select(Location.all.collect{ |u| [u.location_name, u.slug]}, selected: @location.slug)
           / = submit_tag 'go'
       #account.white-box
         = link_to 'My Deals ', account_url
@@ -24,6 +25,6 @@ html
         = link_to ' Sign out', destroy_user_session_path, method: :delete
         br
         br
-        #location= @location.location_name 
+        #location= @current_location.location_name
   #main  
     = yield

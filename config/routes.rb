@@ -26,7 +26,7 @@ WorthdayWeb::Application.routes.draw do
 
   # get '/:geolocation' => 'birthday_deals#index'
 
-  
+  patch '/change_location' => 'users#change_location'
   namespace :dashboard do
     resources :users  
     resources :companies do  

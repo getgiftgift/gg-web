@@ -2,10 +2,10 @@ class User < ActiveRecord::Base
   include ApplicationHelper
   after_create :build_referral_code
 
+  belongs_to :location
   has_many :birthday_deal_vouchers
   has_many :referrals_received, :foreign_key => :recipient_id,
                                 :class_name => "Referral"
-
   has_many :referrals_made, :foreign_key => :referrer_id,
                                 :class_name => "Referral"
   
@@ -50,8 +50,8 @@ class User < ActiveRecord::Base
       user.gender = auth.extra.raw_info.gender                                      # required by Facebook 
       user.oauth_token = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.location = Location.near(auth.info.location).first  # "City, State"
       # user.image = auth.info.image
-      # user.location = auth.info.location  # "City, State"
       user.save!
     end
   end

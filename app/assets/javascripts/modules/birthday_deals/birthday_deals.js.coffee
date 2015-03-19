@@ -2,8 +2,8 @@
 #// All this logic will automatically be available in application.js.
 
 $(document).ready ->
-  $('select').change( ->
-    $(this).parent('form').submit())  
+  $('select#user_location_id').change( ->
+    $(this).parent().parent('form').submit())  
   $('#instructions').hide()
   $('#account, .geobox').hide()
   $('#account, .geobox').delay(3000).fadeIn(2000)

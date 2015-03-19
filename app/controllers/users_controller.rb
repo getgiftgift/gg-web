@@ -80,6 +80,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_location
+    if current_user
+      current_user.update_attributes(location_id: user_params[:location_id])
+      redirect_to root_url
+    end
+  end
+
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
@@ -91,4 +98,10 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  protected
+  def user_params
+    params.require(:user).permit(:location_id)
+  end
+
 end

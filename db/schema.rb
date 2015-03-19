@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310213312) do
+ActiveRecord::Schema.define(version: 20150319194017) do
 
   create_table "birthday_deal_state_transitions", force: :cascade do |t|
     t.integer  "birthday_deal_id", limit: 4
@@ -169,11 +169,14 @@ ActiveRecord::Schema.define(version: 20150310213312) do
     t.datetime "oauth_expires_at"
     t.string   "gender",                 limit: 255
     t.string   "referral_code",          limit: 255
+    t.integer  "location_id",            limit: 4
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "identities", "users"
+  add_foreign_key "users", "locations"
 end
