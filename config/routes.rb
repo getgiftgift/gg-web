@@ -1,21 +1,16 @@
 WorthdayWeb::Application.routes.draw do
-  get '/dashboard' => 'dashboard/locations#index'
-  # match '/users/sign_in' => "birthday_deals#index"
-  # match '/users/sign_up' => "birthday_deals#index"
   root :to => 'birthday_deals#index'
+  get '/dashboard' => 'home#dashboard'
   get '/' => "birthday_deals#index", as: 'birthday_deals'
-  get '/:referral_code' => 'birthday_deals#index'
-  # devise_for :users, :controllers => {:registrations => 'override_registrations'}
   
-  get '/locations' => 'birthday_deals#index', as: 'locations'
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  get '/:referral_code' => 'birthday_deals#index'
+  patch '/change_location' => 'users#change_location'
 
-  # devise_for :users, :path => '', :path_names => { :sign_in => "sign_in", :sign_out => "sign_out", :sign_up => "sign_up" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, only: [:show]
   get '/my_account' => "birthday_deals#account", as: 'account' 
-
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
-  get '/' => "birthday_deals#index", as: 'deals'
+  
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
     member do
       put :trash
@@ -23,11 +18,9 @@ WorthdayWeb::Application.routes.draw do
       get :print
     end
   end
-
-  # get '/:geolocation' => 'birthday_deals#index'
-
-  patch '/change_location' => 'users#change_location'
+  
   namespace :dashboard do
+    get '/locations' => 'locations#index', as: 'index'
     resources :users  
     resources :companies do  
       resources :company_locations

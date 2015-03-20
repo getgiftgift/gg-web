@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_referral_code
 
+
+  def after_sign_in_path_for(resource)
+    dashboard_index_path if resource.admin?
+    birthday_deals_path
+  end
+
   def admin_login_required
     unless current_user && current_user.admin?
       redirect_to root_url  
@@ -46,7 +52,7 @@ class ApplicationController < ActionController::Base
 
   def current_location
     # @current_location ||= (location_from_params || location_from_session || location_from_ip || default_location)
-    @current_location = current_user.location
+    @current_location = current_user.location || location_from_ip || default_location
   end
 
   def set_referral_code
