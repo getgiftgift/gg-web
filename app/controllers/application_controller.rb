@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    dashboard_index_path if resource.admin?
-    birthday_deals_path
+    resource.admin? ? dashboard_index_path : birthday_deals_path  
   end
 
   def admin_login_required

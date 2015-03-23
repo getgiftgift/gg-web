@@ -5,8 +5,8 @@ $(document).ready ->
   $('select#user_location_id').change( ->
     $(this).parent().parent('form').submit())  
   $('#instructions').hide()
-  $('#account, .geobox').hide()
-  $('#account, .geobox').delay(3000).fadeIn(2000)
+  # $('#account, .geobox').hide()
+  # $('#account, .geobox').delay(3000).fadeIn(2000)
   $('#box_container').css('bottom', '-'+$('#box_container').css('height'))
   $('#logo').css('top', '-256px')
   $('#flags-left').css('left', '-410px')
