@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
 
   def current_location
     # @current_location ||= (location_from_params || location_from_session || location_from_ip || default_location)
-    @current_location  ||= (current_user.location || location_from_ip ||  default_location)
+    @current_location  ||= (current_user.location ||  default_location)
   end
 
   def set_referral_code
