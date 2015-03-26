@@ -33,7 +33,6 @@ gem 'haml'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'jquery-qtip2-rails'
 
 gem "koala", "~> 1.11.0rc"
 

@@ -8,29 +8,4 @@
     .right style="padding:30px;"
       / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
       
-      = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250"), user_omniauth_authorize_path(:facebook) 
-      
-        / = render partial: 'devise/sessions/new'
-
-      / h2.bottom_tag
-        / Don't have an account? 
-        / = link_to 'Sign Up', '#customer_signup'   
-
-/ .cell#video
-/   .floater
-/   .white-box
-/     iframe frameborder="0", height="360", src="https://www.youtube-nocookie.com/embed/lj0mOvFTzT8?allowfullscreen=1&rel=0&showinfo=0&modestbranding=1", width="640"
-/     = link_to 'Sign In', '#customer_signin'
-    / = link_to 'Sign Up', '#customer_signup' 
-  
-/ .cell#customer_signup
-/   .floater
-/   .container
-/     .left
-/       / = image_tag "birthday_deals/worthday_templogo_blue_white_tagline.png"
-/     .right
-/       .form
-/         / = render partial: 'devise/registrations/new' 
-/       h2.bottom_tag    
-/       / Already have an account?
-/       / = link_to 'Sign In', '#customer_signin'
+      = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250"), user_omniauth_authorize_path(:facebook)

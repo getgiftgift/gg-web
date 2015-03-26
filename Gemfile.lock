@@ -220,8 +220,6 @@ GEM
     i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
-    jquery-qtip2-rails (0.5.0)
-      railties (>= 3.1.0)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -403,7 +401,6 @@ DEPENDENCIES
   geocoder
   geoip
   haml
-  jquery-qtip2-rails
   jquery-rails
   jquery-ui-rails
   koala (~> 1.11.0rc)
