@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//= require jquery.qtip
-//= require qtip_override
 
 // Compass imports & mixins
 @import "compass/reset";
@@ -335,7 +333,7 @@ body {
   .card-box{
     display: none;
     position: relative;
-    min-height: 278px;
+    min-height: 328px;
     font-family: Tahoma, Geneva, sans-serif;
     &.show {
       display: block;
@@ -394,7 +392,7 @@ body {
   text-align: center;
   text-decoration: none;
   width: 220px;
-  margin: 10px 0;
+  margin: 5px 0;
   font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
   font-weight: 900;
   font-size: 1.5em;
