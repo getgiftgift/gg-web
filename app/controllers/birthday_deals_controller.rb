@@ -8,15 +8,15 @@ class BirthdayDealsController < ApplicationController
 
   def account
     @user = current_user
-    @birthday_vouchers = @user.birthday_deal_vouchers.with_state(:kept)
+    @birthday_vouchers = @user.birthday_deal_vouchers.in_location(current_location).with_state(:kept)
   end
 
   def index
     if customer_logged_in?
       @location = current_location
       @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.in_location(current_location)
+      
       if @birthday_deal_vouchers.empty?
-        # @deals = BirthdayDeal.is_active
         @deals = BirthdayDeal.in_location(current_location).is_active
         return render 'index_not_your_birthday' if @deals.empty?
         @birthday_deal_vouchers = @deals.each.collect{|bd| bd.create_voucher_for(current_user)}
