@@ -12,15 +12,12 @@ html
     - if current_user  
       #geolocation
         
-        = simple_form_for current_user, url: change_location_path do |f|
-          = f.association :location, label_method: :location_name, include_blank: false
+        / = simple_form_for current_user, url: change_location_path do |f|
+          / = f.association :location, label_method: :location_name, include_blank: false
           / , Location.all.collect{ |loc| [loc.location_name, loc.id]}, as: :select
 
-        / = form_tag locations_path, method: :get do
-          / = select_tag :geolocation, options_for_select(Location.all.collect{ |u| [u.location_name, u.slug]}, selected: @location.slug)
-          / = submit_tag 'go'
       #account.white-box
-        = link_to 'My Deals ', account_url
+        = link_to 'My Gifts ', account_url
         ||
         = link_to ' Sign out', destroy_user_session_path, method: :delete
   #main  

@@ -1,7 +1,7 @@
 %nav
   %ul
-    %li= link_to 'Companies', dashboard_companies_path
-    %li= link_to 'Markets', dashboard_locations_path  
+    %li= link_to 'Markets', dashboard_locations_path
+    %li= link_to 'Companies', dashboard_companies_path  
     %li= link_to 'Users', dashboard_users_path
     %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
     %li= current_user.email if current_user
