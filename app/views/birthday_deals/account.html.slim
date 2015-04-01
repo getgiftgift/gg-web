@@ -1,0 +1,20 @@
+.row
+  .large-10.large-centered.columns.white-box
+    .right= link_to "close", birthday_deals_path
+    p My Gifts
+    - if @birthday_vouchers.empty?
+      p You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
+    -else
+      br
+      table style="border:none;"
+        thead
+          tr
+            th Birthday Deal
+            th Expires On
+            th
+        tbody
+          - @birthday_vouchers.each do |deal|
+            tr 
+              td #{deal.hook} at #{deal.company.name}
+              td= deal.good_through.to_s
+              td= link_to 'Print Voucher', print_birthday_deal_voucher_path(deal)

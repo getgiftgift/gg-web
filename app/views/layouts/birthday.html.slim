@@ -1,24 +1,13 @@
 doctype html
 html
   head
-    title Worthday
+    title GiftGift
     = stylesheet_link_tag 'birthday_deals', :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   body
     #fb-root
+    = render 'layouts/nav'
     = render 'layouts/messages'
-    - if current_user  
-      #geolocation
-        
-        / = simple_form_for current_user, url: change_location_path do |f|
-          / = f.association :location, label_method: :location_name, include_blank: false
-          / , Location.all.collect{ |loc| [loc.location_name, loc.id]}, as: :select
-
-      #account.white-box
-        = link_to 'My Gifts ', account_url
-        ||
-        = link_to ' Sign out', destroy_user_session_path, method: :delete
-  #main  
     = yield

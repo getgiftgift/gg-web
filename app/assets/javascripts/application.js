@@ -14,10 +14,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require foundation
 //= require_tree .
 
 
 
-//  remove url garbage
-if (window.location.hash == "#_=_") {
-    window.location.hash = "";   }
+$(function() {
+  $(document).foundation();
+
+  //  remove url garbage
+  if (window.location.hash == "#_=_") {
+    window.location.hash = "";   };
+});

@@ -1,11 +1,7 @@
-- if current_user 
-  = link_to current_user.email, destroy_user_session_path, method: :delete 
-.cell#customer_signin
-  .floater
-  .container 
-    .left
-      = image_tag "birthday_deals/worthday_templogo_blue_white_tagline.png"
-    .right style="padding:30px;"
-      / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
-      
-      = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250"), user_omniauth_authorize_path(:facebook)
+.row style="height:100px;"
+.row
+  .large-4.small-10.small-centered.columns style="text-align:center;"
+    = image_tag "gift_gift_logo.png"
+    p It's not a gift, it's a Gift Gift    
+    = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250", style: 'margin-top: 20px;'), user_omniauth_authorize_path(:facebook)
+    / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
