@@ -1,11 +1,5 @@
-GIT
-  remote: git@github.com:seuros/state_machine.git
-  revision: b5baef856b170f18dc2fdc36def2411c255335b9
-  specs:
-    state_machine (1.2.0)
-
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.0)
     actionmailer (4.2.0)
@@ -114,6 +108,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (2.0.0)
+    dotenv-rails (2.0.0)
+      dotenv (= 2.0.0)
     erubis (2.7.0)
     excon (0.44.4)
     execjs (2.3.0)
@@ -354,8 +351,15 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    state_machine-audit_trail (0.1.8)
-      state_machine
+    state_machines (0.2.2)
+    state_machines-activemodel (0.1.2)
+      activemodel (~> 4.1)
+      state_machines (~> 0.2.0)
+    state_machines-activerecord (0.2.0)
+      activerecord (~> 4.1)
+      state_machines-activemodel (~> 0.1.0)
+    state_machines-audit_trail (1.0.1)
+      state_machines
     temple (0.7.5)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
@@ -394,6 +398,7 @@ DEPENDENCIES
   compass-rails
   delayed_job_active_record
   devise
+  dotenv-rails
   figaro
   fog (~> 1.28.0)
   fog-aws
@@ -415,8 +420,9 @@ DEPENDENCIES
   sass-rails
   simple_form
   slim-rails
-  state_machine!
-  state_machine-audit_trail
+  state_machines
+  state_machines-activerecord
+  state_machines-audit_trail
   therubyracer
   uglifier
   unicorn
