@@ -16,7 +16,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
   scope :in_location, lambda { |location| joins(:birthday_deal).where("birthday_deals.location_id = ?", location.id) }
 
   state_machine initial: :wrapped do
-    store_audit_trail
+    audit_trail
 
     ### Events ###
     event :unwrap do
