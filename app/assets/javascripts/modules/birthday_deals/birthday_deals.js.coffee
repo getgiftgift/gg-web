@@ -30,6 +30,10 @@ $(document).ready ->
     )
    
   $('.birthday-box').click (event) ->
-      $('#details').fadeIn()
-      $('.card-box').hide()
-      $('#card_'+$(this).attr('id')).show()
+    $('#details').fadeIn()
+    $('.card-box').hide()
+    $('#card_'+$(this).attr('id')).show()
+
+  #    
+  # $('.bottom-buttons').click (event) ->
+  #   $('.birthday-box:hidden').first().fadeIn(2000)      

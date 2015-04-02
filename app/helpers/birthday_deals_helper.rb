@@ -57,6 +57,20 @@ module BirthdayDealsHelper
     raw(out)
   end
 
+  def single(vouchers)
+    out = ''
+    display = 'inline-block'
+    vouchers.each { |voucher|
+      box = rand(9)+1
+      apple = content_tag_for :a, voucher, class: "birthday-box", style: "display:#{display};", :data => { box: box} do
+        image_tag "birthday_deals/box-#{box}-closed.png", class: "box-#{box}"
+      end
+      out.concat apple
+      display='none'
+    }
+    out.html_safe 
+  end
+
   def pyramid(vouchers)
     out = ''
     count = vouchers.count
