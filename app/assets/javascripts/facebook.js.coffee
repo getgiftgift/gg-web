@@ -83,39 +83,53 @@
 
 
 
-fb_root = null
-fb_events_bound = false
+# fb_root = null
+# fb_events_bound = false
 
-$ ->
-  loadFacebookSDK()
-  bindFacebookEvents() unless fb_events_bound
+# $ ->
+#   loadFacebookSDK()
+#   bindFacebookEvents() unless fb_events_bound
 
-bindFacebookEvents = ->
-  $(document)
-    .on('page:fetch', saveFacebookRoot)
-    .on('page:change', restoreFacebookRoot)
-    .on('page:load', ->
-      FB?.XFBML.parse()
-    )
-  fb_events_bound = true
+# bindFacebookEvents = ->
+#   $(document)
+#     .on('page:fetch', saveFacebookRoot)
+#     .on('page:change', restoreFacebookRoot)
+#     .on('page:load', ->
+#       FB?.XFBML.parse()
+#     )
+#   fb_events_bound = true
 
-saveFacebookRoot = ->
-  fb_root = $('#fb-root').detach()
+# saveFacebookRoot = ->
+#   fb_root = $('#fb-root').detach()
 
-restoreFacebookRoot = ->
-  if $('#fb-root').length > 0
-    $('#fb-root').replaceWith fb_root
-  else
-    $('body').append fb_root
+# restoreFacebookRoot = ->
+#   if $('#fb-root').length > 0
+#     $('#fb-root').replaceWith fb_root
+#   else
+#     $('body').append fb_root
 
-loadFacebookSDK = ->
-  window.fbAsyncInit = initializeFacebookSDK
-  $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
+# loadFacebookSDK = ->
+#   window.fbAsyncInit = initializeFacebookSDK
+#   $.getScript("//connect.facebook.net/en_US/all.js#xfbml=1")
 
-initializeFacebookSDK = ->
-  FB.init
-    appId     : '462905540438142'
-    channelUrl: '//WWW.YOUR_DOMAIN.COM/channel.html'
-    status    : true
-    cookie    : true
-    xfbml     : true
+# initializeFacebookSDK = ->
+#   FB.init
+#     appId     : '462905540438142'
+#     channelUrl: '//WWW.YOUR_DOMAIN.COM/channel.html'
+#     status    : true
+#     cookie    : true
+#     xfbml     : true
+
+
+# Load the SDK asynchronously
+((d, s, id) ->
+  js = undefined
+  fjs = d.getElementsByTagName(s)[0]
+  if d.getElementById(id)
+    return
+  js = d.createElement(s)
+  js.id = id
+  js.src = '//connect.facebook.net/en_US/sdk.js'
+  fjs.parentNode.insertBefore js, fjs
+  return
+) document, 'script', 'facebook-jssdk'

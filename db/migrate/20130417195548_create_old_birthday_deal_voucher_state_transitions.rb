@@ -1,4 +1,4 @@
-class CreateBirthdayDealVoucherStateTransitions < ActiveRecord::Migration
+class CreateOldBirthdayDealVoucherStateTransitions < ActiveRecord::Migration
   def change
     create_table :birthday_deal_voucher_state_transitions do |t|
       t.integer :birthday_deal_voucher_id

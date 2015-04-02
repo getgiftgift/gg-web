@@ -11,25 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150319194017) do
-
-  create_table "birthday_deal_state_transitions", force: :cascade do |t|
-    t.integer  "birthday_deal_id", limit: 4
-    t.string   "event",            limit: 255
-    t.string   "from",             limit: 255
-    t.string   "to",               limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "birthday_deal_voucher_state_transitions", force: :cascade do |t|
-    t.integer  "birthday_deal_voucher_id", limit: 4
-    t.string   "event",                    limit: 255
-    t.string   "from",                     limit: 255
-    t.string   "to",                       limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20150402014712) do
 
   create_table "birthday_deal_vouchers", force: :cascade do |t|
     t.integer  "birthday_deal_id",    limit: 4
