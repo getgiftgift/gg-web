@@ -1,56 +1,42 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
-ruby '2.2.0'
-
-gem 'rails', '~> 4.2.0'
-gem 'railties', '~> 4.2.0'
-gem 'mysql2'
-
+ruby '2.2.1'
 
 gem 'asset_sync'
-
 gem 'barby'
 gem 'binding_of_caller'
 gem 'byebug'
-
 gem 'carrierwave'
 gem 'coffee-rails'
 gem 'compass'
 gem 'compass-rails'
-
-gem 'devise'
 gem 'delayed_job_active_record'
-
+gem 'devise'
 gem 'figaro'
 gem 'fog', '~> 1.28.0'
 gem 'fog-aws'
 gem 'foundation-rails'
-
 gem 'geocoder'
 gem 'geoip'
-
 gem 'haml'
-
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-
-gem "koala", "~> 1.11.0rc"
-
+gem 'koala', '~> 1.11.0rc'
+gem 'mysql2'
 gem 'omniauth-facebook'
-
+gem 'open4'
 gem 'prawn-rails'
-
+gem 'rails', '~> 4.2.0'
+gem 'railties', '~> 4.2.0'
 gem 'rmagick'
 gem 'rubber'
-
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'state_machine', :git => "git@github.com:seuros/state_machine.git"  # gem no longer maintained by author, using fork
-gem 'state_machine-audit_trail'
-
-gem "therubyracer" #JavaScript runtime for production
-
+gem 'state_machines'
+gem 'state_machines-activerecord'
+gem 'state_machines-audit_trail'
+gem 'therubyracer' #JavaScript runtime for production
 gem 'uglifier'
 gem 'unicorn'
 
@@ -58,5 +44,8 @@ group :development do
   gem 'better_errors'
 end
 
+group :development, :test do
+  gem 'dotenv-rails'
+end
 
-gem 'open4'
+

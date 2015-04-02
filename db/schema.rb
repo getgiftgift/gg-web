@@ -114,16 +114,6 @@ ActiveRecord::Schema.define(version: 20150319194017) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "identities", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.string   "provider",   limit: 255
-    t.string   "uid",        limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
-
   create_table "locations", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "city",       limit: 255
@@ -136,10 +126,8 @@ ActiveRecord::Schema.define(version: 20150319194017) do
   end
 
   create_table "referrals", force: :cascade do |t|
-    t.integer  "referrer_id",  limit: 4
-    t.integer  "recipient_id", limit: 4
-    t.boolean  "active",       limit: 1, default: false
-    t.datetime "activated_at"
+    t.integer "referrer_id",  limit: 4
+    t.integer "recipient_id", limit: 4
   end
 
   create_table "users", force: :cascade do |t|
@@ -177,6 +165,5 @@ ActiveRecord::Schema.define(version: 20150319194017) do
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "identities", "users"
   add_foreign_key "users", "locations"
 end
