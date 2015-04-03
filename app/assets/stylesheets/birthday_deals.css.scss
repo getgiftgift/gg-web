@@ -11,6 +11,9 @@ $topbar-link-bg-hover: scale-color(#412b6a, $lightness: -14%);
 @import "foundation/components/top-bar";
 @import "foundation/components/grid";
 @import "foundation/components/tables";
+@import "foundation/components/type";
+@import "foundation/components/inline-lists";
+
 
 html, body {
   width: 100%;
@@ -37,6 +40,7 @@ body {
   background-attachment:fixed;
   
   a { text-decoration: none; }
+  .fullwidth {width: 100%;}
 } 
 
 

@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402014712) do
+ActiveRecord::Schema.define(version: 20150402021236) do
+
+  create_table "birthday_deal_state_transitions", force: :cascade do |t|
+    t.integer  "birthday_deal_id", limit: 4
+    t.string   "namespace",        limit: 255
+    t.string   "event",            limit: 255
+    t.string   "from",             limit: 255
+    t.string   "to",               limit: 255
+    t.datetime "created_at"
+  end
+
+  add_index "birthday_deal_state_transitions", ["birthday_deal_id"], name: "index_birthday_deal_state_transitions_on_birthday_deal_id", using: :btree
+
+  create_table "birthday_deal_voucher_state_transitions", force: :cascade do |t|
+    t.integer  "birthday_deal_voucher_id", limit: 4
+    t.string   "namespace",                limit: 255
+    t.string   "event",                    limit: 255
+    t.string   "from",                     limit: 255
+    t.string   "to",                       limit: 255
+    t.datetime "created_at"
+  end
+
+  add_index "birthday_deal_voucher_state_transitions", ["birthday_deal_voucher_id"], name: "index_transitions_on_voucher_id", using: :btree
 
   create_table "birthday_deal_vouchers", force: :cascade do |t|
     t.integer  "birthday_deal_id",    limit: 4
@@ -147,5 +169,7 @@ ActiveRecord::Schema.define(version: 20150402014712) do
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "birthday_deal_state_transitions", "birthday_deals"
+  add_foreign_key "birthday_deal_voucher_state_transitions", "birthday_deal_vouchers"
   add_foreign_key "users", "locations"
 end

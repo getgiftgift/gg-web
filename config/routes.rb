@@ -16,6 +16,7 @@ WorthdayWeb::Application.routes.draw do
       put :trash
       put :keep
       get :print
+      put :redeem
     end
   end
   

@@ -2,8 +2,21 @@ class BirthdayDealVouchersController < ApplicationController
   # skip_before_filter :login_required
   # before_filter :customer_login_required, except: [:print]
   # before_filter :user_login_required, only: [:print]
-  
+  layout 'birthday'
+
   respond_to :js, :html
+  
+  def show
+    @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
+  end
+
+  def redeem
+    @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
+    @birthday_deal_voucher.redeem
+    flash[:notice] = "Redeemed!" if @birthday_deal_voucher.state?(:redeemed)
+    redirect_to account_path
+  end
+
   def trash
     @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
     @birthday_deal_voucher.trash
