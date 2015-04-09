@@ -25,7 +25,7 @@ set :rvm_ruby_string, :local
 
 # Easier to do system level config as root - probably should do it through
 # sudo in the future.  We use ssh keys for access, so no passwd needed
-set :user, 'root'
+set :user, 'ubuntu'
 set :password, nil
 
 # Use sudo with user rails for cap deploy:[stop|start|restart]
