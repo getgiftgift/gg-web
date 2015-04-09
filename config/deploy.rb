@@ -19,10 +19,9 @@ set :ssh_options, { :forward_agent => true }
 set :repository, 'git@github.com:addsheet/worthday-demo.git'
 set :branch, 'master'
 set :deploy_via, :remote_cache
+
 # use the same ruby as used locally for deployment
 set :rvm_ruby_string, :local
-# automatically install dependencies on your system    
-set :rvm_autolibs_flag, "read-only" 
 
 # Easier to do system level config as root - probably should do it through
 # sudo in the future.  We use ssh keys for access, so no passwd needed
@@ -96,8 +95,11 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
   load deploy_file
 end
 
+before 'deploy', 'rvm:install_rvm'  # install/update RVM
+before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
+
 # capistrano's deploy:cleanup doesn't play well with FILTER
-after "deploy:finalize_update", "deploy:symlink_shared",'rvm:install_rvm', 'rvm:install_ruby'
+after "deploy:finalize_update", "deploy:symlink_shared"
 after "deploy", "cleanup"
 after "deploy:migrations", "cleanup"
 task :cleanup, :except => { :no_release => true } do
