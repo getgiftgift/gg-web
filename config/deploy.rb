@@ -96,7 +96,7 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
 end
 
 # before 'deploy', 'rvm:install_rvm'  # install/update RVM
-before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
+# before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
 
 # capistrano's deploy:cleanup doesn't play well with FILTER
 after "deploy:finalize_update", "deploy:symlink_shared"
