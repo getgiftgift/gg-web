@@ -1,3 +1,10 @@
-h3 Markets
-= link_to "Add a market", new_dashboard_location_path
-= render partial: "list"
+.row
+  .large-6.columns
+    h4 Markets
+    = link_to "Add a market", new_dashboard_location_path
+    = render partial: "list"
+  .large-6.columns
+    h4 Recent Activity
+    ul
+      li #{@users.count} total users.
+      li #{@recent_users.count} users in the past 7 days.
