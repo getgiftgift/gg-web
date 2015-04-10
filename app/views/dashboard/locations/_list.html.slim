@@ -1,0 +1,15 @@
+- if @locations and not @locations.empty?
+  table
+    tr
+      th Location
+      th Users
+      th Active Deals
+      th
+    - @locations.each do |location|
+      tr
+        td= location.name
+        td= location.users.empty? ? '-' : location.users.count
+        td= location.birthday_deals.is_active.empty? ? '-' : location.birthday_deals.is_active.count
+        td= link_to "Birthday Deals", dashboard_location_birthday_deals_path(location)
+- else
+  No markets have been added.

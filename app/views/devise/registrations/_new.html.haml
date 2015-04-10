@@ -1,4 +1,4 @@
-= simple_form_for(resource, :as => resource_name, :url => user_registration_path, html: {class: 'user-form'}) do |f|
+= simple_form_for(resource, :as => resource_name, :url => user_registration_path, html: {}) do |f|
   =# devise_error_messages!
   %fieldset 
     Sign up for an account
@@ -7,9 +7,9 @@
     = f.input :email, :label => false, :required => true, placeholder: 'E-Mail:'
     = f.input :password, :label => false, :required => true, placeholder: 'Password:'
     = f.input :password_confirmation, :label => false, :required => true, placeholder: 'Confirm Password:'
-    %li.dob
-      = text_field_tag "user[birthdate(2i)]", nil, placeholder: 'MM', input_html: {maxlength: 2}, class: 'month'
-      = text_field_tag "user[birthdate(3i)]", nil, placeholder: 'DD', input_html: {maxlength: 2}, class: 'day'
-      = text_field_tag "user[birthdate(1i)]", nil, placeholder: 'YYYY', input_html: {maxlength: 4}, class: 'year'
+    %li
+      = text_field_tag "user[birthdate(2i)]", nil, placeholder: 'MM', input_html: {maxlength: 2}
+      = text_field_tag "user[birthdate(3i)]", nil, placeholder: 'DD', input_html: {maxlength: 2}
+      = text_field_tag "user[birthdate(1i)]", nil, placeholder: 'YYYY', input_html: {maxlength: 4}
 
-    = f.button :submit, class: 'form-button orange', value: 'Sign_Up'
+    = f.button :submit, class: 'form-button orange', value: 'Sign Up'

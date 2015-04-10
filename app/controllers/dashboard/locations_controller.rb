@@ -6,8 +6,8 @@ class Dashboard::LocationsController < ApplicationController
   # GET /locations
   # GET /locations.xml
   def index
-    @locations = Location.all
-  
+    @locations = Location.all.includes(:users, :birthday_deals)
+
     respond_to do |format|
       format.html { }
       format.xml  { render :xml => @locations }

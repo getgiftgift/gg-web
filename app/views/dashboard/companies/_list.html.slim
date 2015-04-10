@@ -1,23 +1,23 @@
 - if @companies and not @companies.empty?
-  %table.list_table{cellpadding: "0", cellspacing: "0"}
-    %tr
-      %th
-      %th Company
-      %th Location
-      %th Phone
-      %th Actions
+  table.list_table
+    tr
+      th
+      th Company
+      th Location
+      th Phone
+      th Actions
     - @companies.each do |company|
-      %tr
-        %td= image_tag company.image_url(:thumb) if company.image?
-        %td.main= link_to company.name, dashboard_company_path(company)
-        / %td=# display_company_location(company)
-        %td= company.location_id
-        %td= company.phone
-        %td{nowrap: ""}
+      tr
+        td= image_tag company.image_url(:thumb) if company.image?
+        td.main= link_to company.name, dashboard_company_path(company)
+        / td=# display_company_location(company)
+        td= company.location_id
+        td= company.phone
+        td
           = link_to "Edit", edit_dashboard_company_path(company)
           - unless company.archived? 
             = link_to "Archive", archive_dashboard_company_path(company), data: {confirm: "Are you sure you want to archive this client?"}
           - else
             = link_to "Un-archive", unarchive_dashboard_company_path(company), data: {confirm: "Are you sure you want to un-archive this client?"}
 - else
-  No companies match your search.
+  p No companies.
