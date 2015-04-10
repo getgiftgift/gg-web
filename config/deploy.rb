@@ -22,6 +22,7 @@ set :deploy_via, :remote_cache
 
 # use the same ruby as used locally for deployment
 set :rvm_ruby_string, :local
+set :rvm_custom_path, '/home/ubuntu/.rvm'
 
 # Easier to do system level config as root - probably should do it through
 # sudo in the future.  We use ssh keys for access, so no passwd needed
