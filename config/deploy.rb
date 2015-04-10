@@ -25,7 +25,7 @@ set :rvm_ruby_string, :local
 
 # Easier to do system level config as root - probably should do it through
 # sudo in the future.  We use ssh keys for access, so no passwd needed
-set :user, 'ubuntu'
+set :user, 'root'
 set :password, nil
 
 # Use sudo with user rails for cap deploy:[stop|start|restart]
@@ -95,7 +95,7 @@ Dir["#{File.dirname(__FILE__)}/rubber/deploy-*.rb"].sort.each do |deploy_file|
   load deploy_file
 end
 
-before 'deploy', 'rvm:install_rvm'  # install/update RVM
+# before 'deploy', 'rvm:install_rvm'  # install/update RVM
 before 'deploy', 'rvm:install_ruby' # install Ruby and create gemset (both if missing)
 
 # capistrano's deploy:cleanup doesn't play well with FILTER
