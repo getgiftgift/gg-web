@@ -9,7 +9,8 @@ class Dashboard::LocationsController < ApplicationController
     @locations = Location.all.includes(:users, :birthday_deals)
     @users= User.all
     @recent_users = @users.where('created_at >= ?', Date.today-1.week)
-    
+    @vouchers = BirthdayDealVoucher.all
+    @recent_vouchers = @vouchers.where('created_at >= ?', Date.today-1.week)
     respond_to do |format|
       format.html { }
       format.xml  { render :xml => @locations }
