@@ -1,4 +1,4 @@
-class Occasion < ActiveRecord::Model
+class Occasion < ActiveRecord::Base
   
 
 
