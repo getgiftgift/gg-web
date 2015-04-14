@@ -14,8 +14,9 @@
         td= company.location_id
         td= company.phone
         td
-          = link_to "Edit", edit_dashboard_company_path(company)
+          = link_to "Edit ", edit_dashboard_company_path(company)
           - unless company.archived? 
+            || 
             = link_to "Archive", archive_dashboard_company_path(company), data: {confirm: "Are you sure you want to archive this client?"}
           - else
             = link_to "Un-archive", unarchive_dashboard_company_path(company), data: {confirm: "Are you sure you want to un-archive this client?"}

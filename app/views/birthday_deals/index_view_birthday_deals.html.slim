@@ -25,8 +25,13 @@
                 =birthday_deal.company.name
               = image_tag birthday_deal.company.image_url(:deal_image), alt: 'Logo'
               .bottom-buttons
-                = button_to 'Discard It', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red form-button"
-                = button_to 'Keep It', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "orange form-button"
+                / = button_to 'Discard It', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red form-button"
+                = link_to 'Re-Gift It', '#', class: "red form-button", data: {reveal_id: 're-gift-modal'}
+                = link_to 'Keep It', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "orange form-button"
+                #re-gift-modal.reveal-modal data-reveal='' role="dialog"
+                  p This feature will be added in the future.
+                  a.close-reveal-modal href='#' aria-label="Close" &#215; 
+
       #box_container
         .list
           = pyramid(@birthday_deal_vouchers)
