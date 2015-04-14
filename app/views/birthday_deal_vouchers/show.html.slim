@@ -1,7 +1,6 @@
 .row
-  .large-8.medium-8.large-centered.medium-centered.columns.white-box
+  .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
     = image_tag @birthday_deal_voucher.company.image_url
-    / = image_tag "http://placehold.it/350x150"
     h3
       |#{@birthday_deal_voucher.birthday_deal.hook} from #{@birthday_deal_voucher.company.name}
     h4
@@ -12,7 +11,9 @@
     p
       |Expires on: 
       = @birthday_deal_voucher.good_through
-    p= @birthday_deal_voucher.verification_number
+    p
+      | Verification Number: 
+      = @birthday_deal_voucher.verification_number
     .row
       .large-3.columns  
         = link_to 'Redeem', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'button fullwidth'

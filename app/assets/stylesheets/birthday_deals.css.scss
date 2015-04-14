@@ -8,11 +8,13 @@
 @import "base";
 $topbar-bg-color: #412b6a;
 $topbar-link-bg-hover: scale-color(#412b6a, $lightness: -14%);
+$anchor-font-color-hover: #FFFFFF;
 @import "foundation/components/top-bar";
 @import "foundation/components/grid";
 @import "foundation/components/tables";
 @import "foundation/components/type";
 @import "foundation/components/inline-lists";
+@import "foundation/components/reveal";
 
 
 html, body {
@@ -41,7 +43,8 @@ body {
   
   a { text-decoration: none; }
   .fullwidth {width: 100%;}
-  ul {list-style-type: none;}
+  li {list-style-type: none;}
+  .center-text {text-align: center;}
 } 
 
 

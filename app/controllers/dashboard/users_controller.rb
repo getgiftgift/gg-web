@@ -70,7 +70,7 @@ class Dashboard::UsersController < ApplicationController
     # end 
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         format.html { redirect_to dashboard_users_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -96,5 +96,11 @@ class Dashboard::UsersController < ApplicationController
   def get_vouchers
     @user = User.find(params[:id])
     @birthday_vouchers = BirthdayDealVoucher.where('user_id = ?', @user)
-  end  
+  end
+
+  private
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :birthdate)
+    end
+
 end
