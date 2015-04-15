@@ -1,7 +1,7 @@
-.row style="height:100px;"
+.row style="height:75px;"
 .row
-  .large-4.small-10.small-centered.columns style="text-align:center;"
+  .large-6.small-10.small-centered.columns.center-text
     = image_tag "gift_gift_logo.png"
-    p It's not a gift, it's a Gift Gift    
-    = link_to image_tag(asset_path("facebook-login-blue.png"), width: "250", style: 'margin-top: 20px;'), user_omniauth_authorize_path(:facebook)
+    h3 It's not a gift, it's a Gift Gift    
+    = link_to image_tag(asset_path("facebook-login-blue.png"), style: 'margin-top: 20px;'), user_omniauth_authorize_path(:facebook)
     / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
