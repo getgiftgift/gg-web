@@ -1,6 +1,4 @@
 - unless @birthday_deal_vouchers.empty?
-  #flags-left
-  #flags-right
   / #geolocation.boxform.select.geobox
   /   = form_tag '/', method: :post, id: 'selectcity', name: 'selectcity' do 
   /     = field_set_tag do
@@ -10,6 +8,8 @@
   /       #next
   .row
     .large-12.columns
+      / #flags-left
+      / #flags-right
       #instructions
       #details.white-box
         #card_container
