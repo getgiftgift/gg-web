@@ -12,6 +12,9 @@
         ul.right
           li.divider
           li 
+            = link_to 'My Account', user_path(current_user)
+          li.divider
+          li 
             = link_to 'My Gifts', account_path
           li.divider
           li
