@@ -1,5 +1,6 @@
 .row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.white-box
+    .right= link_to "close", birthday_deals_path
     p= user_full_name
     p= current_user.birthdate ? current_user.birthdate : 'N/A'
     p Email: #{current_user.email}
