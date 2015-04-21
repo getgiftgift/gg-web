@@ -18,8 +18,8 @@ $(document).ready ->
     right: '-10px'
     , 2500
     , 'linear'
-  $('#box_container').animate
-    bottom: '35px'
+  $('#gift-area').animate
+    bottom: '50%'
     , 3000, 'linear'
   $('#logo').delay(2500).animate
     top: '10%'
@@ -33,7 +33,3 @@ $(document).ready ->
     $('#details').fadeIn()
     $('.card-box').hide()
     $('#card_'+$(this).attr('id')).show()
-
-  #    
-  # $('.bottom-buttons').click (event) ->
-  #   $('.birthday-box:hidden').first().fadeIn(2000)      

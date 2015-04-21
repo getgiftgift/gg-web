@@ -9,6 +9,6 @@
       - @birthday_vouchers.each do |deal|
         .row
           .large-4.columns #{deal.hook} at #{deal.company.name}
-          .large-4.columns= deal.good_through.to_s
+          .large-4.columns Good through: #{deal.good_through.to_s}
           .large-4.columns= link_to 'Details', birthday_deal_voucher_path(deal)
         br
