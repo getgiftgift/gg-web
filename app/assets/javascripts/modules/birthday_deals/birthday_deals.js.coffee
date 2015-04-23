@@ -25,6 +25,7 @@ $(document).ready ->
     top: '10%'
     , 4000, 'easeInOutElastic', ->
       $('#instructions').fadeIn(2000)  
+  # $('#counter p').append($('.birthday-box:hidden').size() + ' Gifts left.')
   $('.birthday-box.closed').click( ->
     $(this).removeClass('closed').addClass('open')
     )

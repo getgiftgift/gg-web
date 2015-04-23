@@ -3,6 +3,5 @@
   .large-6.small-10.small-centered.columns.center-text
     = image_tag "gift_gift_logo.png"
     h3 It's not a gift, it's a Gift Gift    
-    / <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button>
     = link_to image_tag(asset_path("facebook-login-blue.png"), style: 'margin-top: 20px;'), "javascript:void(0);", onclick: "fbLogin();"
-    / .fb-login-button data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"
+

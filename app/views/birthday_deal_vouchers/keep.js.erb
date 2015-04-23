@@ -2,9 +2,11 @@ $("#details").fadeOut( function() {
   $("#card_birthday_deal_voucher_<%=@birthday_deal_voucher.id %>").remove();
 });
 $("#birthday_deal_voucher_<%=@birthday_deal_voucher.id %>").remove();
-next_gift = $('.birthday-box:hidden')
+var next_gift = $('.birthday-box:hidden')
 if (next_gift.length == 0) {
   $('#details').parent().append("<%= j render(:partial => 'birthday_deals/no_gifts') %>").fadeIn(2000)
 } else {
   next_gift.first().fadeIn(2000)
 }
+// Counter, # of gifts remaining
+// $('#counter p').replaceWith("<p>" + $('.birthday-box:hidden').size() + " Gifts left.</p>")
