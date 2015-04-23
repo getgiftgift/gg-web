@@ -1,0 +1,70 @@
+<script>
+  var scopes = 'public_profile,email,user_birthday,user_location'
+  function statusChangeCallback(response) {
+    if (response.status === 'connected'){
+      // logIn(response)
+    } else if (response.status === 'not_authorized') {
+
+      showLogInButton();
+    } else {
+
+      showLogInButton();
+    }
+  }
+
+  function fbLogin(){
+    FB.login(function(response){
+        // grantedScopes = response.authResponse.grantedScopes
+        // for(scope in scopes.split(',')){
+        //   if (!grantedScopes.includes(scope)){
+        //     fbReRequest();
+        //     return;
+        //   }
+        // }
+        logIn(response);
+      }, {
+        scope: scopes,
+
+        return_scopes: true 
+      });
+  }
+
+  function fbReRequest(){
+    FB.login(function(response){
+        logIn(response)
+      }, {
+        scope: scopes,
+        auth_type: 'rerequest' 
+      });
+  }
+
+
+  function logIn(response){
+    window.location.href="/users/auth/facebook/callback?token=" + response.authResponse.accessToken
+  }
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function(){
+    FB.init({
+      appId     :  "<%= ENV['FACEBOOK_APP_ID'] %>",
+      cookie    :  true,
+      xfbml     :  true,
+      version   : 'v2.3'
+    });
+    checkLoginState();
+  };
+
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>

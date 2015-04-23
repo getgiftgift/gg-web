@@ -37,7 +37,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.7)
+    addressable (2.3.8)
     arel (6.0.0)
     asset_sync (1.1.0)
       activemodel
@@ -227,7 +227,7 @@ GEM
     json (1.8.2)
     jwt (1.2.1)
     kgio (2.9.3)
-    koala (1.11.1)
+    koala (2.0.0)
       addressable
       faraday
       multi_json
@@ -415,7 +415,7 @@ DEPENDENCIES
   haml
   jquery-rails
   jquery-ui-rails
-  koala (~> 1.11.0rc)
+  koala (~> 2.0)
   mysql2
   omniauth-facebook
   open4

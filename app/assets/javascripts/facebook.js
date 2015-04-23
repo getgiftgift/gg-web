@@ -1,4 +1,4 @@
-# # This is called with the results from from FB.getLoginStatus().
+/*# # This is called with the results from from FB.getLoginStatus().
 
 # statusChangeCallback = (response) ->
 #   console.log 'statusChangeCallback'
@@ -119,17 +119,67 @@
 #     status    : true
 #     cookie    : true
 #     xfbml     : true
+*/
 
 
-# Load the SDK asynchronously
-((d, s, id) ->
-  js = undefined
-  fjs = d.getElementsByTagName(s)[0]
-  if d.getElementById(id)
-    return
-  js = d.createElement(s)
-  js.id = id
-  js.src = '//connect.facebook.net/en_US/sdk.js'
-  fjs.parentNode.insertBefore js, fjs
-  return
-) document, 'script', 'facebook-jssdk'
+
+// # Load the SDK asynchronously
+// ((d, s, id) ->
+//   js = undefined
+//   fjs = d.getElementsByTagName(s)[0]
+//   if d.getElementById(id)
+//     return
+//   js = d.createElement(s)
+//   js.id = id
+//   js.src = '//connect.facebook.net/en_US/sdk.js'
+//   fjs.parentNode.insertBefore js, fjs
+//   return
+// ) document, 'script', 'facebook-jssdk'
+
+// FB.login(function(response) {
+//   if(response.authResponse) {
+//     $.ajax({
+//       type: 'POST',
+//       url: '/users/auth/facebook/callback',
+//       dataType: 'json',
+//       data: {signed_request: response.authResponse.signedRequest}
+//       success: function(data, textStatus, jqXHR) {
+//         // Handle success case
+//       },
+//       error: function(jqXHR, textStatus, errorThrown {
+//         // Handle error case
+//       })});
+//   }
+// , scope: 'email'});
+
+
+// function statusChangeCallback(response) {
+//   if (response.status === 'conncted'){
+//     console.log('logged in');
+//   } else if (response.status === 'not_authorized') {
+//     document.getElementById('status').innerHTML = 'Please log into this app.';
+//   } else {
+//     document.getElementById('status').innerHTML = 'Please log into Facebook.';
+//   }
+// }
+
+// function checkLoginState() {
+//   FB.getLoginStatus(function(resposne) {
+//     statusChangeCallback(resposne);
+//   });
+// }
+
+// window.fbAsyncInit = function(){
+//   FB.init({
+//     appId     : ''
+//   })
+// }
+
+
+// (function(d, s, id) {
+//   var js, fjs = d.getElementsByTagName(s)[0];
+//   if (d.getElementById(id)) return;
+//   js = d.createElement(s); js.id = id;
+//   js.src = "//connect.facebook.net/en_US/sdk.js";
+//   fjs.parentNode.insertBefore(js, fjs);
+// }(document, 'script', 'facebook-jssdk'));

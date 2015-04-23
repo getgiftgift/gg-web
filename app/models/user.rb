@@ -22,16 +22,16 @@ class User < ActiveRecord::Base
   validates_presence_of     :email, :message => "Required Field"
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+    where(provider: auth['provider'], uid: auth['uid']).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
-      user.email = auth.info.email                                                  # required by Facebook
-      user.first_name = auth.info.first_name                                        # required by Facebook
-      user.last_name = auth.info.last_name                                          # required by Facebook
-      user.birthdate = Date.strptime( auth.extra.raw_info.birthday, "%m/%d/%Y" )    # required by Facebook
-      user.gender = auth.extra.raw_info.gender                                      # required by Facebook 
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.location = Location.near(auth.info.location).first  # "City, State"
+      user.email = auth['email']                                                  # required by Facebook
+      user.first_name = auth['first_name']                                       # required by Facebook
+      user.last_name = auth['last_name']                                          # required by Facebook
+      user.birthdate = Date.strptime( auth['birthday'], "%m/%d/%Y" )    # required by Facebook
+      user.gender = auth['gender']                                      # required by Facebook 
+      user.oauth_token = auth['access_token']
+      user.oauth_expires_at = Time.at(Time.now + auth['expires'].to_i)
+      user.location = Location.near(auth['location']).first  # "City, State"
       # user.image = auth.info.image
       user.save!
     end
