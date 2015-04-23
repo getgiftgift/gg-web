@@ -4,6 +4,17 @@
     p= user_full_name
     p= current_user.birthdate ? current_user.birthdate : 'N/A'
     p Email: #{current_user.email}
-    p Location: City, State
-    p Notifications 
+    - unless current_user.location.nil? 
+      p Location: #{current_user.location.location_name}
     p Referral Link: https://giftgift.me/r?=#{current_user.referral_code}
+    
+    |Notifications:
+    form
+      .row
+        .small-8
+          .row
+            .small-5.columns
+              = label_tag "right-label", 'Subscribe to email list:', class: "right", style: 'margin-top:3px;'
+            
+            .small-7.columns
+              = check_box_tag 'Subscribe', "1", true, disabled: true, id:"right-label"
