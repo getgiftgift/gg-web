@@ -1,29 +1,27 @@
 - if current_user
-  .contain-to-grid
-    nav.top-bar data-topbar="" role="navigation" 
-      ul.title-area
-        li.name
-          h1
-            = link_to image_tag("gift_gift_text_white.png", size: '138x20'), root_path
-        li.toggle-topbar.menu-icon
-          a href="#" 
-            span 
-      section.top-bar-section
-        ul.right
-          li.divider
-          li 
-            = link_to 'My Account', user_path(current_user)
-          li.divider
-          li 
-            = link_to 'My Gifts', account_path
-          li.divider
+  .off-canvas-wrap data-offcanvas=""
+    .inner-wrap
+      nav.tab-bar
+        section.left-small
+          a.left-off-canvas-toggle.menu-icon href="#" 
+            span
+        section.middle.tab-bar-section
+          h1.title GiftGift
+
+      aside.left-off-canvas-menu
+        ul.off-canvas-list
           li
-            = link_to 'Sign Out', destroy_user_session_path, method: :delete 
-          li.divider
-        ul.left
-          / li.has-form
-            / .row.collapse
-            /   .large-12.columns
-            /     = simple_form_for current_user, url: change_location_path do |f|
-            /       = f.association :location, label_method: :location_name, label: false, include_blank: false 
-          
+            label Menu
+          li 
+            = link_to 'Gifts', account_path
+          li 
+            = link_to 'Account', user_path(current_user)
+          li
+            = link_to 'Sign Out', destroy_user_session_path, method: :delete     
+      section.main-section style="height:800px;"
+        = render 'layouts/messages'
+        = yield
+        a.exit-off-canvas
+- else 
+  = render 'layouts/messages'
+  = yield
