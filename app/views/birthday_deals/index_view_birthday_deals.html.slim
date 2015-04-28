@@ -1,22 +1,46 @@
 - unless @birthday_deal_vouchers.empty?
   .row  
-    #details.large-5.small-10.small-centered.medium-6.columns.white-box
+    #details.large-5.small-12.small-centered.medium-6.columns.white-box
       - @birthday_deal_vouchers.each do |voucher|
         #card_container
           - birthday_deal = voucher.birthday_deal
           = content_tag_for :div, voucher, :card, class: "card-box" do
-            .value
-              = "#{display_price(birthday_deal.value)}"
-              span Value
-            .hook
-              = birthday_deal.hook.to_s + " at " 
-              br
-              =birthday_deal.company.name
-            = image_tag birthday_deal.company.image_url(:deal_image), alt: 'Logo'
-            .bottom-buttons.large-12.small-10.medium-8.small-centered.columns  
-              = link_to 'Keep It', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "orange form-button"
-              = link_to 'No Thanks', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red form-button"
-        
+            .row
+              .small-12.columns
+                img src="http://placehold.it/360x220"
+                / = image_tag birthday_deal.company.image_url(:deal_image), alt: 'Logo'
+            br
+            .row
+              .small-5.columns.center-text
+                .value
+                  sup $
+                  = birthday_deal.value
+                span VALUE
+              
+              .small-7.columns
+                h4.bold-gray= voucher.company.name.upcase
+              hr
+            .row
+              small-12.columns
+                .hook 
+                  = birthday_deal.hook.to_s + " at " 
+                  = birthday_deal.company.name
+                br
+            .row  
+              .bottom-buttons.small-12.small-centered.columns  
+                .row
+                  br
+                  .small-6.columns
+                    = link_to image_tag(asset_path('check.png')), keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-button"
+                    
+                  .small-6.columns
+                    = link_to image_tag(asset_path('x.png')), trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-button"
+                .row 
+                  .small-6.columns
+                    |KEEP IT!
+                  .small-6.columns
+                    |NO THANKS!
+                br
   #gift-area style="width:100%; height:0; position:fixed; left:0; right:0; bottom:0px"
     #gifts.center-text style="margin: 0 auto; width: 230px;"
       = single(@birthday_deal_vouchers) 
@@ -29,3 +53,7 @@
 #re-gift-modal.reveal-modal data-reveal='' role="dialog"
   p This feature will be added in the future.
   a.close-reveal-modal href='#' aria-label="Close" &#215; 
+
+#speech-box
+  #words
+    | "Open me already!"

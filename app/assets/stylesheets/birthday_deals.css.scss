@@ -6,19 +6,11 @@
 // Compass imports & mixins
 @import "compass/reset";
 @import "base";
-
-
-// html, body {
-//   width: 100%;
-//   height: 100%;
-//   font-family: Tahoma, Geneva, sans-serif;
-// }
-
-// html {
-//   overflow-y: scroll;
-// }
+@import "foundation_and_overrides";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
 
 body {
+  font-family: 'Open Sans', sans-serif;
   background: rgb(107,192,236) !important;
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -39,11 +31,6 @@ body {
 } 
 
 #flash_alert, #flash_notice, #flash_error { text-align: center; }
-
-// #my_birthday {
-//   font-size: 20px;
-//   padding-top: 10px;
-// }
 
 .birthday-box {
   cursor: pointer;
@@ -69,85 +56,10 @@ body {
   animation-timing-function: linear;
 }
 
-// #flags-left{
-//   z-index: 100;
-//   position: fixed;
-//   display:block;
-//   top: 45px;
-//   left: -10px;
-//   height: 128px;
-//   width: 400px;
-//   background: image-url("birthday_deals/flags-left.png") no-repeat;
-// }
-
-// #flags-right{
-//   z-index: 100;
-//   position: fixed;
-//   display:block;
-//   top: 45px;
-//   right: -10px;
-//   height: 128px;
-//   width: 400px;
-//   background: image-url("birthday_deals/flags-right.png") no-repeat;
-
-// }
-// #account{
-//   &.white-box{
-//     padding: 10px;
-//     position: fixed;
-//     right: 5px;
-//     top: 5px;
-//     z-index: 50000;
-
-//     a {
-//       text-decoration: none;
-//       &:hover{
-//         text-decoration: underline;
-//       }
-
-//       &:visited{
-//         color: black;
-//       }
-//     }
-//   }
-// }
-// #logo {
-//   z-index: 200;
-//   position: absolute;
-//   left: 30px;
-//   top: 10%;
-// }
-// #instructions {
-//   position: absolute;
-//   z-index: 0;
-//   width: 278px;
-//   height: 278px;
-//   padding: 10px;
-//   right: 30px;
-//   top: 10%;
-//   background: image-url('birthday_deals/open-presents.png');
-// }
-
-// #geolocation {
-//   text-align: center;
-//   padding: 10px;
-  
-// }
-
-// #my_birthday_deals{
-//   .white-box {
-//     padding: 20px;
-//     margin: 120px 10px 10px; 
-//     h2{font-size: 24px; padding: 0px 0px 40px;}
-//     li{display: inline; padding: 0px 5px;}
-//   }
-// }
-
 .white-box {
   background: #fff;
   padding: 25px;
   margin-top: 40px;
-  @include border-radius(10px, 10px);
 
   @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(169, 169, 169, 1) 0 0 8px);
   -webkit-transition: border linear .2s, box-shadow linear .2s;
@@ -164,114 +76,55 @@ body {
   display: none;
   z-index: 200;
   top: 10%;
-
+  span{
+    color: $gray;
+    font-weight: 100;
+  }
   .value{
-    font-family: Arial, Helvetica, sans-serif;
+    // font-family: 'Futura', sans-serif;
+    color: $purple;
     font-size: 4em;
-
-    span {
-      font-size: .25em;
+    font-weight: 800;
+    margin: 0 0 .25em 0;
+    sup {
+      vertical-align: super;
+      font-size: .5em;
     }
   }
   .card-box{
     display: none;
-    font-family: Tahoma, Geneva, sans-serif;
     &.show {
       display: block;
     }
 
     .hook {
       margin-bottom: 5px;
-      text-align: center;
+      text-align: left;
     }
     img {
       display: block;
       margin: 0 auto;
-      border-radius: 15px;
     }
-    .value {
-      font-size: 4em;
-      text-align: center;
-      margin: 0 0 .25em 0;
-      text-shadow: 1px 1px 4px #000000;
-      filter: dropshadow(color=#000000, offx=0, offy=0);
-    }
+    // .value {
+    //   font-size: 4em;
+    //   text-align: center;
+      
+    // }
   }
 }
 
 
 .bottom-buttons {
+  background: $light-gray;
   text-align: center;
-  input {
-    width: 125px;
-    font-size: 1.25em;
-  }
+  font-weight: 800;
+  color: $gray;
+  font-size: 1.2em;
+  letter-spacing: 1px;
 }
 
 .big {
   width: 260px !important;
-}
-
-.form-button {
-  display: inline-block;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  width: 220px;
-  margin: 5px 0;
-  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  font-size: 1.5em;
-  padding: .25em 1em .350em;
-  text-shadow: 0 1px 1px rgba(0,0,0,.3);
-  -webkit-border-radius: .5em;
-  -moz-border-radius: .5em;
-  border-radius: .5em;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-  box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-.form-button:hover {
-  text-decoration: none;
-}
-.form-button:active {
-  position: relative;
-  top: 1px;
-}
-
-.red {
-  color: #fef4e9;
-  border: solid 1px #780B06;
-  @include background-image(linear-gradient(#CE0000, #770000));
-}
-.red:hover {
-  background: #f47c20;
-  @include background-image(linear-gradient(#C00212, #6A010A));
-}
-.red:active {
-  color: #fcd3a5;
-  @include background-image(linear-gradient(#770000, #CE0000));
-}
-.orange {
-  color: #fef4e9;
-  border: solid 1px #da7c0c;
-  background: #f78d1d;
-  background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
-  background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
-}
-.orange:hover {
-  background: #f47c20;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
-  background: -moz-linear-gradient(top,  #f88e11,  #f06015);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
-}
-.orange:active {
-  color: #fcd3a5;
-  background: -webkit-gradient(linear, left top, left bottom, from(#f47a20), to(#faa51a));
-  background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
-  filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
 
 @-webkit-keyframes spaceboots {
@@ -344,5 +197,97 @@ td,th {
   padding: 5px 10px;
 }
 
+.details-button {
+  @include button(
+    // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+    $button-med,
+    // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+    $purple,
+    // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+    false,
+    // We can set $full-width:true to remove side padding extend width. Default:false
+    true,
+    // We can set $disabled:true to create a disabled transparent button. Default:false
+    false,
+    // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+    false
+  );
+  font-weight: bold;
+}
 
-@import 'foundation_and_overrides';
+.green-button {
+  @include button(
+    // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+    $button-med,
+    // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+    #56b947,
+    // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+    false,
+    // We can set $full-width:true to remove side padding extend width. Default:false
+    true,
+    // We can set $disabled:true to create a disabled transparent button. Default:false
+    false,
+    // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+    false
+  );
+  font-weight: bold;
+  height: 75px;
+  width: 120px;
+}
+
+.red-button {
+  @include button(
+    // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+    $button-med,
+    // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+    #d91f26,
+    // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+    false,
+    // We can set $full-width:true to remove side padding extend width. Default:false
+    true,
+    // We can set $disabled:true to create a disabled transparent button. Default:false
+    false,
+    // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+    false
+  );
+  font-weight: bold;
+  height: 75px;
+  width: 120px;
+}
+
+
+
+#speech-box {
+  display: none;
+  background: url(/assets/speech-box.png) no-repeat center;
+  margin: 0 auto; 
+  text-align: center; 
+  top: 20%; 
+  position: relative;
+  height: 135px;
+  width: 350px;
+  #words {
+    font-family: 'Open Sans' sans-serif;
+    color: #3a3a3a;
+    position: relative;
+    height: 108px;
+    width: 332px;
+    padding: 30px 10px 10px 10px;
+    top: 5px;
+    left: 9px;
+    font-size: 30px;
+    font-weight: 300;
+  }
+}
+
+.bold-purple{
+  font-weight: 800;
+  color: $purple;
+}
+
+.bold-gray{
+  font-weight: 800;
+  color: $gray;
+}
+
+
