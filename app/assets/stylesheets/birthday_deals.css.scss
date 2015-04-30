@@ -10,6 +10,23 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
 
 body {
+
+  h1{} 
+  h2{}
+  h3{}
+  h4{
+    color: $purple;
+    font-weight: 800;
+  }
+  h5{
+    color: $gray;
+    font-weight: 800;
+  }
+  h6{
+    color: $purple;
+    font-weight: 800;
+  }
+
   font-family: 'Open Sans', sans-serif;
   background: rgb(107,192,236) !important;
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -58,8 +75,6 @@ body {
 
 .white-box {
   background: #fff;
-  padding: 25px;
-  margin-top: 40px;
 
   @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(169, 169, 169, 1) 0 0 8px);
   -webkit-transition: border linear .2s, box-shadow linear .2s;
@@ -255,12 +270,31 @@ td,th {
   width: 120px;
 }
 
+.redeem-button {
+  @include button(
+    // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
+    $button-med,
+    // Background color. We can set $bg:false for a transparent background. Default: $primary-color.
+    #56b947,
+    // If true, set to button radius which is $global-radius or explicitly set radius amount in px (ex. $radius:10px). Default:false.
+    false,
+    // We can set $full-width:true to remove side padding extend width. Default:false
+    true,
+    // We can set $disabled:true to create a disabled transparent button. Default:false
+    false,
+    // $is-input - <input>s and <button>s take on strange padding. We added this to help fix that. Default:false
+    false
+  );
+  font-weight: bold;
+}
+
+
 #speech-box {
   display: none;
   background: url(/assets/speech-box.png) no-repeat center;
   margin: 0 auto; 
   text-align: center; 
-  top: 15%; 
+  top: 10%; 
   position: relative;
   height: 135px;
   width: 350px;
@@ -288,4 +322,8 @@ td,th {
   color: $gray;
 }
 
+table.barby-barcode { border-spacing: 0; border: none; border-collapse:collapse;}
+tr.barby-row {}
+td.barby-cell { width: 1px; height: 100px; padding: 0 0 0 0; }
+td.barby-cell.on { background: #000; }
 

@@ -1,4 +1,15 @@
 class BirthdayDealVoucher < ActiveRecord::Base
+  require 'barby'
+  require 'barby/barcode/code_128'
+  require 'barby/outputter/html_outputter'
+
+  include HasBarcode
+
+  has_barcode :barcode,
+    :outputter => :svg,
+    :type => :code_128,
+    :value => Proc.new { |c| c.verification_number }
+
   belongs_to :birthday_deal
   belongs_to :user
   has_one :company, through: :birthday_deal
@@ -101,5 +112,11 @@ class BirthdayDealVoucher < ActiveRecord::Base
     num.insert(num.length-5, '-')
     num
   end
+
+  # def barcode
+  #   barcode = Barby::Code128B.new(self.verification_number)
+  #   output = Barby::HtmlOutputter.new(barcode)
+  #   output.to_html
+  # end
 
 end

@@ -1,21 +1,28 @@
 .row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
-    = image_tag @birthday_deal_voucher.company.image_url
-    h3
-      |#{@birthday_deal_voucher.birthday_deal.hook} from #{@birthday_deal_voucher.company.name}
-    h4
-      |$#{@birthday_deal_voucher.value} Value
-    p= @birthday_deal_voucher.user.full_name  
-    p
-      |Birthday: #{@birthday_deal_voucher.user.birthday}
-    p
-      |Expires on: 
-      = @birthday_deal_voucher.good_through
+    / = image_tag @birthday_deal_voucher.company.image_url
+    .header-label
+      h4 = @birthday_deal_voucher.company.name.upcase
+    h5
+      = @birthday_deal_voucher.birthday_deal.hook.upcase
+    br
+    |$#{@birthday_deal_voucher.value} Value
+    hr
+    h5 RECIPIENT
+    = @birthday_deal_voucher.user.full_name
+    br
+    |Birthday: #{@birthday_deal_voucher.user.birthday}
+    hr
+    h5 HOW TO REDEEM
+    hr
+    h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through}
+    hr
+    = @birthday_deal_voucher.barcode_data.html_safe
     p
       | Verification Number: 
       = @birthday_deal_voucher.verification_number
     .row
-      .large-3.columns  
-        = link_to 'Redeem', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, data: {confirm: 'Are you sure you want to redeem this GiftGift?'}, class: 'orange form-button fullwidth', id: 'redeem-button'
-      .large-3.columns  
-        = link_to 'Back', account_path
+      .small-6.small-centered.columns  
+        = link_to 'REDEEM', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, data: {confirm: 'Are you sure you want to redeem this GiftGift?'}, class: 'redeem-button', id: 'redeem-button'
+  
+      = link_to 'Back', account_path
