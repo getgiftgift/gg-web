@@ -24,4 +24,13 @@
       = @birthday_deal_voucher.dashed_verification_number
     .row
       .small-6.small-centered.columns  
-        = link_to 'REDEEM', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, data: {confirm: 'Are you sure you want to redeem this GiftGift?'}, class: 'redeem-button', id: 'redeem-button'
+        a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
+        / = link_to 'REDEEM', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, data: {confirm: 'Are you sure you want to redeem this GiftGift?'}, class: 'redeem-button', id: 'redeem-button'
+
+  
+#confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
+  .row
+    .large-4.small-centered.columns
+      p.lead Are you sure you would like to redeem this gift?
+      = link_to '', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'green-btn left'
+      #cancel.red-btn.right

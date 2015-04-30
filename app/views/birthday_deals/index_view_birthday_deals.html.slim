@@ -31,10 +31,10 @@
                 .row
                   br
                   .small-6.columns
-                    = link_to image_tag(asset_path('check.png')), keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-button"
+                    = link_to '', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-btn"
                     
                   .small-6.columns
-                    = link_to image_tag(asset_path('x.png')), trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-button"
+                    = link_to '', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-btn"
                 .row 
                   .small-6.columns
                     |KEEP IT!
@@ -53,7 +53,8 @@
 #re-gift-modal.reveal-modal data-reveal='' role="dialog"
   p This feature will be added in the future.
   a.close-reveal-modal href='#' aria-label="Close" &#215; 
-
+/ .row
+/   .small-10.small-centered.columns
 #speech-box
   #words
     | "Open me already!"

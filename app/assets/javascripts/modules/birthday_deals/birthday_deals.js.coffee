@@ -19,3 +19,5 @@ $(document).ready ->
     $('#speech-box').hide()
     $('#card_'+$(this).attr('id')).show()
   
+  $('#cancel').click ->
+    $('#confirm-redeem').foundation('reveal', 'close');
