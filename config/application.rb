@@ -26,6 +26,5 @@ module WorthdayWeb
     # For faster asset precompiles, you can partially load your application. 
     # Required by Heroku
     config.assets.initialize_on_precompile = false
-    config.serve_static_assets = true  
   end
 end
