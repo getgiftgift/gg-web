@@ -233,7 +233,7 @@ td,th {
 }
 
 .green-btn {
-  background: url(/assets/check.png) no-repeat center;
+  background: image-url('check.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($green, 0, false);
@@ -242,7 +242,7 @@ td,th {
 }
 
 .red-btn {
-  background: url(/assets/x.png) no-repeat center;
+  background: image-url('x.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($red, 0, false);
@@ -262,7 +262,7 @@ td,th {
 
 #speech-box {
   display: none;
-  background: url(/assets/speech-box.png) no-repeat center;
+  background: image-url('speech-box.png') no-repeat center;
   margin: 0 auto; 
   text-align: center; 
   top: 10%; 
