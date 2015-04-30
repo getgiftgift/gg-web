@@ -194,7 +194,9 @@ body {
   90% { transform: translate(2px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
-.closed {
+.close {
+  color: $gray;
+  font-size: 2em;
 }
 
 .center {margin: auto;}
@@ -321,6 +323,13 @@ td,th {
   font-weight: 800;
   color: $gray;
 }
+
+.header-label{
+  margin: -3px -15px;
+  background: $light-gray;
+  text-align: center;
+}
+
 
 table.barby-barcode { border-spacing: 0; border: none; border-collapse:collapse;}
 tr.barby-row {}

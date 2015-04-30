@@ -1,7 +1,8 @@
 .row
   .large-10.large-centered.columns.white-box
-    .right= link_to "&times;".html_safe, birthday_deals_path
-    h4.bold-purple.center-text MY GIFTS
+    .right= link_to "&times;".html_safe, birthday_deals_path, class: 'close'
+    .header-label.center-text
+      h4 MY GIFTS
     - if @birthday_vouchers.empty?
       p You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
     -else

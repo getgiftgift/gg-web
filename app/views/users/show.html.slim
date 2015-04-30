@@ -1,6 +1,8 @@
 .row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.white-box
-    .right= link_to "close", birthday_deals_path
+    .right= link_to "&times;".html_safe, birthday_deals_path, class: 'close'
+    .header-label
+      h4 My Info
     p= user_full_name
     p= current_user.birthdate ? current_user.birthdate : 'N/A'
     p Email: #{current_user.email}
