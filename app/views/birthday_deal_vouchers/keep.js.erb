@@ -6,7 +6,8 @@ var next_gift = $('.birthday-box:hidden')
 if (next_gift.length == 0) {
   $('#details').parent().append("<%= j render(:partial => 'birthday_deals/no_gifts') %>").fadeIn(2000)
 } else {
-  next_gift.first().fadeIn(2000)
+  next_gift.first().fadeIn(2000)  
 }
+
 // Counter, # of gifts remaining
-// $('#counter p').replaceWith("<p>" + $('.birthday-box:hidden').size() + " Gifts left.</p>")
+update_gift_counter()

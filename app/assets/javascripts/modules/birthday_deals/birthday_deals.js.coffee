@@ -19,5 +19,13 @@ $(document).ready ->
     $('#speech-box').hide()
     $('#card_'+$(this).attr('id')).show()
   
+
+  # update_gift_counter()
+  
+  # $('p#counter').replaceWith("<p>" + gifts_left + " "+word+" left.</p>")
+  # $('p#counter').replaceWith("<p>" + $('.birthday-box:hidden').size() + " Gifts left.</p>")
+
   $('#cancel').click ->
-    $('#confirm-redeem').foundation('reveal', 'close');
+    $('#confirm-redeem').foundation('reveal', 'close')
+
+

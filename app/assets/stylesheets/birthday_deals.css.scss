@@ -9,8 +9,15 @@
 @import "foundation_and_overrides";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
 
-body {
+html {
+  position: relative;
+  min-height: 100%;
+}
 
+body {
+  
+  // margin: 0 0 45px; /* bottom = footer height */
+  section.main-section{min-height: 100%;}
   h1{} 
   h2{}
   h3{}
@@ -304,7 +311,13 @@ footer{
   height: 45px;
   width: 100%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
+}
+
+footer p{
+  padding-top: 10px;
+  color: #FFFFFF;
+  font-weight: 800;
 }
 
 table.barby-barcode { border-spacing: 0; border: none; border-collapse:collapse;}

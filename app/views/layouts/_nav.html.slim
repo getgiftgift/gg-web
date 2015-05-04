@@ -1,13 +1,14 @@
 - if current_user
   .off-canvas-wrap data-offcanvas=""
     .inner-wrap
-      nav.tab-bar
+      nav.tab-bar style="height: 70px;"
         section.left-small
           a.left-off-canvas-toggle.menu-icon href="#" 
             span
         section.middle.tab-bar-section
           h1.title GiftGift
-
+        .messages style="text-align: center; height:25px; width: 100%; position:absolute; top:45px;"
+          p message stuff here
       aside.left-off-canvas-menu
         ul.off-canvas-list
           li
@@ -17,7 +18,8 @@
           li 
             = link_to 'Account', user_path(current_user)
           li
-            = link_to 'Sign Out', destroy_user_session_path, method: :delete     
+            = link_to 'Sign Out', destroy_user_session_path, method: :delete
+                 
       section.main-section style="height:800px;"
         = render 'layouts/messages'
         = yield
