@@ -6,7 +6,7 @@
           a.left-off-canvas-toggle.menu-icon href="#" 
             span
         section.middle.tab-bar-section
-          h1.title GiftGift
+          h1.title= link_to 'GiftGift', root_path, class: 'branding'
         .messages
           / = render 'layouts/messages'
           p#counter 
