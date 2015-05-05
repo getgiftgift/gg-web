@@ -10,7 +10,7 @@
     = @birthday_deal_voucher.barcode_data.html_safe
     p
       | Verification Number: 
-      = @birthday_deal_voucher.dashed_verification_number
+      = @birthday_deal_voucher.verification_number
     .row
       .small-10.large-6.small-centered.columns  
         a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
@@ -29,7 +29,7 @@
 
 #confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
   .row
-    .large-4.small-centered.columns
+    .large-6.medium-8.small-centered.columns
       p.lead Are you sure you would like to redeem this gift?
       = link_to '', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'green-btn left'
       #cancel.red-btn.right
