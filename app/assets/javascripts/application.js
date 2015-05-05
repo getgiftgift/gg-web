@@ -21,7 +21,8 @@
 
 $(function() {
   $(document).foundation();
-
+  resize_main_section();
+  
   //  remove url garbage
   if (window.location.hash == "#_=_") {
     window.location.hash = "";   };
@@ -45,3 +46,7 @@ gifts_word = function() {
   }
   return word;
 };
+
+resize_main_section = function(){
+  $('section.main-section').css('height',$(window).height()-70)
+}

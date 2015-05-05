@@ -6,6 +6,19 @@
       h4 = @birthday_deal_voucher.company.name.upcase
     h5= @birthday_deal_voucher.birthday_deal.hook.upcase
     |$#{@birthday_deal_voucher.value} Value from #{@birthday_deal_voucher.company.name}. 
+    br
+    = @birthday_deal_voucher.barcode_data.html_safe
+    p
+      | Verification Number: 
+      = @birthday_deal_voucher.dashed_verification_number
+    .row
+      .small-10.large-6.small-centered.columns  
+        a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
+    hr
+    h5 HOW TO REDEEM
+    = @birthday_deal_voucher.birthday_deal.how_to_redeem
+    hr
+    h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through} 
     = @birthday_deal_voucher.birthday_deal.restrictions
     hr
     h5 RECIPIENT
@@ -13,21 +26,7 @@
     br
     |Birthday: #{@birthday_deal_voucher.user.birthday}
     hr
-    h5 HOW TO REDEEM
-    = @birthday_deal_voucher.birthday_deal.how_to_redeem
-    hr
-    h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through}
-    hr
-    = @birthday_deal_voucher.barcode_data.html_safe
-    p
-      | Verification Number: 
-      = @birthday_deal_voucher.dashed_verification_number
-    .row
-      .small-6.small-centered.columns  
-        a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
-        / = link_to 'REDEEM', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, data: {confirm: 'Are you sure you want to redeem this GiftGift?'}, class: 'redeem-button', id: 'redeem-button'
 
-  
 #confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
   .row
     .large-4.small-centered.columns
