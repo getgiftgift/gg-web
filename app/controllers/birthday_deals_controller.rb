@@ -8,7 +8,7 @@ class BirthdayDealsController < ApplicationController
 
   def account
     @user = current_user
-    @birthday_vouchers = @user.birthday_deal_vouchers.in_location(current_location).with_state(:kept)
+    @birthday_vouchers = @user.birthday_deal_vouchers.in_location(current_location).order(:valid_on, :state)
   end
 
   def index
