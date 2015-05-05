@@ -31,5 +31,8 @@
   .row
     .large-6.medium-8.small-centered.columns
       p.lead Are you sure you would like to redeem this gift?
-      = link_to '', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'green-btn left'
-      #cancel.red-btn.right
+      .row
+        .small-8.small-centered.large-6.columns
+          = link_to '', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'green-btn fullwidth'
+        .small-8.small-centered.large-6.columns
+          #cancel.red-btn.fullwidth
