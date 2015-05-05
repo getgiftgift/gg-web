@@ -125,5 +125,11 @@ class User < ActiveRecord::Base
 
   def change_password(password)
     self.update_attributes(password: password, password_confirmation: password)
+  end
+
+  def reset_birthday_deals()
+    self.birthday_deal_vouchers.each do |voucher|
+      voucher.reset! if voucher.valid_on.year == Time.now.year || voucher.good_through.year == Time.now.year
+    end
   end 
 end

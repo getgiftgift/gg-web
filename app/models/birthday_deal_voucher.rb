@@ -50,6 +50,10 @@ class BirthdayDealVoucher < ActiveRecord::Base
       transition all - [:redeemed] => :redeemed
     end
 
+    event :reset do
+      transition all => :wrapped
+    end
+
     ### States ###
 
     state :unwrapped do
