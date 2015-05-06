@@ -19,9 +19,9 @@
           li
             label Menu
           li 
-            = link_to 'Gifts', account_path
+            = link_to 'My Gifts', account_path
           li 
-            = link_to 'Account', user_path(current_user)
+            = link_to 'My Account', user_path(current_user)
           li
             = link_to 'Sign Out', destroy_user_session_path, method: :delete
                  
