@@ -6,8 +6,10 @@ $(document).ready ->
     $(this).parent().parent('form').submit())  
   $('.flash').delay(6000).fadeOut(2000)
   $('#box_container').css('bottom', '-'+$('#box_container').css('height'))
+  
   $('#gift-area').animate bottom: '50%', 3000, 'linear', ->  
-    $('#speech-box').show()
+    unless $('.white-box').is(":visible") 
+      $('#speech-box').show()
 
   $('.birthday-box.closed').click( ->
     $(this).removeClass('closed').addClass('open')
