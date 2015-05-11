@@ -1,6 +1,7 @@
 .row
-  .large-8.large-centered.columns.white-box
-    - if @deals.empty?
-      p Sorry, we don't have any presents for you in your city.
-    - else
+  .large-8.large-centered.columns.white-box style=" padding: 20px;"
+    / - if @deals.nil?
+    /   p Sorry, we don't have any presents for you in your city.
+    / - else
+    - if !current_user.eligible_for_birthday_deals?
       p Our records indicate that it's not quite your birthday. We'll send you an email when it's time to celebrate!

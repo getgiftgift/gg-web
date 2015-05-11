@@ -7,6 +7,10 @@ $(document).ready ->
   $('.flash').delay(6000).fadeOut(2000)
   $('#box_container').css('bottom', '-'+$('#box_container').css('height'))
   
+  ##
+  # Animation for the giftbox.
+  # show the speech box after animation completes,
+  # don't show if the details box is visible.
   $('#gift-area').animate bottom: '50%', 3000, 'linear', ->  
     unless $('.white-box').is(":visible") 
       $('#speech-box').show()

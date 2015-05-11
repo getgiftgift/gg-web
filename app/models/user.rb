@@ -72,8 +72,6 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
-    birthdate = Date.today  ## Development testing in production env
-    # Rails.env.production? ? birthdate = self.birthdate : birthdate = Date.today  ## Production
     return nil if birthdate.nil?
     birthday_string = birthdate.strftime('%m%d')
     today = Date.today.strftime('%m%d')
@@ -103,8 +101,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_birthday_deals?
-    return true  ## Development testing in production env
-    # return true if self.test_user?
+    return true if self.test_user?
     date_start = (Date.today - 15.days).strftime('%m%d')
     date_end = (Date.today + 15.days).strftime('%m%d')
     user_bday = self.birthdate.strftime('%m%d')
@@ -120,7 +117,7 @@ class User < ActiveRecord::Base
   end
 
   def test_user?
-    self.email == 'birthday@addsheet.com'
+    self.email == 'birthday@giftgift.me'
   end
 
   def change_password(password)
