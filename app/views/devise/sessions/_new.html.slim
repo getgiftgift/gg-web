@@ -1,7 +1,7 @@
 = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: ''}) do |f|
-  =# devise_error_messages! if resource
+  / = devise_error_messages! if resource
   fieldset 
-    Sign in with your account: 
+    |Sign in with your account: 
     = f.input :email, :label => false, :required => false, :input_html => { :autofocus => true}, placeholder: 'E-Mail:'
     = f.input :password, label: false, required: true, placeholder: 'Password:', hint: link_to('Forgot your password?', new_user_password_path)
 
