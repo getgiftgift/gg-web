@@ -1,0 +1,87 @@
+|Deal info
+/COMPANY
+.row
+  .large-6.columns
+    .row.collapse
+      .small-3.columns
+        span.prefix Company
+      .small-9.columns
+        = f.input :company_id, as: :select, collection: @companies, label: false
+/ VALUE
+.row
+  .large-6.columns
+    .row.collapse
+      .small-3.columns
+        span.prefix Values $
+
+      .small-3.columns
+        = text_field_tag "birthday_deal[value]", @birthday_deal.value, id: 'birthday_deal_value', size: 3, maxlength: 3
+      .small-6.columns
+/ HOOK
+.row
+  .large-12.columns
+    .row.collapse
+      .small-2.columns
+        span.prefix Hook
+
+      .small-8.columns
+        = text_field_tag "birthday_deal[hook]", @birthday_deal.hook, id: 'birthday_deal_hook'
+      .small-2.columns
+        |&nbsp; at Company Name
+/RESTRICTIONS
+fieldset
+  .row
+    .large-12.columns
+      .row.collapse
+        .small-2.columns
+          span.prefix Restrictions
+
+        .small-10.columns
+          = text_field_tag "birthday_deal[hook]", @birthday_deal.hook, id: 'birthday_deal_hook'
+      .row.collapse
+        .small-6.columns
+          = check_box_tag 'spend_x', 'When you spend '
+          = label_tag 'When you spend $X'
+          = text_field_tag :spend_x_amount, nil, class: 'spend_amount'
+          
+        .small-6.columns
+          = check_box_tag 'buy_x', 'When you buy '
+          = label_tag 'When you buy X'
+          = text_field_tag :buy_x_amount, nil, class: 'buy_amount'
+/HOW TO REDEEM
+.row
+  .large-12.columns
+    .row.collapse
+      .small-2.columns
+        span.prefix How to redeem
+      .small-10.columns  
+        = f.input :how_to_redeem, as: :text, input_html: { rows: 4, size: 100}, hint: "This already displays on all vouchers: 'Merchant will check ID upon redemption.  Photo ID showing required to validate birthday.'   DO NOT ADD the text in this quote", label: false
+/ START END DATE  
+fieldset 
+  .row
+    .large-12.columns
+      .row
+        .small-6.columns
+          = f.input :start_date, as: :string 
+            /#, as: :string, data: { behaviour: 'datepicker' }, input_html: {class: "format-m-d-y highlight-days-67 no-transparency", size: 10}
+
+        .small-6.columns      
+          = f.input :end_date, as: :string 
+            / #, as: :string, input_html: { readonly: true, size: 10 }
+
+= f.button :submit, class: 'button'
+
+
+
+
+coffee:
+  $.datepicker.formatDate(
+
+  )
+  $('#birthday_deal_start_date').datepicker(dateFormat: 'yy-mm-dd')
+  $('#birthday_deal_end_date').datepicker(dateFormat: 'yy-mm-dd')
+
+
+
+
+

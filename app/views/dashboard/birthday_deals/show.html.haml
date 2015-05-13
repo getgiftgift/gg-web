@@ -17,7 +17,7 @@
   = @birthday_deal.slug
 %p
   %b Company:
-  = @birthday_deal.company
+  = @birthday_deal.company.name
 %p
   %b Location:
   = @birthday_deal.location.name
@@ -63,7 +63,7 @@
       %tbody
         - for voucher in @birthday_deal.birthday_deal_vouchers
           %tr
-            %td.main= link_to "#{voucher.user.email}", dashboard_user_path(voucher.user)
+            / %td.main= link_to "#{voucher.user.email}", dashboard_user_path(voucher.user)
             %td= voucher.verification_number
             %td= voucher.valid_on
             %td= voucher.good_through

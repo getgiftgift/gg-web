@@ -23,8 +23,8 @@ class BirthdayDealVoucher < ActiveRecord::Base
   delegate :hook, :value, to: :birthday_deal
 
   # attr_accessible :good_through, :valid_on, :user
-  scope :is_available, lambda { where("valid_on <= ? and good_through >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)) }
-  scope :in_location, lambda { |location| joins(:birthday_deal).where("birthday_deals.location_id = ?", location.id) }
+  scope :is_available, -> { where("valid_on <= ? and good_through >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)) }
+  scope :in_location, -> location { joins(:birthday_deal).where("birthday_deals.location_id = ?", location.id) }
 
   state_machine initial: :wrapped do
     audit_trail
