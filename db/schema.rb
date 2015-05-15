@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513144204) do
+ActiveRecord::Schema.define(version: 20150513211937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,10 @@ ActiveRecord::Schema.define(version: 20150513144204) do
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "location_id"
+    t.integer  "occasion_id"
   end
+
+  add_index "birthday_deals", ["occasion_id"], name: "index_birthday_deals_on_occasion_id", using: :btree
 
   create_table "birthday_deals_company_locations", id: false, force: :cascade do |t|
     t.integer  "birthday_deal_id"
@@ -134,9 +137,30 @@ ActiveRecord::Schema.define(version: 20150513144204) do
     t.float    "lat"
   end
 
+  create_table "occasions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+  end
+
   create_table "referrals", force: :cascade do |t|
     t.integer "referrer_id"
     t.integer "recipient_id"
+  end
+
+  create_table "restriction_items", force: :cascade do |t|
+    t.integer  "birthday_deal_id"
+    t.integer  "restriction_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "restrictions", force: :cascade do |t|
+    t.string   "category"
+    t.string   "phrase"
+    t.string   "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

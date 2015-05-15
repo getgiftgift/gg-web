@@ -47,7 +47,6 @@ class Dashboard::BirthdayDealsController < ApplicationController
   # POST /birthday_deals.json
   def create
     @birthday_deal = @location.birthday_deals.build(birthday_deal_params)
-
     respond_to do |format|
       if @birthday_deal.save
         format.html { redirect_to dashboard_location_birthday_deals_path(@location), notice: 'Birthday deal was successfully created.' }
@@ -107,7 +106,6 @@ class Dashboard::BirthdayDealsController < ApplicationController
   # PUT /birthday_deals/1
   # PUT /birthday_deals/1.json
   def update
-
     respond_to do |format|
       if @birthday_deal.update_attributes(birthday_deal_params)
         @birthday_deal.edit
@@ -124,7 +122,6 @@ class Dashboard::BirthdayDealsController < ApplicationController
   # DELETE /birthday_deals/1.json
   def destroy
     @birthday_deal.destroy
-
     respond_to do |format|
       format.js { render 'approval_actions', layout: false }
       format.html { redirect_to dashboard_location_birthday_deals_path(@birthday_deal.location) }
@@ -140,11 +137,13 @@ class Dashboard::BirthdayDealsController < ApplicationController
     @companies = Company.order('name asc')
     @company = @birthday_deal.try(:company)
     @model = 'birthday_deal'
+    @occasions = Occasion.order('name asc')
+
   end
 
   private
   def birthday_deal_params
-    params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :restrictions, :company_id, :comany_location_id, :value, :start_date, :end_date, :state)
+    params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :company_id, :comany_location_id, :value, :start_date, :end_date, :state, :occasion_id, restriction_ids: [], restriction_items_attributes: [:id, :category, :phrase, :value])
   end
 end
  

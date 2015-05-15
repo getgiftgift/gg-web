@@ -9,45 +9,44 @@
         = f.input :company_id, as: :select, collection: @companies, label: false
 / VALUE
 .row
-  .large-6.columns
+  .large-8.columns
     .row.collapse
-      .small-3.columns
+      .small-2.columns
         span.prefix Values $
 
-      .small-3.columns
-        = text_field_tag "birthday_deal[value]", @birthday_deal.value, id: 'birthday_deal_value', size: 3, maxlength: 3
-      .small-6.columns
+      .small-2.columns
+        = f.input :value, id: 'birthday_deal_value', label: false
+      / OCCASION
+      .small-2.columns
+        |&nbsp;
+      .small-3.large-2.columns
+        span.prefix Occasion
+      .small-3.large-4.columns  
+        = f.input :occasion_id, as: :select, collection: @occasions, default: @occasions.first,  label: false
 / HOOK
 .row
   .large-12.columns
     .row.collapse
       .small-2.columns
-        span.prefix Hook
-
+        span.prefix Gift Given
       .small-8.columns
-        = text_field_tag "birthday_deal[hook]", @birthday_deal.hook, id: 'birthday_deal_hook'
+        = f.input :hook, label: false 
       .small-2.columns
         |&nbsp; at Company Name
 /RESTRICTIONS
 fieldset
+  legend Restrictions 
   .row
-    .large-12.columns
-      .row.collapse
-        .small-2.columns
-          span.prefix Restrictions
+    .large-4.columns
+      = f.association :restrictions, as: :check_boxes, label_method: :phrase, value_method: :id
+    / .large-2.columns
+    /   = check_box_tag 'new_restriction'
+    /   = label_tag 'When you' 
+    / .large-2.columns
 
-        .small-10.columns
-          = text_field_tag "birthday_deal[hook]", @birthday_deal.hook, id: 'birthday_deal_hook'
-      .row.collapse
-        .small-6.columns
-          = check_box_tag 'spend_x', 'When you spend '
-          = label_tag 'When you spend $X'
-          = text_field_tag :spend_x_amount, nil, class: 'spend_amount'
-          
-        .small-6.columns
-          = check_box_tag 'buy_x', 'When you buy '
-          = label_tag 'When you buy X'
-          = text_field_tag :buy_x_amount, nil, class: 'buy_amount'
+    /   = select_tag 'buy_spend', options_for_select(['buy','spend'])
+    / .large-4.columns
+    /   = text_field_tag 'buy_spend_value'    
 /HOW TO REDEEM
 .row
   .large-12.columns
@@ -68,20 +67,10 @@ fieldset
         .small-6.columns      
           = f.input :end_date, as: :string 
             / #, as: :string, input_html: { readonly: true, size: 10 }
-
-= f.button :submit, class: 'button'
-
-
-
-
-coffee:
-  $.datepicker.formatDate(
-
-  )
-  $('#birthday_deal_start_date').datepicker(dateFormat: 'yy-mm-dd')
-  $('#birthday_deal_end_date').datepicker(dateFormat: 'yy-mm-dd')
-
-
-
-
-
+.row
+  .large-6.columns
+    .row
+      .large-6.columns
+        = f.button :submit, class: 'button'
+      .large-6.columns  
+        = link_to 'Cancel', dashboard_location_birthday_deals_path(@location)
