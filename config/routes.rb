@@ -11,6 +11,8 @@ WorthdayWeb::Application.routes.draw do
   get '/my_account' => "birthday_deals#account", as: 'account' 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
   
+  resources :companies, only: [:new, :create]
+
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
     member do
       put :trash

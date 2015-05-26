@@ -2,11 +2,18 @@ doctype html
 html
   head
     title The Birthday Club!
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag    "birthday_deals"
     = javascript_include_tag "application"
     = csrf_meta_tags
   body
     #fb-root
     #status  
+    nav.tab-bar style="height: 70px;"
+        section.middle.tab-bar-section
+          h1.title= link_to 'GIFTGIFT', root_path, class: 'branding'
+        .messages
+          p#counter 
+            - flash.each do |name, msg|
+              - if msg.is_a?(String)
+                = msg
     = yield
-    = render partial: 'layouts/facebook.js'

@@ -1,0 +1,38 @@
+.row style='margin-top: 30px;'
+  .small-10.large-8.small-centered.columns.white-box style="padding: 20px 0;"
+    .row
+      .small-8.small-centered.columns
+        = simple_form_for @company do |f|
+          = f.input :name, label: 'Company Name'
+          = f.simple_fields_for :contacts do |c|
+            .row
+              .large-6.columns
+                = c.input :first_name
+              .large-6.columns
+                = c.input :last_name
+            = c.input :email
+
+            = simple_fields_for :credit_card do |p|
+              = p.input :card_number, label: 'Card Number', input_html: { data: {braintree_name: 'number'}}
+              .row 
+                .large-8.columns
+                  = p.input :expiration, as: :date, start_year: Date.today.year,
+                                end_year: Date.today.year + 15, discard_day: true,
+                                  order: [:month, :year]
+              .row 
+                .large-4.columns
+                  = p.input :cvv, input_html: { data: {braintree_name: 'cvv'}}
+                .large-4.columns
+                  = c.input :postal_code, label: 'Billing Zip', input_html: { data: {braintree_name: 'postal-code'}}
+                .large-4.columns
+          = f.button :submit, class: 'redeem-btn'
+
+script src="https://js.braintreegateway.com/v2/braintree.js"
+
+javascript:
+  $(document).ready(function(){
+    $('#credit_card_expiration_1i').attr('data-braintree-name', 'expiration_year');
+    $('#credit_card_expiration_2i').attr('data-braintree-name', 'expiration_month');
+    var client_token = "#{@client_token}";
+    braintree.setup(client_token, "custom", { id: "new_company"});
+  }); 
