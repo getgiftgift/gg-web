@@ -14,19 +14,14 @@ class CompaniesController < ApplicationController
     result = Braintree::Customer.create(
       :first_name => contact_params[:first_name], 
       :last_name => contact_params[:last_name], 
-      :payment_method_nonce => params[:payment_method_nonce],  
       :company => company_params[:name], 
-      :email => contact_params[:email], 
-      :credit_card => {:number => params[:credit_card][:card_number], 
-        :cvv => params[:credit_card][:cvv], 
-        :expiration_month => params[:credit_card]['expiration(2i)'], 
-        :expiration_year => params[:credit_card]['expiration(1i)']
-      }
+      :email => contact_params[:email],
+      :payment_method_nonce => params[:payment_method_nonce]
     )
-
+        
     if result.success?
       @company.contacts.first.update_attributes token: result.customer.credit_cards[0].token
-      flash[:notice] = "Success!"
+      flash[:notice] = "Successfully created #{@company.name}."
       redirect_to new_company_path
     else
       flash[:notice] = "Try again. #{result.errors.first.message}"

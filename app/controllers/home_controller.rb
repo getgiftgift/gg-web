@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  layout 'application'
 
   def dashboard
     if current_user && current_user.admin?
@@ -12,6 +13,15 @@ class HomeController < ApplicationController
   end
 
   def privacy
+  end
+
+  def redeem
+    if params[:redeem]
+      @pin = params[:redeem][:pin]
+      ver = params[:redeem][:verification]
+
+      # BirthdayDealVoucher.where('verification_number like ?', ver).joins(:company).where('pin = ?', pin).first
+    end
   end
 
 end
