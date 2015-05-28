@@ -9,7 +9,7 @@ class CompanyLocation < ActiveRecord::Base
 
   # attr_accessible :company_id, :company, :name, :phone, :fax, :street1, :street2, :city, :state, :postal_code, :location_id
 
-  validates :name, :phone, :street1, :city, :state, :postal_code, presence: true
+  validates :phone, :street1, :city, :state, :postal_code, presence: true
 
   def inline_address
     address = ""
