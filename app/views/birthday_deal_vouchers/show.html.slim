@@ -17,9 +17,9 @@
     hr
     h5 HOW TO REDEEM
     = @birthday_deal_voucher.birthday_deal.how_to_redeem
+    = @birthday_deal_voucher.birthday_deal.show_restrictions
     hr
     h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through} 
-    = @birthday_deal_voucher.birthday_deal.show_restrictions
     hr
     h5 RECIPIENT
     = @birthday_deal_voucher.user.full_name

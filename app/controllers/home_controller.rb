@@ -19,8 +19,10 @@ class HomeController < ApplicationController
     if params[:redeem]
       @pin = params[:redeem][:pin]
       ver = params[:redeem][:verification]
-
-      # BirthdayDealVoucher.where('verification_number like ?', ver).joins(:company).where('pin = ?', pin).first
+      @deal = BirthdayDealVoucher.where('verification_number like ?', "%#{ver}").joins(:company).where('pin = ?', @pin).last
+      redirect_to redeem_path
+    else
+      render 'redeem'
     end
   end
 

@@ -2,15 +2,15 @@
   .small-10.large-8.small-centered.columns.white-box style="padding: 20px 0;"
     .row
       .small-8.small-centered.columns
-        = simple_form_for @company do |f|
-          = f.input :name, label: 'Company Name'
+        = simple_form_for @company, validate: true do |f|
+          = f.input :name, label: 'Company Name', required: true
           = f.simple_fields_for :contacts do |c|
             .row
               .large-6.columns
-                = c.input :first_name
+                = c.input :first_name, required: true
               .large-6.columns
-                = c.input :last_name
-            = c.input :email
+                = c.input :last_name, required: true
+            = c.input :email, required: true
 
             = simple_fields_for :credit_card do |p|
               = p.input :card_number, label: 'Card Number', input_html: { data: {braintree_name: 'number'}}
@@ -23,10 +23,10 @@
                 .large-4.columns
                   = p.input :cvv, input_html: { data: {braintree_name: 'cvv'}}
                 .large-4.columns
-                  = c.input :postal_code, label: 'Billing Zip', input_html: { data: {braintree_name: 'postal_code'}}
+                  = c.input :postal_code, label: 'Billing Zip', input_html: { data: {braintree_name: 'postal_code'}}, required: true
                 .large-4.columns
           = f.button :submit, class: 'redeem-btn'
-          
+
 = javascript_include_tag "https://js.braintreegateway.com/v2/braintree.js"
 javascript:
   $(document).ready(function(){

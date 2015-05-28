@@ -6,6 +6,7 @@ class Company < ActiveRecord::Base
   accepts_nested_attributes_for :contacts
 
   # attr_accessible :archived, :city, :image, :image_cache, :name, :phone, :postal_code, :state, :street1, :street2, :url
+  validates :name, presence: true
 
   mount_uploader :image, ImageUploader
 end

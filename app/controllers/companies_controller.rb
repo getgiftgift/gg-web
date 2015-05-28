@@ -17,14 +17,39 @@ class CompaniesController < ApplicationController
       :company => company_params[:name], 
       :email => contact_params[:email],
       :payment_method_nonce => params[:payment_method_nonce]
-    )
-        
+    )  
     if result.success?
-      @company.contacts.first.update_attributes token: result.customer.credit_cards[0].token
+      response = result.customer.credit_cards[0]
+      @company.contacts.first.update_attributes( 
+        token: response.token, 
+        cc_last_four: response.last_4,
+        cc_card_type: response.card_type,
+        cc_expiration_month: response.expiration_month,
+        cc_expiration_year: response.expiration_year,
+        gateway_customer_id: response.customer_id
+      )
       flash[:notice] = "Successfully created #{@company.name}."
       redirect_to new_company_path
+
+      ## Credit card verification
+      # :options => {
+      #   :verify_card => true
+      # }
+      # result.success?
+      # #=> false
+
+      # verification = result.credit_card_verification
+      # verification.status
+      # #=> "processor_declined"
+
+      # verification.processor_response_code
+      # #=> "2000"
+
+      # verification.processor_response_text
+      # #=> "Do Not Honor"
     else
       flash[:notice] = "Try again. #{result.errors.first.message}"
+      @client_token = Braintree::ClientToken.generate
       render 'new'
     end
   end
