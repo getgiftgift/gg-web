@@ -41,7 +41,6 @@
           %td= company_location.state
           %td= company_location.postal_code
           %td= company_location.phone
-          %td= company_location.location.name
           / = display_company_location(company_location)
           %td
             = link_to 'Edit', edit_dashboard_company_company_location_path(@company, company_location)
