@@ -50,7 +50,7 @@ class Dashboard::CompanyLocationsController < ApplicationController
   # POST /companies
   # POST /companies.xml
   def create
-    @company_location = @company.company_locations.new(params[:company_location])
+    @company_location = @company.company_locations.new(location_params)
 
     respond_to do |format|
       if @company_location.save
@@ -69,7 +69,7 @@ class Dashboard::CompanyLocationsController < ApplicationController
   def update
     @company_location = @company.company_locations.find(params[:id])
     respond_to do |format|
-      if @company_location.update_attributes(params[:company_location])
+      if @company_location.update_attributes(location_params)
         flash[:notice] = 'Company location was successfully updated.'
         format.js   { render :js => 'window.location.reload()' }
         format.html { redirect_to dashboard_company_path(@company) }
@@ -94,6 +94,10 @@ class Dashboard::CompanyLocationsController < ApplicationController
   end
 
   protected
+    def location_params
+      params.require(:company_location).permit(:phone, :street1, :street2, :city, :state, :postal_code)
+    end
+
     def get_company
       @company = Company.find(params[:company_id]) if params[:company_id]
     end
