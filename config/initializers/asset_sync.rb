@@ -1,5 +1,6 @@
 AssetSync.configure do |config|
-  config.fog_provider = ENV['FOG_PROVIDER']
+  config.fog_provider = ENV['FOG_PROVIDER'] if Rails.env.production?
+  config.fog_provider = :file if Rails.env.development?
   config.aws_access_key_id = ENV['AWS_ACCESS_KEY_ID']
   config.aws_secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
   # To use AWS reduced redundancy storage.

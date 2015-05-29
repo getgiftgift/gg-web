@@ -3,15 +3,12 @@
     tr
       th
       th Company
-      th Location
       th Phone
       th Actions
     - @companies.each do |company|
       tr
-        td= image_tag company.image_url(:thumb) if company.image?
+        td= image_tag company.image_url(:thumb)
         td.main= link_to company.name, dashboard_company_path(company)
-        / td=# display_company_location(company)
-        td= company.location_id
         td= company.phone
         td
           = link_to "Edit ", edit_dashboard_company_path(company)

@@ -6,10 +6,7 @@
           - birthday_deal = voucher.birthday_deal
           = content_tag_for :div, voucher, :card, class: "card-box" do
             .row
-              .small-10.small-centered.columns
-                / img src="http://placehold.it/360x220"
-                -if Rails.env.production?
-                  = image_tag birthday_deal.company.image_url(:deal_image), alt: 'Logo'
+              = image_tag birthday_deal.company.image_url(:big), alt: 'Logo', width: '100%'
             br
             .row
               .small-5.columns.center-text
