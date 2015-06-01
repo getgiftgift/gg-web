@@ -5,7 +5,8 @@ WorthdayWeb::Application.routes.draw do
   match '/redeem' => 'home#redeem', via: [:get, :post]
   # get '/:referral_code' => 'birthday_deals#index'
   patch '/change_location' => 'users#change_location'
-
+  get '/terms' => 'home#terms'
+  get '/privacy' => 'home#privacy'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users, only: [:show]
   get '/my_account' => "birthday_deals#account", as: 'account' 
