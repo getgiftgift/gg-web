@@ -1,21 +1,35 @@
-h1
-  = @company.name
-p
-  |Phone: 
-  = @company.phone
-p
-  |Address:
-  = @company.street1
-= @company.street2
-p
-  = display_city_state(@company.city, @company.state)
-  = @company.postal_code
-p
-  |Archived:
-  = @company.archived
+.row
+  .large-12.columns
+    h3= @company.name
+    .row
+      .large-6.columns 
+        p Phone: #{@company.phone}
+        
+        |Address:
+        br
+        = @company.street1
+        br
+        = @company.street2
+        br
+        p #{display_city_state(@company.city, @company.state)} #{@company.postal_code}
+        |Archived: #{@company.archived}
 
-- 3.times do
-  br
+      .large-6.columns
+        h5 Contact Info
+        - if @contact
+          |#{@contact.first_name} #{@contact.last_name}
+          p=@contact.email
+          
+          |Card Info: 
+          br
+          = @contact.cardholder_name
+          p #{@contact.cc_card_type} *#{@contact.cc_last_four}, Exp: #{@contact.cc_expiration_month}/#{@contact.cc_expiration_year}
+          = link_to 'Update', edit_dashboard_company_contact_path(@company, @contact)
+        - else
+          = link_to "Add Contact/Billing", new_dashboard_company_contact_path(@company)
+
+
+
 #company_locations
   = button_to 'Add a Location', new_dashboard_company_company_location_path(@company), method: :get
   - if !@company.company_locations.empty?

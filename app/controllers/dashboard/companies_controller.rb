@@ -29,6 +29,7 @@ class Dashboard::CompaniesController < ApplicationController
   # GET /companies/1.xml
   def show
     @company = Company.find(params[:id])
+    @contact = @company.contacts.first
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @company }

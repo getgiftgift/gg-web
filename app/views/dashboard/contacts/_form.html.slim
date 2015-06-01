@@ -1,0 +1,24 @@
+= simple_form_for [:dashboard, @company, @contact] do |c|
+  = c.input :first_name
+  = c.input :last_name
+  = c.input :email
+
+  = simple_fields_for :credit_card do |p|
+    = p.input :cardholder_name, label: 'Card Holder Name', input_html: { data:{braintree_name: 'cardholder_name'} }
+    = p.input :card_number, label: 'Card Number', input_html: { data: {braintree_name: 'number'}}
+    .row
+      .large-8.columns
+        = p.input :expiration, as: :date, start_year: Date.today.year,
+                      end_year: Date.today.year + 15, discard_day: true,
+                        order: [:month, :year]
+    .row 
+      .large-4.columns
+        = p.input :cvv, input_html: { data: {braintree_name: 'cvv'}}
+      .large-4.columns
+        = p.input :postal_code, label: 'Billing Zip', input_html: { data: {braintree_name: 'postal_code'}}, required: true
+      .large-4.columns
+  = c.submit 'Save', class: 'button'
+  = link_to ' Cancel', dashboard_company_path(@company)
+
+
+

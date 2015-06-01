@@ -21,11 +21,13 @@ class CompaniesController < ApplicationController
     if result.success?
       response = result.customer.credit_cards[0]
       @company.contacts.first.update_attributes( 
-        token: response.token, 
+        token: response.token,
+        cardholder_name: response.cardholder_name, 
         cc_last_four: response.last_4,
         cc_card_type: response.card_type,
         cc_expiration_month: response.expiration_month,
         cc_expiration_year: response.expiration_year,
+        postal_code: result.customer.addresses[0].postal_code,
         gateway_customer_id: response.customer_id
       )
       flash[:notice] = "Successfully created #{@company.name}."

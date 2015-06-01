@@ -13,6 +13,7 @@
             = c.input :email, required: true
 
             = simple_fields_for :credit_card do |p|
+              = p.input :cardholder_name, label: 'Card Holder Name', input_html: { data:{braintree_name: 'cardholder_name'} }
               = p.input :card_number, label: 'Card Number', input_html: { data: {braintree_name: 'number'}}
               .row
                 .large-8.columns
@@ -25,7 +26,7 @@
                 .large-4.columns
                   = c.input :postal_code, label: 'Billing Zip', input_html: { data: {braintree_name: 'postal_code'}}, required: true
                 .large-4.columns
-          = f.button :submit, class: 'redeem-btn'
+          = f.submit 'Save', class: 'redeem-btn'
 
 = javascript_include_tag "https://js.braintreegateway.com/v2/braintree.js"
 javascript:

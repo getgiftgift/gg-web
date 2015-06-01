@@ -1,0 +1,10 @@
+h4 Contact for #{@company.name}
+= render partial: 'form'
+= javascript_include_tag "https://js.braintreegateway.com/v2/braintree.js"
+javascript:
+  $(document).ready(function(){
+    $('#credit_card_expiration_1i').attr('data-braintree-name', 'expiration_year');
+    $('#credit_card_expiration_2i').attr('data-braintree-name', 'expiration_month');
+    var client_token = "#{@client_token}";
+    braintree.setup(client_token, "custom", { id: "new_contact"});
+  }); 

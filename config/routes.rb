@@ -25,7 +25,8 @@ WorthdayWeb::Application.routes.draw do
   namespace :dashboard do
     get '/locations' => 'locations#index', as: 'index'
     resources :users  
-    resources :companies do  
+    resources :companies do 
+      resources :contacts 
       resources :company_locations
       member do
         get :archive 

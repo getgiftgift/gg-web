@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150528184032) do
+ActiveRecord::Schema.define(version: 20150529151501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150528184032) do
     t.string   "cc_expiration_month"
     t.string   "cc_expiration_year"
     t.string   "gateway_customer_id"
+    t.string   "cardholder_name"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
