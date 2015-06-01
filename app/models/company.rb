@@ -9,4 +9,8 @@ class Company < ActiveRecord::Base
   validates :name, presence: true
 
   mount_uploader :image, ImageUploader
+
+  def map_address
+    "#{self.street1} #{self.street2} #{self.city},#{self.state} #{self.postal_code}"
+  end
 end

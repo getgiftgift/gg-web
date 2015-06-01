@@ -3,8 +3,8 @@
     / = image_tag @birthday_deal_voucher.company.image_url
     .right= link_to "&times;".html_safe, account_path(current_user), class: 'close'
     .header-label
-      h4 = @birthday_deal_voucher.company.name.upcase
-    h5= @birthday_deal_voucher.birthday_deal.hook.upcase
+      h4 = @company.name.upcase
+    h5= @birthday_deal.hook.upcase
     |$#{@birthday_deal_voucher.value} Value from #{@birthday_deal_voucher.company.name}. 
     br
     = @birthday_deal_voucher.barcode_data.html_safe
@@ -16,10 +16,17 @@
         a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
     hr
     h5 HOW TO REDEEM
-    = @birthday_deal_voucher.birthday_deal.how_to_redeem
-    = @birthday_deal_voucher.birthday_deal.show_restrictions
+    = @birthday_deal.how_to_redeem
+    = @birthday_deal.show_restrictions
+    h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through}
     hr
-    h6 GOOD THROUGH: #{@birthday_deal_voucher.good_through} 
+    h5 VALID LOCATIONS
+    - if @locations.present?
+      - @locations.each do |loc|
+        = link_to loc.map_address, "https://maps.google.com?q=#{loc.map_address}"
+    - else
+      = link_to @company.map_address, "https://maps.google.com?q=#{@company.map_address}"
+    
     hr
     h5 RECIPIENT
     = @birthday_deal_voucher.user.full_name

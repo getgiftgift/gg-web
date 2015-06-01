@@ -27,7 +27,7 @@ class CompanyLocation < ActiveRecord::Base
   end
 
   def map_address
-    "#{self.street1} #{self.city},#{self.state} #{self.postal_code}"
+    "#{self.street1} #{self.street2} #{self.city},#{self.state} #{self.postal_code}"
   end
 
 end
