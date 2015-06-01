@@ -8,10 +8,10 @@
     - @companies.each do |company|
       tr
         td= image_tag company.image_url(:thumb)
-        td.main= link_to company.name, dashboard_company_path(company)
+        td.main= company.name
         td= company.phone
         td
-          = link_to "Edit ", edit_dashboard_company_path(company)
+          = link_to "Show ", dashboard_company_path(company)
           - unless company.archived? 
             || 
             = link_to "Archive", archive_dashboard_company_path(company), data: {confirm: "Are you sure you want to archive this client?"}

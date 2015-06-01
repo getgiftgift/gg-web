@@ -1,6 +1,7 @@
 .row
   .large-12.columns
     h3= @company.name
+    = link_to 'Edit Company', edit_dashboard_company_path(@company)
     .row
       .large-6.columns 
         p Phone: #{@company.phone}
@@ -14,7 +15,7 @@
         p #{display_city_state(@company.city, @company.state)} #{@company.postal_code}
         |Archived: #{@company.archived}
 
-      .large-6.columns
+      .large-6.columns.panel
         h5 Contact Info
         - if @contact
           |#{@contact.first_name} #{@contact.last_name}
@@ -31,9 +32,9 @@
 
 
 #company_locations
-  = button_to 'Add a Location', new_dashboard_company_company_location_path(@company), method: :get
-  - if !@company.company_locations.empty?
-    h3 Company Locations
+  h4 Company Locations
+  = link_to 'Add a Location', new_dashboard_company_company_location_path(@company), class: 'button'
+  - if !@company.company_locations.empty?   
     table
       thead
         tr
