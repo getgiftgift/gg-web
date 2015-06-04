@@ -48,6 +48,7 @@ gem 'state_machines-audit_trail'
 gem 'therubyracer' #JavaScript runtime for production
 gem 'uglifier'
 gem 'unicorn'
+gem 'yelp'
 
 group :development do 
   gem 'better_errors'

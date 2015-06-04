@@ -363,6 +363,70 @@ td.barby-cell.on { background: #000; }
 
 #credit_card_expiration_1i{
   width: 40%;
-}  
+}
 
+.yelp-logo{
+  background: image-url('yelp_logo.png') no-repeat;
+  height: 20px;
+  width: 40px;
+}
 
+.stars-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -366px;
+  width: 98px;
+  height: 18px;}
+.stars-1-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -390px;
+  width: 98px;
+  height: 18px;
+}
+.stars-1-5{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -414px;
+  width: 98px;
+  height: 18px;
+}
+.stars-2-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -438px;
+  width: 98px;
+  height: 18px;
+}
+.stars-2-5{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -462px;
+  width: 98px;
+  height: 18px;
+}
+.stars-3-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -486px;
+  width: 98px;
+  height: 18px;
+}
+.stars-3-5{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -510px;
+  width: 98px;
+  height: 18px;
+}
+.stars-4-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -534px;
+  width: 98px;
+  height: 18px;
+}
+.stars-4-5{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -558px;
+  width: 98px;
+  height: 18px; 
+}
+.stars-5-0{
+  background: image-url('yelp_stars_sprite.png') no-repeat -6px -582px;
+  width: 98px;
+  height: 18px;
+}
+
+a.yelp {
+  margin: 0 auto;
+  a:hover{text-decoration: underline;}  
+  .stars{
+    position:relative; 
+    float:left; 
+    margin: 0 5px;}
+  span{font-size:10px;} 
+}
