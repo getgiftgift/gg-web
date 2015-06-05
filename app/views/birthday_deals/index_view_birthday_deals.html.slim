@@ -4,7 +4,7 @@
       - @birthday_deal_vouchers.each do |voucher|
         #card_container
           - birthday_deal = voucher.birthday_deal
-          - yelp = Yelp.client.business(birthday_deal.company.yelp_id)
+          / - yelp = Yelp.client.business(birthday_deal.company.yelp_id)
           = content_tag_for :div, voucher, :card, class: "card-box" do
             .row
               = image_tag birthday_deal.company.image_url(:big), alt: 'Logo', width: '100%'
@@ -17,10 +17,10 @@
                 span VALUE 
               .small-7.columns
                 h4.bold-gray= voucher.company.name.upcase
-                - if birthday_deal.company.yelp_id.present?
-                  a.yelp href="#{yelp.url}"
-                    .stars class="stars-#{yelp.rating.to_s.gsub(".","-")}"
-                    span #{yelp.review_count} Reviews
+                / - if birthday_deal.company.yelp_id.present?
+                /   a.yelp href="#{yelp.url}"
+                /     .stars class="stars-#{yelp.rating.to_s.gsub(".","-")}"
+                /     span #{yelp.review_count} Reviews
               hr
             .row
               small-12.columns
