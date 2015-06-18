@@ -26,7 +26,7 @@ class MailingList
     response = self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
     json_response = JSON.parse(response)
     if json_response['status'] == '200'
-      user.subscription.subscribe_confirmed!
+      user.subscription.present? ? user.subscription.subscribe_confirmed! : user.subscription = Subscription.create(state: :subscribed)
     end
 
     # unless JSON.parse(response)['status'] == '200'
