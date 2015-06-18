@@ -245,6 +245,9 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    mailchimp-api (2.0.6)
+      excon (>= 0.16.0)
+      json (>= 1.7.7)
     mandrill-api (1.0.53)
       excon (>= 0.16.0, < 1.0)
       json (>= 1.7.7, < 2.0)
@@ -444,6 +447,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   koala (~> 2.0)
+  mailchimp-api
   mandrill_mailer
   mysql2
   omniauth-facebook

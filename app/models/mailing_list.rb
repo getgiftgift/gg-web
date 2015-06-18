@@ -1,4 +1,10 @@
+require 'httparty'
+
 class MailingList 
+  include HTTParty
+
+  base_uri "http://us2.api.mailchimp.com/3.0"
+
   def self.subscribe(user)
     self.delay.subscribe_delayed(user)
   end
@@ -7,41 +13,43 @@ class MailingList
     self.delay.update_subscription_delayed(user)
   end 
 
-  private
   def self.subscribe_delayed(user)
-    api = new_api
-    api.listSubscribe(:id => MC_LIST_ID, 
-                      :email_address => user.email, 
-                      :merge_vars => get_merge_vars(user), 
-                      :email_type => 'html', 
-                      :double_optin => false, 
-                      :update_existing => true, 
-                      :replace_interests => false, 
-                      :send_welcome => false )
+    options = {
+      email_address: user.email,
+      status: "subscribed",
+      merge_fields: {
+        "FNAME": user.first_name,
+        "LNAME": user.last_name,
+        "BDAY": user.short_birthdate
+      }
+    }
+    response = self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
+    json_response = JSON.parse(response)
+    if json_response['status'] == '200'
+      user.subscription.subscribe_confirmed!
+    end
+
+    # unless JSON.parse(response)['status'] == '200'
+    #   self.update_subscription(user)
+    # end
   end
 
-  def self.update_subscription_delayed(user)
-    api = new_api
-    response = api.listMemberInfo(:id => MC_LIST_ID, :email_address => user.email)
+  def self.update_subscription(user)
+    
 
-    if response['data'][0]['error'] == "The email address passed does not exist on this list"
-      self.subscribe(user)  
-    else  
-      api.listUpdateMember( :id => MC_LIST_ID, 
-                            :email_address => user.email, 
-                            :merge_vars => get_merge_vars(user), 
-                            :email_type => 'html',  
-                            :replace_interests => false, )
-    end  
   end
 
-  def self.get_merge_vars(user)
-    return { 'FNAME' => user.first_name, 'LNAME' => user.last_name, 'BDAY' => user.short_birthdate } 
+private
+  def self.auth_header
+    {"Authorization"=>"apikey #{ENV['MAILCHIMP_API_KEY']}"}
+  end
+
+  def self.list_id
+    ENV['MAILCHIMP_LIST_ID']
   end
 
   def self.new_api
-    return Mailchimp::API.new(MC_APIKEY)
+    Mailchimp::API.new(ENV['MAILCHIMP_API_KEY'])
   end
 
-end
-
+end 

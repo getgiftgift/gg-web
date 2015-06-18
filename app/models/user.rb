@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   include ApplicationHelper
   after_create :build_referral_code
 
+  has_one :subscription
   belongs_to :location
   has_many :birthday_deal_vouchers
   has_many :referrals_received, :foreign_key => :recipient_id,
@@ -128,5 +129,6 @@ class User < ActiveRecord::Base
     self.birthday_deal_vouchers.each do |voucher|
       voucher.reset! if voucher.valid_on.year == Time.now.year || voucher.good_through.year == Time.now.year
     end
-  end 
+  end
+
 end
