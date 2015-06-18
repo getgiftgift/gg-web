@@ -25,9 +25,7 @@ class MailingList
       }
     }
     response = self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
-    json_response = JSON.parse response.body
-    if json_response['status'] == 'subscribed'
-      
+    if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
       # won't be an existing subscription.
       # 
