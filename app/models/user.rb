@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
-  after_create :build_referral_code
+  after_create :build_referral_code, :build_subscription
 
   has_one :subscription
   belongs_to :location
@@ -130,5 +130,10 @@ class User < ActiveRecord::Base
       voucher.reset! if voucher.valid_on.year == Time.now.year || voucher.good_through.year == Time.now.year
     end
   end
+
+  def build_subscription
+    self.subscription = Subscription.create
+  end
+
 
 end
