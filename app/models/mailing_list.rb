@@ -13,6 +13,7 @@ class MailingList
     self.delay.update_subscription_delayed(user)
   end 
 
+  private
   def self.subscribe_delayed(user)
     options = {
       email_address: user.email,
@@ -24,22 +25,22 @@ class MailingList
       }
     }
     response = self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
-    json_response = JSON.parse(response)
-    if json_response['status'] == '200'
-      user.subscription.present? ? user.subscription.subscribe_confirmed! : user.subscription = Subscription.create(state: :subscribed)
+    json_response = JSON.parse response.body
+    if json_response['status'] == 'subscribed'
+      
+      ## create a subscription if calling the MailingList.subscribe manually, since there probably 
+      # won't be an existing subscription.
+      # 
+      user.subscription.present? ? user.subscription.subscribe_confirmed! : Subscription.create(user: user, state: :subscribed)
     end
-
-    # unless JSON.parse(response)['status'] == '200'
-    #   self.update_subscription(user)
-    # end
   end
 
   def self.update_subscription(user)
-    
+    ## Existing member response.
+    # "status"=>400, "detail"=>"email@gmail.com is already a list member.  Use PATCH to update existing members."
 
   end
 
-private
   def self.auth_header
     {"Authorization"=>"apikey #{ENV['MAILCHIMP_API_KEY']}"}
   end

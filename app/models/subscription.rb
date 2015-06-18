@@ -28,7 +28,7 @@ class Subscription < ActiveRecord::Base
     end
 
     event :subscribe_confirmed do
-      transition :pending_subscribe => :subscribed
+      transition [:new, :pending_subscribe] => :subscribed
     end
 
     event :unsubscribe_confirmed do
