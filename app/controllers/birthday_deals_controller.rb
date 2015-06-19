@@ -24,9 +24,9 @@ class BirthdayDealsController < ApplicationController
         @birthday_deal_vouchers = @deals.each.collect{|bd| bd.create_voucher_for(current_user)}
       end
       @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)  
-      if current_user.test_user?
-        @birthday_deal_vouchers = current_user.birthday_deal_vouchers.with_state(:wrapped).includes(:birthday_deal => :company) 
-        @birthday_deal_vouchers.update_all({state: 'wrapped'}) if @birthday_deal_vouchers.empty? 
+      if current_user.test_user? && @birthday_deal_vouchers.empty? 
+        current_user.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
+        @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
       end
       render action: 'index_view_birthday_deals'
     else

@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
+    birthdate = self.test_user? ? Date.today : self.birthdate
     return nil if birthdate.nil?
     birthday_string = birthdate.strftime('%m%d')
     today = Date.today.strftime('%m%d')
