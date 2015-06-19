@@ -4,7 +4,7 @@ class BirthdayDeal < ActiveRecord::Base
   belongs_to :occasion
   has_many :restriction_items 
   has_many :restrictions, through: :restriction_items
-  has_many :birthday_deal_vouchers
+  has_many :birthday_deal_vouchers, dependent: :destroy
   has_and_belongs_to_many :company_locations
   has_many :transition_records, foreign_key: 'birthday_deal_id', class_name: "BirthdayDealStateTransition"
 

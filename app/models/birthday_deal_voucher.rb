@@ -13,7 +13,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
   belongs_to :birthday_deal
   belongs_to :user
   has_one :company, through: :birthday_deal
-  has_many :birthday_deal_voucher_state_transitions
+  has_many :birthday_deal_voucher_state_transitions, dependent: :destroy
   # attr_accessible :good_through, :valid_on, :user
   after_create :generate_verification_number
 
