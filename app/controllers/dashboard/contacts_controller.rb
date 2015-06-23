@@ -1,4 +1,5 @@
 class Dashboard::ContactsController < ApplicationController
+  before_filter :admin_login_required
 
   layout 'dashboard'
 
