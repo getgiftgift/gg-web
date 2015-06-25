@@ -61,12 +61,9 @@ fieldset
     .large-12.columns
       .row
         .small-6.columns
-          = f.input :start_date, as: :string 
-            /#, as: :string, data: { behaviour: 'datepicker' }, input_html: {class: "format-m-d-y highlight-days-67 no-transparency", size: 10}
-
+          = f.input :start_date, as: :string, input_html: {class: 'datepicker'}  
         .small-6.columns      
-          = f.input :end_date, as: :string 
-            / #, as: :string, input_html: { readonly: true, size: 10 }
+          = f.input :end_date, as: :string, input_html: {class: 'datepicker'} 
 .row
   .large-6.columns
     .row

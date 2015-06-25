@@ -1,14 +1,22 @@
 .row
   .large-12.columns.small-centered
     h4 Index
-    | Date Range: #{@start_date} to #{@end_date}
+    | Date Range: 
+    strong= @start_date.strftime("%a, %b %e, %Y") 
+    |&nbsp;-&nbsp;
+    strong= @end_date.strftime("%a, %b %e, %Y")
 
-    = simple_fields_for :search do |f|
-      = f.input :start_date, as: :date
-      = f.input :end_date, as: :date
-      = f.button :submit, label: "Search"
-
-
+    = simple_form_for :search, url: dashboard_location_voucher_reports_path, method: :get do |f|
+      .row
+        .large-6.columns
+          fieldset
+            .row
+              .small-5.columns
+                = f.input :start_date, as: :string, input_html: {class: 'datepicker'} 
+              .small-5.columns      
+                = f.input :end_date, as: :string, input_html: {class: 'datepicker'}  
+              .small-2.column
+                = f.button :submit, 'Go', class: 'go-btn'
     table#voucher_table.tablesorter 
       thead
         tr
@@ -21,7 +29,19 @@
         - @deals.each do |deal|
           tr
             td= deal.company.name
-            td= deal.birthday_deal_vouchers.count 
-            td= deal.company.company_locations.empty? ? "1" : deal.company.company_locations.count
+            td= vouchers_count = deal.birthday_deal_vouchers.count 
+            td= loc_count = deal.company.company_locations.empty? ? "1".to_i : deal.company.company_locations.count
             td= humanized_money_with_symbol @price
-            td= humanized_money_with_symbol (@price * deal.birthday_deal_vouchers.count)
+            - money = @price * deal.birthday_deal_vouchers.count
+            td= humanized_money_with_symbol money
+          - @vouchers_count_total += vouchers_count
+          - @locations_count_total += loc_count 
+          - @money_total += money  
+        tr
+          td
+            strong Total
+          td= @vouchers_count_total
+          td= @locations_count_total
+          td - 
+          td
+            strong= humanized_money_with_symbol @money_total     

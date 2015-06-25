@@ -18,6 +18,14 @@ ul {list-style-type: none;}
 //   width: 150px !important;
 // }
 
+.go-btn{
+  width: 50px;
+  height: 37px;
+  line-height: 8px;
+  margin-top: 21px !important;
+  padding: 10px !important;
+}
+
 #ui-datepicker-div{
   z-index: 3 !important;
   .ui-datepicker-header{
