@@ -134,6 +134,7 @@ class User < ActiveRecord::Base
 
   def build_subscription
     self.subscription = Subscription.create
+    self.subscription.subscribe!
   end
 
 
