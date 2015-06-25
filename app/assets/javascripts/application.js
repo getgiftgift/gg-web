@@ -26,6 +26,8 @@ $(function() {
   //  remove url garbage
   if (window.location.hash == "#_=_") {
     window.location.hash = "";   };
+
+  $("#voucher_table").tablesorter();
 });
 
 update_gift_counter = function(){

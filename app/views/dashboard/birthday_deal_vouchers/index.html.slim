@@ -2,17 +2,26 @@
   .large-12.columns.small-centered
     h4 Index
     | Date Range: #{@start_date} to #{@end_date}
-    table
-      tr
-        th Company
-        th Opens
-        th Locations
-        th Price
-        th Total
-      - @deals.each do |deal|
+
+    = simple_fields_for :search do |f|
+      = f.input :start_date, as: :date
+      = f.input :end_date, as: :date
+      = f.button :submit, label: "Search"
+
+
+    table#voucher_table.tablesorter 
+      thead
         tr
-          td= deal.company.name
-          td= deal.birthday_deal_vouchers.count 
-          td= deal.company.company_locations.empty? ? "1" : deal.company.company_locations.count
-          td= humanized_money_with_symbol @price
-          td= humanized_money_with_symbol (@price * deal.birthday_deal_vouchers.count)
+          th Company
+          th Opens
+          th Locations
+          th Price
+          th Total
+      tbody
+        - @deals.each do |deal|
+          tr
+            td= deal.company.name
+            td= deal.birthday_deal_vouchers.count 
+            td= deal.company.company_locations.empty? ? "1" : deal.company.company_locations.count
+            td= humanized_money_with_symbol @price
+            td= humanized_money_with_symbol (@price * deal.birthday_deal_vouchers.count)

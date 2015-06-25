@@ -10,7 +10,7 @@ class BirthdayDeal < ActiveRecord::Base
 
   # attr_accessible :hook, :how_to_redeem, :path, :restrictions, :company_id, :company_location_ids, :value, :start_date, :end_date
 
-  scope :in_location, -> location {  where("location_id = ?", location.id) }
+  scope :in_location, -> location {  where("birthday_deals.location_id = ?", location.id) }
   scope :is_active, -> { where("start_date <= ? and end_date >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)).with_state(:approved) }
     
   state_machine initial: :unapproved do

@@ -49,6 +49,7 @@ WorthdayWeb::Application.routes.draw do
     end
 
     resources :locations do
+      resources :birthday_deal_vouchers, only: [:index], as: 'voucher_reports', path: 'voucher_reports' 
       resources :birthday_deals, shallow: true do
         member do
           put :submit_for_approval
