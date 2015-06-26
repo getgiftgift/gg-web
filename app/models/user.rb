@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include ApplicationHelper
-  after_create :build_referral_code, :build_subscription
+  after_create :build_referral_code
 
   has_one :subscription
   belongs_to :location
@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
     charset = %w{ 2 3 4 6 7 9 a c d e f g h j k m n p q r t v w x y z}
     code = (0...5).map{ charset.to_a[SecureRandom.random_number(charset.size)] }.join
     update_attributes referral_code: code
+    self.build_subscription
   end
 
   def full_name
