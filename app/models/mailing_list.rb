@@ -13,18 +13,9 @@ class MailingList
     self.delay.update_subscription_delayed(user)
   end 
 
-  private
   def self.subscribe_delayed(user)
-    options = {
-      email_address: user.email,
-      status: "subscribed",
-      merge_fields: {
-        "FNAME": user.first_name,
-        "LNAME": user.last_name,
-        "BDAY": user.short_birthdate
-      }
-    }
-    response = self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
+    byebug
+    response = post_subscribe(user)
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
       # won't be an existing subscription.
@@ -37,6 +28,19 @@ class MailingList
     ## Existing member response.
     # "status"=>400, "detail"=>"email@gmail.com is already a list member.  Use PATCH to update existing members."
 
+  end
+
+  def self.post_subscribe(user)
+    options = {
+      email_address: user.email,
+      status: "subscribed",
+      merge_fields: {
+        "FNAME": user.first_name,
+        "LNAME": user.last_name,
+        "BDAY": user.short_birthdate
+      }
+    }
+    self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
   end
 
   def self.auth_header
