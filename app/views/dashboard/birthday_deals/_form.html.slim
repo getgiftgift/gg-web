@@ -63,7 +63,7 @@ fieldset
         .small-6.columns
           = f.input :start_date, as: :string, input_html: {class: 'datepicker'}  
         .small-6.columns      
-          = f.input :end_date, as: :string, input_html: {class: 'datepicker'} 
+          = f.input :end_date, as: :string, input_html: {class: 'datepicker', value: "#{(Date.today.year+1)}-12-31"} 
 .row
   .large-6.columns
     .row
