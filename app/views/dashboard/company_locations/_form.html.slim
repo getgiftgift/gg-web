@@ -1,0 +1,10 @@
+= simple_form_for([:dashboard, @company, @company_location]) do |f|
+  = f.input :phone, placeholder: '(555) 555-555'
+  fieldset
+    legend Don't include periods like in "S. 9th St."
+    = f.input :street1 
+    = f.input :street2
+  = f.input :city
+  = f.input :state, placeholder: 'e.g. MO'
+  = f.input :postal_code
+  = f.button :submit

@@ -2,7 +2,7 @@
   .small-10.small-centered.columns
     = simple_form_for([:dashboard, @company]) do |f|
       = image_tag @company.image_url if @company.image?
-      = f.input :image, as: :file
+      = f.input :image, as: :file, label: 'Image (should have roughly same proportions as 360x280px)'
       = f.input :image_cache, as: :hidden
       .row  
         .small-12.columns  
