@@ -13,18 +13,11 @@
   %b How to redeem:
   = @birthday_deal.how_to_redeem
 %p
-  %b Path:
-  = @birthday_deal.slug
-%p
   %b Company:
   = @birthday_deal.company.name
 %p
   %b Location:
   = @birthday_deal.location.name
-%p
-  %b Active:
-  = @birthday_deal.active?
-
 %p
   %b Start Date:
   = @birthday_deal.start_date
@@ -32,8 +25,6 @@
 %p
   %b End Date:
   = @birthday_deal.end_date
-
-
 %p
   %b Status:
   %span#status= @birthday_deal.state.titleize
