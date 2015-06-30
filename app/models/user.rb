@@ -24,9 +24,8 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     
-    where(provider: auth['provider'], uid: auth['uid']).first_or_initialize.tap do |user|
+    where(provider: auth['provider'], uid: auth['id']).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
-      user.uid = auth['uid']
       user.email = auth['email']            # required by Facebook
       user.first_name = auth['first_name']  # required by Facebook
       user.last_name = auth['last_name']    # required by Facebook
