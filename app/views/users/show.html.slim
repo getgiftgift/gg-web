@@ -10,12 +10,12 @@
         p Email: #{current_user.email}
         - unless current_user.location.nil? 
           p Location: #{current_user.location.location_name}
-        p Referral Link: https://giftgift.me/r?=#{current_user.referral_code}
-
-        form 
-          .row
-            .small-8.large-6.columns
-              = label_tag "right-label", 'Subscribe to email list:', style: 'font-size: 1em;'
-            
-            .small-4.large-6.columns
-                  = check_box_tag 'Subscribe', "1", true, disabled: true, id:"right-label"
+        p Referral Link: https://GetGiftGift.com/r?=#{current_user.referral_code}
+        .row
+          .small-6.columns
+            = label_tag "right-label", 'Subscription:', style: 'font-size: 1em;'
+          .small-6.columns 
+            // id = user_subscription_attributes_state 
+            = simple_form_for current_user do |f|
+              = f.simple_fields_for :subscription do |s|
+                = s.input :state

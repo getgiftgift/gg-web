@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   after_create :build_referral_code
 
   has_one :subscription
+  accepts_nested_attributes_for :subscription
   belongs_to :location
   has_many :birthday_deal_vouchers
   has_many :referrals_received, :foreign_key => :recipient_id,

@@ -14,7 +14,6 @@ class MailingList
   end 
 
   def self.subscribe_delayed(user)
-    byebug
     response = post_subscribe(user)
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
