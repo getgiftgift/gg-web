@@ -14,12 +14,14 @@ class MailingList
   end 
 
   def self.subscribe_delayed(user)
-    response = post_subscribe(user)
+    response = JSON.parse post_subscribe(user)
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
       # won't be an existing subscription.
       # 
       user.subscription.present? ? user.subscription.subscribe_confirmed! : Subscription.create(user: user, state: :subscribed)
+    elsif response["staus"] == "500"
+      # try again
     end
   end
 
