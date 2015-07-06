@@ -4,8 +4,8 @@
     
     = image_tag "giftgift-logo-text-bow.png", style: 'margin-top: 20px;'
     = image_tag "present-pile.png"
-    = link_to "Free presents? Tell me more!", "#", class: "free-presents"
-    .flex-video style="display:none; margin-top: 20px;"
+    = link_to "Free presents? Tell me more!", "#youtube-video", class: "free-presents"
+    #youtube-video.flex-video style="display:none; margin-top: 20px;"
       iframe width="560" height="315" src="https://www.youtube.com/embed/lj0mOvFTzT8?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen=""
     = link_to image_tag(asset_path("facebook-login-blue.png"), style: 'margin-top: 20px;'), "javascript:void(0);", onclick: "fbLogin();"
     / p= link_to 'or use email', new_user_session_path
