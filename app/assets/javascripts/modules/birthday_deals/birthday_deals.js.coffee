@@ -37,9 +37,3 @@ $(document).ready ->
   $(".free-presents").click ->
     $(".free-presents").hide()
     $('.flex-video').show()
-    $("#free-presents-close").show()    
-  
-  $("#free-presents-close").click ->
-    $(".free-presents").show()
-    $('.flex-video').hide()    
-    $("#free-presents-close").hide()
