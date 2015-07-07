@@ -1,5 +1,7 @@
 <script>
-  var scopes = 'public_profile,email,user_birthday,user_location'
+  // User Location scope fails token exchange when users don't have a location
+  var scopes = 'public_profile,email,user_birthday'
+  // var scopes = 'public_profile,email,user_birthday,user_location'
   function statusChangeCallback(response) {
     if (response.status === 'connected'){
       // logIn(response)
