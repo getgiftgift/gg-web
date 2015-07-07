@@ -9,12 +9,14 @@
           = f.input :name
       .row  
         .small-12.columns 
-          = f.input :yelp_id    
+          = f.input :url, label: "URL", placeholder: 'www.somedomain.com'
       .row
-        .large-6.columns
-          = f.input :facebook_handle
-        .large-6.columns    
-          = f.input :twitter_handle 
+        fieldset
+          legend Don't include @
+          .large-6.columns
+            = f.input :facebook_handle
+          .large-6.columns    
+            = f.input :twitter_handle 
       .row
         .large-4.columns
           = f.input :archived

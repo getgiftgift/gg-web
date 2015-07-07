@@ -1,21 +1,18 @@
 .row
   .large-12.columns
     h3= @company.name
-    = link_to 'Edit Company', edit_dashboard_company_path(@company)
+    p = link_to 'Edit Company', edit_dashboard_company_path(@company)
     .row
       .large-6.columns 
-        p Phone: #{@company.phone}
-        
-        |Address:
-        br
-        = @company.street1
-        br
-        = @company.street2
-        br
-        p #{display_city_state(@company.city, @company.state)} #{@company.postal_code}
-        |Archived: #{@company.archived}
+        |URL:
+        = link_to @company.url, @company.url
 
-      .large-6.columns.panel
+        |Facebook: 
+        = link_to  "#{@company.facebook_handle.gsub('@','')}", "https://facebook.com/#{@company.facebook_handle.gsub('@','')}" unless @company.facebook_handle.nil?
+        br
+        |Twitter: 
+        = link_to "#{@company.twitter_handle.gsub('@','')}", "https://twitter.com/#{@company.twitter_handle.gsub('@','')}" unless @company.twitter_handle.nil?
+      .large-6.columns.panel 
         h5 Contact Info
         - if @contact
           |#{@contact.first_name} #{@contact.last_name}
@@ -28,12 +25,9 @@
           = link_to 'Update', edit_dashboard_company_contact_path(@company, @contact)
         - else
           = link_to "Add Contact/Billing", new_dashboard_company_contact_path(@company)
-
-
-
 #company_locations
-  h4 Company Locations
-  = link_to 'Add a Location', new_dashboard_company_company_location_path(@company), class: 'button'
+  h5 Company Locations
+  = link_to 'Add a Location', new_dashboard_company_company_location_path(@company)
   - if !@company.company_locations.empty?   
     table
       thead
@@ -60,4 +54,4 @@
             | |
             = link_to ' Destroy', dashboard_company_company_location_path(@company, company_location), method: :delete, data: { confirm: 'Are you sure?' }
   - else
-    | No company locations    
+    p No company locations    
