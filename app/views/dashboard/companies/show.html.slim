@@ -4,9 +4,9 @@
     p = link_to 'Edit Company', edit_dashboard_company_path(@company)
     .row
       .large-6.columns 
-        |URL:
-        = link_to @company.url, @company.url
-
+        |Website: 
+        = link_to @company.website, "http://#{@company.website}" unless @company.website.nil?
+        br
         |Facebook: 
         = link_to  "#{@company.facebook_handle.gsub('@','')}", "https://facebook.com/#{@company.facebook_handle.gsub('@','')}" unless @company.facebook_handle.nil?
         br

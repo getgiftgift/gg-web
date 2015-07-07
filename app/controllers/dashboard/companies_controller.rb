@@ -162,6 +162,6 @@ class Dashboard::CompaniesController < ApplicationController
 
   private
   def company_params
-    params.require(:company).permit(:name, :archived, :city, :image, :image_cache, :phone, :postal_code, :state, :street1, :street2, :url, :facebook_handle, :twitter_handle)
+    params.require(:company).permit(:name, :archived, :city, :image, :image_cache, :phone, :postal_code, :state, :street1, :street2, :website, :facebook_handle, :twitter_handle)
   end
 end
