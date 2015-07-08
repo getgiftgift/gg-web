@@ -3,13 +3,13 @@
     tr
       th
       th Company
-      th Phone
+      th 
       th Actions
     - @companies.each do |company|
       tr
         td= image_tag company.image_url(:thumb)
         td.main= company.name
-        td= company.phone
+        td
         td
           = link_to "Show ", dashboard_company_path(company)
           - unless company.archived? 

@@ -5,7 +5,7 @@
     .row
       .large-6.columns 
         |Website: 
-        = link_to @company.website, "http://#{@company.website}" unless @company.website.nil?
+        = link_to "http://#{@company.website}", "http://#{@company.website}" unless @company.website.nil?
         br
         |Facebook: 
         = link_to  "#{@company.facebook_handle.gsub('@','')}", "https://facebook.com/#{@company.facebook_handle.gsub('@','')}" unless @company.facebook_handle.nil?

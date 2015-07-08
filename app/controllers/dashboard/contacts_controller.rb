@@ -43,7 +43,6 @@ class Dashboard::ContactsController < ApplicationController
   end
 
   def update
-    byebug
     @company = Company.find params[:company_id]
     @contact = @company.contacts.first
     @contact.update_attributes(contact_params)
