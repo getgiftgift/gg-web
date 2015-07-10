@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   include ApplicationHelper
   after_create :build_referral_code
 
@@ -121,7 +122,7 @@ class User < ActiveRecord::Base
   end
 
   def test_user?
-    self.email == 'birthday@giftgift.me'
+    self.email == 'birthday@giftgift.me' || 'birthday@getgiftgift.com'
   end
 
   def change_password(password)
@@ -139,5 +140,12 @@ class User < ActiveRecord::Base
     self.subscription.subscribe!
   end
 
+  def admin?
+    has_role? :admin ? true : false
+  end
+
+  def superadmin?
+    has_role? :superadmin ? true : false
+  end
 
 end

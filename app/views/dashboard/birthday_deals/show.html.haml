@@ -30,7 +30,7 @@
   %span#status= @birthday_deal.state.titleize
 
 .buttons
-  / = approval_buttons(@birthday_deal)
+  = approval_buttons(@birthday_deal)
 = link_to 'Edit', edit_dashboard_birthday_deal_path(@birthday_deal) unless @birthday_deal.archived?
 \|
 = link_to 'Back', dashboard_location_birthday_deals_path(@location)
