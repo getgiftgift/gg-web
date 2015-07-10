@@ -5,6 +5,10 @@ class MailingList
 
   base_uri "http://us2.api.mailchimp.com/3.0"
 
+  class MailchimpListError < StandardError
+  end
+
+
   def self.subscribe(user)
     self.delay.subscribe_delayed(user)
   end
@@ -17,11 +21,11 @@ class MailingList
     response = JSON.parse post_subscribe(user)
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
-      # won't be an existing subscription.
-      # 
+      # won't be an existing subscription. 
       user.subscription.present? ? user.subscription.subscribe_confirmed! : Subscription.create(user: user, state: :subscribed)
-    elsif response["staus"] == "500"
-      # try again
+    elsif response["staus"] == "500" # mailchimp internal server error
+      ## try again later
+      self.delay(run_at: 1.hour.from_now).subscribe(user)
     end
   end
 
