@@ -149,11 +149,11 @@ ActiveRecord::Schema.define(version: 20150709200243) do
     t.string   "name"
     t.string   "city"
     t.string   "state"
+    t.string   "lat"
+    t.string   "lng"
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "lng"
-    t.float    "lat"
   end
 
   create_table "occasions", force: :cascade do |t|
@@ -209,7 +209,7 @@ ActiveRecord::Schema.define(version: 20150709200243) do
     t.string   "last_name"
     t.string   "email"
     t.date     "birthdate"
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20150709200243) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.boolean  "admin"
+    t.boolean  "admin",                  default: false
     t.string   "provider"
     t.string   "uid"
     t.string   "oauth_token"

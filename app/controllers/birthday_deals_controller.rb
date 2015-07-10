@@ -1,6 +1,6 @@
 class BirthdayDealsController < ApplicationController
   
-  before_filter :verify_login_and_birthday, except: [:add_birthday_to_user]
+  before_filter :verify_login_and_birthday, except: [:add_birthday_to_user, :add_location_to_user]
 
   layout 'birthday'
 
@@ -42,9 +42,18 @@ class BirthdayDealsController < ApplicationController
   def add_birthday_to_user
     @customer = current_user
     begin
-      @customer.update_attributes( birthdate: Date.new(params[:user_birthdate]['birthdate(1i)'].to_i, params[:user_birthdate]['birthdate(2i)'].to_i, params[:user_birthdate]['birthdate(3i)'].to_i))
-      @customer.save!
+      @customer.update_attribute(:birthdate, Date.strptime(params[:user][:birthdate], "%m/%d/%Y"))
     rescue
+    end
+    redirect_to birthday_deals_url
+  end
+
+  def add_location_to_user
+    begin
+      location = Location.find(params[:user][:location])
+      current_user.location = location
+      current_user.save
+    rescue 
     end
     redirect_to birthday_deals_url
   end
@@ -54,7 +63,8 @@ class BirthdayDealsController < ApplicationController
   def verify_login_and_birthday
     if customer_logged_in?
       birthday = current_user.adjusted_birthday
-      return render 'customer_enter_birthday' if birthday.nil?
+      return render 'customer_enter_birthday' if birthday.blank?
+      return render 'customer_enter_location' if current_user.location.blank?
       unless current_user.eligible_for_birthday_deals?
         return render 'index_not_your_birthday'
       end

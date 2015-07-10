@@ -13,6 +13,7 @@ WorthdayWeb::Application.routes.draw do
   end
   get '/my_account' => "birthday_deals#account", as: 'account' 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
+  post '/add_location_to_user' => 'birthday_deals#add_location_to_user'
   
   resources :companies, only: [:new, :create]
 

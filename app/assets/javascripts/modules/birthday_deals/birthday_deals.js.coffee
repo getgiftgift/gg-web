@@ -37,3 +37,5 @@ $(document).ready ->
   $(".free-presents").click ->
     $(".free-presents").hide()
     $('.flex-video').show()
+
+  $('#user_birthdate').mask("99/99/9999")

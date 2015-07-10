@@ -35,7 +35,6 @@ class User < ActiveRecord::Base
       user.gender = auth['gender']  # required by Facebook 
       user.oauth_token = auth['access_token']
       user.oauth_expires_at = Time.at(Time.now + auth['expires'].to_i)
-      user.location = Location.first
       # user.location = Location.near(auth['location']['name'], 50).first  # "City, State"
       user.save!
     end

@@ -24,7 +24,7 @@ gem 'geocoder'
 gem 'geoip'
 gem 'haml'
 gem 'has_barcode'
-gem 'jquery-rails'
+# gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'koala', '~> 2.0'
 gem 'mailchimp-api', require: 'mailchimp'
@@ -61,4 +61,6 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
-
+source "https://rails-assets.org" do
+  gem 'rails-assets-jquery.maskedinput'
+end
