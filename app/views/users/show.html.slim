@@ -11,11 +11,11 @@
         - unless current_user.location.nil? 
           p Location: #{current_user.location.location_name}
         p Referral Link: https://GetGiftGift.com/r?=#{current_user.referral_code}
-        .row
-          .small-6.columns
-            = label_tag "right-label", 'Subscription:', style: 'font-size: 1em;'
-          .small-6.columns 
-            // id = user_subscription_attributes_state 
-            = simple_form_for current_user do |f|
-              = f.simple_fields_for :subscription do |s|
-                = s.input :state
+        #subscription-status
+          - if @subscription.pending_subscribe?
+            = link_to "Your subscription is processing."
+          - elsif @subscription.subscribed?
+            = link_to "You are subscribed.", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
+          - elsif @subscription.unsubscribed?
+            = link_to "You are not subscribed, click to add.", subscribe_subscription_path(@subscription), method: :patch, remote: true 
+            

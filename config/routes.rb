@@ -8,8 +8,12 @@ WorthdayWeb::Application.routes.draw do
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :users, only: [:show] do
-    resources :subscription, only: [:update]
+  resources :users, only: :show
+  resources :subscriptions do 
+    member do 
+      patch :subscribe
+      patch :unsubscribe
+    end
   end
   get '/my_account' => "birthday_deals#account", as: 'account' 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'

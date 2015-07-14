@@ -5,34 +5,39 @@ class MailingList
 
   base_uri "http://us2.api.mailchimp.com/3.0"
 
-  class MailchimpListError < StandardError
-  end
-
-
   def self.subscribe(user)
     self.delay.subscribe_delayed(user)
   end
 
-  def self.update_subscription(user)
-    self.delay.update_subscription_delayed(user)
+  def self.unsubscribe(user)
+    self.delay.unsubscribe_delayed(user)
   end 
 
   def self.subscribe_delayed(user)
-    response = JSON.parse post_subscribe(user)
+    response = post_subscribe(user)
+    parsed_response = JSON.parse response
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
       # won't be an existing subscription. 
       user.subscription.present? ? user.subscription.subscribe_confirmed! : Subscription.create(user: user, state: :subscribed)
-    elsif response["staus"] == "500" # mailchimp internal server error
+    elsif parsed_response["staus"] == "500" # mailchimp internal server error
       ## try again later
       self.delay(run_at: 1.hour.from_now).subscribe(user)
     end
   end
 
-  def self.update_subscription(user)
-    ## Existing member response.
-    # "status"=>400, "detail"=>"email@gmail.com is already a list member.  Use PATCH to update existing members."
-
+  def self.unsubscribe_delayed(user)
+    options = {
+      status: "unsubscribe"
+    }
+    response = self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
+    parsed_response = JSON.parse(response)
+    if response.success?
+      user.subscription.unsubscribe_confirmed!
+    elsif parsed_response["staus"]) == "500" # mailchimp internal server error
+      ## try again later
+      self.delay(run_at: 1.hour.from_now).unsubscribe(user)
+    end
   end
 
   def self.post_subscribe(user)
@@ -46,6 +51,11 @@ class MailingList
       }
     }
     self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
+  end
+
+  private
+  def self.email_to_md5(email)
+    Digest::MD5.hexdigest(email)
   end
 
   def self.auth_header
