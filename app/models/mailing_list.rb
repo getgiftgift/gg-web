@@ -15,7 +15,7 @@ class MailingList
 
   def self.subscribe_delayed(user)
     response = post_subscribe(user)
-    parsed_response = JSON.parse response
+    parsed_response = JSON.parse response.body
     if response.success?
       ## create a subscription if calling the MailingList.subscribe manually, since there probably 
       # won't be an existing subscription. 
@@ -31,7 +31,7 @@ class MailingList
       status: "unsubscribe"
     }
     response = self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
-    parsed_response = JSON.parse(response)
+    parsed_response = JSON.parse response.body
     if response.success?
       user.subscription.unsubscribe_confirmed!
     elsif parsed_response["staus"] == "500" # mailchimp internal server error
