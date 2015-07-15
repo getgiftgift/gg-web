@@ -27,10 +27,7 @@ class MailingList
   end
 
   def self.unsubscribe_delayed(user)
-    options = {
-      status: "unsubscribe"
-    }
-    response = self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
+    response = patch_unsubscribe(user)
     parsed_response = JSON.parse response.body
     if response.success?
       user.subscription.unsubscribe_confirmed!
@@ -53,6 +50,13 @@ class MailingList
     self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
   end
 
+  def self.patch_unsubscribe(user)
+    options = {
+      status: "unsubscribe"
+    }
+    self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
+  end
+  
   private
   def self.email_to_md5(email)
     Digest::MD5.hexdigest(email)
