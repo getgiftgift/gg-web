@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
   end
 
   def test_user?
-    self.email == 'birthday@giftgift.me' || 'birthday@getgiftgift.com'
+    self.email == ('birthday@giftgift.me' || 'birthday@getgiftgift.com')
   end
 
   def change_password(password)
