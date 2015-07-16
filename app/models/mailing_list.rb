@@ -52,7 +52,7 @@ class MailingList
 
   def self.patch_unsubscribe(user)
     options = {
-      status: "unsubscribe"
+      status: "unsubscribed"
     }
     self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
   end
