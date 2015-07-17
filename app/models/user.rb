@@ -147,4 +147,15 @@ class User < ActiveRecord::Base
     has_role? :superadmin ? true : false
   end
 
+  def subscription_options
+    {
+      email_address: email,
+      merge_fields: {
+        "FNAME": first_name,
+        "LNAME": last_name,
+        "BDAY": short_birthdate
+      }
+    }
+  end
+
 end
