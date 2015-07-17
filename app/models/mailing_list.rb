@@ -6,11 +6,11 @@ class MailingList
   base_uri "http://us2.api.mailchimp.com/3.0"
 
   def self.subscribe(user)
-    self.delay.subscribe_delayed(user)
+    delay.subscribe_delayed(user)
   end
 
   def self.unsubscribe(user)
-    self.delay.unsubscribe_delayed(user)
+    delay.unsubscribe_delayed(user)
   end 
 
   def self.subscribe_delayed(user)
@@ -24,10 +24,10 @@ class MailingList
         user.subscription.present? ? user.subscription.subscribe_confirmed! : Subscription.create(user: user, state: :subscribed)
       elsif parsed_response["staus"] == "500" # mailchimp internal server error
         ## try again later
-        self.delay(run_at: 1.hour.from_now).subscribe(user)
+        delay(run_at: 1.hour.from_now).subscribe(user)
       end
     else ## updating status of user on list but not subscribed
-      update_status(user, 'subscribed')
+      delay.update_status(user, 'subscribed')
       user.subscription.subscribe_confirmed!
     end
   end
@@ -39,7 +39,7 @@ class MailingList
       user.subscription.unsubscribe_confirmed!
     elsif parsed_response["staus"] == "500" # mailchimp internal server error
       ## try again later
-      self.delay(run_at: 1.hour.from_now).unsubscribe(user)
+      delay(run_at: 1.hour.from_now).unsubscribe(user)
     end
   end
 
@@ -60,7 +60,7 @@ class MailingList
 
   def self.update_status(user, status)
     options = user.subscription_options
-    options.merge status: status
+    options.merge!(status: status)
     response = self.patch("/lists/"+list_id+"/members/"+email_to_md5(user.email), headers: auth_header, body: options.to_json)
   end
 
