@@ -129,7 +129,7 @@ def to_pdf(voucher)
             move_down 50
 
             text "Verification number: #{voucher.dashed_verification_number}", :size => 14, :style => :bold
-            text "This is an example voucher and is not valid" if voucher.user.test_user?
+            text "This is an example voucher and is not valid" if voucher.user.is_testuser?
 
             stroke_color "aaaaaa"
 

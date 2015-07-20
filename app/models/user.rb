@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def birthday
-    bday = self.test_user? ? Date.today : self.birthdate
+    bday = self.is_testuser? ? Date.today : self.birthdate
     bday.strftime('%B %d')
   end
 
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
-    birthdate = self.test_user? ? Date.today : self.birthdate
+    birthdate = self.is_testuser? ? Date.today : self.birthdate
     return nil if birthdate.nil?
     birthday_string = birthdate.strftime('%m%d')
     today = Date.today.strftime('%m%d')
@@ -105,7 +105,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_birthday_deals?
-    return true if self.test_user?
+    return true if self.is_testuser?
     date_start = (Date.today - 15.days).strftime('%m%d')
     date_end = (Date.today + 15.days).strftime('%m%d')
     user_bday = self.birthdate.strftime('%m%d')
@@ -118,10 +118,6 @@ class User < ActiveRecord::Base
     else
       return true if user_bday <= date_end and user_bday >= date_start
     end
-  end
-
-  def test_user?
-    self.email == ('birthday@giftgift.me' || 'birthday@getgiftgift.com')
   end
 
   def change_password(password)

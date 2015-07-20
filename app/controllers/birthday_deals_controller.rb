@@ -7,7 +7,7 @@ class BirthdayDealsController < ApplicationController
   respond_to :html, :json
 
   def account
-    if current_user.test_user?
+    if current_user.is_testuser?
       @birthday_vouchers = current_user.birthday_deal_vouchers.in_location(current_location).with_state(:kept, :redeemed).order(:state)
     else
       @birthday_vouchers = current_user.birthday_deal_vouchers.is_available.in_location(current_location).with_state(:kept, :redeemed).order(:state)
@@ -24,7 +24,7 @@ class BirthdayDealsController < ApplicationController
         @birthday_deal_vouchers = @deals.each.collect{|bd| bd.create_voucher_for(current_user)}
       end
       @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)  
-      if current_user.test_user? && @birthday_deal_vouchers.empty? 
+      if current_user.is_testuser? && @birthday_deal_vouchers.empty? 
         current_user.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
         @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
       end
