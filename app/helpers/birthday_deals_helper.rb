@@ -23,7 +23,7 @@ module BirthdayDealsHelper
     out = ''
     if birthday_deal.unapproved?
 
-      if current_user.superadmin?
+      if current_user.is_superadmin?
         out.concat button_to 'Approve', approve_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put
       else
         out.concat button_to 'Submit for Approval', submit_for_approval_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put
@@ -31,7 +31,7 @@ module BirthdayDealsHelper
 
     elsif birthday_deal.pending_approval?
 
-      if current_user.superadmin?
+      if current_user.is_superadmin?
         out.concat button_to 'Approve', approve_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put
         out.concat button_to 'Reject', reject_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put
       else
@@ -40,7 +40,7 @@ module BirthdayDealsHelper
 
     elsif birthday_deal.approved?
 
-      if current_user.superadmin?
+      if current_user.is_superadmin?
         out.concat button_to 'Reject', reject_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put
       else
         out.concat button_to 'Withdraw', withdraw_dashboard_birthday_deal_path(birthday_deal.id), remote: true, method: :put

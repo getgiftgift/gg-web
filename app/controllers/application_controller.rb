@@ -6,21 +6,21 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    resource.admin? ? dashboard_index_path : birthday_deals_path  
+    resource.is_admin? ? dashboard_index_path : birthday_deals_path  
   end
 
   def admin_login_required
-    unless current_user && current_user.admin?
+    unless current_user && current_user.is_admin?
       redirect_to root_url  
     end  
   end
 
   def customer_logged_in?
-    !!current_user && !current_user.admin?
+    !!current_user && !current_user.is_admin?
   end
 
   def logged_in?
-    !!current_user && current_user.admin?
+    !!current_user && current_user.is_admin?
   end 
 
   def location_from_session

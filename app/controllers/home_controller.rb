@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   layout 'application'
 
   def dashboard
-    if current_user && current_user.admin?
+    if current_user && current_user.is_admin?
       redirect_to dashboard_index_path
     else
       redirect_to new_user_session_path

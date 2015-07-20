@@ -139,14 +139,6 @@ class User < ActiveRecord::Base
     self.subscription.subscribe!
   end
 
-  def admin?
-    has_role? :admin ? true : false
-  end
-
-  def superadmin?
-    has_role? :superadmin ? true : false
-  end
-
   def subscription_options
     {
       email_address: email,

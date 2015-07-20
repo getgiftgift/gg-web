@@ -59,7 +59,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
   end
 
   def approve
-    @birthday_deal.approve if current_user.superadmin?
+    @birthday_deal.approve if current_user.is_superadmin?
     respond_to do |format|
       format.html
       format.js { render 'approval_actions', layout: false}
@@ -84,7 +84,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
   end
 
   def approve
-    if current_user.superadmin?
+    if current_user.is_superadmin?
       @birthday_deal.approve!
     end
     respond_to do |format|
@@ -94,7 +94,7 @@ class Dashboard::BirthdayDealsController < ApplicationController
   end
 
   def reject
-    if current_user.superadmin?
+    if current_user.is_superadmin?
       @birthday_deal.reject
     end
     respond_to do |format|
