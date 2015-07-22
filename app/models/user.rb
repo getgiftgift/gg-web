@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    %Q(#{first_name} #{last_name})
   end
 
   def short_birthdate
@@ -110,13 +110,13 @@ class User < ActiveRecord::Base
     date_end = (Date.today + 15.days).strftime('%m%d')
     user_bday = self.birthdate.strftime('%m%d')
     if date_end < date_start # Birthday overlaps new year 
-      if (user_bday >= "0101" and user_bday <= end_date) or ( user_bday <= "1231" and user_bday >= start_date )
+      if (user_bday >= "0101" && user_bday <= end_date) || ( user_bday <= "1231" && user_bday >= start_date )
         return true
       else
         return false  
       end  
     else
-      return true if user_bday <= date_end and user_bday >= date_start
+      return true if user_bday <= date_end && user_bday >= date_start
     end
   end
 
