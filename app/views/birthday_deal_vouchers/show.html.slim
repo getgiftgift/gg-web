@@ -1,7 +1,7 @@
 .row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
     / = image_tag @birthday_deal_voucher.company.image_url
-    .right= link_to "&times;".html_safe, account_path(current_user), class: 'close'
+    .right= link_to "&times;".html_safe, my_gifts_path, class: 'close'
     .header-label
       h4 = @company.name.upcase
     h5= @birthday_deal.hook.upcase

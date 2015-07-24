@@ -6,15 +6,17 @@ WorthdayWeb::Application.routes.draw do
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'
+  get '/users/edit', to: redirect('/')
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :users, only: :show
+  # resources :users, only: :show
+  get '/my_account' => "users#show"
   resources :subscriptions do 
     member do 
       patch :subscribe
       patch :unsubscribe
     end
   end
-  get '/my_account' => "birthday_deals#account", as: 'account' 
+  get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts' 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
   post '/add_location_to_user' => 'birthday_deals#add_location_to_user'
   

@@ -2,6 +2,6 @@
   .large-8.large-centered.columns.white-box.center-text style=" padding: 20px 0;" 
     p 
       |You've opened everything! 
-      = link_to 'View your gifts.', account_path
+      = link_to 'View your gifts.', my_gifts_path
     p= link_to 'Share', "javascript:void(0);", onclick:"fbShare();"
     .opened-gifts= image_tag asset_path('opened_gifts.png') 
