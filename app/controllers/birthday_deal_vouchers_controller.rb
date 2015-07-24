@@ -17,7 +17,7 @@ class BirthdayDealVouchersController < ApplicationController
     @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
     @birthday_deal_voucher.redeem
     flash[:notice] = "Redeemed!" if @birthday_deal_voucher.state?(:redeemed)
-    redirect_to account_path
+    redirect_to my_gifts_path
   end
 
   def trash
@@ -38,7 +38,7 @@ class BirthdayDealVouchersController < ApplicationController
         @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
       rescue ActiveRecord::RecordNotFound
         flash[:notice] = "There was a problem retrieving the voucher"
-        return redirect_to account_path
+        return redirect_to my_gifts_path
       end
     end
 
@@ -48,7 +48,7 @@ class BirthdayDealVouchersController < ApplicationController
                         :type => "application/pdf"
     else
       flash[:notice] = "There was a problem retrieving the voucher"
-      redirect_to account_path
+      redirect_to my_gifts_path
     end
 
   end

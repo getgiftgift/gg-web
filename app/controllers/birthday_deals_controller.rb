@@ -6,7 +6,7 @@ class BirthdayDealsController < ApplicationController
 
   respond_to :html, :json
 
-  def account
+  def my_gifts
     if current_user.is_testuser?
       @birthday_vouchers = current_user.birthday_deal_vouchers.in_location(current_location).with_state(:kept, :redeemed).order(:state)
     else
