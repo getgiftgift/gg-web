@@ -3,7 +3,6 @@ WorthdayWeb::Application.routes.draw do
   get '/dashboard' => 'home#dashboard'
   get '/' => 'birthday_deals#index', as: 'birthday_deals'
   match '/redeem' => 'home#redeem', via: [:get, :post]
-  # get '/:referral_code' => 'birthday_deals#index'
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'

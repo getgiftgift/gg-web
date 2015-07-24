@@ -61,6 +61,20 @@
     checkLoginState();
   };
 
+  function fbShare(){
+    FB.ui({
+      method: 'share',
+      href: 'https://www.facebook.com/GetGiftGift',
+    },
+    // callback
+    function(response) {
+      if (response && !response.error_code) {
+        $("#counter").html("Thanks for sharing!");
+      } else {
+        // error
+      }
+    }
+  );}
 
   (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];

@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title GiftGift
+    title Gift Gift
     = stylesheet_link_tag    "birthday_deals"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -10,7 +10,7 @@ html
     #status  
     nav.tab-bar style="height: 70px;"
         section.middle.tab-bar-section
-          h1.title= link_to 'GIFTGIFT', root_path, class: 'branding'
+          h1.title= link_to 'Gift Gift', root_path, class: 'branding'
         .messages
           p#counter 
             - flash.each do |name, msg|

@@ -3,4 +3,5 @@
     p 
       |You've opened everything! 
       = link_to 'View your gifts.', account_path
+    p= link_to 'Share', "javascript:void(0);", onclick:"fbShare();"
     .opened-gifts= image_tag asset_path('opened_gifts.png') 

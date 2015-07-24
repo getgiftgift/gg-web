@@ -20,12 +20,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     new_auth = @oauth.exchange_access_token_info(token)
     @graph = Koala::Facebook::API.new(new_auth["access_token"])
     auth = @graph.get_object("me")
-    
     auth.merge!(new_auth.merge({provider: @provider}))
-
     @user = User.from_omniauth(auth)
     if @user.persisted?
-      save_referral_code_with_user(@user) if @user.sign_in_count == 0 && session[:referral_code]
+      @user.save_referral_code(session[:referral_code]) if @user.sign_in_count.zero?
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else

@@ -135,6 +135,11 @@ class User < ActiveRecord::Base
     self.subscription.subscribe!
   end
 
+  def save_referral_code(referral_code)
+    referrer = User.where(referral_code: referral_code).first
+    Referral.create(recipient: self, referrer: referrer) if referrer && referrer != self
+  end
+
   def subscription_options
     {
       email_address: email,
