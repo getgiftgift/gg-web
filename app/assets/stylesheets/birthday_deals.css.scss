@@ -203,8 +203,15 @@ body {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 .close {
-  color: $gray;
+  
   font-size: 2em;
+  right: 0;
+  top: 0;
+  position: absolute;
+  margin: 3px 5px 0 0;
+  a{
+    color: $gray;
+  }
 }
 
 .center {margin: auto;}
@@ -301,12 +308,15 @@ td,th {
   color: $gray;
 }
 
+.content-row{
+  margin-top: 25px;
+}
+
 .header-label{
-  margin: -3px -15px;
   background: $light-gray;
   text-align: center;
   h4{
-    margin-left: 43px;
+    margin: 0 0 10px 0;
   }
 }
 
@@ -339,7 +349,7 @@ td.barby-cell.on { background: #000; }
   height:25px; 
   width: 100%; 
   position:absolute; 
-  top:45px; 
+  top: 45px; 
   border-top: solid 1px #201635; 
   background-color: #663399;
 }

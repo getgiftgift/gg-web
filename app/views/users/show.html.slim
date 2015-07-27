@@ -1,8 +1,9 @@
-.row
-  .large-8.medium-8.large-centered.medium-centered.columns.white-box.white-box
-    .right= link_to "&times;".html_safe, birthday_deals_path, class: 'close'
-    .header-label
-      h4 My Info
+.row.content-row
+  .large-8.medium-8.large-centered.medium-centered.columns.white-box
+    .row
+      .close= link_to "&times;".html_safe, birthday_deals_path
+      .header-label
+        h4 MY ACCOUNT
     .row
       .small-8.small-centered.columns
         p= user_full_name
