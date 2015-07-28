@@ -28,6 +28,12 @@ require 'capybara/rails'
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+  # Warden test helpers and test mode for devise.
+  config.include Warden::Test::Helpers
+  config.before :suite do
+    Warden.test_mode!
+  end
+
   # Include FactoryGirl methods (build, create, etc.)
   config.include FactoryGirl::Syntax::Methods
 

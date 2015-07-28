@@ -44,7 +44,7 @@ class MailingList
   end
 
   def self.post_subscribe(user)
-    options = user.subscribe_options
+    options = user.subscription_options
     options.merge  status: "subscribed"
     self.post("/lists/"+list_id+"/members/", headers: auth_header, body: options.to_json)
   end
