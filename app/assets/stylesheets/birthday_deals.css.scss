@@ -321,17 +321,16 @@ td,th {
 }
 
 footer{
-  background: $purple;
+  // background: $purple;
   height: 45px;
   width: 100%;
   bottom: 0;
   position: fixed;
-}
-
-footer p{
-  padding-top: 10px;
-  color: #FFFFFF;
-  font-weight: 800;
+  p a{
+    padding-top: 10px;
+    color: $purple;
+    font-weight: 600;
+  }
 }
 
 table.barby-barcode { border-spacing: 0; border: none; border-collapse:collapse;}
