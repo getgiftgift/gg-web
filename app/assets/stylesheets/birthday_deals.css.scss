@@ -358,9 +358,10 @@ td.barby-cell.on { background: #000; }
 }
 
 .opened-gifts{
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  background: image-url('opened_gifts.png') no-repeat;
+  background-position: center bottom;
+  background-color: #FFFFFF;
+  background-size: 100% auto;
 }
 
 .branding{
@@ -442,4 +443,24 @@ a.yelp {
     float:left; 
     margin: 0 5px;}
   span{font-size:10px;} 
+}
+
+.social-sharing {
+  font-size: 3em;
+  .fi-social-facebook{
+    color: #3b55a0;
+    padding: 10px;
+  }
+  .fi-social-twitter{
+    color:#55acee;
+    padding: 10px;
+  }
+  .fi-social-instagram{
+    color:#9C7C6E;
+    padding: 10px;
+  }
+  .fi-social-google-plus{
+    color: #DF4B38;
+    padding: 10px;
+  }
 }

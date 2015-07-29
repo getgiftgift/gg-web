@@ -1,7 +1,27 @@
 .row.content-row
-  .large-8.large-centered.columns.white-box.center-text style=" padding: 20px 0;" 
-    p 
-      |You've opened everything! 
-      = link_to 'View your gifts.', my_gifts_path
-    p= link_to 'Share', "javascript:void(0);", onclick:"fbShare();"
-    .opened-gifts= image_tag asset_path('opened_gifts.png') 
+  .large-8.large-centered.columns.white-box.center-text.opened-gifts style=" padding: 20px;" 
+    |You’ve opened all your gifts but that’s just half the fun! 
+    br
+    = link_to 'View your gifts here to redeem them!', my_gifts_path
+    br
+    br
+    |Do your friends like presents? Share the love:
+    br 
+    .social-sharing
+      // FACEBOOK
+      a href="javascript:void(0);" onclick="fbShare();"
+        i.fi-social-facebook
+      
+      // TWITTER
+      a href="https://twitter.com/intent/tweet?text=I+got+over+$500+in+free+gifts+for+my+birthday+at+http://getgiftgift.com"
+        i.fi-social-twitter
+      
+      // INSTAGRAM
+      / i.fi-social-instagram
+
+      // GOOGLE PLUS
+      / a href="https://plus.google.com/share?url=getgiftgift.com" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"
+      /   i.fi-social-google-plus
+ 
+  <script type="text/javascript" async src="//platform.twitter.com/widgets.js"></script>
+    
