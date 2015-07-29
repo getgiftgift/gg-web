@@ -6,9 +6,12 @@
 // Compass imports & mixins
 @import "compass/reset";
 @import "base";
+@import "compass/layout/sticky-footer";
 @import "foundation_and_overrides";
 @import "foundation-icons";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
+
+@include sticky-footer(45px, "#layout", "#layout-footer", "#footer");
 
 $letter-spacing: 1px;
 
@@ -317,19 +320,6 @@ td,th {
   text-align: center;
   h4{
     margin: 0 0 10px 0;
-  }
-}
-
-footer{
-  // background: $purple;
-  height: 45px;
-  width: 100%;
-  bottom: 0;
-  position: fixed;
-  p a{
-    padding-top: 10px;
-    color: $purple;
-    font-weight: 600;
   }
 }
 

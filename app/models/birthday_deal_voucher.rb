@@ -102,19 +102,12 @@ class BirthdayDealVoucher < ActiveRecord::Base
 
   def generate_verification_number
     generated_code = "#{id}#{((Time.now + id).to_i+user_id).to_s}"
-    self.verification_number = generated_code
-    save!
-  end
-
-  def plain_verification_number
-    read_attribute(:verification_number)
+    update_attributes verification_number: generated_code
   end
   
   def dashed_verification_number
-    num = read_attribute(:verification_number).clone
-    num.insert(id.to_s.length, '-')
-    num.insert(num.length-5, '-')
-    num
+    num = verification_number.clone
+    num.insert(num.length-6, '-')
   end
 
   # def barcode

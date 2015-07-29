@@ -1,16 +1,17 @@
-.row
+.row.content-row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
     / = image_tag @birthday_deal_voucher.company.image_url
-    .close= link_to "&times;".html_safe, my_gifts_path
-    .header-label
-      h4 = @company.name.upcase
+    .row
+      .close= link_to "&times;".html_safe, my_gifts_path
+      .header-label
+        h4 = @company.name.upcase
     h5= @birthday_deal.hook.upcase
     |$#{@birthday_deal_voucher.value} Value from #{@birthday_deal_voucher.company.name}. 
     br
     = @birthday_deal_voucher.barcode_data.html_safe
     p
       | Verification Number: 
-      = @birthday_deal_voucher.verification_number
+      = @birthday_deal_voucher.dashed_verification_number
     .row
       .small-10.large-6.small-centered.columns  
         a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
@@ -24,8 +25,9 @@
     - if @locations.present?
       - @locations.each do |loc|
         = link_to loc.map_address, "https://maps.google.com?q=#{loc.map_address}"
+        br
     - else
-      = link_to @company.map_address, "https://maps.google.com?q=#{@company.map_address}"
+      = link_to @company.map_address, "https://maps.google.com?q=#{@company.map_address}", target: '_blank'
     
     hr
     h5 RECIPIENT

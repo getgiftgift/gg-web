@@ -11,6 +11,6 @@ class Company < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   def map_address
-    "#{self.street1} #{self.street2} #{self.city}, #{self.state} #{self.postal_code}"
+    "#{self.street1} #{self.street2}&nbsp;#{self.city}, #{self.state} #{self.postal_code}".html_safe
   end
 end
