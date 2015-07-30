@@ -1,7 +1,7 @@
 .row.content-row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
-    / = image_tag @birthday_deal_voucher.company.image_url
     .row
+      span style="float:left; padding-left: 5px;"= link_to "&laquo; Back".html_safe, my_gifts_path
       .close= link_to "&times;".html_safe, my_gifts_path
       .header-label
         h4 = @company.name.upcase
@@ -15,6 +15,7 @@
     .row
       .small-10.large-6.small-centered.columns  
         a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
+        p#redeem-txt Show this screen to the merchant.
     hr
     h5 HOW TO REDEEM
     = @birthday_deal.how_to_redeem
@@ -39,7 +40,8 @@
 #confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
   .row
     .large-6.medium-8.small-centered.columns
-      p.lead Are you sure you would like to redeem this gift?
+      .lead Are you sure you sure?
+      p This action cannot be undone.
       .row
         .small-6.columns
           = link_to '', redeem_birthday_deal_voucher_path(@birthday_deal_voucher), method: :put, class: 'green-btn fullwidth'

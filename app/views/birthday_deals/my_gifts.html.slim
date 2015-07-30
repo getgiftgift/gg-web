@@ -9,7 +9,7 @@
     -else
       br
       - @birthday_vouchers.each_with_index do |deal, index|
-        - index.even? ? color='#e5e5e4' : color='#ffffff' 
+        - index.even? ?  color='#ffffff' : color='#e5e5e4'
         .row style="background:#{color};"
           .large-12.columns
             br

@@ -1,21 +1,32 @@
 .row.content-row
-  .large-8.medium-8.large-centered.medium-centered.columns.white-box
+  .large-6.medium-8.large-centered.medium-centered.columns.white-box
     .row
       .close= link_to "&times;".html_safe, birthday_deals_path
       .header-label
         h4 MY ACCOUNT
     .row
-      .small-8.small-centered.columns
-        p= user_full_name
-        p= current_user.birthdate ? current_user.birthdate : 'N/A'
-        p Email: #{current_user.email}
-        - unless current_user.location.nil? 
-          p Location: #{current_user.location.location_name}
-        p Referral Link: http://GetGiftGift.com/?r=#{current_user.referral_code}
-        #subscription-status
-          - if @subscription.pending_subscribe?
-            = link_to "Your subscription is processing."
-          - elsif @subscription.subscribed?
-            = link_to "You are subscribed.", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
-          - elsif @subscription.unsubscribed?
-            = link_to "You are not subscribed, click to add.", subscribe_subscription_path(@subscription), method: :patch, remote: true 
+      .small-9.small-centered.columns
+        p.center-text= user_full_name
+        dl
+          dt Birthday
+          dd= current_user.birthdate ? current_user.birthdate : 'N/A'
+        
+          dt Email 
+          dd= current_user.email
+          dt Notifications
+          dd#subscription-status  
+            - if @subscription.pending_subscribe? || @subscription.pending_unsubscribe?
+              |Your request is processing.
+            - elsif @subscription.subscribed?
+              |You are receiving emails.
+              
+              = link_to " (Click to unsubscribe)", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
+            - elsif @subscription.unsubscribed?
+              |You don't get our emails.
+              
+              = link_to " (Click to add)", subscribe_subscription_path(@subscription), method: :patch, remote: true, id: 'subscription-status'
+          dt Location
+          dd= current_user.location.location_name
+          
+          dt Referral Link
+          dd http://GetGiftGift.com/?r=#{current_user.referral_code}
