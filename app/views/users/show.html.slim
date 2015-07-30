@@ -19,12 +19,12 @@
               |Your request is processing.
             - elsif @subscription.subscribed?
               |You are receiving emails.
-              
-              = link_to " (Click to unsubscribe)", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
+              br
+              = link_to "(Click to unsubscribe)", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
             - elsif @subscription.unsubscribed?
               |You don't get our emails.
-              
-              = link_to " (Click to add)", subscribe_subscription_path(@subscription), method: :patch, remote: true, id: 'subscription-status'
+              br
+              = link_to "(Click to add)", subscribe_subscription_path(@subscription), method: :patch, remote: true
           dt Location
           dd= current_user.location.location_name
           
