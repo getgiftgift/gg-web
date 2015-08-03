@@ -150,8 +150,9 @@ body {
 
 
 #bottom-buttons {
-  position: fixed; 
-  bottom: 0; width: 100%; 
+  position: absolute; 
+  bottom: 0; 
+  width: 100%; 
   background: $light-gray;
   font-weight: 800;
   color: $gray;
@@ -159,6 +160,7 @@ body {
   letter-spacing: $letter-spacing;
   padding: 5px 0;
   text-align: center;
+  height: 58px;
 }
 
 .big {
@@ -268,7 +270,7 @@ td,th {
   @include button-size;
   @include button-style($green, 0, false);
   height: 45px;
-  width: 80%;
+  width: 100%;
   margin: 3px 0 0 0;
   vertical-align: middle;
   padding: 0px;
@@ -281,7 +283,7 @@ td,th {
   @include button-size;
   @include button-style($red, 0, false);
   height: 45px;
-  width: 80%;
+  width: 100%;
   margin: 3px 0 0 0;
   vertical-align: middle;
   padding: 0px;
