@@ -11,7 +11,7 @@ $(document).ready ->
   # Animation for the giftbox.
   # show the speech box after animation completes,
   # don't show if the details box is visible.
-  $('#gift-area').animate bottom: '50%', 3000, 'linear', ->  
+  $('#gift-area').animate bottom: '40%', 3000, 'linear', ->  
     unless $('.white-box').is(":visible") 
       $('#speech-box').show()
 

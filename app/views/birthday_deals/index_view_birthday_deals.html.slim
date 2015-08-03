@@ -1,13 +1,14 @@
 - unless @birthday_deal_vouchers.empty?
-  .row.content-row  
-    #details.large-5.small-12.small-centered.medium-6.columns.white-box
+  .row style="height: 100%;"
+    #details.large-6.small-12.small-centered.medium-8.columns.white-box style="height: 100%;"
       - @birthday_deal_vouchers.each do |voucher|
         #card_container
           - birthday_deal = voucher.birthday_deal
           / - yelp = Yelp.client.business(birthday_deal.company.yelp_id)
           = content_tag_for :div, voucher, :card, class: "card-box" do
             .row
-              = image_tag birthday_deal.company.image_url(:big), alt: 'Logo', width: '100%'
+              .small-10.columns style="width: 100%;"
+                = image_tag birthday_deal.company.image_url(:big), alt: 'Logo', width: '100%'
             br
             .row
               .small-5.columns.center-text
@@ -28,22 +29,23 @@
                   = birthday_deal.hook.to_s + " at "
                   = birthday_deal.company.name
                 br
-            .row  
-              .bottom-buttons.small-12.small-centered.columns  
-                .row
+
+            .row
+              #bottom-buttons
+                .small-6.columns
+                  = link_to 'KEEP IT!', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-btn"
                   br
-                  .small-6.columns
-                    = link_to '', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-btn"
-                    
-                  .small-6.columns
-                    = link_to '', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-btn"
-                .row 
-                  .small-6.columns
-                    |KEEP IT!
-                  .small-6.columns
-                    |NO THANKS!
-                br
-  #gift-area style="width:100%; height:0; position:fixed; left:0; right:0; bottom:0px"
+                .small-6.columns
+                  = link_to 'NO THANKS!', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-btn"
+                  br
+              br
+  #gift-area
+    .row
+      .small-10.medium-5.large-4.columns.small-centered#speech-box
+        span.box-tip
+        .row
+          .small-12.columns.small-centered#words 
+            h2 Open me already!
     #gifts.center-text style="margin: 0 auto; width: 230px;"
       = single(@birthday_deal_vouchers) 
 
@@ -54,8 +56,8 @@
 #re-gift-modal.reveal-modal data-reveal='' role="dialog"
   p This feature will be added in the future.
   a.close-reveal-modal href='#' aria-label="Close" &#215; 
-/ .row
-/   .small-10.small-centered.columns
-#speech-box
-  #words
-    | "Open me already!"
+
+
+
+
+  

@@ -15,12 +15,21 @@
 
 $letter-spacing: 1px;
 
+@media screen and (max-width: 600px) {
+  .content-row {
+    margin-top: 0px;
+  }
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
+  #layout{
+    height: 100%;
+  }
   section.main-section{min-height: 100%;}
   h1{} 
   h2{}
@@ -61,6 +70,7 @@ body {
 #flash_alert, #flash_notice, #flash_error { text-align: center; }
 
 .birthday-box {
+  margin: 50px 0;
   cursor: pointer;
   -webkit-animation-name: spaceboots;
   -webkit-animation-duration: 0.8s;
@@ -101,7 +111,6 @@ body {
 #details {
   display: none;
   z-index: 200;
-  top: 10%;
   span{
     color: $gray;
     font-weight: 100;
@@ -140,13 +149,16 @@ body {
 }
 
 
-.bottom-buttons {
+#bottom-buttons {
+  position: fixed; 
+  bottom: 0; width: 100%; 
   background: $light-gray;
-  text-align: center;
   font-weight: 800;
   color: $gray;
   font-size: 1.2em;
   letter-spacing: $letter-spacing;
+  padding: 5px 0;
+  text-align: center;
 }
 
 .big {
@@ -251,21 +263,29 @@ td,th {
 }
 
 .green-btn {
-  background: image-url('check.png') no-repeat center;
+  // background: image-url('check.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($green, 0, false);
-  height: 75px;
-  width: 120px;
+  height: 45px;
+  width: 80%;
+  margin: 3px 0 0 0;
+  vertical-align: middle;
+  padding: 0px;
+  line-height: 2.8em;
 }
 
 .red-btn {
-  background: image-url('x.png') no-repeat center;
+  // background: image-url('x.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($red, 0, false);
-  height: 75px;
-  width: 120px;
+  height: 45px;
+  width: 80%;
+  margin: 3px 0 0 0;
+  vertical-align: middle;
+  padding: 0px;
+  line-height: 2.8em;
 }
 
 .redeem-btn {
@@ -276,29 +296,46 @@ td,th {
   font-weight: 600;
   letter-spacing: $letter-spacing;
   width: 100%;
+
+}
+
+.box-tip{
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;  
+  border-top: 40px solid #ffffff;  // triangle
+  border-left:40px solid transparent; // other invisible triangle
+  bottom: -40px;  // equal to the height of border(s).
+  left: 15%;
+}
+#flex-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: flex-end;
 }
 
 #speech-box {
   display: none;
-  background: image-url('speech-box.png') no-repeat center;
   margin: 0 auto; 
   text-align: center; 
-  top: 10%; 
+  top: 20%; 
   position: relative;
-  height: 135px;
-  width: 350px;
+  background: #ffffff;
+  // background: image-url('speech-box.png') no-repeat center;
+  background-size: cover;
+
+
   #words {
     font-family: 'Open Sans' sans-serif;
     color: #3a3a3a;
     position: relative;
-    height: 108px;
-    width: 332px;
-    padding: 30px 10px 10px 10px;
-    top: 5px;
-    left: 9px;
-    font-size: 30px;
+    padding: 10px;
     font-weight: 300;
+    white-space: nowrap;
   }
+  
 }
 
 .bold-purple{
@@ -312,6 +349,7 @@ td,th {
 }
 
 .content-row{
+  height: 100%;
   margin-top: 25px;
 }
 
@@ -353,12 +391,28 @@ td.barby-cell.on { background: #000; }
   background-size: 100% auto;
 }
 
+#gift-area {
+  width:100%; 
+  height:30%; 
+  position:fixed; 
+  left:0; 
+  right:0; 
+  bottom:0px;
+}
+
 .branding{
   color: #FFFFFF;
   font-weight: 600;
   letter-spacing: $letter-spacing;
   font-size: 1.2em;
 }
+
+#bottom-footer {
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+}
+
 
 #credit_card_expiration_2i{
   width: 40%;
