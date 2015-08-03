@@ -5,7 +5,13 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1.0"
     meta itemprop="name" content="Gift Gift"
     meta itemprop="description" content="Get Free stuff on your birthday!"
-    meta itemprop="image" content="#{image_path "present-pile-stars.png"}"
+    meta itemprop="image" content="#{image_url 'present-pile-stars.png'}"
+    meta property="og:title" content="Gift Gift"
+    meta property="og:type" content="website"
+    meta property="og:url" content="http://www.getgiftgift.com/"
+    meta property="og:image" content="#{image_url 'present-pile-stars.png'}"
+    meta property="fb:app_id" content="#{ENV[FACEBOOK_APP_ID]}" 
+
     = stylesheet_link_tag 'birthday_deals', :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
