@@ -25,7 +25,6 @@ class User < ActiveRecord::Base
   validates_presence_of     :email, :message => "Required Field"
 
   def self.from_omniauth(auth)
-    
     where(provider: auth['provider'], uid: auth['id']).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
       user.email = auth['email']            # required by Facebook
@@ -149,6 +148,10 @@ class User < ActiveRecord::Base
         "BDAY": short_birthdate
       }
     }
+  end
+
+  def has_presents_to_open?
+    eligible_for_birthday_deals? && birthday_deal_vouchers.with_state(:wrapped).count > 0 ? true : false
   end
 
 end

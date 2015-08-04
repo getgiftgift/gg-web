@@ -18,12 +18,10 @@
         ul.off-canvas-list
           li
             label Menu
-          li 
-            = link_to 'My Gifts', my_gifts_path
-          li 
-            = link_to 'My Account', my_account_path
-          li
-            = link_to 'Sign Out', destroy_user_session_path, method: :delete
+          li= link_to 'Open Gifts', root_path if current_user.has_presents_to_open?
+          li= link_to 'My Gifts', my_gifts_path
+          li= link_to 'My Account', my_account_path
+          li= link_to 'Sign Out', destroy_user_session_path, method: :delete
                  
       section.main-section style="overflow:auto;"
         
