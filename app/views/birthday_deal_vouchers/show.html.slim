@@ -9,7 +9,7 @@
     |$#{@birthday_deal_voucher.value} Value from #{@birthday_deal_voucher.company.name}. 
     br
     = @birthday_deal_voucher.barcode_data.html_safe
-    p
+    p#verification-number
       | Verification Number: 
       = @birthday_deal_voucher.dashed_verification_number
     .row
