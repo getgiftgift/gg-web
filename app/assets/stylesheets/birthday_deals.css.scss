@@ -27,9 +27,13 @@ html {
 }
 
 body {
-  #layout{
+  #layout, .off-canvas-wrap{
     height: 100%;
   }
+ .inner-wrap {
+  height: 100%;
+  overflow: auto;
+ }
   section.main-section{min-height: 100%;}
   h1{} 
   h2{}
@@ -150,8 +154,9 @@ body {
 
 
 #bottom-buttons {
-  position: absolute; 
-  bottom: 0; 
+  position: fixed; 
+  bottom: 0;
+  left: 0; 
   width: 100%; 
   background: $light-gray;
   font-weight: 800;
@@ -319,7 +324,7 @@ td,th {
 }
 
 #speech-box {
-  display: none;
+  // display: none;
   margin: 0 auto; 
   text-align: center; 
   top: 20%; 

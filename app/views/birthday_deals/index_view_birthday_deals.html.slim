@@ -4,7 +4,6 @@
       - @birthday_deal_vouchers.each do |voucher|
         #card_container
           - birthday_deal = voucher.birthday_deal
-          / - yelp = Yelp.client.business(birthday_deal.company.yelp_id)
           = content_tag_for :div, voucher, :card, class: "card-box" do
             .row
               .small-10.columns style="width: 100%;"
@@ -18,12 +17,8 @@
                 span VALUE 
               .small-7.columns
                 h4.bold-gray= voucher.company.name.upcase
-                / - if birthday_deal.company.yelp_id.present?
-                /   a.yelp href="#{yelp.url}"
-                /     .stars class="stars-#{yelp.rating.to_s.gsub(".","-")}"
-                /     span #{yelp.review_count} Reviews
               hr
-            .row
+            .row style="min-height:400px;"
               small-12.columns
                 .hook 
                   = birthday_deal.hook.to_s + " at "
@@ -32,22 +27,23 @@
 
             .row
               #bottom-buttons
-                .small-6.columns
-                  = link_to 'KEEP IT!', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-btn"
-                  br
-                .small-6.columns
-                  = link_to 'NO THANKS!', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-btn"
-                  br
-              br
-  #gift-area
-    .row
-      .small-10.medium-5.large-4.columns.small-centered#speech-box
-        span.box-tip
-        .row
-          .small-12.columns.small-centered#words 
-            h2 Open me already!
-    #gifts.center-text style="margin: 0 auto; width: 230px;"
-      = single(@birthday_deal_vouchers) 
+                .small-12.large-6.medium-8.medium-centered.columns
+                  .row
+                    .small-6.columns
+                      = link_to 'KEEP IT!', keep_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "green-btn"
+                      br
+                    .small-6.columns
+                      = link_to 'NO THANKS!', trash_birthday_deal_voucher_path(voucher), method: :put, remote: true, class: "red-btn"
+                      br
+    #gift-area
+      .row
+        .small-10.medium-5.large-5.columns.small-centered#speech-box
+          span.box-tip
+          .row
+            .small-12.columns.small-centered#words 
+              h2 Open me already!
+      #gifts.center-text style="margin: 0 auto; width: 230px;"
+        = single(@birthday_deal_vouchers) 
 
 - else
   = render partial: 'no_gifts'
