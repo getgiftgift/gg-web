@@ -11,8 +11,6 @@
 @import "foundation-icons";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
 
-// @include sticky-footer(45px, "#layout", "#layout-footer", "#footer");
-
 $letter-spacing: 1px;
 
 html {
@@ -21,7 +19,17 @@ html {
 }
 
 body {
-  section.main-section{min-height: 100%;}
+  #layout, .off-canvas-wrap{
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .inner-wrap {min-height: 100%;}
+
+  section.main-section{
+    min-height: 100%;
+  }
+
   h1{} 
   h2{}
   h3{}
@@ -39,6 +47,7 @@ body {
   }
 
   font-family: 'Open Sans', sans-serif;
+  
   background: rgb(107,192,236) !important;
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -60,54 +69,36 @@ body {
 
 #flash_alert, #flash_notice, #flash_error { text-align: center; }
 
-.birthday-box {
-  cursor: pointer;
-  -webkit-animation-name: spaceboots;
-  -webkit-animation-duration: 0.8s;
-  -webkit-transform-origin:50% 50%;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-name: spaceboots;
-  -moz-animation-duration: 0.8s;
-  -moz-transform-origin:50% 50%;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-timing-function: linear;
-  -o-animation-name: spaceboots;
-  -o-animation-duration: 0.8s;
-  -o-transform-origin:50% 50%;
-  -o-animation-iteration-count: infinite;
-  -o-animation-timing-function: linear;
-  animation-name: spaceboots;
-  animation-duration: 0.8s;
-  transform-origin:50% 50%;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
 
-.white-box {
-  background: #fff;
-  min-height: 300px;
+.shadows {
   @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(169, 169, 169, 1) 0 0 8px);
   -webkit-transition: border linear .2s, box-shadow linear .2s;
      -moz-transition: border linear .2s, box-shadow linear .2s;
       -ms-transition: border linear .2s, box-shadow linear .2s;
        -o-transition: border linear .2s, box-shadow linear .2s;
           transition: border linear .2s, box-shadow linear .2s;
+}
+
+
+.white-box {
+  background: #fff;
+  min-height: 300px;
+  @extend .shadows;
 
   &:hover {
     @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 2px inset, rgba(169, 169, 169, 1) 0 0 16px);
   }
 }
+
+
 #details {
   display: none;
   z-index: 200;
-  top: 10%;
   span{
     color: $gray;
     font-weight: 100;
   }
   .value{
-    // font-family: 'Futura', sans-serif;
     color: $purple;
     font-size: 4em;
     font-weight: 800;
@@ -131,26 +122,63 @@ body {
       display: block;
       margin: 0 auto;
     }
-    // .value {
-    //   font-size: 4em;
-    //   text-align: center;
-      
-    // }
   }
 }
 
-
-.bottom-buttons {
+#bottom-buttons {
+  position: fixed; 
+  bottom: 0;
+  left: 0; 
+  width: 100%; 
   background: $light-gray;
-  text-align: center;
   font-weight: 800;
   color: $gray;
   font-size: 1.2em;
   letter-spacing: $letter-spacing;
+  padding: 5px 0;
+  text-align: center;
+  height: 58px;
 }
 
 .big {
   width: 260px !important;
+}
+
+.close {  
+  font-size: 2em;
+  right: 0;
+  top: 0;
+  position: absolute;
+  margin: 3px 5px 0 0;
+  a{
+    color: $gray;
+  }
+}
+
+//////// KEYFRAMES FOR GIFT ANIMATION ////////
+.birthday-box {
+  margin: 50px 0;
+  cursor: pointer;
+  -webkit-animation-name: spaceboots;
+  -webkit-animation-duration: 0.8s;
+  -webkit-transform-origin:50% 50%;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spaceboots;
+  -moz-animation-duration: 0.8s;
+  -moz-transform-origin:50% 50%;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -o-animation-name: spaceboots;
+  -o-animation-duration: 0.8s;
+  -o-transform-origin:50% 50%;
+  -o-animation-iteration-count: infinite;
+  -o-animation-timing-function: linear;
+  animation-name: spaceboots;
+  animation-duration: 0.8s;
+  transform-origin:50% 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @-webkit-keyframes spaceboots {
@@ -205,25 +233,13 @@ body {
   90% { transform: translate(2px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
-.close {
-  
-  font-size: 2em;
-  right: 0;
-  top: 0;
-  position: absolute;
-  margin: 3px 5px 0 0;
-  a{
-    color: $gray;
-  }
-}
-
-.center {margin: auto;}
+//////// END KEYFRAMES FOR GIFT ANIMATION ////////
 
 table {
   width: 750px;
   margin: auto;
-  .colored_row{background: #eee;}
-  .blank_row{background: #fff;}
+  .highlight-row{background: #eee;}
+  .blank-row{background: #fff;}
   th {
     font-weight: bold;
   }
@@ -232,6 +248,7 @@ td,th {
   padding: 5px 10px;
 }
 
+//////// BUTTONS ////////
 .details-button {
   @include button(
     // $padding - Used to build padding for buttons Default: $button-med or rem-calc(12)
@@ -251,21 +268,27 @@ td,th {
 }
 
 .green-btn {
-  background: image-url('check.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($green, 0, false);
-  height: 75px;
-  width: 120px;
+  height: 45px;
+  width: 100%;
+  margin: 3px 0 0 0;
+  vertical-align: middle;
+  padding: 0px;
+  line-height: 2.8em;
 }
 
 .red-btn {
-  background: image-url('x.png') no-repeat center;
   @include button-base;
   @include button-size;
   @include button-style($red, 0, false);
-  height: 75px;
-  width: 120px;
+  height: 45px;
+  width: 100%;
+  margin: 3px 0 0 0;
+  vertical-align: middle;
+  padding: 0px;
+  line-height: 2.8em;
 }
 
 .redeem-btn {
@@ -277,29 +300,40 @@ td,th {
   letter-spacing: $letter-spacing;
   width: 100%;
 }
+//////// END BUTTONS ////////
 
+//////// SPEECH BOX ////////
 #speech-box {
-  display: none;
-  background: image-url('speech-box.png') no-repeat center;
+  // display: none;
+  @extend .shadows;
   margin: 0 auto; 
   text-align: center; 
-  top: 10%; 
+  top: 20%; 
   position: relative;
-  height: 135px;
-  width: 350px;
+  background: #ffffff;
+  // background: image-url('speech-box.png') no-repeat center;
+  background-size: cover;
   #words {
     font-family: 'Open Sans' sans-serif;
     color: #3a3a3a;
     position: relative;
-    height: 108px;
-    width: 332px;
-    padding: 30px 10px 10px 10px;
-    top: 5px;
-    left: 9px;
-    font-size: 30px;
+    padding: 10px;
     font-weight: 300;
+    white-space: nowrap;
   }
 }
+
+.box-tip{
+  display: block;
+  position: absolute;
+  height: 0;
+  width: 0;  
+  border-top: 40px solid #ffffff;     // triangle
+  border-left:40px solid transparent; // other invisible triangle
+  bottom: -40px;                      // equal to the height of border(s).
+  left: 15%;
+}
+//////// END SPEECH BOX ////////
 
 .bold-purple{
   font-weight: 800;
@@ -312,6 +346,7 @@ td,th {
 }
 
 .content-row{
+  height: 100%;
   margin-top: 25px;
 }
 
@@ -360,6 +395,12 @@ td.barby-cell.on { background: #000; }
   font-size: 1.2em;
 }
 
+#bottom-footer {
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+}
+
 #credit_card_expiration_2i{
   width: 40%;
 }   
@@ -368,10 +409,44 @@ td.barby-cell.on { background: #000; }
   width: 40%;
 }
 
-.yelp-logo{
-  background: image-url('yelp_logo.png') no-repeat;
-  height: 20px;
-  width: 40px;
+#gift-area {
+  width:100%; 
+  height:30%; 
+  position:fixed; 
+  left:0; 
+  right:0; 
+  bottom:0px;
+}
+
+.social-sharing {
+  font-size: 3em;
+  .fi-social-facebook{
+    color: #3b55a0;
+    padding: 10px;
+  }
+  .fi-social-twitter{
+    color:#55acee;
+    padding: 10px;
+  }
+  .fi-social-instagram{
+    color:#9C7C6E;
+    padding: 10px;
+  }
+  .fi-social-google-plus{
+    color: #DF4B38;
+    padding: 10px;
+  }
+}
+
+////////// YELP ////////// 
+a.yelp {
+  margin: 0 auto;
+  a:hover{text-decoration: underline;}  
+  .stars{
+    position:relative; 
+    float:left; 
+    margin: 0 5px;}
+  span{font-size:10px;} 
 }
 
 .stars-0{
@@ -423,33 +498,9 @@ td.barby-cell.on { background: #000; }
   width: 98px;
   height: 18px;
 }
-
-a.yelp {
-  margin: 0 auto;
-  a:hover{text-decoration: underline;}  
-  .stars{
-    position:relative; 
-    float:left; 
-    margin: 0 5px;}
-  span{font-size:10px;} 
+.yelp-logo{
+  background: image-url('yelp_logo.png') no-repeat;
+  height: 20px;
+  width: 40px;
 }
-
-.social-sharing {
-  font-size: 3em;
-  .fi-social-facebook{
-    color: #3b55a0;
-    padding: 10px;
-  }
-  .fi-social-twitter{
-    color:#55acee;
-    padding: 10px;
-  }
-  .fi-social-instagram{
-    color:#9C7C6E;
-    padding: 10px;
-  }
-  .fi-social-google-plus{
-    color: #DF4B38;
-    padding: 10px;
-  }
-}
+////////// END YELP ////////// 
