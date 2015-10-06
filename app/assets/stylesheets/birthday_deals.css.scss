@@ -69,7 +69,6 @@ body {
 
 #flash_alert, #flash_notice, #flash_error { text-align: center; }
 
-
 .shadows {
   @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 1px inset, rgba(169, 169, 169, 1) 0 0 8px);
   -webkit-transition: border linear .2s, box-shadow linear .2s;
@@ -78,7 +77,6 @@ body {
        -o-transition: border linear .2s, box-shadow linear .2s;
           transition: border linear .2s, box-shadow linear .2s;
 }
-
 
 .white-box {
   background: #fff;
@@ -89,7 +87,6 @@ body {
     @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 2px inset, rgba(169, 169, 169, 1) 0 0 16px);
   }
 }
-
 
 #details {
   display: none;
@@ -401,13 +398,7 @@ td.barby-cell.on { background: #000; }
   padding: 10px;
 }
 
-#credit_card_expiration_2i{
-  width: 40%;
-}   
-
-#credit_card_expiration_1i{
-  width: 40%;
-}
+#credit_card_expiration_2i, #credit_card_expiration_1i{ width: 40%; }   
 
 #gift-area {
   width:100%; 
@@ -438,69 +429,3 @@ td.barby-cell.on { background: #000; }
   }
 }
 
-////////// YELP ////////// 
-a.yelp {
-  margin: 0 auto;
-  a:hover{text-decoration: underline;}  
-  .stars{
-    position:relative; 
-    float:left; 
-    margin: 0 5px;}
-  span{font-size:10px;} 
-}
-
-.stars-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -366px;
-  width: 98px;
-  height: 18px;}
-.stars-1-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -390px;
-  width: 98px;
-  height: 18px;
-}
-.stars-1-5{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -414px;
-  width: 98px;
-  height: 18px;
-}
-.stars-2-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -438px;
-  width: 98px;
-  height: 18px;
-}
-.stars-2-5{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -462px;
-  width: 98px;
-  height: 18px;
-}
-.stars-3-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -486px;
-  width: 98px;
-  height: 18px;
-}
-.stars-3-5{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -510px;
-  width: 98px;
-  height: 18px;
-}
-.stars-4-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -534px;
-  width: 98px;
-  height: 18px;
-}
-.stars-4-5{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -558px;
-  width: 98px;
-  height: 18px; 
-}
-.stars-5-0{
-  background: image-url('yelp_stars_sprite.png') no-repeat -6px -582px;
-  width: 98px;
-  height: 18px;
-}
-.yelp-logo{
-  background: image-url('yelp_logo.png') no-repeat;
-  height: 20px;
-  width: 40px;
-}
-////////// END YELP ////////// 

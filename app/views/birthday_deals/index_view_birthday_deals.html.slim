@@ -1,5 +1,5 @@
 - unless @birthday_deal_vouchers.empty?
-  .row style="height: 100%;"
+  .row
     #details.large-6.small-12.small-centered.medium-8.columns.white-box style="height: 100%;"
       - @birthday_deal_vouchers.each do |voucher|
         #card_container
@@ -36,7 +36,7 @@
                       br
     #gift-area
       .row
-        .small-10.medium-5.large-5.columns.small-centered#speech-box
+        .small-10.medium-5.large-3.columns.small-centered#speech-box
           span.box-tip
           .row
             .small-12.columns.small-centered#words 

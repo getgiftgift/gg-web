@@ -15,14 +15,11 @@ class HomeController < ApplicationController
   def privacy
   end
 
-  def redeem
-    if params[:redeem]
-      @pin = params[:redeem][:pin]
-      ver = params[:redeem][:verification]
-      @deal = BirthdayDealVoucher.where('verification_number like ?', "%#{ver}").joins(:company).where('pin = ?', @pin).last
-      redirect_to redeem_path
-    else
-      render 'redeem'
+  def verify
+    if params[:verify]
+      @pin = params[:verify][:pin]
+      @ver = params[:verify][:verification]
+      @deal = BirthdayDealVoucher.where('verification_number like ?', "%#{@ver}").joins(:company).where('pin = ?', @pin).last
     end
   end
 

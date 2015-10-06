@@ -1,0 +1,30 @@
+- if @deal
+  .row style='margin-top: 30px;'
+    .panel
+      table
+        thead
+          tr
+            th Verification Number
+            th Deal
+            th Created At
+            th State
+        tbody  
+          tr
+            td= @deal.verification_number
+            td= @deal.hook
+            td= @deal.created_at
+            td= @deal.state
+  br
+- if @deal.nil? && @ver
+  .row.center-text style='margin-top: 30px;'
+    | Could not find verification number #{@ver}.
+
+.row style='margin-top: 30px;'  
+  .small-10.large-8.small-centered.columns.white-box style="padding: 20px 0;"
+    .row
+      .small-6.small-centered.columns
+        - @pin ? pin=@pin : pin=""
+        = simple_form_for :verify do |f|
+          = f.input :pin, input_html: {value: pin}
+          = f.input :verification
+          = f.submit 'Verify!', class: 'redeem-btn'

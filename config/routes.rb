@@ -2,7 +2,7 @@ WorthdayWeb::Application.routes.draw do
   root :to => 'birthday_deals#index'
   get '/dashboard' => 'home#dashboard'
   get '/' => 'birthday_deals#index', as: 'birthday_deals'
-  match '/redeem' => 'home#redeem', via: [:get, :post]
+  match '/verify' => 'home#verify', via: [:get, :post]
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'
