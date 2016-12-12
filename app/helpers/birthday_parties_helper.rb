@@ -1,0 +1,2 @@
+module BirthdayPartiesHelper
+end

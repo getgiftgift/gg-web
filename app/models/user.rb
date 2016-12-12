@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   include ApplicationHelper
   after_create :build_referral_code
 
+	has_many :birthday_parties
+
   has_one :subscription
   accepts_nested_attributes_for :subscription
   belongs_to :location

@@ -1,5 +1,9 @@
 WorthdayWeb::Application.routes.draw do
   root :to => 'birthday_deals#index'
+
+	get '/client_token' => 'transactions#get_client_token'
+	get '/birthday_party/:id/checkout' => 'transactions#new'
+	get '/birthday_party/:id' => 'birthday_parties#show'
   get '/dashboard' => 'home#dashboard'
   get '/' => 'birthday_deals#index', as: 'birthday_deals'
   match '/verify' => 'home#verify', via: [:get, :post]
@@ -19,7 +23,8 @@ WorthdayWeb::Application.routes.draw do
   get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts' 
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
   post '/add_location_to_user' => 'birthday_deals#add_location_to_user'
-  
+	resources :transactions
+	resources :birthday_parties, only: :show  
   resources :companies, only: [:new, :create]
 
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
