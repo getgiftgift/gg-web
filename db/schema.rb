@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215025853) do
+ActiveRecord::Schema.define(version: 20161215035422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -213,12 +213,19 @@ ActiveRecord::Schema.define(version: 20161215025853) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "amount"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "birthday_party_id"
+    t.string   "transaction_id",                          null: false
+    t.datetime "settled_at"
+    t.string   "processor",                               null: false
+    t.integer  "amount_cents",      default: 0,           null: false
+    t.string   "amount_currency",   default: "USD",       null: false
+    t.string   "name",              default: "Anonymous"
+    t.string   "note"
   end
+
+  add_index "transactions", ["birthday_party_id"], name: "index_transactions_on_birthday_party_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"
@@ -264,6 +271,8 @@ ActiveRecord::Schema.define(version: 20161215025853) do
 
   add_foreign_key "birthday_deal_state_transitions", "birthday_deals"
   add_foreign_key "birthday_deal_voucher_state_transitions", "birthday_deal_vouchers"
+  add_foreign_key "birthday_deals", "occasions"
+  add_foreign_key "birthday_parties", "users"
   add_foreign_key "transactions", "birthday_parties"
   add_foreign_key "users", "locations"
 end
