@@ -49,10 +49,11 @@ gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'state_machines-audit_trail'
 gem 'therubyracer' #JavaScript runtime for production
+gem 'thin'
 gem 'uglifier'
 gem 'unicorn'
 
-group :development do 
+group :development do
   gem 'better_errors'
 end
 
