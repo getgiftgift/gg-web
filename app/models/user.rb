@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
                                 :class_name => "Referral"
   has_many :referrals_made, :foreign_key => :referrer_id,
                                 :class_name => "Referral"
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+
   devise :omniauthable, omniauth_providers: [:facebook]
 
   validates :email, :uniqueness => { :case_sensitive => false, :message => 'The email you entered is associated with another account'},
@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
       user.first_name = auth['first_name']  # required by Facebook
       user.last_name = auth['last_name']    # required by Facebook
       user.birthdate = Date.strptime( auth['birthday'], "%m/%d/%Y" )  # required by Facebook
-      user.gender = auth['gender']  # required by Facebook 
+      user.gender = auth['gender']  # required by Facebook
       user.oauth_token = auth['access_token']
       user.oauth_expires_at = Time.at(Time.now + auth['expires'].to_i)
       # user.location = Location.near(auth['location']['name'], 50).first  # "City, State"
@@ -49,9 +49,13 @@ class User < ActiveRecord::Base
     end
   end
 
+  def birthday_party
+    @birthday_party ||= birthday_parties.where(date: adjusted_birthday).first_or_create
+  end
+
   def build_referral_code
     # 5 character referral code
-    # avoids similar characters like l and 1, o and 0 etc. 
+    # avoids similar characters like l and 1, o and 0 etc.
     charset = %w{ 2 3 4 6 7 9 a c d e f g h j k m n p q r t v w x y z}
     code = (0...5).map{ charset.to_a[SecureRandom.random_number(charset.size)] }.join
     update_attributes referral_code: code
@@ -110,12 +114,12 @@ class User < ActiveRecord::Base
     date_start = (Date.today - 15.days).strftime('%m%d')
     date_end = (Date.today + 15.days).strftime('%m%d')
     user_bday = self.birthdate.strftime('%m%d')
-    if date_end < date_start # Birthday overlaps new year 
+    if date_end < date_start # Birthday overlaps new year
       if (user_bday >= "0101" && user_bday <= end_date) || ( user_bday <= "1231" && user_bday >= start_date )
         return true
       else
-        return false  
-      end  
+        return false
+      end
     else
       return true if user_bday <= date_end && user_bday >= date_start
     end

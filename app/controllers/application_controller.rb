@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def customer_logged_in?
-    !!current_user && !current_user.admin?
+    !!current_user
   end
 
   def logged_in?
@@ -81,9 +81,6 @@ class ApplicationController < ActionController::Base
       birthday = current_user.adjusted_birthday
       return render 'birthday_deals/customer_enter_birthday' if birthday.blank?
       return render 'birthday_deals/customer_enter_location' if current_user.location.blank?
-      unless current_user.eligible_for_birthday_deals?
-        return render 'birthday_deals/index_not_your_birthday'
-      end
     else
       session[:return_to] = birthday_deals_path
       return render 'birthday_deals/index_customer_login'

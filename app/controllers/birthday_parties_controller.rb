@@ -1,8 +1,7 @@
 class BirthdayPartiesController < ApplicationController
-	
 
 	def show
-		@party = BirthdayParty.find params[:id]
+		@party = current_user.birthday_party
 		@user = @party.user
 	end
 
