@@ -39,6 +39,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.8)
+    airbrake (5.6.1)
+      airbrake-ruby (~> 1.6)
+    airbrake-ruby (1.6.0)
     arel (6.0.3)
     asset_sync (1.1.0)
       activemodel
@@ -472,6 +475,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   asset_sync
   barby
   better_errors

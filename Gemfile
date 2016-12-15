@@ -6,6 +6,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'airbrake'
 gem 'asset_sync'
 gem 'barby'
 gem 'binding_of_caller'
