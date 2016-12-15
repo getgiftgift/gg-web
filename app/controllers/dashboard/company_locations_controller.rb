@@ -1,15 +1,13 @@
-class Dashboard::CompanyLocationsController < ApplicationController
-  before_filter :admin_login_required, :get_company
+class Dashboard::CompanyLocationsController < Dashboard::BaseController
+  before_filter :get_company
 
   respond_to :html, :json
-
-  layout 'dashboard'
 
   # GET /companies
   # GET /companies.xml
   def index
     @company_locations = @company.company_locations.all
-    
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @company_locations }

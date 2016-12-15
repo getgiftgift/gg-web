@@ -1,7 +1,4 @@
-class Dashboard::ContactsController < ApplicationController
-  before_filter :admin_login_required
-
-  layout 'dashboard'
+class Dashboard::ContactsController < Dashboard::BaseController
 
   def new
     @client_token = Braintree::ClientToken.generate
@@ -14,17 +11,17 @@ class Dashboard::ContactsController < ApplicationController
     @contact = @company.contacts.create(contact_params)
 
     result = Braintree::Customer.create(
-      :first_name => params[:contact][:first_name], 
-      :last_name => params[:contact][:last_name], 
-      :company => params[:contact][:name], 
+      :first_name => params[:contact][:first_name],
+      :last_name => params[:contact][:last_name],
+      :company => params[:contact][:name],
       :email => params[:contact][:email],
       :payment_method_nonce => params[:payment_method_nonce]
-    )  
+    )
     if result.success?
       response = result.customer.credit_cards[0]
-      @company.contacts.first.update_attributes( 
+      @company.contacts.first.update_attributes(
         token: response.token,
-        cardholder_name: response.cardholder_name, 
+        cardholder_name: response.cardholder_name,
         cc_last_four: response.last_4,
         cc_card_type: response.card_type,
         cc_expiration_month: response.expiration_month,
@@ -39,7 +36,7 @@ class Dashboard::ContactsController < ApplicationController
       flash[:notice] = "Try again. #{result.errors.first.message}"
       @client_token = Braintree::ClientToken.generate
       render 'new'
-    end  
+    end
   end
 
   def update
@@ -47,17 +44,17 @@ class Dashboard::ContactsController < ApplicationController
     @contact = @company.contacts.first
     @contact.update_attributes(contact_params)
     result = Braintree::Customer.update( @contact.gateway_customer_id,
-      :first_name => contact_params[:first_name], 
-      :last_name => contact_params[:last_name], 
-      :company => @company.name, 
+      :first_name => contact_params[:first_name],
+      :last_name => contact_params[:last_name],
+      :company => @company.name,
       :email => contact_params[:email],
       :payment_method_nonce => params[:payment_method_nonce]
-    )  
+    )
     if result.success?
       response = result.customer.credit_cards[0]
-      @company.contacts.first.update_attributes( 
+      @company.contacts.first.update_attributes(
         token: response.token,
-        cardholder_name: response.cardholder_name, 
+        cardholder_name: response.cardholder_name,
         cc_last_four: response.last_4,
         cc_card_type: response.card_type,
         cc_expiration_month: response.expiration_month,
@@ -70,7 +67,7 @@ class Dashboard::ContactsController < ApplicationController
     else
       @client_token = Braintree::ClientToken.generate
       render 'edit'
-    end  
+    end
   end
 
   def edit

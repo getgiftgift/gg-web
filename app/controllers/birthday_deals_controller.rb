@@ -1,6 +1,6 @@
 class BirthdayDealsController < ApplicationController
-  
-  before_filter :verify_login_and_birthday, except: [:add_birthday_to_user, :add_location_to_user]
+
+  skip_filter :verify_login_and_birthday, only: [:add_birthday_to_user, :add_location_to_user]
 
   layout 'birthday'
 
@@ -23,8 +23,8 @@ class BirthdayDealsController < ApplicationController
         return render 'index_not_your_birthday' if @deals.empty?
         @birthday_deal_vouchers = @deals.each.collect{|bd| bd.create_voucher_for(current_user)}
       end
-      @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)  
-      if current_user.is_testuser? && @birthday_deal_vouchers.empty? 
+      @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
+      if current_user.is_testuser? && @birthday_deal_vouchers.empty?
         current_user.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
         @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
       end
@@ -53,24 +53,11 @@ class BirthdayDealsController < ApplicationController
       location = Location.find(params[:user][:location])
       current_user.location = location
       current_user.save
-    rescue 
+    rescue
     end
     redirect_to birthday_deals_url
   end
 
   protected
 
-  def verify_login_and_birthday
-    if customer_logged_in?
-      birthday = current_user.adjusted_birthday
-      return render 'customer_enter_birthday' if birthday.blank?
-      return render 'customer_enter_location' if current_user.location.blank?
-      unless current_user.eligible_for_birthday_deals?
-        return render 'index_not_your_birthday'
-      end
-    else
-      session[:return_to] = birthday_deals_path
-      return render 'index_customer_login'
-    end
-  end
 end
