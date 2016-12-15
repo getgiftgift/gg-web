@@ -14,17 +14,17 @@ WorthdayWeb::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # resources :users, only: :show
   get '/my_account' => "users#show"
-  resources :subscriptions do 
-    member do 
+  resources :subscriptions do
+    member do
       patch :subscribe
       patch :unsubscribe
     end
   end
-  get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts' 
+  get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts'
   patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
   post '/add_location_to_user' => 'birthday_deals#add_location_to_user'
 	resources :transactions
-	resources :birthday_parties, only: :show  
+
   resources :companies, only: [:new, :create]
 
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
@@ -35,23 +35,28 @@ WorthdayWeb::Application.routes.draw do
       put :redeem
     end
   end
-  
+
+
+  resources :birthday_parties, only: [:show, :index], path: 'birthday_party' do
+
+  end
+
   namespace :dashboard do
     get '/locations' => 'locations#index', as: 'index'
-    resources :users  
-    resources :companies do 
-      resources :contacts 
+    resources :users
+    resources :companies do
+      resources :contacts
       resources :company_locations
       member do
-        get :archive 
+        get :archive
         get :unarchive
-      end  
+      end
       collection do
         get :archived
         match :search, via: [:get, :post]
-      end 
-      
-    end   
+      end
+
+    end
 
     resources :birthday_deal_vouchers, only: [:index], as: "deal_vouchers", path: 'birthday_deals' do
       member do
@@ -62,7 +67,7 @@ WorthdayWeb::Application.routes.draw do
     end
 
     resources :locations do
-      resources :birthday_deal_vouchers, only: [:index], as: 'voucher_reports', path: 'voucher_reports' 
+      resources :birthday_deal_vouchers, only: [:index], as: 'voucher_reports', path: 'voucher_reports'
       resources :birthday_deals, shallow: true do
         member do
           put :submit_for_approval
@@ -72,7 +77,7 @@ WorthdayWeb::Application.routes.draw do
         end
       end
     end
-  end  
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
