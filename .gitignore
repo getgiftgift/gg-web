@@ -21,7 +21,7 @@
 
 tmp/
 .env
-
+.env.local
 # Ignore Carrierwave uploads
 public/uploads
 # Ignore application configuration
