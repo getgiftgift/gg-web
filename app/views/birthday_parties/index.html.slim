@@ -1,11 +1,8 @@
-p It's your birthday party!
-em You need $5 more to unlock your party.large-9.large-centered.columns.white-box
+h1 It's #{@user.full_name}'s Birthday!
 
-  h1 It's #{@user.full_name}'s Birthday!
+h2 Let's make it great by reaching the goal
 
-  h2 Let's make it great by reaching the goal
+.progress.success
+  span.meter style="width: 33%"
 
-  .progress.success
-    span.meter style="width: 33%"
-
-  = link_to 'Help Contribute', '#', class: 'button'
+= link_to 'Help Contribute', '#', class: 'button'
