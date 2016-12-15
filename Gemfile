@@ -3,10 +3,10 @@ source "https://rubygems.org"
 ruby '2.2.1'
 
 group :production do
+  gem 'airbrake'
   gem 'rails_12factor'
 end
 
-gem 'airbrake'
 gem 'asset_sync'
 gem 'barby'
 gem 'binding_of_caller'
