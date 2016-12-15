@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212203732) do
+ActiveRecord::Schema.define(version: 20161215025853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,9 +80,11 @@ ActiveRecord::Schema.define(version: 20161212203732) do
   create_table "birthday_parties", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
+    t.integer  "user_id",    null: false
+    t.date     "date",       null: false
   end
 
+  add_index "birthday_parties", ["user_id", "date"], name: "index_birthday_parties_on_user_id_and_date", unique: true, using: :btree
   add_index "birthday_parties", ["user_id"], name: "index_birthday_parties_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
@@ -211,15 +213,12 @@ ActiveRecord::Schema.define(version: 20161212203732) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "amount"
-    t.integer  "birthday_party_id"
   end
-
-  add_index "transactions", ["birthday_party_id"], name: "index_transactions_on_birthday_party_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"

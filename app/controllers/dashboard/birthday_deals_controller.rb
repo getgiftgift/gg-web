@@ -1,8 +1,5 @@
-class Dashboard::BirthdayDealsController < ApplicationController
-  before_filter :admin_login_required
+class Dashboard::BirthdayDealsController < Dashboard::BaseController
   before_filter :set_form_variables
-  
-  layout 'dashboard'
 
   # GET /birthday_deals
   # GET /birthday_deals.json
@@ -146,4 +143,3 @@ class Dashboard::BirthdayDealsController < ApplicationController
     params.require(:birthday_deal).permit(:hook, :how_to_redeem, :path, :company_id, :comany_location_id, :value, :start_date, :end_date, :state, :occasion_id, restriction_ids: [], restriction_items_attributes: [:id, :category, :phrase, :value])
   end
 end
- 

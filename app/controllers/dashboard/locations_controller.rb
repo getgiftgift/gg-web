@@ -1,8 +1,5 @@
-class Dashboard::LocationsController < ApplicationController
-  before_filter :admin_login_required
-  
-  layout 'dashboard'
-  
+class Dashboard::LocationsController < Dashboard::BaseController
+
   # GET /locations
   # GET /locations.xml
   def index
@@ -52,7 +49,7 @@ class Dashboard::LocationsController < ApplicationController
   def create
     @location = Location.new(location_params)
     # @location.account_id = current_account.id
-    
+
     respond_to do |format|
       if @location.save
         flash[:notice] = 'Location was successfully created.'

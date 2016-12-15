@@ -1,9 +1,5 @@
-class Dashboard::CompaniesController < ApplicationController
-  before_filter :admin_login_required
-
+class Dashboard::CompaniesController < Dashboard::BaseController
   respond_to :html, :json
-
-  layout 'dashboard'
 
   # GET /companies
   # GET /companies.xml

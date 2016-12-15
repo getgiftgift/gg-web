@@ -1,8 +1,5 @@
-class Dashboard::UsersController < ApplicationController
-  before_filter :admin_login_required
+class Dashboard::UsersController < Dashboard::BaseController
   before_filter :get_vouchers, only: [:show]
-
-  layout 'dashboard'
 
   # GET /users
   # GET /users.json
@@ -46,7 +43,7 @@ class Dashboard::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -67,7 +64,7 @@ class Dashboard::UsersController < ApplicationController
     #   day = params[:customer]['birthdate(3i)'].to_i
     #   year = params[:customer]['birthdate(1i)'].to_i
     #   @user.birthdate = Date.new(year,month,day).to_s(:db)
-    # end 
+    # end
 
     respond_to do |format|
       if @user.update_attributes(user_params)

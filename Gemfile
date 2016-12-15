@@ -6,6 +6,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'airbrake'
 gem 'asset_sync'
 gem 'barby'
 gem 'binding_of_caller'
@@ -30,13 +31,13 @@ gem 'koala', '~> 2.0'
 gem 'mailchimp-api', require: 'mailchimp'
 gem 'mandrill_mailer'
 gem 'money-rails'
-gem 'mysql2'
 gem 'omniauth-facebook'
 gem 'open4'
 gem 'pg'
 gem 'prawn-rails'
 gem 'rails', '~> 4.2.0'
 gem 'railties', '~> 4.2.0'
+gem 'rake', '~> 10.5.0'
 gem 'raygun4ruby'
 gem 'rmagick'
 gem 'rolify'
@@ -49,10 +50,11 @@ gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'state_machines-audit_trail'
 gem 'therubyracer' #JavaScript runtime for production
+gem 'thin'
 gem 'uglifier'
 gem 'unicorn'
 
-group :development do 
+group :development do
   gem 'better_errors'
 end
 

@@ -1,7 +1,4 @@
-class Dashboard::BirthdayDealVouchersController < ApplicationController
-  before_filter :admin_login_required
-
-  layout 'dashboard'
+class Dashboard::BirthdayDealVouchersController < Dashboard::BaseController
 
   def index
     # byebug

@@ -1,27 +1,33 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_filter :set_referral_code
-
+  before_filter :verify_login_and_birthday, unless: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    resource.is_admin? ? dashboard_index_path : birthday_deals_path  
+    resource.admin? ? dashboard_index_path : birthday_deals_path
   end
 
   def admin_login_required
-    unless current_user && current_user.is_admin?
-      redirect_to root_url  
-    end  
+    unless current_user && current_user.admin?
+      redirect_to root_url
+    end
+  end
+
+  def customer_required
+    unless current_user
+      redirect_to root_url
+    end
   end
 
   def customer_logged_in?
-    !!current_user && !current_user.is_admin?
+    !!current_user
   end
 
   def logged_in?
-    !!current_user && current_user.is_admin?
-  end 
+    !!current_user && current_user.admin?
+  end
 
   def location_from_session
       @current_location = Location.find(session[:location_id]) if session[:location_id]
@@ -67,5 +73,17 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :first_name, :last_name, :birthdate, :"birthdate(1i)", :"birthdate(2i)", :"birthdate(3i)" ) }
+  end
+
+
+  def verify_login_and_birthday
+    if customer_logged_in?
+      birthday = current_user.adjusted_birthday
+      return render 'birthday_deals/customer_enter_birthday' if birthday.blank?
+      return render 'birthday_deals/customer_enter_location' if current_user.location.blank?
+    else
+      session[:return_to] = birthday_deals_path
+      return render 'birthday_deals/index_customer_login'
+    end
   end
 end

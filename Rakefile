@@ -4,4 +4,5 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-WorthdayWeb::Application.load_tasks
+# WorthdayWeb::Application.load_tasks
+Rails.application.load_tasks
