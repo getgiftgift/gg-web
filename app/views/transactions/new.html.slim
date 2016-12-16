@@ -1,18 +1,24 @@
 = javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/client.min.js"
 = javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/hosted-fields.min.js"
 
-.large-9.large-centered.columns.white-box
-  = form_tag do
-    .hosted-field#card-number
-    .hosted-field#cvv
-    .hosted-field#expiration-date
+.form-container
+  = form_tag transactions_path, method: :post, id: 'checkout-form' do
+    = label_tag :card_number, 'Credit Card Number' 
+    .input-wrapper
+      .hosted-field#card-number
+    = label_tag :cvv, 'CVV'
+    .input-wrapper
+      .hosted-field#cvv
+    = label_tag :expiration_date, 'Expiration Date'
+    .input-wrapper
+      .hosted-field#expiration-date
     = hidden_field_tag :payment_method_nonce 
-    = submit_tag 'Process Payment'  
+    = submit_tag 'Process Payment', class: 'button small'  
 
-
+    
 
 javascript:
-  var submit= $('input[type="submit"]');
+  var submit = $('input[type="submit"]');
   braintree.client.create({ 
     authorization: "#{@token}" 
   }, function (clientErr, clientInstance) {
@@ -23,33 +29,26 @@ javascript:
    braintree.hostedFields.create({
      client: clientInstance,
      styles: {
-       'input': {
-          'font-size': '16px' 
-       },
-       'input.invalid': {
-          'color': 'red'
-       },
-       'input.valid': {
-          'color': 'green' 
-       }
-
-     
+      'color': '#282c37',
+      'font-size': '16px',
+      'transition': 'color 0.1s',
+      'line-height': '3'
      },
-      fields: {
-        number: {
-          selector: '#card-number',
-          placeholder: '4111 1111 1111 1111'
-        },
-        cvv: {
-          selector: '#cvv',
-          placeholder: '123'
-        },
-        expirationDate: {
-          selector: '#expiration-date',
-          placeholder: '10/2019' 
-        }
+    fields: {
+      number: {
+        selector: '#card-number',
+        placeholder: '1111 1111 1111 1111'
+      },
+      cvv: {
+        selector: '#cvv',
+        placeholder: '123'
+      },
+      expirationDate: {
+        selector: '#expiration-date',
+        placeholder: '10/2019' 
       }
-    },  function (hostedFieldsErr, hostedFieldsInstance) {
+    }
+    }, function (hostedFieldsErr, hostedFieldsInstance) {
       if (hostedFieldsErr) {
         // do error stuff
         return;
@@ -57,5 +56,4 @@ javascript:
       submit.removeAttr('disabled');
     });
   });
-  
-
+    

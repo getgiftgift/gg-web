@@ -1,3 +1,46 @@
 // Place all the styles related to the transactions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form-container {
+  display: flex;
+  background-color: #EEE;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: 1em solid #fff;
+  box-sizing: border-box;
+  position: relative;
+}
+
+#checkout-form {
+  background-color: #FFF;
+  padding: 3em 2em 2em;
+  width: 20em;
+  margin-bottom: 2em;
+}
+input-wrapper {
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.86);
+    height: 2.75em;
+    border: 1px solid #eee;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+    padding: 5px 10px;
+    margin-bottom: 1em;
+  }
+
+.hosted-field {
+  height: 2em;
+}
+
+.submit {
+  margin-top: 1em;
+}
