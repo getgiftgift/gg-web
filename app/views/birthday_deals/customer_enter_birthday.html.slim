@@ -4,5 +4,5 @@
     .panel 
       h1 What's your birthday?
       = simple_form_for :user, method: :patch, url: add_birthday_to_user_path do |f|
-        = f.input :birthdate, class: 'date', placeholder: 'MM/DD/YYYY', input_html: {class: 'text-center'}
+        = f.input :birthdate, class: 'date', placeholder: 'MM/DD/YYYY', input_html: {class: 'text-center'}, autofocus: true
         = f.button :submit, "Submit", {class: 'expand'}
