@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161215035422) do
+ActiveRecord::Schema.define(version: 20161223010912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,18 +51,19 @@ ActiveRecord::Schema.define(version: 20161215035422) do
 
   create_table "birthday_deals", force: :cascade do |t|
     t.integer  "company_id"
-    t.integer  "value"
     t.string   "hook"
     t.string   "restrictions"
     t.string   "how_to_redeem"
     t.string   "slug"
     t.string   "state"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.date     "start_date"
     t.date     "end_date"
     t.integer  "location_id"
     t.integer  "occasion_id"
+    t.integer  "value_cents",    default: 0,     null: false
+    t.string   "value_currency", default: "USD", null: false
   end
 
   add_index "birthday_deals", ["occasion_id"], name: "index_birthday_deals_on_occasion_id", using: :btree
@@ -203,6 +204,17 @@ ActiveRecord::Schema.define(version: 20161215035422) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "sponsorships", force: :cascade do |t|
+    t.string   "name",                                      null: false
+    t.string   "note"
+    t.integer  "amount_per_party_cents",    default: 0,     null: false
+    t.string   "amount_per_party_currency", default: "USD", null: false
+    t.datetime "start_date",                                null: false
+    t.datetime "end_date",                                  null: false
+    t.integer  "total_amount_cents",        default: 0,     null: false
+    t.string   "total_amount_currency",     default: "USD", null: false
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "state"
@@ -223,9 +235,12 @@ ActiveRecord::Schema.define(version: 20161215035422) do
     t.string   "amount_currency",   default: "USD",       null: false
     t.string   "name",              default: "Anonymous"
     t.string   "note"
+    t.integer  "type_id"
+    t.string   "type_type"
   end
 
   add_index "transactions", ["birthday_party_id"], name: "index_transactions_on_birthday_party_id", using: :btree
+  add_index "transactions", ["type_type", "type_id"], name: "index_transactions_on_type_type_and_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"

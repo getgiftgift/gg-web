@@ -1,0 +1,2 @@
+module Dashboard::SponsorshipsControllerHelper
+end

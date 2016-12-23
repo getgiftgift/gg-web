@@ -5,7 +5,7 @@
   = @birthday_deal.hook
 %p
   %b Value:
-  = display_price(@birthday_deal.value)
+  = number_to_currency(@birthday_deal.value)
 %p
   %b Restrictions:
   = @birthday_deal.show_restrictions

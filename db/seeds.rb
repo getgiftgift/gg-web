@@ -5,7 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Location.first_or_create(name: 'Columbia', city: 'Columbia', state: 'MO')
+location = Location.first_or_create(name: 'Columbia', city: 'Columbia', state: 'MO')
+
 %w[
   david@addsheet.com
   joshuasmith.ca@gmail.com
@@ -15,3 +16,16 @@ Location.first_or_create(name: 'Columbia', city: 'Columbia', state: 'MO')
   )
   user.change_password('password')
 end
+
+company = Company.where(
+  name: 'Testcorp'
+  ).first_or_create
+
+deal = company.birthday_deals.where(
+  location: location,
+  state: :approved
+).first_or_create(
+  value: 20.00,
+  start_date: Date.today,
+  end_date: Date.today + 10.years
+)

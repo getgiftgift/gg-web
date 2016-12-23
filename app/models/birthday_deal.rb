@@ -8,7 +8,7 @@ class BirthdayDeal < ActiveRecord::Base
   has_and_belongs_to_many :company_locations
   has_many :transition_records, foreign_key: 'birthday_deal_id', class_name: "BirthdayDealStateTransition"
 
-  # attr_accessible :hook, :how_to_redeem, :path, :restrictions, :company_id, :company_location_ids, :value, :start_date, :end_date
+  monetize :value_cents
 
   scope :in_location, -> location {  where("birthday_deals.location_id = ?", location.id) }
   scope :is_active, -> { where("start_date <= ? and end_date >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)).with_state(:approved) }

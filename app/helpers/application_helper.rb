@@ -11,16 +11,6 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  
-  def display_price(price)
-    return nil unless price
-    if ((price*100).divmod(100))[1] == 0
-      "$#{price.to_int}"
-    else
-      number_to_currency(price)
-    end
-  end
-
   def display_city_state(city, state)
     city_state = ""
     if city and not city.empty?

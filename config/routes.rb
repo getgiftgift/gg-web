@@ -3,7 +3,6 @@ WorthdayWeb::Application.routes.draw do
 
 	get '/birthday_party/:id/checkout' => 'transactions#new'
 	get '/birthday_party/:id' => 'birthday_parties#show'
-  get '/dashboard' => 'home#dashboard'
   get '/' => 'birthday_deals#index', as: 'birthday_deals'
   match '/verify' => 'home#verify', via: [:get, :post]
   patch '/change_location' => 'users#change_location'
@@ -41,7 +40,7 @@ WorthdayWeb::Application.routes.draw do
   end
 
   namespace :dashboard do
-    get '/locations' => 'locations#index', as: 'index'
+    get '/' => 'locations#index', as: 'index'
     resources :users
     resources :companies do
       resources :contacts
@@ -76,6 +75,9 @@ WorthdayWeb::Application.routes.draw do
         end
       end
     end
+
+    resources :sponsorships
+
   end
   # The priority is based upon order of creation:
   # first created -> highest priority.

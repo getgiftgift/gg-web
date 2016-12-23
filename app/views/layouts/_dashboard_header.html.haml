@@ -2,6 +2,8 @@
   %ul
     %li= link_to 'Markets', dashboard_locations_path
     %li= link_to 'Companies', dashboard_companies_path  
+    %li= link_to 'BirthdayDeals', dashboard_location_birthday_deals_path(current_location)
+    %li= link_to 'Sponsorships', dashboard_sponsorships_path  
     %li= link_to 'Users', dashboard_users_path
     %li= link_to 'Sign Out', destroy_user_session_path, method: :delete
     %li= current_user.email if current_user

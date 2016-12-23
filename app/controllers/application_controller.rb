@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_referral_code
   before_filter :verify_login_and_birthday, unless: :devise_controller?
 
+  helper_method :current_location
+
   def after_sign_in_path_for(resource)
     resource.admin? ? dashboard_index_path : birthday_deals_path
   end
