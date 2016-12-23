@@ -1,5 +1,11 @@
 class BirthdayParty < ActiveRecord::Base
-	 belongs_to :user
+  PARTY_VALID_FOR = 30.days
 
-   has_many :transactions
+  belongs_to :user
+
+  has_many :transactions
+
+  def available?
+    Time.now >= date && Time.now <= date + PARTY_VALID_FOR
+  end
 end

@@ -78,8 +78,7 @@ class ApplicationController < ActionController::Base
 
   def verify_login_and_birthday
     if customer_logged_in?
-      birthday = current_user.adjusted_birthday
-      return render 'birthday_deals/customer_enter_birthday' if birthday.blank?
+      return render 'birthday_deals/customer_enter_birthday' if current_user.birthdate.blank?
       return render 'birthday_deals/customer_enter_location' if current_user.location.blank?
     else
       session[:return_to] = birthday_deals_path

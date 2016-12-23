@@ -80,49 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
-    birthdate = self.is_testuser? ? Date.today : self.birthdate
-    return nil if birthdate.nil?
-    birthday_string = birthdate.strftime('%m%d')
-    today = Date.today.strftime('%m%d')
-    start_date = (birthdate - 15.days).strftime('%m%d')
-    end_date = (birthdate + 15.days).strftime('%m%d')
-    if end_date < start_date # The birthday club range crosses years
-      if birthday_string >= '0101' && birthday_string <= end_date # The birthday is in the new year
-        if today <= '1231' && today >= (Date.today - 1.month).strftime('%m%d') # Today is in the earlier year
-          birthday = birthdate.change(year: (Date.today + 1.year).year) # The birthday occurs in the next year
-        elsif today >= '0101'# Today is in the new year
-          birthday = birthdate.change(year: (Date.today.year)) # This birthday is in the current year
-        end
-      elsif birthday_string <= '1231' && birthday_string >= start_date # The birthday is in the earlier year
-        if today <= '1231' && today >= start_date # Today is in the earlier year
-          birthday = birthdate.change(year: (Date.today.year)) # The birthday occurs in this year
-        elsif today >= '0101' && today <= end_date # Today is in the new year
-          birthday = birthdate.change(year: (Date.today - 1.year).year) # This birthday is in the previous year
-        end
-      end
-    else
-      birthday = birthdate.change(year: Date.today.year) unless birthdate.month == 2 && birthdate.day == 29 && !Date.today.leap?
-    end
-    if birthdate.leap? && birthdate.month == 2 && birthdate.day == 29 && !Date.today.leap?  # Customer has a leap year birthday and on leap day and its not a leap year
-      birthday = birthdate.change(day: 28, year: Date.today.year)
-    end
-    birthday
+    birthdate + (Date.today.year - birthdate.year).years
   end
 
   def eligible_for_birthday_deals?
-    return true if self.is_testuser?
-    date_start = (Date.today - 15.days).strftime('%m%d')
-    date_end = (Date.today + 15.days).strftime('%m%d')
-    user_bday = self.birthdate.strftime('%m%d')
-    if date_end < date_start # Birthday overlaps new year
-      if (user_bday >= "0101" && user_bday <= end_date) || ( user_bday <= "1231" && user_bday >= start_date )
-        return true
-      else
-        return false
-      end
-    else
-      return true if user_bday <= date_end && user_bday >= date_start
-    end
+    birthday_party.available?
   end
 
   def change_password(password)
