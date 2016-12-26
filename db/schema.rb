@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161223010912) do
+ActiveRecord::Schema.define(version: 20161226200505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,10 +79,12 @@ ActiveRecord::Schema.define(version: 20161223010912) do
   add_index "birthday_deals_company_locations", ["company_location_id"], name: "index_birthday_deals_company_locations_on_company_location_id", using: :btree
 
   create_table "birthday_parties", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id",    null: false
-    t.date     "date",       null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "user_id",                       null: false
+    t.date     "date",                          null: false
+    t.integer  "cost_cents",    default: 3000,  null: false
+    t.string   "cost_currency", default: "USD", null: false
   end
 
   add_index "birthday_parties", ["user_id", "date"], name: "index_birthday_parties_on_user_id_and_date", unique: true, using: :btree
