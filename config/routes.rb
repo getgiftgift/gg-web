@@ -1,16 +1,25 @@
 WorthdayWeb::Application.routes.draw do
-  root :to => 'birthday_deals#index'
+  root :to => 'birthday_parties#index'
 
-	get '/birthday_party/:id/checkout' => 'transactions#new'
-	get '/birthday_party/:id' => 'birthday_parties#show'
-  get '/' => 'birthday_deals#index', as: 'birthday_deals'
+	get '/party/:id/checkout' => 'transactions#new'
+	# get '/party/:id' => 'birthday_parties#show'
+ #  get '/party => 'birthday_parties#index', as: 'party'
   match '/verify' => 'home#verify', via: [:get, :post]
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'
-  get '/users/edit', to: redirect('/')
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  # resources :users, only: :show
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: "users/registrations" } do
+  end
+  devise_scope :user do
+    patch '/users/update_birthday', to: 'users/registrations#update_birthday'
+    patch '/users/update_location', to: 'users/registrations#update_location'
+  end
+  # resources :users, controller: 'users/registrations', only: [] do
+  #   collection do
+  #     patch :update_birthday
+  #     patch :update_location
+  #   end
+  # end
   get '/my_account' => "users#show"
   resources :subscriptions do
     member do
@@ -19,8 +28,7 @@ WorthdayWeb::Application.routes.draw do
     end
   end
   get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts'
-  patch '/add_birthday_to_user' => 'birthday_deals#add_birthday_to_user'
-  post '/add_location_to_user' => 'birthday_deals#add_location_to_user'
+
 	resources :transactions, only: [:new, :create, :show]
 
   resources :companies, only: [:new, :create]
@@ -35,8 +43,7 @@ WorthdayWeb::Application.routes.draw do
   end
 
 
-  resources :birthday_parties, only: [:show, :index], path: 'birthday_party' do
-
+  resources :birthday_parties, only: [:show, :index], path: 'party' do
   end
 
   namespace :dashboard do

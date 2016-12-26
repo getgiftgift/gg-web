@@ -3,6 +3,6 @@
   .large-6.small-10.small-centered.columns.center-text
     .panel 
       h1 Select Your City
-      = simple_form_for :user, method: :post, url: add_location_to_user_path do |f|
+      = simple_form_for :user, method: :patch, url: users_update_location_path do |f|
         = f.input :location, collection: Location.all.sort, as: :radio_buttons, label: false
         = f.button :submit, "Submit", {class: 'expand'}

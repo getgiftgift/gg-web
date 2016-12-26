@@ -17,6 +17,7 @@ class BirthdayDealsController < ApplicationController
   def index
     if customer_logged_in?
       @location = current_location
+
       @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.in_location(current_location)
       if @birthday_deal_vouchers.empty?
         @deals = BirthdayDeal.in_location(current_location).is_active
@@ -29,33 +30,11 @@ class BirthdayDealsController < ApplicationController
         @birthday_deal_vouchers = current_user.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
       end
       render action: 'index_view_birthday_deals'
-    else
-      @customer = Customer.new
-      render action: 'index_customer_login'
     end
   end
 
   def show
     @birthday_deal = BirthdayDeal.find(params[:id])
-  end
-
-  def add_birthday_to_user
-    @customer = current_user
-    begin
-      @customer.update_attribute(:birthdate, Date.strptime(params[:user][:birthdate], "%m/%d/%Y"))
-    rescue
-    end
-    redirect_to birthday_deals_url
-  end
-
-  def add_location_to_user
-    begin
-      location = Location.find(params[:user][:location])
-      current_user.location = location
-      current_user.save
-    rescue
-    end
-    redirect_to birthday_deals_url
   end
 
   protected

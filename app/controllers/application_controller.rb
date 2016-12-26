@@ -7,8 +7,10 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_location
 
+  layout 'birthday'
+
   def after_sign_in_path_for(resource)
-    resource.admin? ? dashboard_index_path : birthday_deals_path
+    resource.admin? ? dashboard_index_path : birthday_parties_path
   end
 
   def admin_login_required
@@ -80,11 +82,12 @@ class ApplicationController < ActionController::Base
 
   def verify_login_and_birthday
     if customer_logged_in?
-      return render 'birthday_deals/customer_enter_birthday' if current_user.birthdate.blank?
-      return render 'birthday_deals/customer_enter_location' if current_user.location.blank?
+      return render 'home/customer_enter_birthday' if current_user.birthdate.blank?
+      return render 'home/customer_enter_location' if current_user.location.blank?
     else
-      session[:return_to] = birthday_deals_path
-      return render 'birthday_deals/index_customer_login'
+      session[:return_to] = root_path
+      @user = User.new
+      return render 'home/customer_login'
     end
   end
 end

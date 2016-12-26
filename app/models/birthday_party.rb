@@ -16,7 +16,19 @@ class BirthdayParty < ActiveRecord::Base
   end
 
   def activated?
-    Money.new(transactions.sum(:amount_cents)) == cost
+    total_contributed == cost
+  end
+
+  def amount_complete_decimal
+    total_contributed / cost
+  end
+
+  def amount_complete_percentage
+    "#{(amount_complete_decimal * 100)}%"
+  end
+
+  def total_contributed
+    @total_contributed ||= Money.new(transactions.sum(:amount_cents))
   end
 
   private
