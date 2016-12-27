@@ -102,7 +102,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
   end
 
   def generate_verification_number
-    generated_code = "#{id}#{((Time.now + id).to_i+user_id).to_s}"
+    generated_code = "#{id}#{((Time.now + id).to_i+user.id).to_s}"
     update_attributes verification_number: generated_code
   end
   

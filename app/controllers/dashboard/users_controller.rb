@@ -92,7 +92,7 @@ class Dashboard::UsersController < Dashboard::BaseController
 
   def get_vouchers
     @user = User.find(params[:id])
-    @birthday_vouchers = BirthdayDealVoucher.where('user_id = ?', @user)
+    @birthday_vouchers = @user.birthday_deal_vouchers
   end
 
   private
