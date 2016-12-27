@@ -14,12 +14,7 @@ WorthdayWeb::Application.routes.draw do
     patch '/users/update_birthday', to: 'users/registrations#update_birthday'
     patch '/users/update_location', to: 'users/registrations#update_location'
   end
-  # resources :users, controller: 'users/registrations', only: [] do
-  #   collection do
-  #     patch :update_birthday
-  #     patch :update_location
-  #   end
-  # end
+
   get '/my_account' => "users#show"
   resources :subscriptions do
     member do
@@ -33,6 +28,7 @@ WorthdayWeb::Application.routes.draw do
 
   resources :companies, only: [:new, :create]
 
+  resources :birthday_deals, only: [:index, :show]
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
     member do
       put :trash

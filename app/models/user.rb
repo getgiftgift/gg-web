@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
   has_one :subscription
   accepts_nested_attributes_for :subscription
   belongs_to :location
-  has_many :birthday_deal_vouchers
+
+  has_many :birthday_deal_vouchers, -> {merge(BirthdayParty.redeemable)}, through: :birthday_parties
+
   has_many :referrals_received, :foreign_key => :recipient_id,
                                 :class_name => "Referral"
   has_many :referrals_made, :foreign_key => :referrer_id,
@@ -50,7 +52,8 @@ class User < ActiveRecord::Base
   end
 
   def birthday_party
-    @birthday_party ||= birthday_parties.includes(:transactions).where(start_date: adjusted_birthday).first_or_create
+    # either currently active or next future birthday. Should there be a period to review the previous party?
+    @birthday_party ||= birthday_parties.redeemable.first || birthday_parties.includes(:transactions).where(start_date: next_birthday).first_or_create
   end
 
   def build_referral_code
@@ -63,11 +66,7 @@ class User < ActiveRecord::Base
   end
 
   def days_til_next_birthday
-    if Time.zone.now <= adjusted_birthday
-      (adjusted_birthday.to_time - Time.zone.now).to_i / 1.day
-    else
-      ((adjusted_birthday.to_time + 1.year) - Time.zone.now).to_i / 1.day
-    end
+    (next_birthday.to_time.to_i - Date.today.to_time.to_i) / 1.day
   end
 
   def full_name
@@ -87,6 +86,14 @@ class User < ActiveRecord::Base
     write_attribute(:birthdate, birthdate)
   end
 
+  def next_birthday
+    if adjusted_birthday < Date.today
+      adjusted_birthday + 1.year
+    else
+      adjusted_birthday
+    end
+  end
+
   def adjusted_birthday
     birthdate + (Date.today.year - birthdate.year).years
   end
@@ -99,11 +106,11 @@ class User < ActiveRecord::Base
     self.update_attributes(password: password, password_confirmation: password)
   end
 
-  def reset_birthday_deals()
-    self.birthday_deal_vouchers.each do |voucher|
-      voucher.reset! if voucher.valid_on.year == Time.now.year || voucher.good_through.year == Time.now.year
-    end
-  end
+  # def reset_birthday_deals()
+  #   self.birthday_deal_vouchers.each do |voucher|
+  #     voucher.reset! if voucher.valid_on.year == Time.now.year || voucher.good_through.year == Time.now.year
+  #   end
+  # end
 
   def build_subscription
     self.subscription = Subscription.create

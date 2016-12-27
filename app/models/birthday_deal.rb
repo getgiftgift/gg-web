@@ -81,8 +81,8 @@ class BirthdayDeal < ActiveRecord::Base
     self.destroy
   end
 
-  def create_voucher_for(user)
-    voucher = self.birthday_deal_vouchers.create(user: user, valid_on: user.adjusted_birthday, good_through: user.adjusted_birthday + BirthdayParty::PARTY_VALID_FOR)
+  def create_voucher_for(birthday_party)
+    voucher = self.birthday_deal_vouchers.create(birthday_party: birthday_party, valid_on: birthday_party.start_date, good_through: birthday_party.end_date)
     if user.is_testuser?
       voucher.verification_number = "#{voucher.id}000000000"
       voucher.save
