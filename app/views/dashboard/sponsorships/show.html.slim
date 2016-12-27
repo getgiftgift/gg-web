@@ -1,0 +1,18 @@
+= render 'form'
+
+
+h1 Parties to sponsor
+table
+  thead
+    th Name
+    th Progress
+    th has been sponsored by this sponsor
+    th
+  tbody
+    - @parties.each do |party|
+      tr
+        td= party.user.full_name
+        td #{humanized_money_with_symbol(party.total_contributed)} / #{humanized_money_with_symbol(party.cost)}
+        td= party.sponsorships.include?(@sponsorship)
+        td= button_to 'Sponsor', sponsor_dashboard_sponsorship_path(@sponsorship), params: {party_id: party.id}
+    

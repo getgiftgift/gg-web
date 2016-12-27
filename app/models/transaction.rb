@@ -1,6 +1,8 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :birthday_party
-  belongs_to :type, polymorphic: true
+
+  self.inheritance_column = :type
+  BRAINTREE = 'braintree'
 
   monetize :amount_cents
 end

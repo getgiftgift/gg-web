@@ -1,0 +1,4 @@
+ul 
+  - transactions.each do |transaction|
+    li #{transaction.name} threw in #{humanized_money_with_symbol(transaction.amount)}
+    

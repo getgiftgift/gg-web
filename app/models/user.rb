@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
   def birthday_party
-    @birthday_party ||= birthday_parties.where(date: adjusted_birthday).first_or_create
+    @birthday_party ||= birthday_parties.includes(:transactions).where(start_date: adjusted_birthday).first_or_create
   end
 
   def build_referral_code

@@ -44,6 +44,7 @@ WorthdayWeb::Application.routes.draw do
 
 
   resources :birthday_parties, only: [:show, :index], path: 'party' do
+    post :donate, on: :member, to: 'transactions#create'
   end
 
   namespace :dashboard do
@@ -83,7 +84,9 @@ WorthdayWeb::Application.routes.draw do
       end
     end
 
-    resources :sponsorships
+    resources :sponsorships do
+      post :sponsor, on: :member
+    end
 
   end
   # The priority is based upon order of creation:

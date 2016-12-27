@@ -1,10 +1,13 @@
-.large-9.large-centered.columns.white-box
+h1 It's #{@user.full_name}'s Birthday!
 
-  h1 It's #{@user.full_name}'s Birthday!
+h2 Let's make it great by reaching the goal
 
-  h2 Let's make it great by reaching the goal
+p #{humanized_money_with_symbol(@party.total_contributed)} of #{humanized_money_with_symbol(@party.cost)} goal
+.progress.success
+  span.meter style="width: #{@party.amount_complete_percentage}"
+p Raised by #{@party.transactions.size} people in #{@party.days_since_first_transaction} days
 
-  .progress.success
-    span.meter style="width: 33%"
+= link_to 'Help Contribute', '#', class: 'button'
 
-  = link_to 'Help Contribute', '#', class: 'button'
+= render 'transactions/form'
+= render 'transactions/list', transactions: @party.transactions

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226200505) do
+ActiveRecord::Schema.define(version: 20161227013125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,15 +79,16 @@ ActiveRecord::Schema.define(version: 20161226200505) do
   add_index "birthday_deals_company_locations", ["company_location_id"], name: "index_birthday_deals_company_locations_on_company_location_id", using: :btree
 
   create_table "birthday_parties", force: :cascade do |t|
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.integer  "user_id",                       null: false
-    t.date     "date",                          null: false
-    t.integer  "cost_cents",    default: 3000,  null: false
-    t.string   "cost_currency", default: "USD", null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.integer  "user_id",                              null: false
+    t.date     "start_date",                           null: false
+    t.integer  "cost_cents",    default: 3000,         null: false
+    t.string   "cost_currency", default: "USD",        null: false
+    t.date     "end_date",      default: '2017-01-25', null: false
   end
 
-  add_index "birthday_parties", ["user_id", "date"], name: "index_birthday_parties_on_user_id_and_date", unique: true, using: :btree
+  add_index "birthday_parties", ["user_id", "start_date"], name: "index_birthday_parties_on_user_id_and_start_date", unique: true, using: :btree
   add_index "birthday_parties", ["user_id"], name: "index_birthday_parties_on_user_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
@@ -230,19 +231,19 @@ ActiveRecord::Schema.define(version: 20161226200505) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.integer  "birthday_party_id"
-    t.string   "transaction_id",                          null: false
+    t.string   "transaction_id"
     t.datetime "settled_at"
-    t.string   "processor",                               null: false
+    t.string   "processor"
     t.integer  "amount_cents",      default: 0,           null: false
     t.string   "amount_currency",   default: "USD",       null: false
     t.string   "name",              default: "Anonymous"
     t.string   "note"
-    t.integer  "type_id"
-    t.string   "type_type"
+    t.string   "type"
+    t.integer  "sponsorship_id"
+    t.string   "status"
   end
 
   add_index "transactions", ["birthday_party_id"], name: "index_transactions_on_birthday_party_id", using: :btree
-  add_index "transactions", ["type_type", "type_id"], name: "index_transactions_on_type_type_and_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"

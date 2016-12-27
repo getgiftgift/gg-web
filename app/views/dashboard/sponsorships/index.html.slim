@@ -1,19 +1,22 @@
 .container
+  = link_to 'New Sponsorship', new_dashboard_sponsorship_path
   table
     thead
       th Name
       th Amount per party
+      th Total Amount Sponsored
       th Start date
       th End date
       th
     tbody
     - @sponsorships.each do |sponsorship|
       tr
-        td= link_to sponsorship.full_name, dashboard_sponsorship_path(sponsorship)
-        td= sponsorship.amount_per_party
-        td= sponsorship.start_date
-        td= sponsorship.end_date
+        td= link_to sponsorship.name, dashboard_sponsorship_path(sponsorship)
+        td= humanized_money_with_symbol(sponsorship.amount_per_party)
+        td #{humanized_money_with_symbol(sponsorship.amount_sponsored)} / #{humanized_money_with_symbol(sponsorship.total_amount)}
+        td= sponsorship.start_date.to_date
+        td= sponsorship.end_date.to_date
         td
           = link_to 'Edit', edit_dashboard_sponsorship_path(sponsorship)
-          | \
+          |&nbsp;|&nbsp;
           = link_to 'Delete', dashboard_sponsorship_path(sponsorship), method: :delete, data: { confirm: 'Are you sure?' }
