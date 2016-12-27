@@ -62,6 +62,14 @@ class User < ActiveRecord::Base
     self.build_subscription
   end
 
+  def days_til_next_birthday
+    if Time.zone.now <= adjusted_birthday
+      (adjusted_birthday.to_time - Time.zone.now).to_i / 1.day
+    else
+      ((adjusted_birthday.to_time + 1.year) - Time.zone.now).to_i / 1.day
+    end
+  end
+
   def full_name
     %Q(#{first_name} #{last_name})
   end

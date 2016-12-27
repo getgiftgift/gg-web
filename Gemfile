@@ -47,7 +47,7 @@ gem 'rvm-capistrano'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'state_machines'
+gem 'state_machines', '~> 0.4.0'
 gem 'state_machines-activerecord'
 gem 'state_machines-audit_trail'
 gem 'therubyracer' #JavaScript runtime for production

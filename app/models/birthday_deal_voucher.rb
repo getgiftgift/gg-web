@@ -11,7 +11,8 @@ class BirthdayDealVoucher < ActiveRecord::Base
     :value => Proc.new { |c| c.verification_number }
 
   belongs_to :birthday_deal
-  belongs_to :user
+  belongs_to :birthday_party
+  has_one :user, through: :birthday_party
   has_one :company, through: :birthday_deal
   has_many :birthday_deal_voucher_state_transitions, dependent: :destroy
   # attr_accessible :good_through, :valid_on, :user

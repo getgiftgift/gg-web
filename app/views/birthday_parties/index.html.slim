@@ -1,0 +1,15 @@
+h1 Your Birthday is #{pluralize(@user.days_til_next_birthday, 'day')} away!
+
+h2 We have a great party for you, #{@user.full_name}!
+
+hr
+
+= render 'status', party: @party
+
+- if @party.activated? && @party.available? || true
+  = link_to 'Take me to my party!', birthday_deals_path, class: 'button'
+- else 
+  = link_to 'Help Contribute', '#', class: 'button'
+
+  = render 'transactions/form'
+= render 'transactions/list', transactions: @party.transactions

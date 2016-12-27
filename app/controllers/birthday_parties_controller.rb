@@ -5,7 +5,6 @@ class BirthdayPartiesController < ApplicationController
   def index
 		@party = current_user.birthday_party
     @user = current_user
-    render :show
   end
 
   def show
