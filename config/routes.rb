@@ -11,11 +11,12 @@ WorthdayWeb::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: "users/registrations" } do
   end
   devise_scope :user do
+    get   '/my_account', to: 'users/registrations#show'
     patch '/users/update_birthday', to: 'users/registrations#update_birthday'
     patch '/users/update_location', to: 'users/registrations#update_location'
   end
 
-  get '/my_account' => "users#show"
+
   resources :subscriptions do
     member do
       patch :subscribe

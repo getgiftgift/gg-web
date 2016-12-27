@@ -2,6 +2,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   layout 'birthday'
 
+  def show
+    @subscription = current_user.subscription
+  end
+
   def update_birthday
     if current_user.birthdate.blank? and user_params.include?(:birthdate)
       current_user.birthdate = Date.strptime(user_params[:birthdate], "%m/%d/%Y")

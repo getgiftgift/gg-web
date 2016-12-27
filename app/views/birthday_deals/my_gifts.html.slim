@@ -4,7 +4,7 @@
       .close= link_to "&times;".html_safe, birthday_deals_path
       .header-label
         h4 MY GIFTS
-    - if @birthday_vouchers.empty?
+    - if @birthday_vouchers.blank?
       p.center-text You don't have any birthday vouchers. It's either not your birthday, or you haven't kept any!
     -else
       br
