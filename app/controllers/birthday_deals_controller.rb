@@ -18,16 +18,26 @@ class BirthdayDealsController < ApplicationController
     if customer_logged_in?
       @location = current_location
       @party = current_user.birthday_party
-      @birthday_deal_vouchers = @party.birthday_deal_vouchers
+      @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
+      if current_user.is_testuser? 
+        if @birthday_deal_vouchers.empty?
+          @party.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
+        end
+        @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
+        return render action: 'index_view_birthday_deals'
+      end
+
+      if @party.activated? && @party.available?
+        @party.create_vouchers if @party.birthday_deal_vouchers.blank?
+        @birthday_deal_vouchers = @party.birthday_deal_vouchers
+      else
+        return render 'index_not_your_birthday'
+      end
       if @birthday_deal_vouchers.empty?
         @deals = BirthdayDeal.in_location(current_location).is_active
         return render 'index_not_your_birthday' if @deals.empty?
       end
-      @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
-      if current_user.is_testuser? && @birthday_deal_vouchers.empty?
-        @party.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
-        @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
-      end
+      
       render action: 'index_view_birthday_deals'
     end
   end
