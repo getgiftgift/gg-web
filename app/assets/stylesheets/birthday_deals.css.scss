@@ -48,7 +48,13 @@ body {
   }
 
   font-family: 'Open Sans', sans-serif;
-  
+  .title-img{
+    img{
+      height: 37px;
+      width: auto;
+    }
+    margin: 0 auto;
+  }
   background: rgb(107,192,236) !important;
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
   /* IE9 SVG, needs conditional override of 'filter' to 'none' */
@@ -372,8 +378,7 @@ td.barby-cell.on { background: #000; }
   width: 100%; 
   position:absolute; 
   top: 45px; 
-  border-top: solid 1px #201635; 
-  background-color: #663399;
+  background-color: rgba(255,255,255,0);
   p {
     font-size: .8em;
   }

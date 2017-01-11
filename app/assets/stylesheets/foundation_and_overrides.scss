@@ -95,9 +95,10 @@ $font-family-sans-serif: "Open Sans", Helvetica, Arial, sans-serif;
 // $font-weight-normal: normal !default;
 // $font-weight-bold: bold !default;
 
-$purple         : #412b6a;
-// $white       : #FFFFFF;
-// $ghost       : #FAFAFA;
+$white          : #FFFFFF;
+$light-orange   : #f58b2c;
+$dark-orange    : #f1752c;
+$ghost       : #FAFAFA;
 // $snow        : #F9F9F9;
 // $vapor       : #F6F6F6;
 // $white-smoke : #F5F5F5;
@@ -119,9 +120,9 @@ $gray           : #7A7A7A;
 $light-gray     : #e5e5e4;
 $red            : #d91f26;
 $green          : #56b947;
-
+$purple         : $ghost;
 // We use these as default colors throughout
-// $primary-color: #008CBA;
+$primary-color: $light-orange;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -854,7 +855,7 @@ $off-canvas-bg-hover: scale-color($oil, $lightness: -30%);
 // $off-canvas-back-hover-border-bottom: none;
 
 // Off Canvas Menu Icon Variables
-// $tabbar-menu-icon-color: $white;
+$tabbar-menu-icon-color: $oil;
 // $tabbar-menu-icon-hover: scale-color($tabbar-menu-icon-color, $lightness: -30%);
 
 // $tabbar-menu-icon-text-indent: rem-calc(35);
