@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20161227070658) do
     t.date     "start_date",                           null: false
     t.integer  "cost_cents",    default: 3000,         null: false
     t.string   "cost_currency", default: "USD",        null: false
-    t.date     "end_date",      default: '2017-01-25', null: false
+    t.date     "end_date",      default: '2017-01-26', null: false
     t.integer  "location_id"
   end
 
@@ -242,12 +242,17 @@ ActiveRecord::Schema.define(version: 20161227070658) do
     t.string   "amount_currency",   default: "USD",       null: false
     t.string   "name",              default: "Anonymous"
     t.string   "note"
-    t.string   "type"
+    t.string   "last_4"
+    t.string   "card_type"
+    t.string   "expiration_date"
+    t.string   "cardholder_name"
     t.integer  "sponsorship_id"
+    t.string   "type"
     t.string   "status"
   end
 
   add_index "transactions", ["birthday_party_id"], name: "index_transactions_on_birthday_party_id", using: :btree
+  add_index "transactions", ["type", "sponsorship_id"], name: "index_transactions_on_type_and_sponsorship_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"
@@ -294,9 +299,7 @@ ActiveRecord::Schema.define(version: 20161227070658) do
   add_foreign_key "birthday_deal_state_transitions", "birthday_deals"
   add_foreign_key "birthday_deal_voucher_state_transitions", "birthday_deal_vouchers"
   add_foreign_key "birthday_deal_vouchers", "birthday_parties"
-  add_foreign_key "birthday_deals", "occasions"
   add_foreign_key "birthday_parties", "locations"
-  add_foreign_key "birthday_parties", "users"
   add_foreign_key "transactions", "birthday_parties"
   add_foreign_key "users", "locations"
 end
