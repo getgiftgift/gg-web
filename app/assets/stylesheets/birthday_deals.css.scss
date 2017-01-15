@@ -38,11 +38,9 @@ body {
   h3{}
   h4{
     color: $tuatara;
-    font-weight: 800;
   }
   h5{
     color: $tuatara;
-    font-weight: 800;
   }
   h6{
     color: $tuatara;
@@ -165,6 +163,9 @@ body {
   margin-top: 20px;
   .row{
     margin-top: 10px;
+  }
+  .label{
+    margin-top: 3px;
   }
   h4{ margin-bottom: 15px;}
 }
