@@ -10,7 +10,7 @@
 @import "foundation_and_overrides";
 @import "foundation-icons";
 @import "transactions";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
+// @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
 
 $letter-spacing: 1px;
 
@@ -20,6 +20,8 @@ html {
 }
 
 body {
+  font-family: "Helvetica Neue", sans-serif;
+  color: $tuatara;
   #layout, .off-canvas-wrap{
     height: 100%;
     overflow-y: auto;
@@ -35,15 +37,15 @@ body {
   h2{}
   h3{}
   h4{
-    color: $purple;
+    color: $tuatara;
     font-weight: 800;
   }
   h5{
-    color: $gray;
+    color: $tuatara;
     font-weight: 800;
   }
   h6{
-    color: $purple;
+    color: $tuatara;
     font-weight: 800;
   }
 
@@ -157,6 +159,18 @@ body {
   a{
     color: $gray;
   }
+}
+
+#account-info{
+  margin-top: 20px;
+  .row{
+    margin-top: 10px;
+  }
+  h4{ margin-bottom: 15px;}
+}
+
+#subscription-status{
+  display: inline;
 }
 
 //////// KEYFRAMES FOR GIFT ANIMATION ////////
@@ -355,7 +369,7 @@ td,th {
 }
 
 .header-label{
-  background: $light-gray;
+  // background: $light-gray;
   text-align: center;
   h4{
     margin: 0 0 10px 0;

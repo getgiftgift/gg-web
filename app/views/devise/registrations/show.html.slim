@@ -3,30 +3,41 @@
     .row
       .close= link_to "&times;".html_safe, birthday_deals_path
       .header-label
-        h4 MY ACCOUNT
+        h6 My Account
     .row
-      .small-11.small-centered.columns
-        p.center-text= user_full_name
-        dl
-          dt Birthday
-          dd= current_user.birthdate ? current_user.birthdate : 'N/A'
-        
-          dt Email 
-          dd= current_user.email
-          dt Notifications
-          dd#subscription-status  
-            - if @subscription.pending_subscribe? || @subscription.pending_unsubscribe?
-              |Your request is processing.
-            - elsif @subscription.subscribed?
-              |You are receiving emails.
-              br
-              = link_to "(Click to unsubscribe)", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
-            - elsif @subscription.unsubscribed?
-              |You don't get our emails.
-              br
-              = link_to "(Click to add)", subscribe_subscription_path(@subscription), method: :patch, remote: true
-          dt Location
-          dd= current_user.location.location_name
-          
-          dt Referral Link
-          dd http://GetGiftGift.com/?r=#{current_user.referral_code}
+      .small-10.small-centered.columns#account-info
+        h4.center-text= user_full_name
+        .row
+          .small-4.columns 
+            b.right.label Birthday
+          .small-8.columns 
+            = current_user.birthdate ? current_user.birthdate : 'N/A'
+        .row
+          .small-4.columns  
+            b.right.label Email 
+          .small-8.columns  
+            = current_user.email
+        .row
+          .small-4.columns  
+            b.right.label Notifications
+          .small-8.columns  
+            #subscription-status  
+              - if @subscription.pending_subscribe? || @subscription.pending_unsubscribe?
+                |Your request is processing.
+              - elsif @subscription.subscribed?
+                |You are receiving emails.
+                br
+                = link_to "(Click to unsubscribe)", unsubscribe_subscription_path(@subscription), method: :patch, remote: true
+              - elsif @subscription.unsubscribed?
+                |You don't get our emails.
+                br
+                = link_to "(Click to add)", subscribe_subscription_path(@subscription), method: :patch, remote: true
+        .row
+          .small-4.columns 
+            b.right.label Location
+          .small-8.columns   
+            = current_user.location.location_name
+        .row
+          .small-4.columns 
+            b.right.label Referral Link 
+          .small-8.columns http://GetGiftGift.com/?r=#{current_user.referral_code}
