@@ -12,7 +12,7 @@
     - if @party.activated? && @party.available? || true
       = link_to 'Take me to my party!', birthday_deals_path, class: 'button'
     - else 
-      = link_to 'Help Contribute', '#', class: 'button'}
+      = link_to 'Help Contribute', '#', class: 'button'
 
 
       = render 'transactions/form'
