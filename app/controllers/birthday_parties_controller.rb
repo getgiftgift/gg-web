@@ -1,6 +1,7 @@
 class BirthdayPartiesController < ApplicationController
 
   before_filter :create_token, only: [:index, :show]
+  skip_filter   :verify_login_and_birthday, only: [:show]
 
   def index
 		@party = current_user.birthday_party
