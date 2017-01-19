@@ -10,7 +10,8 @@
 @import "foundation_and_overrides";
 @import "foundation-icons";
 @import "transactions";
-// @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,700,600,800,400,300,200,100);
+@import "foundation/components/tabs";
+@import "birthday_parties";
 
 $letter-spacing: 1px;
 
@@ -43,8 +44,9 @@ body {
     color: $tuatara;
   }
   h6{
-    color: $tuatara;
-    font-weight: 800;
+    font-size: $h4-font-size;
+    color: $light-orange;
+
   }
 
   font-family: 'Open Sans', sans-serif;
@@ -93,6 +95,10 @@ body {
   &:hover {
     @include box-shadow(rgba(0, 0, 0, 0.075) 0 1px 2px inset, rgba(169, 169, 169, 1) 0 0 16px);
   }
+}
+
+.hidden{
+  display: none;
 }
 
 #details {
@@ -156,6 +162,20 @@ body {
   margin: 3px 5px 0 0;
   a{
     color: $gray;
+  }
+}
+span.orange {
+  color: $light-orange;
+  font-weight: 600;
+}
+
+#donation-info{
+  .tab-title{
+    border-bottom: solid 2px #636363;
+    background: #FFFFFF;
+  }
+  .tab-title.active{
+    border-bottom: solid 4px #636363;
   }
 }
 
