@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  
+
   layout 'birthday'
 
   def show
@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_birthday
     if current_user.birthdate.blank? and user_params.include?(:birthdate)
-      current_user.birthdate = Date.strptime(user_params[:birthdate], "%m/%d/%Y")
+      current_user.birthdate = user_params[:birthdate]
     end
     current_user.save
     redirect_to root_url
@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_location
     if user_params.include?(:location)
       location = Location.find(user_params[:location])
-      current_user.location = location  
+      current_user.location = location
     end
     current_user.save
     redirect_to root_url

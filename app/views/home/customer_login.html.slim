@@ -1,11 +1,12 @@
 .row style="height:35px;"
 .row
   .large-6.small-10.small-centered.columns.center-text
-    
+
     = image_tag "giftgift-logo.png", style: 'margin-top: 20px;'
     = image_tag "present-pile-stars.png"
     #play_video= link_to "Free presents? Tell me more!", "#youtube-video", class: "free-presents"
     #youtube-video.flex-video style="display:none; margin-top: 20px;"
       iframe width="560" height="315" src="https://www.youtube.com/embed/0yDV9aTOFEI?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen=""
     = link_to image_tag(asset_path("facebook-login-blue.png"), style: 'margin-top: 20px;'), "javascript:void(0);", onclick: "fbLogin();"
-    / p= link_to 'or use email', new_user_session_path
+    - if Rails.env.development?
+      p= link_to 'Dev login', new_user_session_path

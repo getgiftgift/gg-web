@@ -87,6 +87,7 @@ class User < ActiveRecord::Base
   end
 
   def next_birthday
+    return nil unless birthdate
     if adjusted_birthday < Date.today
       adjusted_birthday + 1.year
     else
@@ -95,6 +96,7 @@ class User < ActiveRecord::Base
   end
 
   def adjusted_birthday
+    return nil unless birthdate
     birthdate + (Date.today.year - birthdate.year).years
   end
 

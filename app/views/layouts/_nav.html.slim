@@ -3,12 +3,12 @@
     .inner-wrap
       nav.tab-bar style="height: 70px;"
         section.left-small
-          a.left-off-canvas-toggle.menu-icon href="#" 
+          a.left-off-canvas-toggle.menu-icon href="#"
             span
         section.middle.tab-bar-section
           h1.title= link_to 'Gift Gift', root_path, class: 'branding'
         .messages
-          p#counter 
+          p#counter
             - flash.each do |name, msg|
               - if msg.is_a?(String)
                 = msg
@@ -17,14 +17,15 @@
         ul.off-canvas-list
           li
             label Menu
-          li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
-          li= link_to 'View My Gifts', my_gifts_path
+          - if current_user.birthdate.present?
+            li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
+            li= link_to 'View My Gifts', my_gifts_path
           li= link_to 'My Account', my_account_path
           li= link_to 'Sign Out', destroy_user_session_path, method: :delete
-          li= mail_to 'help@getgiftgift.com', 'Email Us', target: '_blank' 
+          li= mail_to 'help@getgiftgift.com', 'Email Us', target: '_blank'
       section.main-section
         = yield
         a.exit-off-canvas
-- else 
+- else
   = render 'layouts/messages'
   = yield
