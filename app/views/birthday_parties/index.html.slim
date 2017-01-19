@@ -1,5 +1,6 @@
 .row.content-row
-  .large-8.large-centered.columns.white-box
+  .large-8.large-centered.columns.white-box.text-center
+    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?type=large"
     h2 Your Birthday is #{pluralize(@user.days_til_next_birthday, 'day')} away!
 
     h3 We have a great party for you, #{@user.full_name}!
@@ -7,7 +8,6 @@
     hr
 
     = render 'status', party: @party
-
 
     - if @party.activated? && @party.available?
       = link_to 'Take me to my party!', birthday_deals_path, class: 'button'
