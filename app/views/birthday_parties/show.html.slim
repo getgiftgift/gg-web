@@ -1,6 +1,6 @@
 .row.content-row
-  .large-8.large-centered.columns.white-box
-    img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?type=large"
+  .large-8.large-centered.columns.white-box.text-center
+    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?type=large"
     h2 #{@user.full_name}'s Birthday is #{pluralize(@user.days_til_next_birthday, 'day')} away!
 
     h3 Throw A Party for #{@user.full_name}
@@ -26,6 +26,6 @@
         = render 'transactions/list', transactions: @party.transactions
       .content#what
         p
-          |When we get to our $29 goal,
-          span.orange #{current_user.full_name}
+          |When we get to our $29 goal, 
+          span.orange #{current_user.full_name} 
           |will receive 30 presents worth $150 or more for their birthday! Help #{current_user.full_name} have a great birthday.
