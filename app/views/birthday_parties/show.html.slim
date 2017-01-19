@@ -8,12 +8,8 @@
     = render 'status', party: @party
 
     = link_to 'Help Contribute', '#', class: 'button reveal-payment'
-    / #checkout-modal.reveal-modal data-reveal=''
-    /   = render 'transactions/form'
-    /   = link_to "&#215;".html_safe, '#', class: 'close-reveal-modal'
-.row.content-row#payment-box
-  .large-8.large-centered.columns.white-box
-    = render 'transactions/form'
+
+= render 'transactions/form'
 
 .row.content-row
   .large-8.large-centered.columns.white-box#donation-info

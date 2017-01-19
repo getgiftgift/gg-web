@@ -12,8 +12,23 @@
     - if @party.activated? && @party.available?
       = link_to 'Take me to my party!', birthday_deals_path, class: 'button'
     - else
-      = link_to 'Help Contribute', '#', class: 'button'
+      = link_to 'Help Contribute', '#', class: 'button reveal-payment'
 
 
-      = render 'transactions/form'
-    = render 'transactions/list', transactions: @party.transactions
+= render 'transactions/form'
+
+.row.content-row
+  .large-8.large-centered.columns.white-box#donation-info
+    ul.tabs data-tab=""
+      li.tab-title.active
+        a href="#donations"
+          h6 Recent Donations
+      li.tab-title
+        a href="#what"
+          h6 Shout Outs
+
+    .tabs-content
+      .content.active#donations
+        = render 'transactions/list', transactions: @party.transactions
+      .content#what
+        = render 'transactions/shout_outs', transactions: @party.transactions

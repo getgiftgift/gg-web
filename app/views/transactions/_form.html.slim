@@ -1,28 +1,28 @@
 = javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/client.min.js"
 = javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/hosted-fields.min.js"
+.row.content-row#payment-box
+  .large-8.large-centered.columns.white-box.form-container
+    = form_tag donate_birthday_party_path(@party), method: :post, id: 'checkout-form' do
+      = label_tag :amount, 'Donation Amount'
+      = number_field_tag :amount, @party.minimum_donation.to_i, min: @party.minimum_donation.to_i, max: @party.total_remaining.to_i
 
-.form-container
-  = form_tag donate_birthday_party_path(@party), method: :post, id: 'checkout-form' do
-    = label_tag :amount, 'Donation Amount'
-    = number_field_tag :amount, @party.minimum_donation.to_i, min: @party.minimum_donation.to_i, max: @party.total_remaining.to_i
+      = label_tag :name, 'Name (public)'
+      = text_field_tag :name, nil, placeholder: 'Anonymous'
 
-    = label_tag :name, 'Name (public)'
-    = text_field_tag :name, nil, placeholder: 'Anonymous'
+      = label_tag :note, 'Note (private)'
+      = text_field_tag :note, nil, placeholder: 'Happy birthday!'
 
-    = label_tag :note, 'Note (private)'
-    = text_field_tag :note, nil, placeholder: 'Happy birthday!'
-
-    = label_tag :card_number, 'Credit Card Number' 
-    .input-wrapper
-      .hosted-field#card-number
-    = label_tag :cvv, 'CVV'
-    .input-wrapper
-      .hosted-field#cvv
-    = label_tag :expiration_date, 'Expiration Date'
-    .input-wrapper
-      .hosted-field#expiration-date
-    = hidden_field_tag :payment_method_nonce 
-    = submit_tag 'Process Payment', class: 'button small'  
+      = label_tag :card_number, 'Credit Card Number' 
+      .input-wrapper
+        .hosted-field#card-number
+      = label_tag :cvv, 'CVV'
+      .input-wrapper
+        .hosted-field#cvv
+      = label_tag :expiration_date, 'Expiration Date'
+      .input-wrapper
+        .hosted-field#expiration-date
+      = hidden_field_tag :payment_method_nonce 
+      = submit_tag 'Process Payment', class: 'button small'  
 
     
 
