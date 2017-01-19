@@ -9,9 +9,9 @@
     = render 'status', party: @party
 
 
-    - if @party.activated? && @party.available? || true
+    - if @party.activated? && @party.available?
       = link_to 'Take me to my party!', birthday_deals_path, class: 'button'
-    - else 
+    - else
       = link_to 'Help Contribute', '#', class: 'button'
 
 
