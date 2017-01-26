@@ -44,9 +44,7 @@ body {
     color: $tuatara;
   }
   h6{
-    font-size: $h4-font-size;
     color: $light-orange;
-
   }
 
   font-family: 'Open Sans', sans-serif;
@@ -171,6 +169,13 @@ span.orange {
   .tab-title{
     border-bottom: solid 2px #636363;
     background: #FFFFFF;
+    h6 {
+      color: $light-orange;
+    }
+    a {
+      outline: none;
+      padding: .75rem;
+    }
   }
   .tab-title.active{
     border-bottom: solid 4px #636363;

@@ -1,4 +1,12 @@
-p #{humanized_money_with_symbol(party.total_contributed)} of #{humanized_money_with_symbol(party.cost)} goal
+p
+  h2.text-left
+    span.orange
+      sup= currency_symbol
+      |#{humanized_money(party.total_contributed)}
+    small.subheader
+      |&nbsp;of&nbsp;
+      sup= currency_symbol
+      |#{humanized_money(party.cost)} goal
 .progress.round#progress
   span.meter style="width: #{party.amount_complete_percentage}"
-p Raised by #{party.transactions.size} #{'person'.pluralize(party.transactions.size)} in #{party.days_since_first_transaction} days
+p.text-left Raised by #{party.transactions.size} #{'person'.pluralize(party.transactions.size)} in #{party.days_since_first_transaction} days

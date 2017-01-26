@@ -1,7 +1,12 @@
 - if transactions.blank?
   p No one wants to party yet.
-- else 
-  ul 
+- else
+  ul
     - transactions.each do |transaction|
-      li #{transaction.name} threw in #{humanized_money_with_symbol(transaction.amount)}
-      
+      li
+        h4.subheader
+          strong #{transaction.name}
+          |&nbsp;threw in&nbsp;
+          span.orange
+            sup= currency_symbol
+            |#{humanized_money(transaction.amount)}

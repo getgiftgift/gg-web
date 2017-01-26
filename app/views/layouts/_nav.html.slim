@@ -1,31 +1,29 @@
-- if current_user
-  .off-canvas-wrap data-offcanvas=""
-    .inner-wrap
-      nav.tab-bar#header
-        section.left-small
-          a.left-off-canvas-toggle.menu-icon href="#"
-            span
-        section.middle.tab-bar-section
-          h1.title-img= link_to image_tag(image_path('giftgift-logo.png')), root_path
-        .messages
-          p#counter
-            - flash.each do |name, msg|
-              - if msg.is_a?(String)
-                = msg
+.off-canvas-wrap data-offcanvas=""
+  .inner-wrap
+    nav.tab-bar#header
+      section.left-small
+        a.left-off-canvas-toggle.menu-icon href="#"
+          span
+      section.middle.tab-bar-section
+        h1.title-img= link_to image_tag(image_path('giftgift-logo.png')), root_path
+      .messages
+        p#counter
+          - flash.each do |name, msg|
+            - if msg.is_a?(String)
+              = msg
 
-      aside.left-off-canvas-menu
-        ul.off-canvas-list
-          li
-            label Menu
-          - if current_user.birthdate.present?
-            li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
-            li= link_to 'View My Gifts', my_gifts_path
+    aside.left-off-canvas-menu
+      ul.off-canvas-list
+        li
+          label Menu
+        - if current_user and current_user.birthdate.present?
+          li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
+          li= link_to 'View My Gifts', my_gifts_path
           li= link_to 'My Account', my_account_path
           li= link_to 'Sign Out', destroy_user_session_path, method: :delete
-          li= mail_to 'help@getgiftgift.com', 'Email Us', target: '_blank'
-      section.main-section
-        = yield
-        a.exit-off-canvas
-- else
-  = render 'layouts/messages'
-  = yield
+        - else
+          li= link_to 'Sign Up / Sign In', root_url
+        li= mail_to 'help@getgiftgift.com', 'Email Us', target: '_blank'
+    section.main-section
+      = yield
+      a.exit-off-canvas

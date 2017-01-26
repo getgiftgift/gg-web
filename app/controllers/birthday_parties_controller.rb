@@ -17,7 +17,7 @@ class BirthdayPartiesController < ApplicationController
 
   def create_token
     @token = Braintree::ClientToken.generate
-    @transaction = Transaction.new  
+    @transaction = Transaction.new
   end
 
 end

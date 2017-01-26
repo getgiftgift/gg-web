@@ -22,6 +22,10 @@
   margin-bottom: 0;
 }
 
+sup {
+  vertical-align: super;
+  font-size: large;
+}
 
 #countdown-banner {
   h3{
@@ -40,6 +44,22 @@
   // IE9 SVG, needs conditional override of 'filter' to 'none'
   $experimental-support-for-svg: true;
   @include background-image(linear-gradient(top, #f2d179 0%,#d9b400 100%));
+}
+
+#donations{
+  ul{
+    margin: 0;
+  }
+}
+
+#image-wrap {
+  max-width: 100%;
+  max-height: 40vh;
+  overflow: hidden;
+}
+
+.fb-img{
+  width: 100%;
 }
 
 #progress {

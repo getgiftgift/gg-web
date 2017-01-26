@@ -1,33 +1,34 @@
 .row.content-row-top.small-collapse
   .medium-8.medium-centered.columns.white-box.text-center
-    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?width=500"
+    #image-wrap
+      img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?width=500"
     #countdown-banner
       h3
         |#{@user.possessive_full_name} Birthday is&nbsp;
         em #{pluralize(@user.days_til_next_birthday, 'day')} away!
     .row
       .small-12.columns
-        h3.subheader
+        h3.subheader.text-left
           |Throw A Party for&nbsp;
           strong #{@user.full_name}
         hr
         = render 'status', party: @party
 
-        = link_to 'Help Contribute', '#', class: 'button reveal-payment'
+        = link_to "Donate to #{@user.possessive_first_name} Party!", '#', class: 'button reveal-payment'
 
 = render 'transactions/form'
 
 .row.content-row
   .medium-8.medium-centered.columns.white-box#donation-info
     .row
-      .medium-8.small-12.medium-centered.columns
+      .small-12.medium-centered.columns
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
-              p Recent Donations
+              h6 Recent Donations
           li.tab-title
             a href="#what"
-              p What is this?
+              h6 What is this?
         .tabs-content
           .content.active#donations
             = render 'transactions/list', transactions: @party.transactions
