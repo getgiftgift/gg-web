@@ -1,7 +1,7 @@
 // Place all the styles related to the birthday_parties controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+// $light-orange   : #F65E24;
 
 #payment-box {
   display: none;
@@ -17,7 +17,7 @@
 }
 
 .tab-title p {
-  color: $light-orange;
+  color: #F65E24;
   font-weight: 600;
   margin-bottom: 0;
 }
