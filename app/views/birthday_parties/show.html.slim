@@ -25,10 +25,10 @@
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
-              h6 Recent Donations
+              h3 Recent Donations
           li.tab-title
             a href="#what"
-              h6 What is this?
+              h3 What is this?
         .tabs-content
           .content.active#donations
             = render 'transactions/list', transactions: @party.transactions
