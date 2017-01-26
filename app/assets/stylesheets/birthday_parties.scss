@@ -9,6 +9,12 @@
 
 .tabs .tab-title > a {
   background-color: #FFFFFF;
+  padding: 1em;
+}
+
+.tab-title p {
+  color: $light-orange;
+  font-weight: 600;
 }
 
 img.fb-img {

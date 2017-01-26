@@ -19,16 +19,17 @@
 
 .row.content-row
   .large-8.large-centered.columns.white-box#donation-info
-    ul.tabs data-tab=""
-      li.tab-title.active
-        a href="#donations"
-          h6 Recent Donations
-      li.tab-title
-        a href="#what"
-          h6 Shout Outs
-
-    .tabs-content
-      .content.active#donations
-        = render 'transactions/list', transactions: @party.transactions
-      .content#what
-        = render 'transactions/shout_outs', transactions: @party.transactions
+    .row
+      .large-8.small-12.large-centered.columns
+        ul.tabs data-tab=""
+          li.tab-title.active
+            a href="#donations"
+              p Recent Donations
+          li.tab-title
+            a href="#what"
+              p Shout Outs
+        .tabs-content
+          .content.active#donations
+            = render 'transactions/list', transactions: @party.transactions
+          .content#what
+            = render 'transactions/shout_outs', transactions: @party.transactions

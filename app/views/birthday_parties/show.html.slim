@@ -13,19 +13,20 @@
 
 .row.content-row
   .large-8.large-centered.columns.white-box#donation-info
-    ul.tabs data-tab=""
-      li.tab-title.active
-        a href="#donations"
-          h6 Recent Donations
-      li.tab-title
-        a href="#what"
-          h6 What is this?
-
-    .tabs-content
-      .content.active#donations
-        = render 'transactions/list', transactions: @party.transactions
-      .content#what
-        p
-          |When we get to our $29 goal, 
-          span.orange #{current_user.full_name} 
-          |will receive 30 presents worth $150 or more for their birthday! Help #{current_user.full_name} have a great birthday.
+    .row
+      .large-8.small-12.large-centered.columns
+        ul.tabs data-tab=""
+          li.tab-title.active
+            a href="#donations"
+              p Recent Donations
+          li.tab-title
+            a href="#what"
+              p What is this?
+        .tabs-content
+          .content.active#donations
+            = render 'transactions/list', transactions: @party.transactions
+          .content#what
+            p
+              |When we get to our $29 goal, 
+              span.orange #{current_user.full_name} 
+              |will receive 30 presents worth $150 or more for their birthday! Help #{current_user.full_name} have a great birthday.
