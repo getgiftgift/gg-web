@@ -1,4 +1,7 @@
-ul 
-  - transactions.each do |transaction|
-    li #{transaction.name} threw in #{humanized_money_with_symbol(transaction.amount)}
-    
+- if transactions.blank?
+  p No one wants to party yet.
+- else 
+  ul 
+    - transactions.each do |transaction|
+      li #{transaction.name} threw in #{humanized_money_with_symbol(transaction.amount)}
+      

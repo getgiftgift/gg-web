@@ -6,6 +6,10 @@
 #payment-box {
   display: none;
 }
+.tab-title {
+  width: 50%;
+  text-align: center;
+}
 
 .tabs .tab-title > a {
   background-color: #FFFFFF;
@@ -15,6 +19,7 @@
 .tab-title p {
   color: $light-orange;
   font-weight: 600;
+  margin-bottom: 0;
 }
 
 img.fb-img {
