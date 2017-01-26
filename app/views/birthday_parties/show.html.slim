@@ -1,20 +1,26 @@
-.row.content-row
-  .large-8.large-centered.columns.white-box.text-center
-    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?type=large"
-    h2 #{@user.full_name}'s Birthday is #{pluralize(@user.days_til_next_birthday, 'day')} away!
+.row.content-row-top.small-collapse
+  .medium-8.medium-centered.columns.white-box.text-center
+    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?width=500"
+    #countdown-banner
+      h3
+        |#{@user.possessive_full_name} Birthday is&nbsp;
+        em #{pluralize(@user.days_til_next_birthday, 'day')} away!
+    .row
+      .small-12.columns
+        h3.subheader
+          |Throw A Party for&nbsp;
+          strong #{@user.full_name}
+        hr
+        = render 'status', party: @party
 
-    h3 Throw A Party for #{@user.full_name}
-    hr
-    = render 'status', party: @party
-
-    = link_to 'Help Contribute', '#', class: 'button reveal-payment'
+        = link_to 'Help Contribute', '#', class: 'button reveal-payment'
 
 = render 'transactions/form'
 
 .row.content-row
-  .large-8.large-centered.columns.white-box#donation-info
+  .medium-8.medium-centered.columns.white-box#donation-info
     .row
-      .large-8.small-12.large-centered.columns
+      .medium-8.small-12.medium-centered.columns
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
@@ -27,6 +33,6 @@
             = render 'transactions/list', transactions: @party.transactions
           .content#what
             p
-              |When we get to our $29 goal, 
-              span.orange #{@user.full_name} 
+              |When we get to our #{humanized_money_with_symbol(@party.cost)} goal,&nbsp;
+              span.orange #{@user.full_name}&nbsp;
               |will receive 30 presents worth $150 or more for their birthday! Help #{@user.full_name} have a great birthday.

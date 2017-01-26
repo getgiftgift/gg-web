@@ -34,7 +34,7 @@ body {
     min-height: 100%;
   }
 
-  h1{} 
+  h1{}
   h2{}
   h3{}
   h4{
@@ -57,24 +57,14 @@ body {
     }
     margin: 0 auto;
   }
-  background: rgb(107,192,236) !important;
-  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
-  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMSUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI2MyUiIHN0b3AtY29sb3I9IiM2YmMwZWMiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvcmFkaWFsR3JhZGllbnQ+CiAgPHJlY3QgeD0iLTUwIiB5PSItNTAiIHdpZHRoPSIxMDEiIGhlaWdodD0iMTAxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-  background: -moz-radial-gradient(center, circle cover,  rgba(255,255,255,1) 1%, rgba(107,192,236,1) 63%) !important; /* FF3.6+ */
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,rgba(255,255,255,1)), color-stop(63%,rgba(107,192,236,1))) !important; /* Chrome,Safari4+ */
-  background: -webkit-radial-gradient(center, circle cover,  rgba(255,255,255,1) 1%,rgba(107,192,236,1) 63%) !important; /* Chrome10+,Safari5.1+ */
-  background: -o-radial-gradient(center, circle cover,  rgba(255,255,255,1) 1%,rgba(107,192,236,1) 63%) !important; /* Opera 12+ */
-  background: -ms-radial-gradient(center, circle cover,  rgba(255,255,255,1) 1%,rgba(107,192,236,1) 63%) !important; /* IE10+ */
-  background: radial-gradient(circle at center,  rgba(255,255,255,1) 1%,rgba(107,192,236,1) 63%) !important; /* W3C */
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  
+  background: rgb(221,221,221) !important;
+
+
   a { text-decoration: none; }
   .fullwidth {width: 100%;}
   li {list-style-type: none;}
   .center-text {text-align: center;}
-} 
+}
 
 #flash_alert, #flash_notice, #flash_error { text-align: center; }
 
@@ -99,6 +89,14 @@ body {
 
 .hidden{
   display: none;
+}
+
+#header{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 2000;
+  @extend .shadows;
 }
 
 #details {
@@ -136,10 +134,10 @@ body {
 }
 
 #bottom-buttons {
-  position: fixed; 
+  position: fixed;
   bottom: 0;
-  left: 0; 
-  width: 100%; 
+  left: 0;
+  width: 100%;
   background: $light-gray;
   font-weight: 800;
   color: $gray;
@@ -154,7 +152,7 @@ body {
   width: 260px !important;
 }
 
-.close {  
+.close {
   font-size: 2em;
   right: 0;
   top: 0;
@@ -345,9 +343,9 @@ td,th {
 #speech-box {
   // display: none;
   @extend .shadows;
-  margin: 0 auto; 
-  text-align: center; 
-  top: 20%; 
+  margin: 0 auto;
+  text-align: center;
+  top: 20%;
   position: relative;
   background: #ffffff;
   // background: image-url('speech-box.png') no-repeat center;
@@ -366,7 +364,7 @@ td,th {
   display: block;
   position: absolute;
   height: 0;
-  width: 0;  
+  width: 0;
   border-top: 40px solid #ffffff;     // triangle
   border-left:40px solid transparent; // other invisible triangle
   bottom: -40px;                      // equal to the height of border(s).
@@ -382,6 +380,10 @@ td,th {
 .bold-gray{
   font-weight: 800;
   color: $gray;
+}
+
+.content-row-top{
+  margin-top: 45px;
 }
 
 .content-row{
@@ -408,11 +410,11 @@ td.barby-cell.on { background: #000; }
 }
 
 .messages{
-  text-align: center; 
-  height:25px; 
-  width: 100%; 
-  position:absolute; 
-  top: 45px; 
+  text-align: center;
+  height:25px;
+  width: 100%;
+  position:absolute;
+  top: 45px;
   background-color: rgba(255,255,255,0);
   p {
     font-size: .8em;
@@ -439,14 +441,14 @@ td.barby-cell.on { background: #000; }
   padding: 10px;
 }
 
-#credit_card_expiration_2i, #credit_card_expiration_1i{ width: 40%; }   
+#credit_card_expiration_2i, #credit_card_expiration_1i{ width: 40%; }
 
 #gift-area {
-  width:100%; 
-  height:30%; 
-  position:fixed; 
-  left:0; 
-  right:0; 
+  width:100%;
+  height:30%;
+  position:fixed;
+  left:0;
+  right:0;
   bottom:0px;
 }
 

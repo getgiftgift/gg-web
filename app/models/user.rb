@@ -73,6 +73,10 @@ class User < ActiveRecord::Base
     %Q(#{first_name} #{last_name})
   end
 
+  def possessive_full_name
+    full_name + ('s' == full_name[-1,1] ? "'" : "'s")
+  end
+
   def short_birthdate
     self.birthdate.strftime('%m/%d')
   end

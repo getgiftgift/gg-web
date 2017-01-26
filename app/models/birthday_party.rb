@@ -34,13 +34,15 @@ class BirthdayParty < ActiveRecord::Base
   end
 
   def amount_complete_percentage
-    "#{(amount_complete_decimal * 100)}%"
+    #adds one for the progress meter styling
+    return "0%" unless amount_complete_decimal > 0
+    "#{(amount_complete_decimal * 100) + 1}%"
   end
 
   def days_since_first_transaction
     return 0 if transactions.blank?
     (Time.zone.now - transactions.order(created_at: :asc).first.created_at).to_i / 1.day
-  end 
+  end
 
   def minimum_donation
     [total_remaining, MINIMUM_DONATION].min
@@ -49,7 +51,7 @@ class BirthdayParty < ActiveRecord::Base
   def total_contributed
     @total_contributed ||= Money.new(transactions.sum(:amount_cents))
   end
-  
+
   def total_remaining
     cost - total_contributed
   end

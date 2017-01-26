@@ -1,4 +1,4 @@
 p #{humanized_money_with_symbol(party.total_contributed)} of #{humanized_money_with_symbol(party.cost)} goal
-.progress.success
+.progress.round#progress
   span.meter style="width: #{party.amount_complete_percentage}"
 p Raised by #{party.transactions.size} people in #{party.days_since_first_transaction} days
