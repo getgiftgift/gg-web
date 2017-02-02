@@ -1,29 +1,30 @@
 class TransactionsController < ApplicationController
-	
+
 	skip_filter :verify_login_and_birthday
 	def new
 		@token = Braintree::ClientToken.generate
-		@transaction = Transaction.new	
+		@transaction = Transaction.new
 	end
 
 	def create
 		@party = BirthdayParty.find(params[:id])
 		amount = Monetize.parse(params[:amount])
 		@result = Braintree::Transaction.sale(
-			amount: amount.to_s, 
+			amount: amount.to_s,
 			payment_method_nonce: params[:payment_method_nonce],
 			options: {
 				:submit_for_settlement => true
-			}
+			},
+			merchant_account_id: "GiftGift_instant"
 		)
 
 		transaction = @result.transaction
-		
+
 		BraintreeTransaction.create(
 			birthday_party: @party,
 			transaction_id: transaction.id,
 			amount: Monetize.parse(transaction.amount),
-			processor: Transaction::BRAINTREE, 
+			processor: Transaction::BRAINTREE,
 			status: transaction.status,
 			name: params[:name].presence || 'Anonymous',
 			note: params[:note].presence || 'Happy birthday!'
@@ -32,5 +33,5 @@ class TransactionsController < ApplicationController
 		redirect_to birthday_party_path(@party)
 	end
 
-	
+
 end
