@@ -1,7 +1,6 @@
 .row.content-row
   .large-10.large-centered.columns.white-box
     .row
-      .close= link_to "&times;".html_safe, birthday_deals_path
       .header-label
         h5 My Gifts
     - if @birthday_vouchers.blank?
@@ -13,10 +12,10 @@
         .row style="background:#{color};"
           .large-12.columns
             br
-            .row 
-              .small-8.large-4.columns style='font-weight: bold; color:#7a7a7a;' = deal.company.name.upcase 
+            .row
+              .small-8.large-4.columns style='font-weight: bold; color:#7a7a7a;' = deal.company.name.upcase
               .small-8.large-4.columns #{deal.hook} at #{deal.company.name}
-              .small-4.large-4.columns style='font-weight: 100;' 
+              .small-4.large-4.columns style='font-weight: 100;'
                 - if deal.redeemed?
                   h4.center-text style="margin-left: -15px;" REDEEMED
                   br
