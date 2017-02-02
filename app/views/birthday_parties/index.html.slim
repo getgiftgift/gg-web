@@ -1,6 +1,7 @@
 .row.content-row-top.small-collapse
   .medium-8.medium-centered.columns.white-box.text-center
-    img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?width=500"
+    #image-wrap
+      img.fb-img src="http://graph.facebook.com/v2.8/#{@user.uid}/picture?width=500"
     #countdown-banner
       h3
         |Your Birthday is&nbsp;
@@ -26,7 +27,7 @@
 .row.content-row
   .medium-8.medium-centered.columns.white-box#donation-info
     .row
-      .medium-8.small-12.medium-centered.columns
+      .small-12.medium-centered.columns
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
