@@ -31,10 +31,10 @@
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
-              h3 Recent Donations
+              h6 Recent Donations
           li.tab-title
             a href="#what"
-              h3 Shout Outs
+              h6 Shout Outs
         .tabs-content
           .content.active#donations
             = render 'transactions/list', transactions: @party.transactions
