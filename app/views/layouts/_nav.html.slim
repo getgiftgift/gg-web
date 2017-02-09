@@ -16,6 +16,7 @@
       ul.off-canvas-list
         li
           label Menu
+          li= link_to 'Home', root_path
         - if current_user and current_user.birthdate.present?
           li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
           li= link_to 'View My Gifts', my_gifts_path
