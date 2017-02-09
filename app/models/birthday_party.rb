@@ -17,6 +17,7 @@ class BirthdayParty < ActiveRecord::Base
   monetize :cost_cents
 
   before_create :set_party_attributes
+  after_create :create_vouchers
 
   scope :redeemable, -> { where("? BETWEEN start_date and end_date", Time.zone.now)}
   scope :available_to_sponsor, -> { where("end_date >= ?", Time.zone.now)}
@@ -57,7 +58,6 @@ class BirthdayParty < ActiveRecord::Base
   end
 
   def create_vouchers
-    #this needs to happen pretty much on the birthday to make sure they're active vouchers
     BirthdayDeal.is_active.in_location(location).each do |deal|
       deal.create_voucher_for(self)
     end
