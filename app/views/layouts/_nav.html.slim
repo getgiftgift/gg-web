@@ -6,11 +6,12 @@
           span
       section.middle.tab-bar-section
         h1.title-img= link_to image_tag(image_path('giftgift-logo.png')), root_path
-      .messages
-        p#counter
-          - flash.each do |name, msg|
-            - if msg.is_a?(String)
-              = msg
+      - unless flash.blank?
+        .messages
+          p#counter
+            - flash.each do |name, msg|
+              - if msg.is_a?(String)
+                = msg
 
     aside.left-off-canvas-menu
       ul.off-canvas-list
