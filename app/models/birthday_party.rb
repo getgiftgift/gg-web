@@ -20,6 +20,8 @@ class BirthdayParty < ActiveRecord::Base
 
   scope :redeemable, -> { where("? BETWEEN start_date and end_date", Time.zone.now)}
   scope :available_to_sponsor, -> { where("end_date >= ?", Time.zone.now)}
+  scope :birthday_is_today, -> {where("start_date = ?", Time.zone.today)}
+  scope :is_funded, -> {joins(:transactions).having("birthday_parties.cost_cents = SUM(transactions.amount_cents)").group(:id)}
 
   def available?
     Time.zone.now >= start_date && Time.zone.now <= end_date
