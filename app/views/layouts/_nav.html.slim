@@ -6,16 +6,18 @@
           span
       section.middle.tab-bar-section
         h1.title-img= link_to image_tag(image_path('giftgift-logo.png')), root_path
-      .messages
-        p#counter
-          - flash.each do |name, msg|
-            - if msg.is_a?(String)
-              = msg
+      - unless flash.blank?
+        .messages
+          p#counter
+            - flash.each do |name, msg|
+              - if msg.is_a?(String)
+                = msg
 
     aside.left-off-canvas-menu
       ul.off-canvas-list
         li
           label Menu
+          li= link_to 'Home', root_path
         - if current_user and current_user.birthdate.present?
           li= link_to 'Open My Gifts', root_path if current_user.has_presents_to_open?
           li= link_to 'View My Gifts', my_gifts_path

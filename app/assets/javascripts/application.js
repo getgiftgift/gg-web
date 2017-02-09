@@ -21,6 +21,7 @@
 $(function() {
   $(document).foundation();
   $("#voucher_table").tablesorter();
+  $(".messages").fadeOut(3000)
 });
 
 update_gift_counter = function(){

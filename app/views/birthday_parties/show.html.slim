@@ -14,7 +14,13 @@
         hr
         = render 'status', party: @party
 
-        = link_to "Donate to #{@user.possessive_first_name} Party!", '#', class: 'button reveal-payment'
+        - if @party.activated? && @party.available?
+          h3 We did it! Thanks for helping make #{@user.possessive_first_name} day special!
+        - elsif @party.activated? && !@party.available?
+          h3 We did it! #{@user.first_name} will have a great party!
+        - else
+          = link_to "Donate to #{@user.possessive_first_name} Party!", '#', class: 'button reveal-payment'
+
 
 = render 'transactions/form'
 

@@ -117,6 +117,7 @@ body {
   }
   .card-box{
     display: none;
+    padding-top: ($column-gutter/2);
     &.show {
       display: block;
     }

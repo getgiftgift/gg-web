@@ -8,13 +8,14 @@ html
     = csrf_meta_tags
   body
     #fb-root
-    #status  
+    #status
     nav.tab-bar style="height: 70px;"
         section.middle.tab-bar-section
           h1.title= link_to 'Gift Gift', root_path, class: 'branding'
-        .messages
-          p#counter 
-            - flash.each do |name, msg|
-              - if msg.is_a?(String)
-                = msg
+        - unless flash.blank?
+          .messages
+            p#counter
+              - flash.each do |name, msg|
+                - if msg.is_a?(String)
+                  = msg
     = yield

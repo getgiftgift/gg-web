@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
   def birthday_party
     # either currently active or next future birthday. Should there be a period to review the previous party?
-    @birthday_party ||= birthday_parties.redeemable.first || birthday_parties.includes(:transactions).where(start_date: next_birthday).first_or_create
+    @birthday_party ||= birthday_parties.redeemable.first || birthday_parties.includes(:transactions).where(start_date: next_birthday, location: location).first_or_create
   end
 
   def build_referral_code
