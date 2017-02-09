@@ -28,7 +28,7 @@ class BirthdayDealsController < ApplicationController
 
       if @party.activated? && @party.available?
         @party.create_vouchers if @party.birthday_deal_vouchers.blank?
-        @birthday_deal_vouchers = @party.reload.birthday_deal_vouchers
+        @birthday_deal_vouchers = @party.reload.birthday_deal_vouchers.with_state(:wrapped).includes(:birthday_deal => :company)
       else
         return render 'index_not_your_birthday'
       end
