@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_birthday_deals?
-    birthday_party.available?
+    birthdate && location && birthday_party.available?
   end
 
   def change_password(password)
