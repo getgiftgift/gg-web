@@ -22,6 +22,14 @@
   // position: relative;
 }
 
+#card-number, #cvv, #expiration-date{
+  border: 1px solid #CCC;
+  font-size: 0.875rem;
+  padding: 0.5rem;
+  height: 2.3125rem;
+  margin: 0 0 1rem 0;
+}
+
 #checkout-form {
   background-color: #FFF;
   padding: 3em 2em 2em;
