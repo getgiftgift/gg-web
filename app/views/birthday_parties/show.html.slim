@@ -19,7 +19,7 @@
         - elsif @party.activated? && !@party.available?
           h3 We did it! #{@user.first_name} will have a great party!
         - else
-          = link_to "Donate to #{@user.possessive_first_name} Party!", '#', class: 'button reveal-payment'
+          = link_to "Chip in to #{@user.possessive_first_name} Party!", '#', class: 'button reveal-payment'
 
 
 = render 'transactions/form'
@@ -31,7 +31,7 @@
         ul.tabs data-tab=""
           li.tab-title.active
             a href="#donations"
-              h6 Recent Donations
+              h6 Recent Activity
           li.tab-title
             a href="#what"
               h6 What is this?
