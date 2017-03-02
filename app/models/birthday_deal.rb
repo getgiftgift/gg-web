@@ -2,7 +2,7 @@ class BirthdayDeal < ActiveRecord::Base
   belongs_to :company
   belongs_to :location
   belongs_to :occasion
-  has_many :restriction_items 
+  has_many :restriction_items
   has_many :restrictions, through: :restriction_items
   has_many :birthday_deal_vouchers, dependent: :destroy
   has_and_belongs_to_many :company_locations
@@ -12,7 +12,7 @@ class BirthdayDeal < ActiveRecord::Base
 
   scope :in_location, -> location {  where("birthday_deals.location_id = ?", location.id) }
   scope :is_active, -> { where("start_date <= ? and end_date >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)).with_state(:approved) }
-    
+
   state_machine initial: :unapproved do
     audit_trail
 

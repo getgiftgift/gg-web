@@ -12,7 +12,7 @@ class BirthdayParty < ActiveRecord::Base
 
   has_many :sponsorships, through: :sponsored_transactions, foreign_key: :sponsorship_id
 
-  has_many :birthday_deal_vouchers
+  has_many :birthday_deal_vouchers, dependent: :destroy
 
   monetize :cost_cents
 

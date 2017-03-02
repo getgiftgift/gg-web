@@ -47,7 +47,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
       transition all - [:redeemed, :printed] => :printed
     end
 
-    event :redeem do 
+    event :redeem do
       transition all - [:redeemed] => :redeemed
     end
 
@@ -105,7 +105,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
     generated_code = "#{id}#{((Time.now + id).to_i+user.id).to_s}"
     update_attributes verification_number: generated_code
   end
-  
+
   def dashed_verification_number
     num = verification_number.clone
     num.insert(num.length-6, '-')
