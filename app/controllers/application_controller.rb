@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
 
   def location_from_session
       @current_location = Location.find(session[:location_id]) if session[:location_id]
-    end
+  end
 
   def location_from_params
     if params[:geolocation]

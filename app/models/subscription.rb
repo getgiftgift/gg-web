@@ -3,8 +3,8 @@ class Subscription < ActiveRecord::Base
   belongs_to :user
 
   state_machine :state, initial: :new do 
-    after_transition any => :pending_subscribe, :do => Proc.new {|subscription, *args| MailingList.delay.subscribe(subscription.user)}
-    after_transition :subscribed => :pending_unsubscribe, :do => Proc.new {|subscription, *args| MailingList.delay.unsubscribe(subscription.user)}
+    after_transition any => :pending_subscribe, :do => Proc.new {|subscription, *args| MailingList.subscribe(subscription.user)}
+    after_transition :subscribed => :pending_unsubscribe, :do => Proc.new {|subscription, *args| MailingList.unsubscribe(subscription.user)}
 
     state :new
     state :inactive
@@ -28,11 +28,11 @@ class Subscription < ActiveRecord::Base
     end
 
     event :subscribe_confirmed do
-      transition [:new, :pending_subscribe] => :subscribed
+      transition [:new, :pending_subscribe, :unsubscribed] => :subscribed
     end
 
     event :unsubscribe_confirmed do
-      transition :pending_unsubscribe => :unsubscribed
+      transition [:subscribed, :pending_unsubscribe] => :unsubscribed
     end
 
     event :confirm do
