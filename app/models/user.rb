@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
 
   def birthday_party
     # either currently active or next future birthday. Should there be a period to review the previous party?
-    @birthday_party ||= birthday_parties.redeemable.first || birthday_parties.includes(:transactions).where(start_date: next_birthday, location: location).first_or_create
+    @birthday_party ||= birthday_parties.redeemable.first || birthday_parties.includes(:transactions).where(start_date: current_eligible_birthday, location: location).first_or_create
   end
 
   def build_referral_code
@@ -66,7 +66,8 @@ class User < ActiveRecord::Base
   end
 
   def days_til_next_birthday
-    (next_birthday.to_time.to_i - Date.today.to_time.to_i) / 1.day
+    days = (current_eligible_birthday.to_time.to_i - Date.today.to_time.to_i) / 1.day
+    days <= 0 ? 0 : days
   end
 
   def full_name
@@ -94,9 +95,9 @@ class User < ActiveRecord::Base
     write_attribute(:birthdate, birthdate)
   end
 
-  def next_birthday
+  def current_eligible_birthday
     return nil unless birthdate
-    if adjusted_birthday < Date.today
+    if adjusted_birthday < (Date.today - 30.days)
       adjusted_birthday + 1.year
     else
       adjusted_birthday

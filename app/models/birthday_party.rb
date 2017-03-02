@@ -62,7 +62,7 @@ class BirthdayParty < ActiveRecord::Base
   def create_vouchers
     reload
     BirthdayDeal.is_active.in_location(location).each do |deal|
-      birthday_deal_vouchers.create(birthday_deal: deal)
+      birthday_deal_vouchers.create(birthday_deal: deal, valid_on: start_date, good_through: end_date)
     end
   end
 
