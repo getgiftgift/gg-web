@@ -27,11 +27,26 @@ class Dashboard::SponsorshipsController < Dashboard::BaseController
 
   end
 
+  def update
+    @sponsorship = Sponsorship.find(params[:id])
+    respond_to do |format|
+      if @sponsorship.update_attributes(sponsorship_params)
+        flash[:notice] = 'Sponsorship was successfully updated.'
+        format.html { redirect_to(:action => "index") }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @sponsorship.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+
   def sponsor
     party = BirthdayParty.find(params[:party_id])
     sponsorship = Sponsorship.find(params[:id])
     sponsorship.transactions.create(
-      birthday_party: party, 
+      birthday_party: party,
       amount: sponsorship.amount_per_party,
       status: 'complete',
       name: sponsorship.name,
@@ -45,6 +60,5 @@ class Dashboard::SponsorshipsController < Dashboard::BaseController
 
   def sponsorship_params
     params.require(:sponsorship).permit(:name, :note, :amount_per_party, :total_amount, :start_date, :end_date)
-
-  end  
+  end
 end
