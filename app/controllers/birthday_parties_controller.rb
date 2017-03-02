@@ -1,19 +1,32 @@
 class BirthdayPartiesController < ApplicationController
 
-  before_filter :create_token, only: [:index, :show]
   skip_filter   :verify_login_and_birthday, only: [:show]
+  before_filter :create_token, only: [:index, :show]
+  before_filter :set_party
 
-  def index
-		@party = current_user.birthday_party
-    @user = current_user
-  end
 
-  def show
-    @party = BirthdayParty.where(id: params[:id]).includes(:transactions).first
-		@user = @party.user
-	end
+
+  def index; end
+
+  def show; end
 
   private
+
+  def set_party
+    if params[:id]
+      @party = BirthdayParty.where(id: params[:id]).includes(:transactions).first
+    else
+      @party = current_user.birthday_party
+    end
+    if @party.user == current_user
+      @user = current_user
+      render :index
+    else
+      @user = @party.user
+      render :show
+    end
+
+  end
 
   def create_token
     @token = Braintree::ClientToken.generate
