@@ -16,7 +16,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
   has_one :company, through: :birthday_deal
   has_many :birthday_deal_voucher_state_transitions, dependent: :destroy
   # attr_accessible :good_through, :valid_on, :user
-  after_commit :generate_verification_number, on: :create
+  after_create :generate_verification_number
 
   # extend FriendlyId
   # friendly_id :verification_number
