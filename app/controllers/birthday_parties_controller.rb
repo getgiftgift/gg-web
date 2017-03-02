@@ -18,6 +18,9 @@ class BirthdayPartiesController < ApplicationController
     else
       @party = current_user.birthday_party
     end
+
+    return redirect_to root_url unless @party
+
     if @party.user == current_user
       @user = current_user
       render :index
