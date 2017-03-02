@@ -60,6 +60,7 @@ class BirthdayParty < ActiveRecord::Base
   end
 
   def create_vouchers
+    reload
     BirthdayDeal.is_active.in_location(location).each do |deal|
       birthday_deal_vouchers.create(birthday_deal: deal)
     end
