@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 ruby '2.2.1'
 
@@ -42,7 +42,6 @@ gem 'rake', '~> 10.5.0'
 gem 'raygun4ruby'
 gem 'rmagick'
 gem 'rolify'
-gem 'rubber'
 gem 'rvm-capistrano'
 gem 'sass-rails'
 gem 'simple_form'
@@ -50,7 +49,7 @@ gem 'slim-rails'
 gem 'state_machines', '~> 0.4.0'
 gem 'state_machines-activerecord'
 gem 'state_machines-audit_trail'
-gem 'therubyracer' #JavaScript runtime for production
+gem 'therubyracer' # JavaScript runtime for production
 gem 'thin'
 gem 'uglifier'
 gem 'unicorn'
@@ -67,6 +66,6 @@ group :development, :test do
   gem 'dotenv-rails'
 end
 
-source "https://rails-assets.org" do
+source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ujs'
 end
