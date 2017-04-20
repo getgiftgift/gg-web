@@ -16,6 +16,8 @@ WorthdayWeb::Application.routes.draw do
     get   '/my_account', to: 'users/registrations#show'
     patch '/users/update_birthday', to: 'users/registrations#update_birthday'
     patch '/users/update_location', to: 'users/registrations#update_location'
+    get '/users/subscribe', to: 'users/registrations#subscribe'
+    get '/users/unsubscribe', to: 'users/registrations#unsubscribe'
   end
 
 

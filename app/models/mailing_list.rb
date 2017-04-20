@@ -41,7 +41,7 @@ class MailingList
       parsed_response = JSON.parse response.body
       if response.success?
         user.subscription.unsubscribe_confirmed!
-      elsif parsed_response['staus'] == '500' # mailchimp internal server error
+      elsif parsed_response['status'] == '500' # mailchimp internal server error
         ## try again later
         # delay(run_at: 1.hour.from_now).unsubscribe(user)
       end
@@ -64,6 +64,12 @@ class MailingList
 
     def get_status(email)
       get(lists_members_email(email), headers: auth_header)
+    end
+
+    def subscription_status(user)
+      response = get_status(user.email)
+      parsed_response = JSON.parse response.body
+      parsed_response['status']
     end
 
     def update_status(user, status)

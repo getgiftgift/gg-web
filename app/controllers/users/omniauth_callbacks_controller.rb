@@ -23,7 +23,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth.merge!(new_auth.merge({provider: @provider}))
     @user = User.from_omniauth(auth)
     if @user.persisted?
-      @user.save_referral_code(session[:referral_code]) if @user.sign_in_count.zero?
+      if @user.new_record?
+        @user.save_referral_code(session[:referral_code])
+        MailingList.add_to_list(@user)
+      end
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
