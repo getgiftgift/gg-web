@@ -3,7 +3,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout 'birthday'
 
   def show
-    @subscription = current_user.subscription
+    @subscription_status = MailingList.subscription_status(current_user)
+  end
+
+  def subscribe
+    MailingList.subscribe(current_user)
+    redirect_to my_account_path
+  end
+
+  def unsubscribe
+    MailingList.unsubscribe(current_user)
+    redirect_to my_account_path
   end
 
   def update_birthday
