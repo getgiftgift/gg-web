@@ -71,7 +71,10 @@ class Notifier
       result = mandrill_mail.messages.send_template template_name, template_content, message
     end
 
-    def chip_in(user, amount)  
+    def chip_in(transaction)
+      user = transaction.birthday_party.user
+      amount = transaction.amount.format(no_cents_if_whole: true)
+
       subject = "A friend chipped in to your party!"
       template_name = "gift-gift-chip-in"
       template_content = nil
@@ -99,33 +102,33 @@ class Notifier
       result = mandrill_mail.messages.send_template template_name, template_content, message
     end
 
-    def chip_in_confirmation(user, amount)
-      # user = party user
-      subject = "A friend chipped in to your party!"
-      template_name = "gift-gift-chip-in-confirm"
-      template_content = nil
-      message = {
-        "metadata"=>{"website"=>"www.getgiftgift.com"},
-        "subaccount"=>"gift-gift",
-        "merge"=>true,
-        "global_merge_vars"=>[
-          {"content"=> user.first_name, "name"=>"FNAME"},
-          {"content"=> amount, "name"=>"AMOUNT"}
-        ],
-        "to"=>
-          [{"type"=>"to",
-            "email"=> user.email,
-            "name"=> user.full_name}
-          ],
-        "from_name"=> default_from,
-        "subject"=> subject,
-        "from_email"=> default_from,
-        "important"=>true,
-        "track_clicks"=>true,
-        "track_opens"=>true,
-      }
+    # def chip_in_confirmation(transaction)
+    #   # user = party user
+    #   subject = "Thanks for chipping in to  party!"
+    #   template_name = "gift-gift-chip-in-confirm"
+    #   template_content = nil
+    #   message = {
+    #     "metadata"=>{"website"=>"www.getgiftgift.com"},
+    #     "subaccount"=>"gift-gift",
+    #     "merge"=>true,
+    #     "global_merge_vars"=>[
+    #       {"content"=> user.first_name, "name"=>"FNAME"},
+    #       {"content"=> amount, "name"=>"AMOUNT"}
+    #     ],
+    #     "to"=>
+    #       [{"type"=>"to",
+    #         "email"=> user.email,
+    #         "name"=> user.full_name}
+    #       ],
+    #     "from_name"=> default_from,
+    #     "subject"=> subject,
+    #     "from_email"=> default_from,
+    #     "important"=>true,
+    #     "track_clicks"=>true,
+    #     "track_opens"=>true,
+    #   }
 
-      result = mandrill_mail.messages.send_template template_name, template_content, message
-    end
+    #   result = mandrill_mail.messages.send_template template_name, template_content, message
+    # end
   end
 end
