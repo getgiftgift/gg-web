@@ -13,3 +13,4 @@
       = text_field_tag "user[birthdate(1i)]", nil, placeholder: 'YYYY', input_html: {maxlength: 4}
 
     = f.button :submit, class: 'form-button orange', value: 'Sign Up'
+    %p= link_to 'Cancel', root_path

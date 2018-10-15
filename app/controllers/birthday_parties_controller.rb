@@ -4,8 +4,6 @@ class BirthdayPartiesController < ApplicationController
   before_filter :create_token, only: [:index, :show]
   before_filter :set_party
 
-
-
   def index; end
 
   def show; end

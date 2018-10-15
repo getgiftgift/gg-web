@@ -1,11 +1,1 @@
-.row style="margin-top: 50px;"
-  #auth-box.large-4.small-10.medium-6.small-centered.columns
-    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: ''}) do |f|
-      = devise_error_messages! if resource
-      fieldset
-        |Sign in with your account:
-        = f.input :email, :label => false, :required => false, :input_html => { :autofocus => true}, placeholder: 'E-Mail:'
-        = f.input :password, label: false, required: true, placeholder: 'Password:'
-        = link_to('Forgot your password?', new_user_password_path)
-
-        = f.button :submit,  :class => 'fullwidth', :value => 'Sign In'
+render 'new'
