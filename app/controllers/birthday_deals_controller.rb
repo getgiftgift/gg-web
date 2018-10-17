@@ -26,7 +26,7 @@ class BirthdayDealsController < ApplicationController
         return render action: 'index_view_birthday_deals'
       end
 
-      if @party.activated? && @party.available?
+      if @party.available? # && @party.activated?
         @party.create_vouchers if @party.birthday_deal_vouchers.blank?
         @birthday_deal_vouchers = @party.reload.birthday_deal_vouchers.with_state(:wrapped).includes(:birthday_deal => :company)
       else

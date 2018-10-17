@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   layout 'birthday'
 
   def after_sign_in_path_for(resource)
-    resource.admin? ? dashboard_index_path : birthday_parties_path
+    ## Disable BirthdayParty for now, just give out the deals
+    # resource.admin? ? dashboard_index_path : birthday_parties_path
+    resource.admin? ? dashboard_index_path : birthday_deals_path
   end
 
   def admin_login_required
