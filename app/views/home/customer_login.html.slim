@@ -8,5 +8,6 @@
     
     / TODO - Fix fb login
     / = link_to image_tag(asset_path("facebook-login-blue.png"), style: 'margin-top: 20px;'), "javascript:void(0);", onclick: "fbLogin();"
-    = render 'devise/sessions/new'
-    = link_to 'Need an account? Sign up here!', [:new, :user, :registration]
+.row.center-text
+  = render 'devise/sessions/new'
+  = link_to 'Need an account? Sign up here!', [:new, :user, :registration]
