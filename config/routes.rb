@@ -5,7 +5,7 @@ WorthdayWeb::Application.routes.draw do
 
 	get '/party/:id/checkout' => 'transactions#new'
 	# get '/party/:id' => 'birthday_parties#show'
- #  get '/party => 'birthday_parties#index', as: 'party'
+  # get '/party => 'birthday_parties#index', as: 'party'
   match '/verify' => 'home#verify', via: [:get, :post]
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'

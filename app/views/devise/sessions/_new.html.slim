@@ -1,5 +1,5 @@
 .row
-  #auth-box.large-10.small-10.medium-6.small-centered.columns
+  #auth-box.large-5.small-10.medium-6.small-centered.columns
     = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: {class: ''}) do |f|
       = devise_error_messages! if resource
       fieldset
