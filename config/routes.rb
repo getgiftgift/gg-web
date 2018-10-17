@@ -1,7 +1,7 @@
 WorthdayWeb::Application.routes.draw do
   default_url_options :host => "www.getgiftgift.com"
 
-  root :to => 'birthday_parties#index'
+  root :to => 'birthday_deals#index'
 
 	get '/party/:id/checkout' => 'transactions#new'
 	# get '/party/:id' => 'birthday_parties#show'
