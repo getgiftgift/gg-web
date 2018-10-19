@@ -2,32 +2,25 @@ class User < ActiveRecord::Base
   rolify
   include ApplicationHelper
   after_create :build_referral_code
-
 	has_many :birthday_parties
-
   has_one :subscription
   accepts_nested_attributes_for :subscription
   belongs_to :location
-
   has_many :birthday_deal_vouchers, -> {merge(BirthdayParty.redeemable)}, through: :birthday_parties
-
   has_many :referrals_received, :foreign_key => :recipient_id,
                                 :class_name => "Referral"
   has_many :referrals_made, :foreign_key => :referrer_id,
                                 :class_name => "Referral"
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
   devise :omniauthable, omniauth_providers: [:facebook]
 
-  validates :email, :uniqueness => { :case_sensitive => false, :message => 'The email you entered is associated with another account'},
-                    :length => { :within => 3..100, :message => 'Invalid Length' },
-                    :presence => {:message => "Required Field"}
-  validates_length_of       :email,    :within => 3..100, :allow_nil => true, :allow_blank => true
-
-  validates_presence_of     :email, :message => "Required Field"
-
+  validates :email, :uniqueness => { :case_sensitive => false, 
+                                     :message => 'The email you entered is associated with another account'},
+                                     :length => { :within => 3..100, :message => 'Invalid Length' },
+                                     :presence => true
+  validates :first_name, :last_name, :birthdate, presence: true
+  
   def self.from_omniauth(auth)
     where(provider: auth['provider'], uid: auth['id']).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
@@ -62,7 +55,7 @@ class User < ActiveRecord::Base
     charset = %w{ 2 3 4 6 7 9 a c d e f g h j k m n p q r t v w x y z}
     code = (0...5).map{ charset.to_a[SecureRandom.random_number(charset.size)] }.join
     update_attributes referral_code: code
-    self.build_subscription
+    self.build_subscription if Rails.env.production?
   end
 
   def days_til_next_birthday

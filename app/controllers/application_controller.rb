@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     resource.admin? ? dashboard_index_path : birthday_deals_path
   end
 
+  def after_sign_up_path_for(resource)
+    birthday_deals_path
+  end
+
   def admin_login_required
     unless current_user && current_user.admin?
       redirect_to root_url
