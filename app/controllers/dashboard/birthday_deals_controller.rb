@@ -56,7 +56,7 @@ class Dashboard::BirthdayDealsController < Dashboard::BaseController
   end
 
   def approve
-    @birthday_deal.approve if current_user.is_superadmin?
+    @birthday_deal.approve
     respond_to do |format|
       format.html
       format.js { render 'approval_actions', layout: false}
