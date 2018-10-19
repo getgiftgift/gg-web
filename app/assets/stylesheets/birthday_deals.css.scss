@@ -35,6 +35,15 @@ body {
     margin-top: 45px;
   }
 
+  #error_explanation{
+    border: 2px solid #f04124; 
+    padding: 10px 10px 0px; 
+    margin-bottom: 10px;
+    ul{
+      color: #f04124;
+    }
+  }
+
   h1{}
   h2{}
   h3{}
@@ -81,8 +90,10 @@ body {
 }
 
 .white-box {
+  margin-top: 50px;
   background: #fff;
   min-height: 300px;
+  fieldset{border: none;}
   @extend .shadows;
 
   &:hover {

@@ -1,7 +1,9 @@
-.row style="margin-top: 50px;"
-  #auth-box.large-4.small-10.medium-6.small-centered.columns
+.row
+  .white-box.large-5.small-10.medium-6.small-centered.columns 
     = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post, class: 'user-form'}) do |f|
       fieldset
-        |Forgot your password?
-        = f.input :email, label: false, placeholder: 'E-Mail:', autofocus: true
+        h4 Reset your password 
+        h6 Enter your email to get started!
+        = f.input :email, label: false, placeholder: 'email', autofocus: true
         = f.button :submit, class: 'fullwidth', value: 'Send Reset Instructions'
+        = link_to 'Cancel', :root

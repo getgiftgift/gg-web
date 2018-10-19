@@ -1,20 +1,26 @@
 .row
-  #auth-box.large-5.small-10.medium-6.small-centered.columns
+  .white-box.large-5.small-12.medium-6.small-centered.columns
     = simple_form_for resource, as: resource_name, url: user_registration_path do |f|
-      / = devise_error_messages!
       fieldset
         h4 Create a New Account 
         h6 Enter your info to get started!
+        = devise_error_messages!
         = f.input :first_name, label: false, placeholder: 'First Name:'
         = f.input :last_name, label: false, placeholder: 'Last Name:'
         = f.input :email, label: false, placeholder: 'E-Mail:'
         = f.input :password, label: false, placeholder: 'Password:'
         = f.input :password_confirmation, label: false, placeholder: 'Confirm Password:'
-        = f.input :birthdate, order: [:month, :day, :year], as: :string, input_html: {type: :date}
-        / li
-        /   = text_field_tag "user[birthdate(2i)]", nil, required: true, placeholder: 'MM', size: 2, maxlength: 2
-        /   = text_field_tag "user[birthdate(3i)]", nil, required: true, placeholder: 'DD', size: 2, maxlength: 2
-        /   = text_field_tag "user[birthdate(1i)]", nil, required: true, placeholder: 'YYYY', size: 4, maxlength: 4
+        = label_tag 'Birthdate'
+        .row
+          .small-3.columns
+            = text_field_tag "user[birthdate(2i)]", nil, required: true, 
+              placeholder: 'MM', size: 2, maxlength: 2
+          .small-3.columns
+            = text_field_tag "user[birthdate(3i)]", nil, required: true, 
+              placeholder: 'DD', size: 2, maxlength: 2
+          .small-6.columns
+            = text_field_tag "user[birthdate(1i)]", nil, required: true, 
+              placeholder: 'YYYY', size: 4, maxlength: 4
 
         = f.button :submit, class: 'form-button orange fullwidth', value: 'Sign Up'
         = link_to 'Cancel', :root
