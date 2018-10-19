@@ -55,7 +55,8 @@ class User < ActiveRecord::Base
     charset = %w{ 2 3 4 6 7 9 a c d e f g h j k m n p q r t v w x y z}
     code = (0...5).map{ charset.to_a[SecureRandom.random_number(charset.size)] }.join
     update_attributes referral_code: code
-    self.build_subscription if Rails.env.production?
+    ## TODO Fix this
+    # self.build_subscription if Rails.env.production?
   end
 
   def days_til_next_birthday
