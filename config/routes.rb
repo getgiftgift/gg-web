@@ -10,6 +10,7 @@ WorthdayWeb::Application.routes.draw do
   patch '/change_location' => 'users#change_location'
   get '/terms' => 'home#terms'
   get '/privacy' => 'home#privacy'
+  get '/help' => 'home#help'
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", registrations: "users/registrations" } do
   end
   devise_scope :user do

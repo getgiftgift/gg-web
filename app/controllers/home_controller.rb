@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
-  layout 'application'
+  layout 'birthday'
+
+  skip_filter :verify_login_and_birthday, only: [:terms, :privacy, :help]
 
   def dashboard
     if current_user && current_user.is_admin?
@@ -13,6 +15,9 @@ class HomeController < ApplicationController
   end
 
   def privacy
+  end
+
+  def help
   end
 
   def verify
