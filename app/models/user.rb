@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                                      :length => { :within => 3..100, :message => 'Invalid Length' },
                                      :presence => true
   validates :first_name, :last_name, :birthdate, presence: true
-  
+
   def self.from_omniauth(auth)
     where(provider: auth['provider'], uid: auth['id']).first_or_initialize.tap do |user|
       user.password = Devise.friendly_token[0,20]
@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
   def days_til_next_birthday
     days = (current_eligible_birthday.to_time.to_i - Date.today.to_time.to_i) / 1.day
     days <= 0 ? 0 : days
+  end
+
+  def location_name
+    location.location_name
   end
 
   def full_name

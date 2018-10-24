@@ -2,7 +2,7 @@ WorthdayWeb::Application.routes.draw do
   default_url_options :host => "www.getgiftgift.com"
 
   root :to => 'birthday_deals#index'
-
+  
 	get '/party/:id/checkout' => 'transactions#new'
 	# get '/party/:id' => 'birthday_parties#show'
   # get '/party => 'birthday_parties#index', as: 'party'
@@ -149,5 +149,5 @@ WorthdayWeb::Application.routes.draw do
   # match ':controller(/:action(/:id))(.:format)'
 
   # Catch all route to root path
-  # get '*path' => redirect('/')
+  match '*path', to: redirect('/'), via: :all
 end

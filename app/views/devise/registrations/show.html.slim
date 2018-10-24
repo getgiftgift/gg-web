@@ -1,40 +1,17 @@
-.row.content-row
-  .large-7.medium-8.large-centered.medium-centered.columns.white-box
-    .row
-      .header-label
-        h5 My Account
-    .row
-      .small-10.small-centered.columns#account-info
-        h4.center-text= user_full_name
-        .row
-          .small-4.columns
-            b.right.label Birthday
-          .small-8.columns
-            = current_user.birthdate ? current_user.birthdate : 'N/A'
-        .row
-          .small-4.columns
-            b.right.label Email
-          .small-8.columns
-            = current_user.email
-        .row
-          .small-4.columns
-            b.right.label Notifications
-          .small-8.columns
-            #subscription-status
-              - if @subscription_status == 'subscribed'
-                |You are receiving emails.
-                br
-                = link_to "(Click to unsubscribe)", users_unsubscribe_path(@current_user)
-              - else
-                |You don't get our emails.
-                br
-                = link_to "(Click to add)", users_subscribe_path(@current_user)
-        .row
-          .small-4.columns
-            b.right.label Location
-          .small-8.columns
-            = current_user.location.location_name
-        .row
-          .small-4.columns
-            b.right.label Referral Link
-          .small-8.columns http://GetGiftGift.com/?r=#{current_user.referral_code}
+.row
+  .white-box.large-6.small-10.small-centered.columns
+    fieldset
+      h4.center-text My Account
+      ul.pricing-table
+        li.bullet-item 
+          b Birthdate: 
+          = current_user.birthdate
+        li.bullet-item 
+          b Email: 
+          = current_user.email
+        li.bullet-item 
+          b Location: 
+          = current_user.location_name
+        li.bullet-item 
+          b Referral Link: 
+          |http://GetGiftGift.com/?r=#{current_user.referral_code}

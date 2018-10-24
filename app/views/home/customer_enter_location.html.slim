@@ -1,7 +1,6 @@
-.row style="height:35px;"
 .row
-  .large-6.small-10.small-centered.columns.center-text
-    .panel 
+  .white-box.large-6.small-10.small-centered.columns.center-text
+    fieldset
       h4 Select Your City
       = simple_form_for :user, method: :patch, url: users_update_location_path do |f|
         = f.input :location, collection: Location.all.sort, as: :radio_buttons, label: false
