@@ -1,7 +1,6 @@
 .row.content-row
-  .large-8.large-centered.columns.white-box style=" padding: 20px;"
-    - if @deals.blank?
-      p Sorry, we don't have any presents for you in your city.
-    - if !current_user.eligible_for_birthday_deals?
-      p We’re showing it’s not quite your birthday. Never fear!  We will notify you when it’s time to open your presents.  
-      = link_to 'Notification Settings', my_account_path, class: 'button' 
+  .large-8.large-centered.columns.white-box
+    h4.center-text Soon
+    / - if !current_user.eligible_for_birthday_deals?
+    p We’re showing it’s not quite your birthday. Never fear!  We will notify you when it’s time to open your presents.  
+    / = link_to 'Notification Settings', my_account_path, class: 'button' 

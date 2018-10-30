@@ -1,9 +1,9 @@
 .row
   .white-box.large-5.small-12.medium-6.small-centered.columns
     = simple_form_for resource, as: resource_name, url: user_registration_path do |f|
-      fieldset
-        h4 Create a New Account 
-        h6 Enter your info to get started!
+        .center-text
+          h4 Create a New Account 
+          h6 Enter your info to get started!
         = devise_error_messages!
         = f.input :first_name, label: false, placeholder: 'First Name:'
         = f.input :last_name, label: false, placeholder: 'Last Name:'
@@ -21,6 +21,6 @@
           .small-6.columns
             = text_field_tag "user[birthdate(1i)]", nil, required: true, 
               placeholder: 'YYYY', size: 4, maxlength: 4
-
-        = f.button :submit, class: 'form-button orange fullwidth', value: 'Sign Up'
-        = link_to 'Cancel', :root
+        .center-text
+          = f.button :submit, class: 'form-button orange fullwidth', value: 'Sign Up'
+          = link_to 'Cancel', :root
