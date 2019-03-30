@@ -10,7 +10,7 @@ end
 gem 'asset_sync'
 gem 'barby'
 gem 'binding_of_caller'
-gem 'braintree'
+gem 'braintree', '~> 2.94.0' 
 gem 'byebug'
 gem 'carrierwave'
 gem 'coffee-rails'

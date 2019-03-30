@@ -18,11 +18,11 @@ class BirthdayDealsController < ApplicationController
     if customer_logged_in?
       @party = current_user.birthday_party
       @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
-      if current_user.is_testuser?
+      if Rails.env.development? || current_user.is_testuser?
         if @birthday_deal_vouchers.empty?
-          @party.birthday_deal_vouchers.is_available.update_all({state: 'wrapped'})
+          @party.birthday_deal_vouchers.update_all({state: 'wrapped'})
         end
-        @birthday_deal_vouchers = @party.birthday_deal_vouchers.is_available.with_state(:wrapped).includes(:birthday_deal => :company)
+        @birthday_deal_vouchers = @party.birthday_deal_vouchers.with_state(:wrapped).includes(:birthday_deal => :company)
         return render action: 'index_view_birthday_deals'
       end
 
@@ -44,7 +44,4 @@ class BirthdayDealsController < ApplicationController
   def show
     @birthday_deal = BirthdayDeal.find(params[:id])
   end
-
-  protected
-
 end

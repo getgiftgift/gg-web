@@ -7,7 +7,7 @@ class BirthdayDealVouchersController < ApplicationController
   respond_to :js, :html
   
   def show
-    @birthday_deal_voucher = current_user.birthday_deal_vouchers.includes(:birthday_deal => [:restrictions], :company => [:company_locations]).find(params[:id])
+    @birthday_deal_voucher = current_user.birthday_party.birthday_deal_vouchers.includes(:birthday_deal => [:restrictions], :company => [:company_locations]).find(params[:id])
     @birthday_deal = @birthday_deal_voucher.birthday_deal
     @company = @birthday_deal_voucher.company
     @locations = @company.company_locations
@@ -26,7 +26,7 @@ class BirthdayDealVouchersController < ApplicationController
   end
 
   def keep
-    @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
+    @birthday_deal_voucher = current_user.birthday_party.birthday_deal_vouchers.find params[:id]
     @birthday_deal_voucher.keep
   end
 

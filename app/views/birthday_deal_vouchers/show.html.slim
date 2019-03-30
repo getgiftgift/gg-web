@@ -1,7 +1,7 @@
 .row.content-row
   .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
     .row
-      span style="float:left; padding-left: 5px;"= link_to "&laquo; Back".html_safe, my_gifts_path
+      / span style="float:left; padding-left: 5px;"= link_to "&laquo; Back".html_safe, my_gifts_path
       .close= link_to "&times;".html_safe, my_gifts_path
       .header-label
         h4 = @company.name.upcase
@@ -37,7 +37,7 @@
     br
     |Birthday: #{@birthday_deal_voucher.user.birthday}
     hr
-
+    |Processing Fee: #{humanized_money_with_symbol @birthday_deal.transaction_fee}
 #confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
   .row
     .large-6.medium-8.small-centered.columns
