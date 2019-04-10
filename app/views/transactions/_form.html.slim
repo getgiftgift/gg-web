@@ -1,17 +1,13 @@
-= javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/client.min.js"
-= javascript_include_tag "https://js.braintreegateway.com/web/3.6.1/js/hosted-fields.min.js"
+= javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/client.min.js"
+= javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.js"
+.hidden#token= @token
 .row.content-row#payment-box
   .medium-8.medium-centered.columns.white-box.form-container
-    = form_tag donate_birthday_party_path(@party), method: :post, id: 'checkout-form' do
+    = form_tag :transactions, method: :post, id: 'checkout-form' do
       = label_tag :amount, 'Amount'
-      = number_field_tag :amount, @party.minimum_donation.to_i, min: @party.minimum_donation.to_i, max: @party.total_remaining.to_i
-
-      = label_tag :name, 'Name (public)'
-      = text_field_tag :name, nil, placeholder: 'Anonymous'
-
-      = label_tag :note, 'Note (private)'
-      = text_field_tag :note, nil, placeholder: 'Happy birthday!'
-
+      = text_field_tag :amount
+      = label_tag :name, 'Name'
+      = text_field_tag :name, nil, placeholder: 'First Last'
       = label_tag :card_number, 'Credit Card Number' 
       .input-wrapper
         .hosted-field#card-number
@@ -21,61 +17,68 @@
       = label_tag :expiration_date, 'Expiration Date'
       .input-wrapper
         .hosted-field#expiration-date
+      = label_tag :postal_code, 'Postal Code'
+      .input-wrapper
+        .hosted-field#postal-code  
       = hidden_field_tag :payment_method_nonce 
       = submit_tag 'Process Payment', class: 'button'  
 
-    
-
 javascript:
-  var form = document.querySelector("#checkout-form");
-  var submit = $("input[type='submit']");
+  $(document).on('turbolinks:load', function() {
+    var form = document.querySelector("#checkout-form");
+    var submit = $("input[type='submit']");
 
-  braintree.client.create({
-    authorization: "#{@token}"
-  }, function (clientErr, clientInstance) {
-    if (clientErr) {
-      // do error stuff
-      return;
-    }
-   braintree.hostedFields.create({
-     client: clientInstance,
-     styles: {
-      'input': {
-        'color': '#7d7d7d',
-        'font-size': '.875rem',
-      }
-     },
-    fields: {
-      number: {
-        selector: '#card-number',
-        placeholder: '1111 1111 1111 1111'
-      },
-      cvv: {
-        selector: '#cvv',
-        placeholder: '123'
-      },
-      expirationDate: {
-        selector: '#expiration-date',
-        placeholder: '10/2019' 
-      }
-    }
-    }, function (hostedFieldsErr, hostedFieldsInstance) {
-      if (hostedFieldsErr) {
+    braintree.client.create({
+      authorization: "#{@token}"
+    }, function (clientErr, clientInstance) {
+      if (clientErr) {
         // do error stuff
         return;
       }
-      submit.removeAttr('disabled');
+    braintree.hostedFields.create({
+      client: clientInstance,
+      styles: {
+        'input': {
+          'color': '#7d7d7d',
+          'font-size': '.875rem',
+        }
+      },
+      fields: {
+        number: {
+          selector: '#card-number',
+          placeholder: '4111 1111 1111 1111'
+        },
+        cvv: {
+          selector: '#cvv',
+          placeholder: '123'
+        },
+        expirationDate: {
+          selector: '#expiration-date',
+          placeholder: 'MM/YYYY' 
+        },
+        postalCode: {
+          selector: '#postal-code',
+          placeholder: '11111'
+        }
+      }
+      }, function (hostedFieldsErr, hostedFieldsInstance) {
+        if (hostedFieldsErr) {
+          // do error stuff
+          return;
+        }
+        submit.removeAttr('disabled');
 
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
 
-        hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
-          if (tokenizeErr) {
-            // Handle error in Hosted Fields tokenization
-            return;
-          }
-          document.querySelector('input[name="payment_method_nonce"]').value = payload.nonce;
-          form.submit();
+          hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
+            if (tokenizeErr) {
+              // Handle error in Hosted Fields tokenization
+              return;
+            }
+            document.querySelector('input[name="payment_method_nonce"]').value = payload.nonce;
+            form.submit();
+          });
         });
       });
     });

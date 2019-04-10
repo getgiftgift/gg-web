@@ -1,1 +1,21 @@
-= render 'form'
+.row.content-row#payment-box
+  .medium-8.medium-centered.columns.white-box.form-container
+    - if @payment_method
+      = form_tag :transactions do
+        .row
+          .payment-info.panel style='margin-left: 0.5rem; font-size: .875em'
+            / = image_tag @payment_method.image_url
+            .div 
+              strong= @payment_method.card_type
+            = " Last 4: #{@payment_method.last_4}"
+            =< "Expires: #{@payment_method.expiration_month}/#{@payment_method.expiration_year}"
+        = radio_button_tag 'payment', 'existing'
+        = label_tag :payment, 'Use this payment method', class: 'right inline'
+        = hidden_field_tag :party_id, @party.id
+        
+        .div
+          = radio_button_tag 'payment', 'new'
+          = label_tag :payment, 'Enter New Payment', class: 'right inline'
+        = submit_tag 'submit', class: 'button'
+    - else
+      = render 'form'
