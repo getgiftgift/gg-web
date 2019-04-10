@@ -105,7 +105,6 @@ class Dashboard::BirthdayDealsController < Dashboard::BaseController
   def update
     respond_to do |format|
       if @birthday_deal.update_attributes(birthday_deal_params)
-        @birthday_deal.edit
         format.html { redirect_to dashboard_location_birthday_deals_path(@birthday_deal.location), notice: 'Birthday deal was successfully updated.' }
         format.json { head :no_content }
       else
