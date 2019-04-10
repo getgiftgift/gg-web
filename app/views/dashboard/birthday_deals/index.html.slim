@@ -1,0 +1,24 @@
+h4 Birthday Deals for #{@location.city}, #{@location.state}
+= link_to 'New Birthday deal' , new_dashboard_location_birthday_deal_path(@location), class: 'button tiny'
+
+table.list_table.tablesorter
+  thead
+    tr
+      th Hook
+      th Company
+      th Status
+      th Active
+      th
+
+  tbody
+    - @birthday_deals.each do |birthday_deal|
+      = content_tag_for(:tr, birthday_deal, class: birthday_deal.state ) do
+        td= birthday_deal ? birthday_deal.hook : link_to(birthday_deal.hook, edit_dashboard_birthday_deal_path(birthday_deal.id))
+        td= birthday_deal.company.name
+        td.state= birthday_deal.state.capitalize
+        td= birthday_deal.approved? ? birthday_deal.active? ? 'Active' : 'Expired' : 'N/A'          
+        td
+          => link_to 'Edit', [:edit, :dashboard, birthday_deal]
+          => link_to 'View', dashboard_birthday_deal_path(birthday_deal)
+          = link_to 'Archive', dashboard_birthday_deal_path(birthday_deal), 
+            :confirm => 'Are you sure?', :method => :delete unless birthday_deal.archived?
