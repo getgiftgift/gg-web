@@ -13,7 +13,7 @@ class BirthdayDeal < ActiveRecord::Base
   scope :in_location, -> location {  where("birthday_deals.location_id = ?", location.id) }
   scope :is_active, -> { where("start_date <= ? and end_date >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)).with_state(:approved) }
 
-  state_machine initial: :unapproved do
+  state_machine initial: :approved do
     audit_trail
 
     event :submit_for_approval do
