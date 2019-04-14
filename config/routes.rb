@@ -3,7 +3,6 @@ WorthdayWeb::Application.routes.draw do
 
   root :to => 'birthday_deals#index'
   
-	get '/party/:id/checkout' => 'transactions#new'
 	# get '/party/:id' => 'birthday_parties#show'
   # get '/party => 'birthday_parties#index', as: 'party'
   match '/verify' => 'home#verify', via: [:get, :post]
@@ -30,9 +29,7 @@ WorthdayWeb::Application.routes.draw do
   end
   get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts'
 
-  resources :transactions, only: [:new, :create, :show] do
-    get '/new_payment_method', to: 'transactions#new_payment_method', on: :collection
-  end
+  resources :transactions, only: [:new, :create, :show]
   resources :companies, only: [:new, :create]
 
   resources :birthday_deals, only: [:index]
@@ -42,6 +39,8 @@ WorthdayWeb::Application.routes.draw do
       put :keep
       get :print
       put :redeem
+      get 'checkout' => 'transactions#new'
+      get 'new_payment_method' => 'transactions#new_payment_method'
     end
   end
 

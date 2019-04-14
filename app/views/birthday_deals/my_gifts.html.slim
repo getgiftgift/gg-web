@@ -19,6 +19,7 @@
                   h4.center-text REDEEMED
                   br
                 -else
-                  = link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'details-button'
-      
-      .clearfix= link_to 'Checkout', [:new, :transaction], class: 'button right'    
+                  ul.button-group
+                    li= link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'button tiny'
+                    li
+                      = link_to 'CHECKOUT', [:checkout, deal], class: 'button tiny'
