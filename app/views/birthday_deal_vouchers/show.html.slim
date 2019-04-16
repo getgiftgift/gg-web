@@ -10,8 +10,7 @@
     br
     = @birthday_deal_voucher.barcode_data.html_safe
     p#verification-number
-      | Verification Number:
-      = @birthday_deal_voucher.dashed_verification_number
+      | Verification Number: #{@birthday_deal_voucher.dashed_verification_number}
     .row
       .small-10.large-6.small-centered.columns
         a.redeem-btn href='#' data-reveal-id='confirm-redeem' REDEEM
@@ -37,7 +36,6 @@
     br
     |Birthday: #{@birthday_deal_voucher.user.birthday}
     hr
-    |Processing Fee: #{humanized_money_with_symbol @birthday_deal.transaction_fee}
 #confirm-redeem.reveal-modal.center-text data-reveal='' aria-labelledby="confirm" aria-hidden="true" role='dialog'
   .row
     .large-6.medium-8.small-centered.columns

@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 	
 	helper_method :voucher, :saved_user_payment_token
 
-	def new 
+	def new
 		if saved_user_payment_token
 			@payment_method = gateway.payment_method.find(saved_user_payment_token)
 		end 
@@ -36,11 +36,14 @@ class TransactionsController < ApplicationController
 		end
 
 		if result.success?
-			# set flash
+			flash[:success] = 'Payment processed successfullly!'
 			current_user.update(payment_token: result.transaction.credit_card_details.token)
 			# create transaction record and mark deal as redeemable
+			Transaction.create()
+			voucher.make_redeemable!
 			redirect_to :my_gifts
 		else
+			flash[:info] = 'There was an issue try again'
 			render :new
 		end
 

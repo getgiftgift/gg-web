@@ -111,6 +111,10 @@ class BirthdayDealVoucher < ActiveRecord::Base
     num.insert(num.length-6, '-')
   end
 
+  def make_redeemable!
+    update redeemable: true
+  end
+
   # def barcode
   #   barcode = Barby::Code128B.new(self.verification_number)
   #   output = Barby::HtmlOutputter.new(barcode)

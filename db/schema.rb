@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190331185833) do
+ActiveRecord::Schema.define(version: 20190416002402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,8 @@ ActiveRecord::Schema.define(version: 20190331185833) do
     t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "birthday_party_id",   null: false
+    t.integer  "birthday_party_id",                   null: false
+    t.boolean  "redeemable",          default: false
   end
 
   add_index "birthday_deal_vouchers", ["birthday_party_id"], name: "index_birthday_deal_vouchers_on_birthday_party_id", using: :btree

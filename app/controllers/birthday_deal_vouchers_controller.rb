@@ -14,7 +14,7 @@ class BirthdayDealVouchersController < ApplicationController
   end
 
   def redeem
-    @birthday_deal_voucher = current_user.birthday_deal_vouchers.find params[:id]
+    @birthday_deal_voucher = BirthdayDealVoucher.find params[:id]
     @birthday_deal_voucher.redeem
     flash[:notice] = "Redeemed!" if @birthday_deal_voucher.state?(:redeemed)
     redirect_to my_gifts_path

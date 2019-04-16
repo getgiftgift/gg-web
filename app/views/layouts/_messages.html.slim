@@ -1,3 +1,7 @@
 - flash.each do |name, msg|
   - if msg.is_a?(String)
-    .flash id="flash_#{name}" = msg
+    .alert-box class="#{name}" data-alert='' 
+      = msg
+      a href="#" class="close" &times;
+
+

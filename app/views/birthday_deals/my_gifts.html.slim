@@ -16,10 +16,11 @@
                 p GOOD THROUGH: #{deal.good_through.to_s}
               .small-4.columns
                 - if deal.redeemed?
-                  h4.center-text REDEEMED
+                  h5.right REDEEMED
                   br
                 -else
-                  ul.button-group
-                    li= link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'button tiny'
-                    li
-                      = link_to 'CHECKOUT', [:checkout, deal], class: 'button tiny'
+                  ul.button-group.right
+                    - if deal.redeemable?
+                      li= link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'button tiny'
+                    - else
+                      li= link_to 'CHECKOUT', [:checkout, deal], class: 'button tiny'
