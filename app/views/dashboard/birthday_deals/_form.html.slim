@@ -1,5 +1,5 @@
 |Deal info
-/COMPANY
+
 .row
   .large-6.columns
     .row.collapse
@@ -7,7 +7,7 @@
         span.prefix Company
       .small-9.columns
         = f.input :company_id, as: :select, collection: @companies, label: false
-/ VALUE
+
 .row
   .large-8.columns
     .row.collapse
@@ -16,14 +16,14 @@
 
       .small-2.columns
         = f.input :value, id: 'birthday_deal_value', label: false
-      / OCCASION
+
       .small-2.columns
         |&nbsp;
       .small-3.large-2.columns
         span.prefix Occasion
       .small-3.large-4.columns  
         = f.input :occasion_id, as: :select, collection: @occasions, default: @occasions.first,  label: false
-/ HOOK
+
 .row
   .large-12.columns
     .row.collapse
@@ -33,7 +33,7 @@
         = f.input :hook, label: false 
       .small-2.columns
         |&nbsp; at Company Name
-/RESTRICTIONS
+
 fieldset
   legend Restrictions 
   .row
@@ -55,19 +55,11 @@ fieldset
         span.prefix How to redeem
       .small-10.columns  
         = f.input :how_to_redeem, as: :text, input_html: { rows: 4, size: 100}, hint: "This already displays on all vouchers: 'Merchant will check ID upon redemption.  Photo ID showing required to validate birthday.'   DO NOT ADD the text in this quote", label: false
-/ START END DATE  
-fieldset 
-  .row
-    .large-12.columns
-      .row
-        .small-6.columns
-          = f.input :start_date, as: :string, input_html: {class: 'datepicker'}  
-        .small-6.columns      
-          = f.input :end_date, as: :string, input_html: {class: 'datepicker', value: "#{(Date.today.year+1)}-12-31"} 
+  
 .row
-  .large-6.columns
-    .row
-      .large-6.columns
-        = f.button :submit, class: 'button'
-      .large-6.columns  
-        = link_to 'Cancel', dashboard_location_birthday_deals_path(@location)
+  = f.input :start_date, as: :date, order: [:month, :day, :year], input_html: {class: 'large-4 columns'}
+  = f.input :end_date, as: :date, order: [:month, :day, :year], input_html: {class: 'large-4 columns'}
+.row
+  = f.button :submit, class: 'button'
+.row
+  = link_to 'Cancel', dashboard_location_birthday_deals_path(@location)
