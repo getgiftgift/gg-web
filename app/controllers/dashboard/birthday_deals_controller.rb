@@ -44,6 +44,7 @@ class Dashboard::BirthdayDealsController < Dashboard::BaseController
   # POST /birthday_deals.json
   def create
     @birthday_deal = @location.birthday_deals.build(birthday_deal_params)
+    @birthday_deal.start_date = Date.today if params[:birthday_deal][:start_date].nil?
     respond_to do |format|
       if @birthday_deal.save
         format.html { redirect_to dashboard_location_birthday_deals_path(@location), notice: 'Birthday deal was successfully created.' }
