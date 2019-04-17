@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
 	skip_filter :verify_login_and_birthday
 	
-	helper_method :voucher, :saved_user_payment_token
+	helper_method :voucher, :party, :saved_user_payment_token
 
 	def new
 		if saved_user_payment_token
@@ -34,12 +34,16 @@ class TransactionsController < ApplicationController
 				}
 			)
 		end
-
 		if result.success?
+			response = result.transaction
 			flash[:success] = 'Payment processed successfullly!'
-			current_user.update(payment_token: result.transaction.credit_card_details.token)
-			# create transaction record and mark deal as redeemable
-			Transaction.create()
+			current_user.update(payment_token: response.credit_card_details.token)
+			Transaction.create( 
+				transaction_id: response.id, 
+				amount: Monetize.parse(response.amount),
+				voucher: voucher,
+				birthday_party: party
+			)
 			voucher.make_redeemable!
 			redirect_to :my_gifts
 		else
@@ -70,5 +74,9 @@ class TransactionsController < ApplicationController
 
 		def saved_user_payment_token
 			@saved_user_payment_token ||= current_user.payment_token
+		end
+
+		def party
+			@party ||= BirthdayParty.find params[:party_id]
 		end
 end

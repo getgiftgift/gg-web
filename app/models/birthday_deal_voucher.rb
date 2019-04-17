@@ -2,7 +2,6 @@ class BirthdayDealVoucher < ActiveRecord::Base
   require 'barby'
   require 'barby/barcode/code_128'
   require 'barby/outputter/html_outputter'
-
   include HasBarcode
 
   has_barcode :barcode,
@@ -14,16 +13,12 @@ class BirthdayDealVoucher < ActiveRecord::Base
   belongs_to :birthday_party
   has_one :user, through: :birthday_party
   has_one :company, through: :birthday_deal
+  has_one :payment_transaction, class_name: 'Transaction', foreign_key: 'voucher_id'
   has_many :birthday_deal_voucher_state_transitions, dependent: :destroy
-  # attr_accessible :good_through, :valid_on, :user
+
   after_create :generate_verification_number
-
-  # extend FriendlyId
-  # friendly_id :verification_number
-
   delegate :hook, :value, to: :birthday_deal
 
-  # attr_accessible :good_through, :valid_on, :user
   scope :is_available, -> { where("valid_on <= ? and good_through >= ? ", Date.today.midnight.to_s(:db), Date.today.midnight.to_s(:db)) }
   scope :in_location, -> location { joins(:birthday_deal).where("birthday_deals.location_id = ?", location.id) }
 

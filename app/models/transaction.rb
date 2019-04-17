@@ -1,8 +1,6 @@
 class Transaction < ActiveRecord::Base
 	belongs_to :birthday_party
-
-  self.inheritance_column = :type
-  BRAINTREE = 'braintree'
+  belongs_to :voucher, class_name: 'BirthdayDealVoucher'
 
   monetize :amount_cents
 end
