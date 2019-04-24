@@ -4,24 +4,7 @@
 .row.content-row#payment-box
   .medium-10.medium-centered.columns.white-box.form-container
     = form_tag :transactions, method: :post, id: 'checkout-form' do
-      .row
-        .payment-info.panel style='margin-left: 0.5rem; font-size: .875em'
-          = image_tag @payment_method.image_url
-          .div 
-            / strong= @payment_method.card_type
-          = " Last 4: #{@payment_method.last_4}"
-          =< "Expires: #{@payment_method.expiration_month}/#{@payment_method.expiration_year}"
-        = radio_button_tag 'payment', 'existing'
-        = label_tag :payment, 'Use this payment method', class: 'right inline'
-        = hidden_field_tag :party_id, @party.id
-        
-        .div
-          = radio_button_tag 'payment', 'new'
-          = label_tag :payment, 'Enter New Payment', class: 'right inline'
-
       #payment_details
-        = label_tag :amount, 'Amount'
-        = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true
         = label_tag :name, 'Name'
         = text_field_tag :name, nil, placeholder: 'First Last'
         = label_tag :card_number, 'Credit Card Number' 
@@ -35,33 +18,35 @@
           .hosted-field#expiration-date
         = label_tag :postal_code, 'Postal Code'
         .input-wrapper
-          .hosted-field#postal-code  
-        = hidden_field_tag :payment_method_nonce 
+          .hosted-field#postal-code 
+        hr   
+        = hidden_field_tag :payment_method_nonce
+      = label_tag :amount, 'Transaction Fee'
+      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true   
       = submit_tag 'Process Payment', class: 'button'  
 
 javascript:
   var form = document.querySelector("#checkout-form");
   var submit = $("input[type='submit']");
-
   braintree.client.create({
-    authorization: "#{@token}"
+    authorization: "#{@client_token}"
   }, function (clientErr, clientInstance) {
     if (clientErr) {
       // do error stuff
       return;
     }
-  braintree.hostedFields.create({
-    client: clientInstance,
-    styles: {
+   braintree.hostedFields.create({
+     client: clientInstance,
+     styles: {
       'input': {
         'color': '#7d7d7d',
         'font-size': '.875rem',
       }
-    },
+     },
     fields: {
       number: {
         selector: '#card-number',
-        placeholder: '4111 1111 1111 1111'
+        placeholder: '1111 1111 1111 1111'
       },
       cvv: {
         selector: '#cvv',
@@ -69,11 +54,11 @@ javascript:
       },
       expirationDate: {
         selector: '#expiration-date',
-        placeholder: 'MM/YYYY' 
+        placeholder: '10/2019' 
       },
       postalCode: {
         selector: '#postal-code',
-        placeholder: '11111'
+        placeholder: '12345'
       }
     }
     }, function (hostedFieldsErr, hostedFieldsInstance) {
@@ -82,10 +67,8 @@ javascript:
         return;
       }
       submit.removeAttr('disabled');
-
       form.addEventListener('submit', function(event) {
         event.preventDefault();
-
         hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
           if (tokenizeErr) {
             // Handle error in Hosted Fields tokenization
@@ -97,4 +80,3 @@ javascript:
       });
     });
   });
-

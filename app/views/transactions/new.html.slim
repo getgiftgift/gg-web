@@ -1,1 +1,24 @@
-= render 'form'
+.row.content-row#payment-box
+  .medium-10.medium-centered.columns.white-box.form-container
+    = form_tag :transactions, method: :post, id: 'checkout-form' do
+      #payment_method.panel style='font-size: .875em'
+        = image_tag @payment_method.image_url
+        .div 
+          / strong= @payment_method.card_type
+        = " Last 4: #{@payment_method.last_4}"
+        =< "Expires: #{@payment_method.expiration_month}/#{@payment_method.expiration_year}"
+      = radio_button_tag 'payment', 'existing', true
+      = label_tag :payment, 'Use this payment method', class: 'right inline'
+      
+      
+      .div
+        = radio_button_tag 'payment', 'new'
+        = label_tag :payment, 'Enter New Payment', class: 'right inline'
+      hr   
+      
+      = label_tag :amount, 'Transaction Fee'
+      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee)
+      = hidden_field_tag :payment_method_token, saved_user_payment_token
+      = hidden_field_tag :party_id, @party.id
+      = hidden_field_tag :id, voucher.id
+      = submit_tag 'Submit', class: 'button'  

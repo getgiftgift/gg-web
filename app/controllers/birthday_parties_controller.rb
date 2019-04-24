@@ -1,7 +1,6 @@
 class BirthdayPartiesController < ApplicationController
 
   skip_filter   :verify_login_and_birthday, only: [:show]
-  before_filter :create_token, only: [:index, :show]
   # before_filter :set_party
 
   def index; end
@@ -25,8 +24,4 @@ class BirthdayPartiesController < ApplicationController
       end
     end
 
-    def create_token
-      @token = Braintree::ClientToken.generate
-      @transaction = Transaction.new
-    end
 end

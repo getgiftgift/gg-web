@@ -51,7 +51,7 @@ gem 'slim-rails'
 gem 'state_machines', '~> 0.4.0'
 gem 'state_machines-activerecord'
 gem 'state_machines-audit_trail'
-gem 'therubyracer' # JavaScript runtime for production
+gem 'therubyracer'
 gem 'thin'
 gem 'uglifier'
 gem 'unicorn'

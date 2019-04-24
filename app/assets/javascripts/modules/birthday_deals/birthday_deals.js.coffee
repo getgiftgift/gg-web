@@ -4,7 +4,7 @@
 $(document).ready ->
   $('select#user_location_id').change( ->
     $(this).parent().parent('form').submit())
-  $('.flash').delay(6000).fadeOut(2000)
+  $('.alert-box').delay(6000).fadeOut(2000)
   $('#box_container').css('bottom', '-'+$('#box_container').css('height'))
 
   ##
@@ -25,6 +25,8 @@ $(document).ready ->
     $('#speech-box').hide()
     $('#card_'+$(this).attr('id')).show()
 
+  $('.alert-box .close').click ->
+    $(this).parent().hide()
 
   # update_gift_counter()
 
