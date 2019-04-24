@@ -1,18 +1,19 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.4.6'
 
 group :production do
   gem 'airbrake'
   gem 'rails_12factor'
 end
-
+gem 'xmlrpc'
 gem 'asset_sync'
 gem 'barby'
 gem 'binding_of_caller'
 gem 'braintree', '~> 2.94.0' 
 gem 'byebug'
 gem 'carrierwave'
+gem 'cardconnect'
 gem 'coffee-rails'
 gem 'compass'
 gem 'compass-rails'
@@ -60,8 +61,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'dotenv-rails'
