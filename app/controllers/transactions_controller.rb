@@ -6,7 +6,9 @@ class TransactionsController < ApplicationController
 	def new
 		if saved_user_payment_token
 			@payment_method = gateway.payment_method.find(saved_user_payment_token)
-		end 
+		else
+			redirect_to [:new_payment_method, voucher] and return
+		end
 		@transaction = Transaction.new
 		@party = current_user.birthday_party
 	end
