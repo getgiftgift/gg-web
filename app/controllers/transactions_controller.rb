@@ -46,7 +46,7 @@ class TransactionsController < ApplicationController
 				birthday_party: party
 			)
 			voucher.make_redeemable!
-			redirect_to :my_gifts
+			redirect_to voucher
 		else
 			flash[:info] = 'There was an issue try again'
 			render :new
