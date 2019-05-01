@@ -10,7 +10,6 @@ class TransactionsController < ApplicationController
 			redirect_to [:new_payment_method, voucher] and return
 		end
 		@transaction = Transaction.new
-		@party = current_user.birthday_party
 	end
 
 	def create
@@ -79,6 +78,6 @@ class TransactionsController < ApplicationController
 		end
 
 		def party
-			@party ||= BirthdayParty.find params[:party_id]
+			@party ||= voucher.birthday_party
 		end
 end

@@ -20,6 +20,6 @@
       = label_tag :amount, 'Transaction Fee'
       = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee)
       = hidden_field_tag :payment_method_token, saved_user_payment_token
-      = hidden_field_tag :party_id, @party.id
+      = hidden_field_tag :party_id, party.id
       = hidden_field_tag :id, voucher.id
       = submit_tag 'Submit', class: 'button'  

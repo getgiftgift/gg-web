@@ -21,8 +21,9 @@
           .hosted-field#postal-code 
         hr   
         = hidden_field_tag :payment_method_nonce
+        = hidden_field_tag :id, voucher.id
       = label_tag :amount, 'Transaction Fee'
-      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true   
+      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee)   
       = submit_tag 'Process Payment', class: 'button'  
 
 javascript:
