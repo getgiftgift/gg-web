@@ -1,5 +1,6 @@
-= javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/client.min.js"
-= javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.js"
+- content_for :head do
+  = javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/client.min.js"
+  = javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.js"
 
 .row.content-row#payment-box
   .medium-10.medium-centered.columns.white-box.form-container
@@ -7,7 +8,7 @@
       #payment_details
         = label_tag :name, 'Name'
         = text_field_tag :name, nil, placeholder: 'First Last'
-        = label_tag :card_number, 'Credit Card Number' 
+        = label_tag :card_number, 'Credit Card Number'
         .input-wrapper
           .hosted-field#card-number
         = label_tag :cvv, 'CVV'
@@ -18,13 +19,13 @@
           .hosted-field#expiration-date
         = label_tag :postal_code, 'Postal Code'
         .input-wrapper
-          .hosted-field#postal-code 
-        hr   
+          .hosted-field#postal-code
+        hr
         = hidden_field_tag :payment_method_nonce
         = hidden_field_tag :id, voucher.id
       = label_tag :amount, 'Transaction Fee'
-      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee)   
-      = submit_tag 'Process Payment', class: 'button'  
+      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true
+      = submit_tag 'Process Payment', class: 'button'
 
 javascript:
   var form = document.querySelector("#checkout-form");
@@ -36,14 +37,14 @@ javascript:
       // do error stuff
       return;
     }
-   braintree.hostedFields.create({
-     client: clientInstance,
-     styles: {
-      'input': {
-        'color': '#7d7d7d',
-        'font-size': '.875rem',
-      }
-     },
+    braintree.hostedFields.create({
+      client: clientInstance,
+      styles: {
+        'input': {
+          'color': '#7d7d7d',
+          'font-size': '.875rem',
+        }
+      },
     fields: {
       number: {
         selector: '#card-number',
@@ -55,7 +56,7 @@ javascript:
       },
       expirationDate: {
         selector: '#expiration-date',
-        placeholder: '10/2019' 
+        placeholder: '10/2019'
       },
       postalCode: {
         selector: '#postal-code',
