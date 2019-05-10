@@ -1,5 +1,5 @@
 //= require jquery
-//= require jquery_ujs
+//= require jquery-ujs
 //= require jquery-ui
 //= require foundation
 //= require_tree .
@@ -10,13 +10,14 @@ $(function() {
   // $(".messages").fadeOut(3000)
 });
 
-update_gift_counter = function(){
-  $('p#counter').replaceWith("<p id='counter'>"+gifts_remain()+" "+gifts_word()+" left.</p>")
+update_gift_counter = function() {
+  $("p#counter").replaceWith(
+    "<p id='counter'>" + gifts_remain() + " " + gifts_word() + " left.</p>"
+  );
 };
 
 gifts_remain = function() {
-  var gifts_left;
-  return gifts_left = $('.birthday-box:hidden').size();
+  return $(".birthday-box:hidden").length;
 };
 
 gifts_word = function() {

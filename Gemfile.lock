@@ -39,9 +39,9 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.6.0)
       public_suffix (>= 2.0.2, < 4.0)
-    airbrake (9.1.0)
-      airbrake-ruby (~> 4.2)
-    airbrake-ruby (4.2.5)
+    airbrake (9.2.1)
+      airbrake-ruby (~> 4.3)
+    airbrake-ruby (4.3.0)
       rbtree3 (~> 0.5)
     arel (6.0.4)
     asset_sync (2.7.0)
@@ -242,10 +242,6 @@ GEM
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
     ipaddress (0.8.3)
-    jquery-rails (4.3.3)
-      rails-dom-testing (>= 1, < 3)
-      railties (>= 4.2.0)
-      thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (1.8.6)
@@ -318,7 +314,7 @@ GEM
     open4 (1.3.4)
     orm_adapter (0.5.0)
     pdf-core (0.7.0)
-    pg (0.21.0)
+    pg (0.20.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -343,7 +339,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.2.11.1)
       sprockets-rails
-    rails-assets-jquery (3.4.0)
+    rails-assets-jquery (2.2.4)
     rails-assets-jquery-ujs (1.2.2)
       rails-assets-jquery (> 1.8)
     rails-deprecated_sanitizer (1.0.3)
@@ -436,7 +432,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
-    unicorn (5.5.0)
+    unicorn (5.5.1)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     warden (1.2.7)
@@ -473,7 +469,6 @@ DEPENDENCIES
   geoip
   haml
   has_barcode
-  jquery-rails
   jquery-ui-rails
   koala (~> 2.0)
   mailchimp-api
@@ -483,9 +478,10 @@ DEPENDENCIES
   money-rails
   omniauth-facebook
   open4
-  pg
+  pg (= 0.20.0)
   prawn-rails
   rails (~> 4.2.0)
+  rails-assets-jquery (~> 2.2.4)!
   rails-assets-jquery-ujs!
   rails_12factor
   railties (~> 4.2.0)

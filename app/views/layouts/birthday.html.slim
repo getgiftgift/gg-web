@@ -8,10 +8,11 @@ html
     meta property="og:type" content="website"
     meta property="og:url" content="http://www.getgiftgift.com/"
     meta property="og:image" content="#{image_url 'present-pile-stars.png'}"
-    meta property="fb:app_id" content="#{ENV['FACEBOOK_APP_ID']}" 
+    meta property="fb:app_id" content="#{ENV['FACEBOOK_APP_ID']}"
 
     = stylesheet_link_tag 'birthday_deals', :media => "all"
     = javascript_include_tag "application"
+    = yield :head
     = csrf_meta_tags
     = favicon_link_tag 'favicon.ico'
   body
