@@ -29,7 +29,11 @@ WorthdayWeb::Application.routes.draw do
   end
   get '/my_gifts' => "birthday_deals#my_gifts", as: 'my_gifts'
 
-  resources :transactions, only: [:new, :create, :show]
+  resources :transactions, only: [:new, :create, :show] do
+    member do
+      put :admin_bypass
+    end
+  end
   resources :companies, only: [:new, :create]
 
   resources :birthday_deals, only: [:index]

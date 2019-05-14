@@ -41,7 +41,7 @@ class TransactionsController < ApplicationController
     end
     if result.success?
       response = result.transaction
-      flash[:success] = 'Payment processed successfullly!'
+      flash[:success] = 'Payment processed successfully!'
       current_user.update(payment_token: response.credit_card_details.token)
       Transaction.create(
         transaction_id: response.id,
@@ -59,6 +59,12 @@ class TransactionsController < ApplicationController
 
   def new_payment_method
     @client_token = gateway.client_token.generate
+  end
+
+  def admin_bypass
+    return redirect_to(root_path) unless current_user.is_admin?
+    voucher.make_redeemable!
+    redirect_to voucher
   end
 
   private

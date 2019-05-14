@@ -27,6 +27,10 @@
       = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true
       = submit_tag 'Process Payment', class: 'button'
 
+      - if current_user.is_admin?
+        #admin-bypass
+          = link_to raw("Skip Payment (Admin Only) &raquo;"), admin_bypass_transaction_path(voucher.id), method: :put
+
 javascript:
   var form = document.querySelector("#checkout-form");
   var submit = $("input[type='submit']");

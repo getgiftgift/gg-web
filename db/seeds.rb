@@ -26,6 +26,7 @@ deal = company.birthday_deals.where(
   state: :approved
 ).first_or_create(
   value: 20.00,
+  hook: 'Free Item',
   start_date: Date.today,
   end_date: Date.today + 10.years
 )
