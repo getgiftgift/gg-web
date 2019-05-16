@@ -12,16 +12,10 @@
       p
         b Verification Number: #{birthday_deal_voucher.dashed_verification_number}
       p Show this screen to the merchant.
-    - else
-      .row
-        .small-10.large-6.small-centered.columns
-          = link_to 'REDEEM', [:confirm, birthday_deal_voucher], class: 'green-btn fullwidth'  
+
     hr
-    h5 HOW TO REDEEM
-    = birthday_deal.how_to_redeem
     = birthday_deal.show_restrictions
-    hr
     h4
       span.orange GOOD THROUGH: #{birthday_deal_voucher.good_through}
     hr
-
+    

@@ -1,0 +1,18 @@
+.row.content-row
+  .large-8.medium-8.large-centered.medium-centered.columns.white-box.center-text
+    h3 Confirm
+    - if @freebies > 0
+      .small-6.columns
+        = link_to 'REDEEM', redeem_birthday_deal_voucher_path(birthday_deal_voucher), method: :put, class: 'green-btn fullwidth'
+      .small-6.columns
+        #cancel.red-btn.fullwidth CANCEL
+      p&nbsp;
+      p Sometimes there is a small processing fee to redeem Gift Gifts, but not to worry! We give you your first 3 Gift Gifts free!
+      span.orange
+        p This will be your #{number_of_freebies_left} free redemption.
+    - else
+      p You've used your 3 free redemptions. Please enter a payment method to proceed.
+      p= link_to "Enter Payment Info", [:checkout, birthday_deal_voucher], class: 'button'  
+      = link_to 'What is this?', '#', data: {toggle: 'what-is-this'}
+      .dropdown-pane#what-is-this data-dropdown=''
+        p Processing fees are how we pay for our operations. If you are unsatisfied for any reason, we'll refund your processing fee.

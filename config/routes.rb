@@ -39,10 +39,12 @@ WorthdayWeb::Application.routes.draw do
   resources :birthday_deals, only: [:index]
   resources :birthday_deal_vouchers, only: [:show, :index], path: 'birthday_deals' do
     member do
+      get :verification
+      get :confirm
       put :trash
       put :keep
       get :print
-      put :redeem
+      get :redeem
       get 'checkout' => 'transactions#new'
       get 'new_payment_method' => 'transactions#new_payment_method'
     end

@@ -41,7 +41,7 @@ class TransactionsController < ApplicationController
     end
     if result.success?
       response = result.transaction
-      flash[:success] = 'Payment processed successfully!'
+      flash[:success] = t('.success')
       current_user.update(payment_token: response.credit_card_details.token)
       Transaction.create(
         transaction_id: response.id,
@@ -49,10 +49,10 @@ class TransactionsController < ApplicationController
         voucher: voucher,
         birthday_party: party
       )
-      voucher.make_redeemable!
-      redirect_to voucher
+      voucher.redeem!
+      redirect_to [:verification, voucher]
     else
-      flash[:info] = 'There was an issue try again'
+      flash[:info] = t('.failure')
       render :new
     end
   end

@@ -103,7 +103,7 @@ class BirthdayDealVoucher < ActiveRecord::Base
 
   def dashed_verification_number
     num = verification_number.clone
-    num.insert(num.length-6, '-')
+    num.insert(4, '-').insert(8, '-')
   end
 
   def make_redeemable!
