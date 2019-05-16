@@ -20,7 +20,4 @@
                   br
                 -else
                   ul.button-group.right
-                    - if deal.redeemable?
-                      li= link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'button tiny'
-                    - else
-                      li= link_to 'REDEEM', [:checkout, deal], class: 'button tiny'
+                    li= link_to 'DETAILS', birthday_deal_voucher_path(deal), class: 'button tiny'
