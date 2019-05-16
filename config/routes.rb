@@ -44,7 +44,7 @@ WorthdayWeb::Application.routes.draw do
       put :trash
       put :keep
       get :print
-      get :redeem
+      match :redeem, via: [:get, :put]
       get 'checkout' => 'transactions#new'
       get 'new_payment_method' => 'transactions#new_payment_method'
     end
