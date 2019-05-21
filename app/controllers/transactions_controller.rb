@@ -5,12 +5,9 @@ class TransactionsController < ApplicationController
 
   helper_method :voucher, :party, :saved_user_payment_token
 
-  TRANSACTION_FEE = 0.99
-
   def new
-    if saved_user_payment_token
-      @payment_method = gateway.payment_method.find(saved_user_payment_token)
-    else
+    @credit_card_profile = current_user.last_unexpired_credit_card_profile
+    if @credit_card_profile.nil?
       redirect_to([:new_payment_method, voucher]) && return
     end
     @transaction = Transaction.new
@@ -21,44 +18,26 @@ class TransactionsController < ApplicationController
       redirect_to([:new_payment_method, voucher]) && return
     end
 
-    result = if params[:payment] == 'existing'
-               gateway.transaction.sale(
-                 amount: TRANSACTION_FEE,
-                 payment_method_token: params[:payment_method_token],
-                 options: {
-                   submit_for_settlement: true
-                 }
-               )
-             else
-               gateway.transaction.sale(
-                 amount: TRANSACTION_FEE.to_s,
-                 payment_method_nonce: params[:payment_method_nonce],
-                 options: {
-                   submit_for_settlement: true,
-                   store_in_vault_on_success: true
-                 }
-               )
+    cch = CardConnectHelper.new(current_user, voucher)
+
+    if params[:credit_card_profile_id]
+      ccp = current_user.credit_card_profiles.find(params[:credit_card_profile_id])
+      result = cch.charge_with_profile(ccp, params)
+    else
+      result = cch.charge_without_profile(params)
     end
-    if result.success?
-      response = result.transaction
+
+    if result[:result]
       flash[:success] = t('.success')
-      current_user.update(payment_token: response.credit_card_details.token)
-      Transaction.create(
-        transaction_id: response.id,
-        amount: Monetize.parse(response.amount),
-        voucher: voucher,
-        birthday_party: party
-      )
       voucher.redeem!
       redirect_to [:verification, voucher]
     else
-      flash[:info] = t('.failure')
-      render :new
+      flash[:error] = result[:error]
+      render :new_payment_method
     end
   end
 
   def new_payment_method
-    @client_token = gateway.client_token.generate
   end
 
   def admin_bypass
@@ -69,21 +48,8 @@ class TransactionsController < ApplicationController
 
   private
 
-  def gateway
-    @gateway ||= Braintree::Gateway.new(
-      environment: :sandbox,
-      merchant_id: ENV['BRAINTREE_MERCHANT_ID'],
-      public_key: ENV['BRAINTREE_PUBLIC_KEY'],
-      private_key: ENV['BRAINTREE_PRIVATE_KEY']
-    )
-  end
-
   def voucher
     @voucher ||= BirthdayDealVoucher.find params[:id]
-  end
-
-  def saved_user_payment_token
-    @saved_user_payment_token ||= current_user.payment_token
   end
 
   def party

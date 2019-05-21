@@ -1,20 +1,14 @@
-- content_for :head do
-  = javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/client.min.js"
-  = javascript_include_tag "https://js.braintreegateway.com/web/3.43.0/js/hosted-fields.js"
-
 .row.content-row#payment-box
   .medium-10.medium-centered.columns.white-box.form-container
     = form_tag :transactions, method: :post, id: 'checkout-form' do
-      - unless saved_user_payment_token.nil?
+      - unless @credit_card_profile.nil?
         #payment_method.panel style='font-size: .875em'
-          = image_tag @payment_method.image_url
+          / = image_tag @payment_method.image_url
           .div
-            / strong= @payment_method.card_type
-          = " Last 4: #{@payment_method.last_4}"
-          =< "Expires: #{@payment_method.expiration_month}/#{@payment_method.expiration_year}"
+          / = " Last 4: #{@credit_card_profile.last_4}"
+          = "Expires: #{@credit_card_profile.expiry}"
         = radio_button_tag 'payment', 'existing', true
         = label_tag :payment, 'Use this payment method', class: 'right inline'
-
 
       .div
         = radio_button_tag 'payment', 'new'
@@ -22,8 +16,8 @@
       hr
 
       = label_tag :amount, 'Transaction Fee'
-      = text_field_tag :amount, humanized_money(voucher.birthday_deal.transaction_fee), disabled: true
-      = hidden_field_tag :payment_method_token, saved_user_payment_token
+      p= number_to_currency(CardConnectHelper::TRANSACTION_FEE)
+      = hidden_field_tag :credit_card_profile_id, @credit_card_profile.id
       = hidden_field_tag :party_id, party.id
       = hidden_field_tag :id, voucher.id
       = submit_tag 'Submit', class: 'button'

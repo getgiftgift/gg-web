@@ -76,16 +76,8 @@ class Dashboard::ContactsController < Dashboard::BaseController
     @contact = Contact.find params[:id]
   end
 
-
-
-
-
-
-
-
-
-
 private
+
   def contact_params
     params.require(:contact).permit(:first_name, :last_name, :email)
   end

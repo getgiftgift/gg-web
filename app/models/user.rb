@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
                                 :class_name => "Referral"
   has_many :referrals_made, :foreign_key => :referrer_id,
                                 :class_name => "Referral"
+  has_many :credit_card_profiles, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
@@ -144,6 +145,10 @@ class User < ActiveRecord::Base
 
   def has_presents_to_open?
     eligible_for_birthday_deals? && birthday_deal_vouchers.with_state(:wrapped).count > 0 ? true : false
+  end
+
+  def last_unexpired_credit_card_profile
+    credit_card_profiles.order('created_at DESC').select { |ccp| !ccp.expired? }.first
   end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190506193418) do
+ActiveRecord::Schema.define(version: 20190517033142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20190506193418) do
     t.date     "start_date",                                       null: false
     t.integer  "cost_cents",                default: 3000,         null: false
     t.string   "cost_currency",             default: "USD",        null: false
-    t.date     "end_date",                  default: '2017-01-26', null: false
+    t.date     "end_date",                  default: '2019-06-13', null: false
     t.integer  "location_id"
     t.integer  "complimentary_redemptions", default: 3
   end
@@ -148,6 +148,15 @@ ActiveRecord::Schema.define(version: 20190506193418) do
     t.string   "cc_expiration_year"
     t.string   "gateway_customer_id"
     t.string   "cardholder_name"
+  end
+
+  create_table "credit_card_profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "cardconnect_profileid"
+    t.string   "expiry"
+    t.string   "card_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -245,10 +254,6 @@ ActiveRecord::Schema.define(version: 20190506193418) do
     t.string   "amount_currency",   default: "USD", null: false
     t.string   "name"
     t.string   "note"
-    t.string   "last_4"
-    t.string   "card_type"
-    t.string   "expiration_date"
-    t.string   "cardholder_name"
     t.integer  "sponsorship_id"
     t.string   "type"
     t.string   "status"
@@ -304,7 +309,9 @@ ActiveRecord::Schema.define(version: 20190506193418) do
   add_foreign_key "birthday_deal_state_transitions", "birthday_deals"
   add_foreign_key "birthday_deal_voucher_state_transitions", "birthday_deal_vouchers"
   add_foreign_key "birthday_deal_vouchers", "birthday_parties"
+  add_foreign_key "birthday_deals", "occasions"
   add_foreign_key "birthday_parties", "locations"
+  add_foreign_key "birthday_parties", "users"
   add_foreign_key "transactions", "birthday_parties"
   add_foreign_key "users", "locations"
 end
