@@ -36,6 +36,12 @@
   width: 20em;
   margin-bottom: 2em;
 }
+.form-wrapper {
+  clear: both;
+  display: block !important;
+}
+.card-wrapper {
+}
 
 #admin-bypass {
   height: 100px;

@@ -1,7 +1,7 @@
 # Plain-old Ruby class for managing interactions with CardConnect via the 'cardconnect' gem.
 class CardConnectHelper
 
-  TRANSACTION_FEE = 0.99
+  TRANSACTION_FEE = 0.25
   TRANSACTION_CURRENCY = 'USD'
   TRANSACTION_COUNTRY = 'US'
 
@@ -98,10 +98,12 @@ private
   end
 
   def create_card_profile!(params, auth_response)
+    last4 = params[:account].delete('^-0-9').split(//).last(4).join
     CreditCardProfile.create!(user: @user,
                               cardconnect_profileid: auth_response.profileid,
                               expiry: params[:expiry],
-                              card_type: params[:accttype])
+                              card_type: params[:accttype],
+                              last4: last4)
   end
 
   def create_transaction!(capture_response)

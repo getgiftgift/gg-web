@@ -1,3 +1,10 @@
+- content_for :head
+  = javascript_include_tag "jquery.card.js"
+
+.row.content-row
+  .medium-10.medium-centered.columns.white-box
+    .row
+      .card-wrapper
 
 .row.content-row#payment-box
   .medium-10.medium-centered.columns.white-box.form-container
@@ -6,9 +13,9 @@
         = label_tag :name, 'Name'
         = text_field_tag :name, nil, placeholder: 'First Last'
         = label_tag :account, 'Credit Card Number'
-        = text_field_tag :account, nil, placeholder: '4111 1111 1111 1111'
+        = text_field_tag :account, nil, placeholder: '•••• •••• •••• ••••'
         = label_tag :cvv2, 'CVV'
-        = text_field_tag :cvv2, nil, placeholder: '123'
+        = text_field_tag :cvv2, nil, placeholder: '•••'
         = label_tag :expiry, 'Expiration Date'
         = text_field_tag :expiry, nil, placeholder: 'MMYY'
         = label_tag :postal, 'Postal Code'
@@ -24,3 +31,37 @@
           = link_to raw("Skip Payment (Admin Only) &raquo;"), admin_bypass_transaction_path(voucher.id), method: :put
 
 javascript:
+
+  $('#checkout-form').card({
+      // a selector or DOM element for the container
+      // where you want the card to appear
+      container: '.card-wrapper', // *required*
+
+      formSelectors: {
+        numberInput: 'input#account', // optional — default input[name="number"]
+        expiryInput: 'input#expiry', // optional — default input[name="expiry"]
+        cvcInput: 'input#cvv2', // optional — default input[name="cvc"]
+        nameInput: 'input#name' // optional - defaults input[name="name"]
+    },
+
+    width: 200, // optional — default 350px
+    formatting: true, // optional - default true
+
+    // Strings for translation - optional
+    messages: {
+        validDate: 'valid\ndate', // optional - default 'valid\nthru'
+        monthYear: 'mmyy', // optional - default 'month/year'
+    },
+
+    // Default placeholders for rendered fields - optional
+    placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: 'Full Name',
+        expiry: 'MMYY',
+        cvc: '•••'
+    },
+
+    // if true, will log helpful messages for setting up Card
+    debug: true // optional - default false
+
+  });
