@@ -1,34 +1,33 @@
 - content_for :head
   = javascript_include_tag "jquery.card.js"
 
-.row.content-row
-  .medium-10.medium-centered.columns.white-box
+.row.content-row.white-box
+  .medium-10.medium-centered.columns
     .row
       .card-wrapper
+  .row#payment-box
+    .medium-10.medium-centered.columns.form-container
+      = form_tag :transactions, method: :post, id: 'checkout-form' do
+        #payment_details
+          = label_tag :name, 'Name'
+          = text_field_tag :name, nil, placeholder: 'First Last'
+          = label_tag :account, 'Credit Card Number'
+          = text_field_tag :account, nil, placeholder: '•••• •••• •••• ••••'
+          = label_tag :cvv2, 'CVV'
+          = text_field_tag :cvv2, nil, placeholder: '•••'
+          = label_tag :expiry, 'Expiration Date'
+          = text_field_tag :expiry, nil, placeholder: 'MMYY'
+          = label_tag :postal, 'Postal Code'
+          = text_field_tag :postal, nil, placeholder: '65202'
+          hr
+          = hidden_field_tag :id, voucher.id
+        = label_tag :amount, 'Transaction Fee'
+        p= number_to_currency(CardConnectHelper::TRANSACTION_FEE)
+        = submit_tag 'Process Payment', class: 'button'
 
-.row.content-row#payment-box
-  .medium-10.medium-centered.columns.white-box.form-container
-    = form_tag :transactions, method: :post, id: 'checkout-form' do
-      #payment_details
-        = label_tag :name, 'Name'
-        = text_field_tag :name, nil, placeholder: 'First Last'
-        = label_tag :account, 'Credit Card Number'
-        = text_field_tag :account, nil, placeholder: '•••• •••• •••• ••••'
-        = label_tag :cvv2, 'CVV'
-        = text_field_tag :cvv2, nil, placeholder: '•••'
-        = label_tag :expiry, 'Expiration Date'
-        = text_field_tag :expiry, nil, placeholder: 'MMYY'
-        = label_tag :postal, 'Postal Code'
-        = text_field_tag :postal, nil, placeholder: '65202'
-        hr
-        = hidden_field_tag :id, voucher.id
-      = label_tag :amount, 'Transaction Fee'
-      p= number_to_currency(CardConnectHelper::TRANSACTION_FEE)
-      = submit_tag 'Process Payment', class: 'button'
-
-      - if current_user.is_admin?
-        #admin-bypass
-          = link_to raw("Skip Payment (Admin Only) &raquo;"), admin_bypass_transaction_path(voucher.id), method: :put
+        - if current_user.is_admin?
+          #admin-bypass
+            = link_to raw("Skip Payment (Admin Only) &raquo;"), admin_bypass_transaction_path(voucher.id), method: :put
 
 javascript:
 
